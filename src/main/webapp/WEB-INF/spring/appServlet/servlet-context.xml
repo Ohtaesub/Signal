@@ -21,7 +21,20 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<context:component-scan base-package="com.signal.*" />
+	<!-- 
+	<context:component-scan base-package="com.signal.all" />
+	<context:component-scan base-package="com.signal.enter" />
+	<context:component-scan base-package="com.signal.interview" />
+	<context:component-scan base-package="com.signal.job" />
+	<context:component-scan base-package="com.signal.jobposting" />
 	<context:component-scan base-package="com.signal.main" />
+	<context:component-scan base-package="com.signal.member" />
+	<context:component-scan base-package="com.signal.objection" />
+	<context:component-scan base-package="com.signal.recommend" />
+	<context:component-scan base-package="com.signal.resume" />
+	<context:component-scan base-package="com.signal.test" />	 
+	-->
 	
 	
 	
