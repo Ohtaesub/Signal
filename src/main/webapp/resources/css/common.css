@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+* {
+    font-family:'Noto Sans KR',sans-serif;
+}
+
+/* 좌측 메뉴바 스타일 */
+ul.sidemenu {
+        list-style-type: none;
+        width: 200px;
+        border-radius: 100px 50px;
+        padding: 0;
+        margin: 0;
+}
+
+#wrap {
+	width:200px
+}
+
+nav ul li a {
+   	text-decoration: none;
+    display: block;
+    color: #bfbfbf;
+    padding: 8px 15px 8px 15px;
+    /* 사이드바 메뉴 간격 조절 */
+    margin-bottom: 10px; 
+
+    font-weight: bold;
+    border-bottom: 1px solid #fff;
+}
+
+li a:hover {
+    background-color: #e8ecf4;
+    border-radius: 10px;
+    color: black;
+}
+
+/* 상단 메뉴바 스타일 */
+#header {
+	height: 220px
+}
+
+ul.nav li a {
+    text-decoration: none;
+    color: black;
+    padding: 20px 120px 8px 15px;
+    font-weight: bold;
+}
+    
+ul.nav{
+    text-decoration: none;
+    font-weight:bold;
+    padding: 8px 15px 8px 15px;
+    float:right;
+    list-style:none;
+    width: 500px;
+    position: relative;
+    left: -650px;
+    font-size: 25px;
+    top: -80px;
+}	
+     
+ul.nav li{float:left;}
+     
+/* 상단 선 스타일 */
+hr{
+    color: black;
+    height: 3px;
+    width: 80%;
+    position: relative;
+    top: -92px;
+    left: 15px;
+    background: #1f3864;
+}
+    
+/* 우측 상단 로그인 회원가입 관련 (밑에 코드 모두)*/
+#container {
+    width:200px;
+    height:140px;
+    text-align: center;
+    background-color: #1f3864;
+    border-radius: 20px;
+    position: relative; 
+    top: -250px;
+    left: 1150px;
+    display:table-cell;
+    vertical-align:middle;
+}
+
+#container > aside > a {
+	font-weight: bold;
+}    
+   
+#container > aside > span {
+    font-size:11px;
+    color:#c8c8c8;
+}
+
+.join,.login {
+    width: 100px;
+	height: 50px;
+    border: none;
+    background-color: #1f3864;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	cursor: pointer;
+	border-radius: 10px;
+	font-weight: bold;
+    position: relative;
+    top: -310px;
+    left: 900px;
+}
+
+div aside {
+    color: white;
+}
+
+div aside a {
+    color: white;
+}
+
+li a{
+    text-align: center;
+}
