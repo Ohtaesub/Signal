@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.signal.all.dto.ResumeDTO;
 import com.signal.resume.service.ResumeService;
@@ -32,7 +33,7 @@ public class ResumeController {
 		logger.info("결과 확인 : 리스트 개수=" +list.size());
 		model.addAttribute("list", list);
 		
-		return "resumeList";
+		return "./resume/resumeList";
 	}
 	
 	
@@ -47,7 +48,24 @@ public class ResumeController {
 		logger.info("결과 확인 : 리스트 개수=" +list.size());
 		model.addAttribute("list", list);
 		
-		return "personList";
+		return "./resume/personList";
+	}
+	
+	// 이력서 상세보기
+	@RequestMapping(value = "resumeDetail.do", method = RequestMethod.GET)
+	public String resumeDetail(Model model, @RequestParam String re_no) {
+		ResumeDTO dto = service.resumeDetail(re_no);
+		ArrayList<ResumeDTO> careerDto = service.careerDetail(re_no);
+		ArrayList<ResumeDTO> socialDto = service.socialDetail(re_no);
+		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);		
+		String page = "./resume/resumeDetail";
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("careerDto", careerDto);
+		model.addAttribute("socialDto", socialDto);
+		model.addAttribute("licenseDto", licenseDto);
+		
+		return page;
 	}
 	
 	

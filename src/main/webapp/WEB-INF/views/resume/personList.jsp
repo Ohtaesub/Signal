@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="../../resources/css/common.css" type="text/css"/>
-</head>
+<%@ include file="../../../resources/inc/header.jsp" %>
+
+<style>
+	#section {
+		width : 800px;
+		position: relative;
+		top : -380px;
+		left : 350px;
+	}
+</style>
+
 <body>
-	<jsp:include page="../../resources/inc/header_b.jsp"></jsp:include>
-	<table>
+
+	<table id="section">
 		<thead>
 			<tr>
 				<th>나이</th>

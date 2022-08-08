@@ -14,7 +14,7 @@
 	</p>
 	<ul class="nav">
 	    <li><a href="#">채용공고</a></li>
-	    <li><a href="#">인재채용</a></li>
+	    <li><a href="/personList.go">인재채용</a></li>
 	</ul>
 	<hr/>
 	<div id="container"> 
@@ -28,7 +28,7 @@
         	<nav>
 				<ul class="sidemenu">
 					<li><a href="">개인정보관리</a></li>
-	                <li><a href="">이력서</a></li>
+	                <li><a href="/resumeList.go">이력서</a></li>
 	                <li><a href="">회원추천</a></li>
 	                <li><a href="">입사지원현황</a></li>
 	                <li><a href="">입사제안현황</a></li>

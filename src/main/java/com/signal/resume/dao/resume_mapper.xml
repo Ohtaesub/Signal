@@ -17,5 +17,31 @@
 		GROUP BY c.cl_id 
 	</select>
 	
+	<select id="resumeDetail" resultType="resume" parameterType="String">
+	SELECT re_title, re_fn_status, re_sch_name, re_sch_period, re_major, re_average, re_total, re_register, re_intro, re_portfolio, jp_name, jc_name
+	,cl_name, cl_call, cl_address, cl_birth, cl_email, cl_gender, cl_photo, cl_age FROM resume r 
+	LEFT OUTER JOIN job_pa jp ON jp.jp_no = r.jp_no
+	LEFT OUTER JOIN job_ch jc ON jc.jc_no = r.jc_no 
+	LEFT OUTER JOIN client c ON c.cl_id = r.cl_id
+	WHERE r.re_no = #{re_no}
+	</select>
+	
+	<select id="careerDetail" resultType="resume" parameterType="String">
+	SELECT r.re_no, ca_com_name, ca_period, ca_job, ca_content FROM career c 
+	LEFT OUTER JOIN resume r ON c.re_no = r.re_no
+	WHERE r.re_no = #{re_no}
+	</select>
+	
+	<select id="socialDetail" resultType="resume" parameterType="String">
+	SELECT r.re_no, soc_field, soc_name, soc_content, soc_period FROM social s 
+	LEFT OUTER JOIN resume r ON s.re_no = r.re_no
+	WHERE r.re_no = #{re_no}
+	</select>
+	
+	<select id="licenseDetail" resultType="resume" parameterType="String">
+	SELECT r.re_no, li_field, li_date, li_org, li_name FROM license l 
+	LEFT OUTER JOIN resume r ON l.re_no = r.re_no
+	WHERE r.re_no = #{re_no}
+	</select>
 	
 </mapper>

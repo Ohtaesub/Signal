@@ -8,6 +8,13 @@ import org.apache.ibatis.type.Alias;
 public class ResumeDTO {
 
 	private String cl_id;
+	private String cl_name;
+	private String cl_call;
+	private String cl_address;
+	private Date cl_birth;
+	private String cl_email;
+	private String cl_photo;
+	
 	private int cl_age;
 	private String cl_gender;
 	private int inter_grade;
@@ -24,12 +31,16 @@ public class ResumeDTO {
 	private int re_total;
 	private String re_register;
 	private String re_intro;
+	private String re_portfolio;
+	
 	private int jp_no;
 	private String jp_name;
 	private int jp_hidden;
 	private int jc_no;
 	private String jc_name;
 	private int jc_hidden;
+	private String li_field;
+	
 	private int li_no;
 	private String li_date;
 	private String li_org;
@@ -54,6 +65,43 @@ public class ResumeDTO {
 	private double avr_inter_grade;
 	private int cnt_inter;
 	private double avr_st_score;
+	
+	public String getCl_name() {
+		return cl_name;
+	}
+	public void setCl_name(String cl_name) {
+		this.cl_name = cl_name;
+	}
+	public String getCl_call() {
+		return cl_call;
+	}
+	public void setCl_call(String cl_call) {
+		this.cl_call = cl_call;
+	}
+	public String getCl_address() {
+		return cl_address;
+	}
+	public void setCl_address(String cl_address) {
+		this.cl_address = cl_address;
+	}
+	public Date getCl_birth() {
+		return cl_birth;
+	}
+	public void setCl_birth(Date cl_birth) {
+		this.cl_birth = cl_birth;
+	}
+	public String getCl_email() {
+		return cl_email;
+	}
+	public void setCl_email(String cl_email) {
+		this.cl_email = cl_email;
+	}
+	public String getCl_photo() {
+		return cl_photo;
+	}
+	public void setCl_photo(String cl_photo) {
+		this.cl_photo = cl_photo;
+	}
 	
 	public double getAvr_inter_grade() {
 		return avr_inter_grade;
@@ -175,6 +223,12 @@ public class ResumeDTO {
 	public void setRe_intro(String re_intro) {
 		this.re_intro = re_intro;
 	}
+	public String getRe_portfolio() {
+		return re_portfolio;
+	}
+	public void setRe_portfolio(String re_portfolio) {
+		this.re_portfolio = re_portfolio;
+	}
 	public int getJp_no() {
 		return jp_no;
 	}
@@ -210,6 +264,12 @@ public class ResumeDTO {
 	}
 	public void setJc_hidden(int jc_hidden) {
 		this.jc_hidden = jc_hidden;
+	}
+	public String getLi_field() {
+		return li_field;
+	}
+	public void setLi_field(String li_field) {
+		this.li_field = li_field;
 	}
 	public int getLi_no() {
 		return li_no;

@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div id="header">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
+</head>
+<body>
+	<div id="header">
 	<p id="logo">
 	    <a href="/"><img src="resources/images/Logo.jpg" alt="Signal" width="150" height="130"/></a>
 	</p>
@@ -14,7 +22,7 @@
 	</div>
 	    <input type="button" class="login" value="로그인" onclick="showPopup()"/>
 	    <input type="button" class="join" value="회원가입" onclick="location.href='joinSelect.go'"/>
-</div>
+	</div>
     <div id="wrap">
     	<div id="aside">
         	<nav>
@@ -54,3 +62,11 @@
 			</nav>
     	</div>
      </div>
+</body>
+<script>
+	function showPopup() {
+	window.open("loginPopup.go", "login", "width=400, height=300, left=100, top=50");
+	
+	}
+</script>
+</html>
