@@ -18,8 +18,8 @@
 	<div id="section">
 		<div>
 			<button onclick="#">등록</button>
-			<button onclick="#">수정</button>
-			<button onclick="#">삭제</button>
+			<button onclick="resumeUpdate()">수정</button>
+			<button onclick="resumeDelete()">삭제</button>
 		</div>
 	<table>
 		<thead>
@@ -43,5 +43,24 @@
 	</table>
 	</div>
 </body>
-<script></script>
+<script>
+function resumeUpdate(){
+	var re_no = $('input[type=radio]:checked').val();
+	if(re_no>0){
+		location.href='resumeUpdate.go?re_no='+re_no;	
+	}else{
+		alert("수정할 이력서를 선택하세요!");   
+	}	
+}
+
+function resumeDelete(){
+	var re_no = $('input[type=radio]:checked').val();
+	if(re_no>0){
+		location.href='resumeDelete.go?re_no='+re_no;	
+	}else{
+		alert("삭제할 이력서를 선택하세요!");   
+	}	
+}
+
+</script>
 </html>
