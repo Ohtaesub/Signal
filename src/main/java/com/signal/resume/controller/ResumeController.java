@@ -23,7 +23,7 @@ public class ResumeController {
 	// cl_id 세션값으로 해당 id에 맞는 리스트만 불러오기
 	// 우선 메인페이지 제작 전 전체 리스트 호출로 수정 진행
 	@RequestMapping(value = "resumeList.go", method = RequestMethod.GET)
-	public String home(Model model) {		
+	public String resumeList(Model model) {		
 		
 		logger.info("이력서 리스트 요청");
 		
@@ -33,6 +33,21 @@ public class ResumeController {
 		model.addAttribute("list", list);
 		
 		return "resumeList";
+	}
+	
+	
+	// 인재현황 리스트 불러오기
+	
+	@RequestMapping(value = "personList.go", method = RequestMethod.GET)
+	public String personList(Model model) {		
+		
+		logger.info("인재현황 리스트 요청");
+
+		ArrayList<ResumeDTO> list = service.personList();
+		logger.info("결과 확인 : 리스트 개수=" +list.size());
+		model.addAttribute("list", list);
+		
+		return "personList";
 	}
 	
 	

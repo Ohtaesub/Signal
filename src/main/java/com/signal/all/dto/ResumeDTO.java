@@ -7,8 +7,13 @@ import org.apache.ibatis.type.Alias;
 @Alias("resume")
 public class ResumeDTO {
 
-	private int re_no;
 	private String cl_id;
+	private int cl_age;
+	private String cl_gender;
+	private int inter_grade;
+	private String inter_comment;
+	private int st_score;
+	private int re_no;
 	private String re_title;
 	private String re_fn_status;
 	private int re_hidden;
@@ -45,6 +50,59 @@ public class ResumeDTO {
 	private String reco_state;
 	private String reco_relation;
 	private Date reco_date;
+	
+	private double avr_inter_grade;
+	private int cnt_inter;
+	private double avr_st_score;
+	
+	public double getAvr_inter_grade() {
+		return avr_inter_grade;
+	}
+	public void setAvr_inter_grade(double avr_inter_grade) {
+		this.avr_inter_grade = avr_inter_grade;
+	}
+	public int getCnt_inter() {
+		return cnt_inter;
+	}
+	public void setCnt_inter(int cnt_inter) {
+		this.cnt_inter = cnt_inter;
+	}
+	public double getAvr_st_score() {
+		return avr_st_score;
+	}
+	public void setAvr_st_score(double avr_st_score) {
+		this.avr_st_score = avr_st_score;
+	}
+	public int getCl_age() {
+		return cl_age;
+	}
+	public void setCl_age(int cl_age) {
+		this.cl_age = cl_age;
+	}
+	public String getCl_gender() {
+		return cl_gender;
+	}
+	public void setCl_gender(String cl_gender) {
+		this.cl_gender = cl_gender;
+	}
+	public int getInter_grade() {
+		return inter_grade;
+	}
+	public void setInter_grade(int inter_grade) {
+		this.inter_grade = inter_grade;
+	}
+	public String getInter_comment() {
+		return inter_comment;
+	}
+	public void setInter_comment(String inter_comment) {
+		this.inter_comment = inter_comment;
+	}
+	public int getSt_score() {
+		return st_score;
+	}
+	public void setSt_score(int st_score) {
+		this.st_score = st_score;
+	}
 	public int getRe_no() {
 		return re_no;
 	}

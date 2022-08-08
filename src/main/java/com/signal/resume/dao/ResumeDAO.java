@@ -8,4 +8,6 @@ public interface ResumeDAO {
 
 	ArrayList<ResumeDTO> list();
 
+	ArrayList<ResumeDTO> personList();
+
 }

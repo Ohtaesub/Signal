@@ -21,4 +21,9 @@ public class ResumeService {
 		return dao.list();
 	}
 
+	public ArrayList<ResumeDTO> personList() {
+		logger.info("인재현황 리스트 서비스 요청");
+		return dao.personList();
+	}
+
 }

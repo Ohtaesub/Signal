@@ -9,28 +9,30 @@
 </head>
 <body>
 	<jsp:include page="../../resources/inc/header_b.jsp"></jsp:include>
-	<div>
 	<table>
 		<thead>
 			<tr>
-				<th>번호</th>
-				<th>이력서 제목</th>
-				<th>직무 대분류</th>
-				<th>직무 소분류</th>				
+				<th>나이</th>
+				<th>성별</th>
+				<th>면접평점</th>
+				<th>면접코멘트수</th>
+				<th>셀프평점</th>
+				<th>입사제안</th>				
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list}" var="resume">
+			<c:forEach items="${list}" var="person">
 				<tr>
-					<td>${resume.re_no}</td>
-					<td><a href="#">${resume.re_title}</a></td>
-					<td>${resume.jp_name}</td>
-					<td>${resume.jc_name}</td>
+					<td>${person.cl_age}</td>
+					<td>${person.cl_gender}</td>
+					<td>${person.avr_inter_grade}</td>
+					<td>${person.cnt_inter}</td>
+					<td>${person.avr_st_score}</td>
+					<td><button onclick="#">입사제안</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	</div>
 </body>
 <script></script>
 </html>
