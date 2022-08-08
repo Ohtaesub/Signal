@@ -1,5 +1,5 @@
 package com.signal.all.dto;
 
-public class JopPostingDTO {
+public class JobPostingDTO {
 
 }
