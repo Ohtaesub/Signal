@@ -3,4 +3,51 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.signal.interview.dao.InterviewDAO">
 	
+	
+		<select id="interviewList" resultType="com.signal.all.dto.InterviewDTO">
+			select 
+			jpo_title,com_name,inter_date,inter_grade,inter_result,inter_no
+			from interview i 
+			left outer join apply a on i.apply_no = a.apply_no 
+			left outer join job_posting jp on a.jpo_no = jp.jpo_no 
+			left outer join company c on jp.com_id = c.com_id;
+		</select>
+		<select id="interviewDetail" resultType="com.signal.all.dto.InterviewDTO" parameterType="String">
+			select 
+			jpo_title,com_name,inter_date,inter_grade,inter_result,inter_no,inter_comment
+			from interview i 
+			left outer join apply a on i.apply_no = a.apply_no 
+			left outer join job_posting jp on a.jpo_no = jp.jpo_no 
+			left outer join company c on jp.com_id = c.com_id
+			WHERE inter_no =#{inter_no}
+		</select>
+		
+		
+		<select id="clientObjectionReg" resultType="com.signal.all.dto.InterviewDTO" parameterType="String">
+			select 
+			jpo_title,com_name,inter_date,inter_grade,inter_result,inter_no
+			from interview i 
+			left outer join apply a on i.apply_no = a.apply_no 
+			left outer join job_posting jp on a.jpo_no = jp.jpo_no 
+			left outer join company c on jp.com_id = c.com_id
+			WHERE inter_no =#{inter_no}
+		</select>
+		
+	
+		
+		<select id="comInterviewList" resultType="com.signal.all.dto.InterviewDTO">
+		SELECT inter_no,cl_photo ,cl_name ,cl_age ,cl_gender ,re_title,inter_date ,inter_result 
+		FROM interview i
+			left outer join apply a on a.apply_no = i.apply_no 
+			left outer join job_posting jp on jp.jpo_no = a.jpo_no 
+			left outer join resume r on r.re_no = a.re_no 
+			left outer join client c on c.cl_id = r.cl_id
+		ORDER BY i.inter_no DESC;
+		</select>
+
+		<update id="comInterviewDateDo" parameterType="hashmap">
+		UPDATE interview SET inter_date=#{inter_date} WHERE inter_no =#{inter_no}
+		</update>
+		
+		
 </mapper>
