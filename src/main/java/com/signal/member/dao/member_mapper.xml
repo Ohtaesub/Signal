@@ -6,4 +6,24 @@
 		SELECT cl_id
 		FROM client WHERE cl_id =#{chkclId}
 	</select>
+	
+	<select id="overlayEmail" parameterType="String" resultType="String">
+	SELECT cl_email 
+	FROM client WHERE cl_email=#{chkEmail}
+	</select>
+	
+	<insert id="clientJoin" parameterType="hashmap">
+	INSERT INTO client
+	(cl_id
+	,cl_pw
+	,cl_name
+	,cl_birth
+	,cl_age
+	,cl_gender
+	,cl_address
+	,cl_call
+	,cl_email
+	,cl_photo)
+	VALUES (#{cl_id},PASSWORD(#{cl_pw}),#{cl_name},#{cl_birth},#{cl_age},#{gender},#{cl_address},#{cl_call},#{cl_email},#{cl_photo})
+	</insert>
 </mapper>

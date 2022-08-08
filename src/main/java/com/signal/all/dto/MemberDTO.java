@@ -18,6 +18,7 @@ public class MemberDTO {
 	private String cl_photo;
 	private String st_comment;
 	private int cl_age;
+	
 	public String getCl_id() {
 		return cl_id;
 	}

@@ -16,7 +16,7 @@ public class MemberService {
 	
 	@Autowired MemberDAO dao;
 	
-	// 아이디 중복확인
+	// 개인회원 아이디 중복확인
 	public HashMap<String, Object> overlayClientId(String cl_id) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -27,7 +27,26 @@ public class MemberService {
 		boolean over = overclId == null?false:true;
 		map.put("overlayClientId", over);
 		
-		return null;
+		return map;
+	}
+
+	// 개인회원 이메일 중복확인
+	public HashMap<String, Object> overlayEmail(String cl_email) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String overClientEmail=dao.overlayEmail(cl_email);
+		logger.info("중복된 이메일 인가요? : "+overClientEmail);
+		//중복된 이메일이면 중복 이메일:(중복이메일)이 보여짐 ->사용불가 이메일
+		//사용가능한 이메일이면 중복 이메일:(null)이 보여짐 ->사용가능 이메일
+		boolean over = overClientEmail ==null?false:true;
+		map.put("overlayEmail", over);
+		
+		return map;
+	}
+
+	public int clientJoin(HashMap<String, String> params) {
+		logger.info("회원가입 서비스 요청!");
+		return dao.clientJoin(params);
 	}
 
 }
