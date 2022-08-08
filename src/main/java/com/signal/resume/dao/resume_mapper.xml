@@ -2,5 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.signal.resume.dao.ResumeDAO">
+
+	<select id="list" resultType="resume">
+		SELECT re_no, re_title, jp_name, jc_name FROM resume r
+		LEFT OUTER JOIN job_pa jp ON r.jp_no = jp.jp_no
+		LEFT OUTER JOIN job_ch jc ON r.jc_no = jc.jc_no  
+	</select>
 	
 </mapper>
