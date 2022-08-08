@@ -1,6 +1,7 @@
 package com.signal.resume.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.signal.all.dto.ResumeDTO;
 import com.signal.resume.service.ResumeService;
@@ -50,6 +52,20 @@ public class ResumeController {
 		
 		return "./resume/personList";
 	}
+	
+	
+	//리스트 호출
+	@RequestMapping("/personList.ajax")
+	@ResponseBody
+	public HashMap<String, Object> personList2(@RequestParam HashMap<String, String> params) {
+		logger.info("과정 리스트 요청 : "+params);	
+	
+		HashMap<String, Object> map = service.personList2(params);
+		ArrayList<ResumeDTO> courList = (ArrayList<ResumeDTO>) map.get("personList");
+		logger.info("리스트 불러오기");
+		return map;
+	}
+	
 	
 	// 이력서 상세보기
 	@RequestMapping(value = "resumeDetail.do", method = RequestMethod.GET)

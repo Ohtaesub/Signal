@@ -17,6 +17,14 @@
 		GROUP BY c.cl_id 
 	</select>
 	
+	<select id="personList2" parameterType="hashmap" resultType="resume">
+		SELECT cl_age, cl_gender, (SUM(inter_grade)/COUNT(inter_comment)) AS avr_inter_grade, 
+		COUNT(DISTINCT inter_comment) as cnt_inter, (SUM(st_score)/COUNT(st_comment)) AS avr_st_score FROM client c 
+		LEFT OUTER JOIN self_test_result str ON c.cl_id = str.cl_id 
+		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id 
+		GROUP BY c.cl_id 
+	</select>
+	
 	<select id="resumeDetail" resultType="resume" parameterType="String">
 	SELECT re_title, re_fn_status, re_sch_name, re_sch_period, re_major, re_average, re_total, re_register, re_intro, re_portfolio, jp_name, jc_name
 	,cl_name, cl_call, cl_address, cl_birth, cl_email, cl_gender, cl_photo, cl_age FROM resume r 

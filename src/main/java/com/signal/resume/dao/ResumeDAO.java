@@ -1,6 +1,7 @@
 package com.signal.resume.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.signal.all.dto.ResumeDTO;
 
@@ -17,5 +18,9 @@ public interface ResumeDAO {
 	ArrayList<ResumeDTO> socialDetail(String re_no);
 
 	ArrayList<ResumeDTO> licenseDetail(String re_no);
+
+	int allCount(HashMap<String, Object> searchResult);
+
+	ArrayList<ResumeDTO> personList2(HashMap<String, Object> searchResult);
 
 }

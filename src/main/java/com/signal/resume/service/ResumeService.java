@@ -1,6 +1,7 @@
 package com.signal.resume.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,54 @@ public class ResumeService {
 		return dao.licenseDetail(re_no);
 	}
 	// 이력서 상세보기 서비스 요청 끝	
+
+	public HashMap<String, Object> personList2(HashMap<String, String> params) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//cnt : 리스트 갯수, page : 보여줄 페이지 수
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+		logger.info("보여줄 페이지 : "+page);
+		
+		String grade = params.get("grade");
+		String startAge = params.get("startAge");
+		String endAge = params.get("endAge");
+		
+		HashMap<String, Object> searchResult = new HashMap<String, Object>();
+		searchResult.put("grade", grade);
+		searchResult.put("startAge", startAge);
+		searchResult.put("endAge", endAge);
+		
+		//총 갯수(allCnt) / 페이지당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
+
+		int allCnt = dao.allCount(searchResult);
+
+		logger.info("allCnt : "+allCnt);
+		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
+		logger.info("pages : "+pages);
+		
+		if(pages==0) {pages=1;}
+		
+		if(page > pages) { //5개씩 보는 마지막 페이지로 갔을 때, 15개씩 보는 걸로 바꿨을때 뜨는 에러 해결
+			page = pages;
+		}
+		
+		map.put("pages", pages); //만들 수 있는 최대 페이지 수
+		
+		map.put("currPage", page); //현재 페이지
+		
+		int offset = (page-1) * cnt;
+		logger.info("offset,cnt : "+offset+","+cnt); //offset:게시글 시작번호		
+		
+		searchResult.put("cnt", cnt);
+		searchResult.put("offset", offset);
+		
+		ArrayList<ResumeDTO> courList = dao.personList2(searchResult);
+
+		map.put("courList", courList);
+		
+		return map;
+	}
 	
 	
 }
