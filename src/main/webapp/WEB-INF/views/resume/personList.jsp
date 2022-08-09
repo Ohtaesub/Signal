@@ -39,17 +39,8 @@
 				<th>입사제안</th>				
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach items="${list}" var="person">
-				<tr>
-					<td>${person.cl_age}</td>
-					<td>${person.cl_gender}</td>
-					<td>${person.avr_inter_grade}</td>
-					<td>${person.cnt_inter}</td>
-					<td>${person.avr_st_score}</td>
-					<td><button onclick="#">입사제안</button></td>
-				</tr>
-			</c:forEach>
+		<tbody id="list">
+			
 		</tbody>
 		<tr>
 			<td colspan="6" id="paging">
@@ -61,7 +52,7 @@
 				</div>
 			</td>
 		</tr>
-	</table>
+	</table>	
 </body>
 <script>
 var currPage = 1;
@@ -104,15 +95,15 @@ function listCall(page){
 
 $('#personSearch').on('click',function(){
 	$("#pagination").twbsPagination('destroy');
-	courseSearch(currPage);
+	personSearch(currPage);
 });
 
-function courseSearch(page){
+function personSearch(page){
 	
 	var pagePerNum = 10;
 	
-	 var subName = $("#grade option:selected").val();
-	 console.log(grade);
+	 var searchCondition = $("#searchCondition option:selected").val();
+	 console.log(searchCondition);
 		 
 	 var startAge = $("#startAge").val();
 	 console.log(startAge);
@@ -126,25 +117,25 @@ function courseSearch(page){
 		 data:{
 			 cnt : pagePerNum,
 			 page : page,
-			 grade : grade,			 
+			 searchCondition : searchCondition,			 
 			 startAge : startAge,
 			 endAge : endAge 
 		 },
 		dataType:'json',
 		success:function(data){
 			console.log(data);
-			drawList(data.courList);
+			drawList(data.personList);
 			currPage = data.currPage;
 			
 			//플러그인 사용 페이징
 			$("#pagination").twbsPagination({
 				startPage:data.currPage, //시작페이지
 				totalPages:data.pages, //총 페이지(전체게시물 / 한 페이지에 보여줄 게시물 수)
-				visiblePages: 5, // 한번에 보여줄 페이지 수
+				visiblePages: 10, // 한번에 보여줄 페이지 수
 				onPageClick:function(e,page){
 					console.log(page);
 					currPage=page;
-					courseSearch(page);
+					personSearch(page);
 				}
 			});
 		},
@@ -154,6 +145,27 @@ function courseSearch(page){
 	 });
 
 	}
+
+function drawList(personList){
+	
+	var content="";
+	
+	personList.forEach(function(item){
+				
+		//console.log(item);
+		content += '<tr>';
+		content += '<td>'+item.cl_age+'</td>';
+		content += '<td>'+item.cl_gender+'</td>';
+		content += '<td>'+item.avr_inter_grade+'</td>';
+		content += '<td>'+item.cnt_inter+'</td>';
+		content += '<td>'+item.avr_st_score+'</td>';
+		content += '<td><button onclick="#">입사제안</button></td>';
+		content += '</tr>';
+	});
+	
+	$('#list').empty();
+	$('#list').append(content);
+}
 
 </script>
 </html>

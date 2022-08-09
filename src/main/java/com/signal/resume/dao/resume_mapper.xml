@@ -23,6 +23,39 @@
 		LEFT OUTER JOIN self_test_result str ON c.cl_id = str.cl_id 
 		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id 
 		GROUP BY c.cl_id 
+		<where>
+			<if test="startAge != null and endAge != null and searchCondition != null">
+				<if test="startAge != '' and endAge != ''">
+					<![CDATA[
+					AND cl_age >= #{startAge}
+					AND cl_age <= #{endAge}
+					]]>
+				<if test="searchCondition.equals('grade')">
+					ORDER BY avr_inter_grade DESC	
+				</if>
+				</if>
+			</if>
+		</where>
+		LIMIT #{cnt} OFFSET #{offset}
+	</select>
+	
+	<select id="allCount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(DISTINCT c.cl_id) FROM client c 
+		LEFT OUTER JOIN self_test_result str ON c.cl_id = str.cl_id 
+		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id		
+		<where>
+			<if test="startAge != null and endAge != null and searchCondition != null">
+				<if test="startSearch != '' and endSearch != ''">
+					<![CDATA[
+					AND cl_age >= #{startSearch}
+					AND cl_age <= #{endSearch}
+					]]>
+					<if test="searchCondition.equals('grade')">
+						ORDER BY avr_inter_grade DESC
+					</if>
+				</if>
+			</if>
+		</where>
 	</select>
 	
 	<select id="resumeDetail" resultType="resume" parameterType="String">

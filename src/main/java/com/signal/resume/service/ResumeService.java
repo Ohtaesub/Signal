@@ -59,12 +59,13 @@ public class ResumeService {
 		int page = Integer.parseInt(params.get("page"));
 		logger.info("보여줄 페이지 : "+page);
 		
-		String grade = params.get("grade");
+		String searchCondition = params.get("searchCondition");
 		String startAge = params.get("startAge");
 		String endAge = params.get("endAge");
 		
+		
 		HashMap<String, Object> searchResult = new HashMap<String, Object>();
-		searchResult.put("grade", grade);
+		searchResult.put("searchCondition", searchCondition);
 		searchResult.put("startAge", startAge);
 		searchResult.put("endAge", endAge);
 		
@@ -92,9 +93,9 @@ public class ResumeService {
 		searchResult.put("cnt", cnt);
 		searchResult.put("offset", offset);
 		
-		ArrayList<ResumeDTO> courList = dao.personList2(searchResult);
+		ArrayList<ResumeDTO> personList = dao.personList2(searchResult);
 
-		map.put("courList", courList);
+		map.put("personList", personList);
 		
 		return map;
 	}
