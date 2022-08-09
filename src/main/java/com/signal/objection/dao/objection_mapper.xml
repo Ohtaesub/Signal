@@ -6,8 +6,7 @@
 	
 		<select id="clientObjectionList" resultType="com.signal.all.dto.ObjectionDTO">
 		SELECT 
-			jpo_title,com_name,inter_date,inter_result,inter_grade,obj_state,obj_content,
-			obj_date 
+			jpo_title,com_name,inter_date,inter_result,inter_grade,obj_state,obj_content,obj_date,o.inter_no
 		FROM objection o 
 			left outer join interview i on o.inter_no = i.inter_no 
 			left outer join apply a on i.apply_no = a.apply_no 
@@ -15,4 +14,45 @@
 			left outer join company c on jp.com_id = c.com_id;
 		</select>
 	
+	
+	<select id="comObjectionList" resultType="com.signal.all.dto.ObjectionDTO">
+			select cl.cl_photo ,cl.cl_name,cl.cl_age,cl.cl_gender,re.re_title,com.com_name,i.inter_date,i.inter_result,i.inter_grade ,ob.obj_cl_content,ob.obj_state,ob.obj_date  
+			FROM objection ob
+			left outer join interview i on ob.inter_no = i.inter_no 
+			left outer join apply ap on ap.apply_no = i.apply_no 
+			left outer join job_posting jp on ap.jpo_no = jp.jpo_no 
+			left outer join company com on jp.com_id = com.com_id 
+			left outer join resume re on ap.re_no = re.re_no 
+			left outer join client cl on re.cl_id = cl.cl_id;
+		</select>
+			
+			<select id="adminObjectionList" resultType="com.signal.all.dto.ObjectionDTO">
+			select distinct cl.cl_id ,cl.cl_name,ob.obj_state,com.com_name,com.com_id,i.inter_no,ap.apply_no,i.inter_blind  
+			FROM objection ob
+			left outer join interview i on ob.inter_no = i.inter_no 
+			left outer join apply ap on ap.apply_no = i.apply_no 
+			left outer join job_posting jp on ap.jpo_no = jp.jpo_no 
+			left outer join company com on jp.com_id = com.com_id 
+			left outer join resume re on ap.re_no = re.re_no 
+			left outer join client cl on re.cl_id = cl.cl_id
+			where i.inter_blind ='1';
+		</select>
+	
+		<select id="adminBlindList" resultType="com.signal.all.dto.ObjectionDTO">
+			select distinct cl.cl_id ,cl.cl_name,ob.obj_state,com.com_name,com.com_id,i.inter_no,ap.apply_no,i.inter_blind  
+			FROM objection ob
+				left outer join interview i on ob.inter_no = i.inter_no 
+				left outer join apply ap on ap.apply_no = i.apply_no 
+				left outer join job_posting jp on ap.jpo_no = jp.jpo_no 
+				left outer join company com on jp.com_id = com.com_id 
+				left outer join resume re on ap.re_no = re.re_no 
+				left outer join client cl on re.cl_id = cl.cl_id
+			where i.inter_blind ='0';
+		</select>
+		
+		<insert id="clientDbjectionRegDo" parameterType="hashmap">
+		INSERT INTO objection(obj_cl_content,inter_no) VALUES (#{obj_cl_content},#{inter_no} )
+		</insert>
+		
+		
 </mapper>

@@ -5,16 +5,20 @@ import java.sql.Date;
 public class InterviewDTO {
 	private String jpo_title;
 	private String com_name;
+	private String it_que;
+	private int it_no;
 	private Date  inter_date;
 	private int inter_grade;
 	private String inter_result;
 	private int inter_no;
 	private String inter_comment;
+	private int inter_score;
 	private String cl_name;
 	private int cl_age;
 	private String cl_gender;
 	private String cl_photo;
 	private String re_title;
+	private String obj_cl_content;
 	
 	
 	
@@ -90,5 +94,30 @@ public class InterviewDTO {
 	public void setInter_comment(String inter_comment) {
 		this.inter_comment = inter_comment;
 	}
+	public String getIt_que() {
+		return it_que;
+	}
+	public void setIt_que(String it_que) {
+		this.it_que = it_que;
+	}
+	public int getIt_no() {
+		return it_no;
+	}
+	public void setIt_no(int it_no) {
+		this.it_no = it_no;
+	}
+	public int getInter_score() {
+		return inter_score;
+	}
+	public void setInter_score(int inter_score) {
+		this.inter_score = inter_score;
+	}
+	public String getObj_cl_content() {
+		return obj_cl_content;
+	}
+	public void setObj_cl_content(String obj_cl_content) {
+		this.obj_cl_content = obj_cl_content;
+	}
+	
 	
 }

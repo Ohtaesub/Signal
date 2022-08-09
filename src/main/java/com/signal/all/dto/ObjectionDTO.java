@@ -3,10 +3,18 @@ package com.signal.all.dto;
 import java.sql.Date;
 
 public class ObjectionDTO {
+	private String cl_id;
+	private String cl_photo;
+	private String cl_name;
+	private int cl_age;
+	private String cl_gender;
+	private String re_title;
 	private String jpo_title;
 	private String com_name;
+	private String com_id;
 	private Date  inter_date;
 	private int inter_grade;
+	private int inter_blind;
 	private String inter_result;
 	private int inter_no;
 	private String inter_comment;
@@ -79,6 +87,54 @@ public class ObjectionDTO {
 	}
 	public void setObj_date(Date obj_date) {
 		this.obj_date = obj_date;
+	}
+	public String getCl_photo() {
+		return cl_photo;
+	}
+	public void setCl_photo(String cl_photo) {
+		this.cl_photo = cl_photo;
+	}
+	public String getCl_name() {
+		return cl_name;
+	}
+	public void setCl_name(String cl_name) {
+		this.cl_name = cl_name;
+	}
+	public int getCl_age() {
+		return cl_age;
+	}
+	public void setCl_age(int cl_age) {
+		this.cl_age = cl_age;
+	}
+	public String getCl_gender() {
+		return cl_gender;
+	}
+	public void setCl_gender(String cl_gender) {
+		this.cl_gender = cl_gender;
+	}
+	public String getRe_title() {
+		return re_title;
+	}
+	public void setRe_title(String re_title) {
+		this.re_title = re_title;
+	}
+	public String getCom_id() {
+		return com_id;
+	}
+	public void setCom_id(String com_id) {
+		this.com_id = com_id;
+	}
+	public int getInter_blind() {
+		return inter_blind;
+	}
+	public void setInter_blind(int inter_blind) {
+		this.inter_blind = inter_blind;
+	}
+	public String getCl_id() {
+		return cl_id;
+	}
+	public void setCl_id(String cl_id) {
+		this.cl_id = cl_id;
 	}
 	
 	

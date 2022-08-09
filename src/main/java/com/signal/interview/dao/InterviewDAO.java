@@ -17,4 +17,12 @@ public interface InterviewDAO {
 
 	int comInterviewDateDo(HashMap<String, String> params);
 
+	ArrayList<InterviewDTO> interviewDetailResultList(String inter_no);
+
+	float avgGrade();
+
+	int countComment();
+
+
+
 }

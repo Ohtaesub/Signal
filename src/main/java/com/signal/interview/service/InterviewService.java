@@ -38,5 +38,23 @@ public class InterviewService {
 		int row =dao.comInterviewDateDo(params);
 		
 	}
+
+	public ArrayList<InterviewDTO> interviewDetailResultList(String inter_no) {
+		
+		return dao.interviewDetailResultList(inter_no);
+	}
+
+	public float avgGrade() {
+		
+		return dao.avgGrade();
+	}
+
+	public int countComment() {
+	
+		return dao.countComment();
+
+	}
+
+
 	
 }
