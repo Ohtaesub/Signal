@@ -3,6 +3,8 @@ package com.signal.resume.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,8 +87,28 @@ public class ResumeController {
 		return page;
 	}
 	
+	@RequestMapping(value = "resumeReg.go", method = RequestMethod.GET)
+	public String resumeReg(HttpSession session, Model model) {		
+		
+		/* String id = (String) session.getAttribute("loginId"); */
+		String id = "aaaabbbb";
+		logger.info(id + " 의 이력서 등록페이지 이동");
+		ResumeDTO dto = service.resumeRegDetail(id);
+		model.addAttribute("cl_id", id);	
+		model.addAttribute("dto", dto);
+		
+		return "./resume/resumeReg";
+	}
 	
-	
+	@RequestMapping(value = "/resumeReg.do")
+	public String write(@RequestParam HashMap<String, String> params, 
+			HttpSession session, Model model) {
+		
+			logger.info("params : {}",params);
+			service.resumeReg(params);	
+		
+		return "redirect:/resumeList.go";
+	}
 	
 	
 }

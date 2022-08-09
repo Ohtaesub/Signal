@@ -17,7 +17,7 @@
 	
 	<div id="section">
 		<div>
-			<button onclick="#">등록</button>
+			<button onclick="location.href='resumeReg.go'">등록</button>
 			<button onclick="resumeUpdate()">수정</button>
 			<button onclick="resumeDelete()">삭제</button>
 		</div>

@@ -85,4 +85,14 @@
 	WHERE r.re_no = #{re_no}
 	</select>
 	
+	<select id="resumeRegDetail" resultType="resume" parameterType="String">
+	SELECT cl_name, cl_call, cl_address, cl_birth, cl_email, cl_gender, cl_photo, cl_age FROM client c	
+	WHERE cl_id = #{id}
+	</select>
+	
+	<insert id="resumeReg" parameterType="hashmap">
+	INSERT INTO resume(cl_id, re_title, re_fn_status, re_sch_name, re_sch_period, re_major, re_average, re_total, re_register, re_intro, re_portfolio, jp_no, jc_no)
+	VALUES (#{cl_id},#{re_title},#{re_fn_status},#{re_sch_name},#{re_sch_period},#{re_major},#{re_average},#{re_total},#{re_register},#{re_intro},#{re_portfolio},#{jp_no},#{jc_no})
+	</insert>
+	
 </mapper>

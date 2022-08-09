@@ -99,6 +99,25 @@ public class ResumeService {
 		
 		return map;
 	}
+
+	public ResumeDTO resumeRegDetail(String id) {
+		ResumeDTO dto = new ResumeDTO();
+		dto = dao.resumeRegDetail(id);
+		return dto;
+	}
+
+	public boolean resumeReg(HashMap<String, String> params) {
+		
+		logger.info("이력서 기본정보 등록 서비스");
+		boolean success = false;
+		
+		if(dao.resumeReg(params)>0) {
+			success = true;
+		}
+		logger.info("이력서 등록 : " + success);
+		return success;
+		
+	}
 	
 	
 }
