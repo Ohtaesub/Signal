@@ -10,6 +10,7 @@
 <style></style>
 </head>
 <body>
+<p>마이페이지 > 이의제기현황 <p>
 <table>
     <colgroup>
        <col width="400"></col>

@@ -10,6 +10,9 @@
 <style></style>
 </head>
 <body>
+<p>마이페이지 > 면접현황 <p>
+<p>평균 평점 ${avgGrade}<p>
+<p>총코멘트수 ${countComment}<p>
 <table>
     <colgroup>
         <col width="170"></col>
@@ -39,7 +42,13 @@
                         <td>${interviewList.inter_result}</td>
                         <td align="center">${interviewList.inter_grade}</td>
                         <td align="center">
-	                         	<button type="button" onclick="location.href='clientObjectionReg.go?inter_no=${interviewList.inter_no}'">이의제기</button>
+                        	<c:choose>
+									<c:when test="${empty interviewList.obj_cl_content}">
+									<button type="button" onclick="location.href='clientObjectionReg.go?inter_no=${interviewList.inter_no}'">이의제기</button>
+									</c:when>					
+									<c:otherwise>처리중</c:otherwise>
+									
+							</c:choose>
 	                            <button type="button" onclick="location.href='interviewDetail.go?inter_no=${interviewList.inter_no}'">상세보기</button>
                          </td>
                          <td >

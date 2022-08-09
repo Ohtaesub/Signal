@@ -10,6 +10,7 @@
 <style></style>
 </head>
 <body>
+<p>마이페이지 > 면접현황 <p>
 <form action="clentobjection.do" method="get" >
     <table class="dto">
         
@@ -30,8 +31,18 @@
                 <td>${dto.inter_result}</td>
             </tr>
             <tr>
-                <th>평점</th>
-                <td>${dto.inter_grade}</td>
+                <th>평점상세내역</th>
+                <td>
+                	<table>
+	                	<c:forEach items="${interviewDetailResultList}" var="interviewDetailResultList" >
+		                    <tr>
+		                        <td align="center">${interviewDetailResultList.it_no} 번</td>
+		                        <td align="center">${interviewDetailResultList.it_que}</td>
+		                        <td align="center">${interviewDetailResultList.inter_score} 점</td> 
+		                    </tr>
+						</c:forEach>
+                	</table>
+                </td>
             </tr>
             <tr>
                 <th>코멘트</th>

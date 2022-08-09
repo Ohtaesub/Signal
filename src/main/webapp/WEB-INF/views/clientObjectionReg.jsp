@@ -10,10 +10,11 @@
 <style></style>
 </head>
 <body>
-<form action="clentobjection.do" method="get" >
+<form action="clientDbjectionReg.do" method="get" onsubmit="return clientDbjectionReg()" >
     <table class="dto">
         
             <tr>
+            
                 <th>채용공고제목</th>
                 <td>${dto.jpo_title} </td>
             </tr>
@@ -35,7 +36,10 @@
             </tr>
             <tr>
                 <th>이의제기</th>
-                <td><textarea rows="5" cols="30" name="pc_explan" id="pc_explan"></textarea></td>
+                <td>
+                <textarea rows="10" cols="40" name="obj_cl_content" id="obj_cl_content"></textarea>
+                	<input type="hidden" name="inter_no" value="${dto.inter_no}">
+                	</td>
            </tr>
         </table>
         <input type="submit" value="등록"/>
@@ -43,5 +47,16 @@
     </form>		
 </body>
 <script>
+
+
+function clientDbjectionReg()	{
+		
+		
+		if($('#obj_cl_content').val()==""){
+			alert("입련란이 비었습니다 확인주세요.");
+			$("#obj_cl_content").focus();
+			return false;
+		}
+}
 </script>
 </html>

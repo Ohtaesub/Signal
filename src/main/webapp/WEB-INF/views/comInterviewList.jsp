@@ -10,6 +10,7 @@
 <style></style>
 </head>
 <body>
+<p>기업페이지 > 면접관리 리스트 <p>
 <table>
     <colgroup>
         <col width="70"></col>
