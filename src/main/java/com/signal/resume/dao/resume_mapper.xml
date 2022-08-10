@@ -106,6 +106,20 @@
 	WHERE re_no = #{param3}
 	</update>
 	
+	<insert id="careerReg" parameterType="hashmap">
+	INSERT INTO career(re_no, ca_com_name, ca_period, ca_job, ca_content)
+	VALUES (#{re_no},#{ca_com_name},#{ca_period},#{ca_job},#{ca_content})
+	</insert>
+	
+	<insert id="socialReg" parameterType="hashmap">
+	INSERT INTO social(re_no, soc_field, soc_name, soc_period, soc_content)
+	VALUES (#{re_no},#{soc_field},#{soc_name},#{soc_period},#{soc_content})
+	</insert>
+	
+	<insert id="licenseReg" parameterType="hashmap">
+	INSERT INTO license(re_no, li_field, li_name, li_org, li_date)
+	VALUES (#{re_no},#{li_field},#{li_name},#{li_org},#{li_date})
+	</insert>
 	
 	
 </mapper>

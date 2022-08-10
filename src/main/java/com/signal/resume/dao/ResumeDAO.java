@@ -29,4 +29,10 @@ public interface ResumeDAO {
 
 	int resumeReg(int jp_no, int jc_no, int re_no);
 
+	int careerReg(HashMap<String, String> params);
+
+	int socialReg(HashMap<String, String> params);
+
+	int licenseReg(HashMap<String, String> params);
+
 }

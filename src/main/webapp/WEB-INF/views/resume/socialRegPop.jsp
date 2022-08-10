@@ -32,5 +32,12 @@
 	</table>
 	</form>
 </body>
-<script></script>
+<script>
+var msg = "${success}";
+if(msg){
+	alert("등록이 완료되었습니다");
+	window.opener.location.reload();
+	window.close(); 
+}
+</script>
 </html>

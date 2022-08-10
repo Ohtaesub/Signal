@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.signal.all.dto.ResumeDTO;
 import com.signal.resume.dao.ResumeDAO;
@@ -142,6 +143,55 @@ public class ResumeService {
 		
 		return "redirect:/resumeAddReg.go?re_no="+re_no;
 		
+	}
+
+	public ModelAndView careerReg(HashMap<String, String> params) {
+		
+		ModelAndView mav = new ModelAndView("./resume/careerRegPop");
+		
+		boolean success=false;
+		int row = dao.careerReg(params);
+		if(row>0) {
+			success=true;
+		}
+		String reNo=params.get("re_no");
+		int re_no=Integer.parseInt(reNo);
+		
+		mav.addObject("re_no", re_no);
+		mav.addObject("success", success);
+		return mav;
+	}
+
+	public ModelAndView socialReg(HashMap<String, String> params) {
+ModelAndView mav = new ModelAndView("./resume/socialRegPop");
+		
+		boolean success=false;
+		int row = dao.socialReg(params);
+		if(row>0) {
+			success=true;
+		}
+		String reNo=params.get("re_no");
+		int re_no=Integer.parseInt(reNo);
+		
+		mav.addObject("re_no", re_no);
+		mav.addObject("success", success);
+		return mav;
+	}
+
+	public ModelAndView licenseReg(HashMap<String, String> params) {
+ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
+		
+		boolean success=false;
+		int row = dao.licenseReg(params);
+		if(row>0) {
+			success=true;
+		}
+		String reNo=params.get("re_no");
+		int re_no=Integer.parseInt(reNo);
+		
+		mav.addObject("re_no", re_no);
+		mav.addObject("success", success);
+		return mav;
 	}
 	
 	

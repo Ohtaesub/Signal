@@ -21,7 +21,7 @@
 		</tr>
 		<tr>
 			<th>근무내용</th>
-			<td colspan="5">
+			<td colspan="5">				
 				<input type="text" name="ca_content"/>
 				<input type="hidden" name="re_no" value="${re_no }">
 			</td>
@@ -32,5 +32,13 @@
 	</table>
 	</form>
 </body>
-<script></script>
+<script>
+	var msg = "${success}";
+	if(msg){
+		alert("등록이 완료되었습니다");
+		window.opener.location.reload();
+		window.close(); 
+	}
+
+</script>
 </html>

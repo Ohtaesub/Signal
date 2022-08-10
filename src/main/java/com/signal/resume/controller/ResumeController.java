@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.signal.all.dto.ResumeDTO;
 import com.signal.resume.service.ResumeService;
@@ -149,7 +150,7 @@ public class ResumeController {
 	@RequestMapping(value = "socialReg.go", method = RequestMethod.GET)
 	public String socialReg(Model model, @RequestParam String re_no) {		
 		
-		logger.info(re_no + "번 이력서 경력사항 등록 요청");
+		logger.info(re_no + "번 이력서 그 외 활동 등록 요청");
 		model.addAttribute("re_no", re_no);
 		return "./resume/socialRegPop";
 	}
@@ -157,7 +158,7 @@ public class ResumeController {
 	@RequestMapping(value = "socialUp.go", method = RequestMethod.GET)
 	public String socialUp(Model model, @RequestParam String re_no) {		
 		
-		logger.info(re_no + "번 이력서 경력사항 수정 요청");
+		logger.info(re_no + "번 이력서 그 외 활동 수정 요청");
 		
 		ArrayList<ResumeDTO> socialDto = service.socialDetail(re_no);
 		
@@ -170,7 +171,7 @@ public class ResumeController {
 	@RequestMapping(value = "licenseReg.go", method = RequestMethod.GET)
 	public String licenseReg(Model model, @RequestParam String re_no) {		
 		
-		logger.info(re_no + "번 이력서 경력사항 등록 요청");
+		logger.info(re_no + "번 이력서 자격증,수상내역 등록 요청");
 		model.addAttribute("re_no", re_no);
 		return "./resume/licenseRegPop";
 	}
@@ -178,7 +179,7 @@ public class ResumeController {
 	@RequestMapping(value = "licenseUp.go", method = RequestMethod.GET)
 	public String licenseUp(Model model, @RequestParam String re_no) {		
 		
-		logger.info(re_no + "번 이력서 경력사항 수정 요청");
+		logger.info(re_no + "번 이력서 자격증,수상내역 수정 요청");
 		
 		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);
 		
@@ -208,8 +209,32 @@ public class ResumeController {
 		
 	}
 	
+	@RequestMapping(value = "/careerReg.do")
+	public ModelAndView careerReg(@RequestParam HashMap<String, String> params, 
+			HttpSession session, Model model) {
+		
+		logger.info("params : {}",params);	
+		
+		return service.careerReg(params);
+	}
 	
+	@RequestMapping(value = "/socialReg.do")
+	public ModelAndView socialReg(@RequestParam HashMap<String, String> params, 
+			HttpSession session, Model model) {
+		
+		logger.info("params : {}",params);	
+		
+		return service.socialReg(params);
+	}
 	
+	@RequestMapping(value = "/licenseReg.do")
+	public ModelAndView licenseReg(@RequestParam HashMap<String, String> params, 
+			HttpSession session, Model model) {
+		
+		logger.info("params : {}",params);	
+		
+		return service.licenseReg(params);
+	}
 	
 	
 }
