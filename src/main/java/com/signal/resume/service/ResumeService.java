@@ -106,16 +106,41 @@ public class ResumeService {
 		return dto;
 	}
 
-	public boolean resumeReg(HashMap<String, String> params) {
+	public String resumeReg(HashMap<String, String> params) {
 		
 		logger.info("이력서 기본정보 등록 서비스");
-		boolean success = false;
+		ResumeDTO dto = new ResumeDTO();
+		dto.setCl_id(params.get("cl_id"));
+		dto.setRe_title(params.get("re_title"));
+		dto.setRe_fn_status(params.get("re_fn_status"));
+		dto.setRe_sch_name(params.get("re_sch_name"));
+		dto.setRe_sch_period(params.get("re_sch_period"));
+		dto.setRe_major(params.get("re_major"));		
+		dto.setRe_register(params.get("re_register"));
+		dto.setRe_intro(params.get("re_intro"));
+		dto.setRe_portfolio(params.get("re_portfolio"));
+		dto.setRe_average(params.get("re_average"));
+		dto.setRe_total(params.get("re_total"));
 		
-		if(dao.resumeReg(params)>0) {
-			success = true;
-		}
-		logger.info("이력서 등록 : " + success);
-		return success;
+		String jp = params.get("jp_no");
+		int jp_no = Integer.parseInt(jp);
+		String jc = params.get("jc_no");		
+		int jc_no = Integer.parseInt(jc);
+		
+		if(jp_no != 0 || jc_no != 0) {
+			int rowB=dao.resumeRegB(dto);
+			int re_no = dto.getRe_no();
+			int row=dao.resumeReg(jp_no, jc_no, re_no);
+			logger.info("이력서 등록 결과 : " + rowB + '/' + row);
+		} else {
+			int rowB=dao.resumeRegB(dto);
+			logger.info("이력서 등록 결과 : " + rowB);			
+		}	
+		
+		int re_no = dto.getRe_no();
+		logger.info("이력서 등록 결과 : " + re_no);
+		
+		return "redirect:/resumeAddReg.go?re_no="+re_no;
 		
 	}
 	

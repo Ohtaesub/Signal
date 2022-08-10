@@ -105,10 +105,111 @@ public class ResumeController {
 			HttpSession session, Model model) {
 		
 			logger.info("params : {}",params);
-			service.resumeReg(params);	
-		
-		return "redirect:/resumeList.go";
+					
+		return service.resumeReg(params);
 	}
+	
+	@RequestMapping(value = "resumeAddReg.go", method = RequestMethod.GET)
+	public String resumeAddReg(Model model, @RequestParam String re_no) {		
+		
+		logger.info(re_no + "번 이력서 추가정보 등록 요청");
+		
+		ArrayList<ResumeDTO> careerDto = service.careerDetail(re_no);
+		ArrayList<ResumeDTO> socialDto = service.socialDetail(re_no);
+		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);	
+		
+		model.addAttribute("re_no", re_no);
+		model.addAttribute("careerDto", careerDto);
+		model.addAttribute("socialDto", socialDto);
+		model.addAttribute("licenseDto", licenseDto);
+		return "./resume/resumeAddReg";
+	}
+	
+	@RequestMapping(value = "careerReg.go", method = RequestMethod.GET)
+	public String careerReg(Model model, @RequestParam String re_no) {		
+		
+		logger.info(re_no + "번 이력서 경력사항 등록 요청");
+		model.addAttribute("re_no", re_no);
+		return "./resume/careerRegPop";
+	}
+	
+	@RequestMapping(value = "careerUp.go", method = RequestMethod.GET)
+	public String careerUp(Model model, @RequestParam String re_no) {		
+		
+		logger.info(re_no + "번 이력서 경력사항 수정 요청");
+		
+		ArrayList<ResumeDTO> careerDto = service.careerDetail(re_no);
+		
+		model.addAttribute("re_no", re_no);
+		model.addAttribute("careerDto", careerDto);
+		
+		return "./resume/careerUpPop";
+	}
+	
+	@RequestMapping(value = "socialReg.go", method = RequestMethod.GET)
+	public String socialReg(Model model, @RequestParam String re_no) {		
+		
+		logger.info(re_no + "번 이력서 경력사항 등록 요청");
+		model.addAttribute("re_no", re_no);
+		return "./resume/socialRegPop";
+	}
+	
+	@RequestMapping(value = "socialUp.go", method = RequestMethod.GET)
+	public String socialUp(Model model, @RequestParam String re_no) {		
+		
+		logger.info(re_no + "번 이력서 경력사항 수정 요청");
+		
+		ArrayList<ResumeDTO> socialDto = service.socialDetail(re_no);
+		
+		model.addAttribute("re_no", re_no);
+		model.addAttribute("socialDto", socialDto);
+		
+		return "./resume/socialUpPop";
+	}
+	
+	@RequestMapping(value = "licenseReg.go", method = RequestMethod.GET)
+	public String licenseReg(Model model, @RequestParam String re_no) {		
+		
+		logger.info(re_no + "번 이력서 경력사항 등록 요청");
+		model.addAttribute("re_no", re_no);
+		return "./resume/licenseRegPop";
+	}
+	
+	@RequestMapping(value = "licenseUp.go", method = RequestMethod.GET)
+	public String licenseUp(Model model, @RequestParam String re_no) {		
+		
+		logger.info(re_no + "번 이력서 경력사항 수정 요청");
+		
+		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);
+		
+		model.addAttribute("re_no", re_no);
+		model.addAttribute("licenseDto", licenseDto);
+		
+		return "./resume/licenseUpPop";
+	}
+	
+	@RequestMapping(value = "resumeUpdate.go", method = RequestMethod.GET)
+	public String resumeUpdate(Model model, @RequestParam String re_no) {		
+		
+		logger.info(re_no + "번 이력서 수정 요청");
+		
+		ResumeDTO dto = service.resumeDetail(re_no);
+		ArrayList<ResumeDTO> careerDto = service.careerDetail(re_no);
+		ArrayList<ResumeDTO> socialDto = service.socialDetail(re_no);
+		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);		
+		String page = "./resume/resumeUpdate";
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("careerDto", careerDto);
+		model.addAttribute("socialDto", socialDto);
+		model.addAttribute("licenseDto", licenseDto);
+		model.addAttribute("re_no", re_no);
+		return page;
+		
+	}
+	
+	
+	
 	
 	
 }

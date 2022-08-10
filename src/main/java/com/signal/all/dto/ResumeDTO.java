@@ -27,8 +27,8 @@ public class ResumeDTO {
 	private String re_sch_name;
 	private String re_sch_period;
 	private String re_major;
-	private int re_average;
-	private int re_total;
+	private String re_average;
+	private String re_total;
 	private String re_register;
 	private String re_intro;
 	private String re_portfolio;
@@ -199,16 +199,16 @@ public class ResumeDTO {
 	public void setRe_major(String re_major) {
 		this.re_major = re_major;
 	}
-	public int getRe_average() {
+	public String getRe_average() {
 		return re_average;
 	}
-	public void setRe_average(int re_average) {
+	public void setRe_average(String re_average) {
 		this.re_average = re_average;
 	}
-	public int getRe_total() {
+	public String getRe_total() {
 		return re_total;
 	}
-	public void setRe_total(int re_total) {
+	public void setRe_total(String re_total) {
 		this.re_total = re_total;
 	}
 	public String getRe_register() {

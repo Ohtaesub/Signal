@@ -39,7 +39,7 @@
    
    <!-- 쿼리 실행 + 자원 반납 여부 -->
    <logger name="jdbc.connection" additivity="false">
-      <level value="info" />
+      <level value="off" />
       <appender-ref ref="console"/>
    </logger>
    

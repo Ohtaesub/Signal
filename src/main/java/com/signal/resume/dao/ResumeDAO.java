@@ -23,8 +23,10 @@ public interface ResumeDAO {
 
 	ArrayList<ResumeDTO> personList2(HashMap<String, Object> searchResult);
 
-	ResumeDTO resumeRegDetail(String id);
+	ResumeDTO resumeRegDetail(String id);	
 
-	int resumeReg(HashMap<String, String> params);
+	int resumeRegB(ResumeDTO dto);
+
+	int resumeReg(int jp_no, int jc_no, int re_no);
 
 }
