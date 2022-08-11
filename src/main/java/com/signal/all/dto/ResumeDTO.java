@@ -60,6 +60,8 @@ public class ResumeDTO {
 	private String reco_req_memo;
 	private String reco_state;
 	private String reco_relation;
+	private String reco_content;
+	
 	private Date reco_date;
 	
 	private double avr_inter_grade;
@@ -391,7 +393,12 @@ public class ResumeDTO {
 	public void setReco_date(Date reco_date) {
 		this.reco_date = reco_date;
 	}
-	
+	public String getReco_content() {
+		return reco_content;
+	}
+	public void setReco_content(String reco_content) {
+		this.reco_content = reco_content;
+	}
 	
 	
 	

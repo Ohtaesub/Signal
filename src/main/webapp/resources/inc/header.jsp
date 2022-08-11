@@ -32,7 +32,7 @@
 				<ul class="sidemenu">
 					<li><a href="">개인정보관리</a></li>
 	                <li><a href="/resumeList.go">이력서</a></li>
-	                <li><a href="">회원추천</a></li>
+	                <li><a href="/recommendMe.go">회원추천</a></li>
 	                <li><a href="">입사지원현황</a></li>
 	                <li><a href="">입사제안현황</a></li>
 	                <li><a href="">면접현황</a></li>

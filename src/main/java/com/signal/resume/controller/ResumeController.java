@@ -236,5 +236,21 @@ public class ResumeController {
 		return service.licenseReg(params);
 	}
 	
+	@RequestMapping(value = "recommendMe.go", method = RequestMethod.GET)
+	public String recommendMeGo(HttpSession session, Model model) {		
+		
+		/* String id = (String) session.getAttribute("loginId"); */
+		String id = "bbbbcccc";
+		logger.info(id + " 의 추천현황 페이지 이동");
+		ArrayList<ResumeDTO> list = service.recommendMe(id);
+		ArrayList<ResumeDTO> listB = service.recommendYou(id);
+		model.addAttribute("cl_id", id);	
+		model.addAttribute("list", list);
+		model.addAttribute("listB", listB);
+		
+		return "./resume/recommendMe";
+	}
+	
+	
 	
 }
