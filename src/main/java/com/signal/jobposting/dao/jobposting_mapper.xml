@@ -3,4 +3,127 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.signal.jobposting.dao.JobPostingDAO">
 	
+	<select id="login" resultType="String">
+      SELECT com_id FROM company WHERE com_id = #{param1} AND com_pw = #{param2}
+   </select>
+	
+	<select id="ComDetail" resultType="String">
+		SELECT
+			ci_ceo
+		FROM
+			com_info
+		WHERE com_id = #{param1}
+	</select>
+	
+	<select id="infoCom" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+		SELECT com_name,com_id FROM company WHERE com_id = #{param1}
+	</select>
+	
+	<insert id="infoWrite" parameterType="com.signal.all.dto.JobPostingDTO">
+		INSERT INTO com_info(
+			com_id,ci_ceo,ci_web,ci_intro,ci_pass_intro,ci_emp,ci_photo
+		)VALUES(
+			#{com_id},#{ci_ceo},#{ci_web},#{ci_intro},#{ci_pass_intro},#{ci_emp},#{ci_photo}
+		)	
+	</insert>
+	
+	<select id="ComInfoDetail" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+		SELECT 
+			ci.ci_no,
+			com.com_id,
+			com.com_name,
+			ci.ci_ceo,
+			ci.ci_emp,
+			ci.ci_intro,
+			ci.ci_pass_intro,
+			ci.ci_photo,
+			ci.ci_web
+		FROM 
+			com_info ci
+		JOIN company com ON ci.com_id = com.com_id
+		WHERE com.com_id = #{param1} AND ci.ci_ceo = #{param2} AND ci.ci_no = #{param3}
+	</select>
+	
+	<select id="file" resultType="String">
+		SELECT ci_no FROM com_info WHERE com_id = #{param1}
+	</select>
+	
+	<select id="Detail" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+		SELECT 
+			ci.ci_no,
+			com.com_id,
+			com.com_name,
+			ci.ci_ceo,
+			ci.ci_emp,
+			ci.ci_intro,
+			ci.ci_pass_intro,
+			ci.ci_photo,
+			ci.ci_web
+		FROM 
+			com_info ci
+		JOIN company com ON ci.com_id = com.com_id
+		WHERE com.com_id = #{param1} AND ci.ci_ceo = #{param2} AND ci.ci_no = #{param3}
+	</select>
+	
+	<select id="comUpdate" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+		SELECT 
+			ci.ci_no,
+			com.com_id,
+			com.com_name,
+			ci.ci_ceo,
+			ci.ci_emp,
+			ci.ci_intro,
+			ci.ci_pass_intro,
+			ci.ci_photo,
+			ci.ci_web
+		FROM com_info ci
+		JOIN company com ON ci.com_id = com.com_id
+		WHERE ci.com_id = #{param1}
+	</select>
+	
+	<update id="update" parameterType="hashmap">
+			UPDATE com_info ci, company com SET 
+				ci.ci_ceo = #{ci_ceo},
+				com.com_name = #{com_name},
+				ci.ci_emp = #{ci_emp},
+				ci.ci_intro = #{ci_intro},
+				ci.ci_pass_intro = #{ci_pass_intro},
+				ci.ci_photo = #{ci_photo},
+				ci.ci_web = #{ci_web}
+			WHERE ci.com_id = com.com_id AND ci.com_id = #{com_id}
+	</update>
+
+	
+	<!-- <insert id="info" parameterType="hashmap">
+		INSERT INTO com_info(
+			ci_ceo,
+			ci_emp,
+			ci_web,
+			ci_intro,
+			ci_pass_intro
+		) VALUES(
+			#{ci_ceo},
+			#{ci_emp},
+			#{ci_web},
+			#{ci_intro},
+			#{ci_pass_intro}
+		)
+	</insert> -->
+	
+<!-- 	<insert id="infoWrite" parameterType="hashmap">
+		<selectKey keyProperty="com_no" resultType="String">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		
+		INSERT INTO com_ifo(
+			ci_ceo,
+			ci_emp,
+			ci_web,
+			ci_photo,
+			ci_intro,
+			ci_pass_intro,
+			
+		)
+	</insert> -->
+	
 </mapper>
