@@ -193,6 +193,15 @@ ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
 		mav.addObject("success", success);
 		return mav;
 	}
+
+	public ArrayList<ResumeDTO> recommendMe(String id) {
+		logger.info("추천현황 리스트 서비스");
+		return dao.recommendMe(id);
+	}
+
+	public ArrayList<ResumeDTO> recommendYou(String id) {
+		return dao.recommendYou(id);
+	}
 	
 	
 }

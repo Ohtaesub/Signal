@@ -35,4 +35,8 @@ public interface ResumeDAO {
 
 	int licenseReg(HashMap<String, String> params);
 
+	ArrayList<ResumeDTO> recommendMe(String id);
+
+	ArrayList<ResumeDTO> recommendYou(String id);
+
 }
