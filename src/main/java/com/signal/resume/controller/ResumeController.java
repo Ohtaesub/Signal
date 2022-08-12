@@ -102,7 +102,7 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value = "/resumeReg.do")
-	public String write(@RequestParam HashMap<String, String> params, 
+	public String resumeReg(@RequestParam HashMap<String, String> params, 
 			HttpSession session, Model model) {
 		
 			logger.info("params : {}",params);
@@ -243,14 +243,25 @@ public class ResumeController {
 		String id = "bbbbcccc";
 		logger.info(id + " 의 추천현황 페이지 이동");
 		ArrayList<ResumeDTO> list = service.recommendMe(id);
-		ArrayList<ResumeDTO> listB = service.recommendYou(id);
+		/* ArrayList<ResumeDTO> listB = service.recommendYou(id); */
 		model.addAttribute("cl_id", id);	
 		model.addAttribute("list", list);
-		model.addAttribute("listB", listB);
+		/* model.addAttribute("listB", listB); */
 		
 		return "./resume/recommendMe";
 	}
 	
+	@RequestMapping(value="/recommendYou.ajax")
+	@ResponseBody
+	public HashMap<String, Object> recommendUlist(HttpSession session) {
+		logger.info("리스트 요청");
+		HashMap<String, Object> map = new HashMap<String, Object>();		
+			String id="bbbbcccc";
+			ArrayList<ResumeDTO> list = service.recommendUlist(id);
+			map.put("list", list);		
+		
+		return map;
+	}
 	
 	
 }

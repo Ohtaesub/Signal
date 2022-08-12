@@ -39,4 +39,6 @@ public interface ResumeDAO {
 
 	ArrayList<ResumeDTO> recommendYou(String id);
 
+	ArrayList<ResumeDTO> recommendUlist(String id);
+
 }

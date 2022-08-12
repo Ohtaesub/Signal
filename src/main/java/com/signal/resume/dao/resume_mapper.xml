@@ -126,11 +126,16 @@
 	</insert>
 	
 	<select id="recommendMe" resultType="resume" parameterType="String">
-		SELECT reco_no, reco_cl_id, reco_req_memo,reco_relation, reco_date FROM recommend
+		SELECT reco_no, cl_id, reco_cl_id, reco_req_memo,reco_relation, reco_date FROM recommend
 		WHERE cl_id=#{id} 
 	</select>
 	
-	<select id="recommendYou" resultType="resume" parameterType="String">
+	<!-- <select id="recommendYou" resultType="resume" parameterType="String">
+		SELECT reco_no, cl_id, reco_req_memo, reco_content, reco_state, reco_relation, reco_date FROM recommend
+		WHERE reco_cl_id=#{id} 
+	</select> -->
+	
+	<select id="recommendUlist" resultType="resume" parameterType="String">
 		SELECT reco_no, cl_id, reco_req_memo, reco_content, reco_state, reco_relation, reco_date FROM recommend
 		WHERE reco_cl_id=#{id} 
 	</select>

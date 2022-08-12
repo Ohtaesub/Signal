@@ -202,6 +202,11 @@ ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
 	public ArrayList<ResumeDTO> recommendYou(String id) {
 		return dao.recommendYou(id);
 	}
+
+	public ArrayList<ResumeDTO> recommendUlist(String id) {
+		logger.info("내가추천 list 요청");
+		return dao.recommendUlist(id);
+	}
 	
 	
 }
