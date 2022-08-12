@@ -3,6 +3,8 @@ package com.signal.enter.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.signal.all.dto.EnterDTO;
 import com.signal.all.dto.JobPostingDTO;
+import com.signal.all.dto.PageMakerDTO;
 import com.signal.all.dto.ResumeDTO;
 import com.signal.enter.service.EnterService;
 
@@ -78,19 +81,32 @@ public class EnterController {
 	
 	// by태섭, 개인 마이페이지 입사제안현황 기능_2022_08_11
 	@RequestMapping(value = "/clientOfferList.go")
-	public String clientOfferList(Model model) {
-		// by태섭, 나중에 개인 회원에 해당하는 리스트만 보여주기, 인자값에 id값을 넣어주자
+	public String clientOfferList(Model model, Criteria cri, HttpSession session) {
 		logger.info("입사제안 리스트 호출");
-		ArrayList<EnterDTO> clientOfferList = service.clientOfferList();
+		
+		// by태섭, 세션에서 회원 아이디 값 가져오기
+		String cl_id = (String) session.getAttribute("loginId");
+		// by태섭, 페이징 처리에 skip, amount 변수
+		int skip = cri.getSkip();
+		int amount = cri.getAmount();
+		//ArrayList<EnterDTO> clientOfferList = service.clientOfferList();
+		//  by태섭, 페이징 처리한 리스트 호출
+		ArrayList<EnterDTO> clientOfferList = service.clientOfferList(cl_id,skip,amount);
 		model.addAttribute("clientOfferList", clientOfferList);
+		//페이징 인터페이스 처리 부분
+		int total = service.getOfferTotal(cl_id);
+        PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+        //PageMaker 데이터를 view로 보내기 위함
+        model.addAttribute("pageMaker", pageMake);
+		
 		return "clientOfferList";
 	}
 	
 	// by태섭, 개인 입사제안 선택 후 삭제 기능_2022_08_11	
 	@RequestMapping(value = "/deleteOffer.do", method = RequestMethod.POST)
 	public String delete(Model model, @RequestParam String[] chkArr) {//같은 이름으로 여러 개 올 경우 이렇게 받아줘야 한다.
-		
 		logger.info("입사제안 삭제 요청");
+		
 		// by태섭, 제안 삭제 요청 chkArr에 offer_no 담아서 삭제 요청
 		boolean success = service.deleteOffer(chkArr);
 		logger.info("삭제 성공 여부 : "+success);
@@ -98,15 +114,37 @@ public class EnterController {
 		return "redirect:/clientOfferList.go";
 	}
 	
+	//by태섭, 입사제안현황에서 공고제목 눌렀을 때 채용공고 보여주고 열람여부 변경_2022_08_12
+	@RequestMapping(value = "/jobPostingDetail.go")
+	public String jobPostingDetail(Model model, @RequestParam int offer_no) {
+		logger.info("채용공고 상세보기 요청");
+		
+		service.jobPostingDetail(offer_no);
+		return "personOffer";
+	}
+	
 	//by태섭, 개인 입사지원 현황 리스트 호출_2022_08_11
 	@RequestMapping(value = "/clientApplyList.go")
-	public String clientApplyList(Model model) {
-		// by태섭, 나중에 개인 회원에 해당하는 리스트만 보여주기, 인자값에 id값을 넣어주자
+	public String clientApplyList(Model model, Criteria cri, HttpSession session) {
 		logger.info("입사지원 리스트 호출");
-		ArrayList<EnterDTO> clientApplyList = service.clientApplyList();
+		
+		// by태섭, 세션에서 회원 아이디 값 가져오기
+		String cl_id = (String) session.getAttribute("loginId");
+		// by태섭, 페이징 처리에 skip, amount 변수
+		int skip = cri.getSkip();
+		int amount = cri.getAmount();
+		//  by태섭, 페이징 처리한 리스트 호출
+		ArrayList<EnterDTO> clientApplyList = service.clientApplyList(cl_id,skip,amount);
 		model.addAttribute("clientApplyList", clientApplyList);
+		// by태섭, 페이징 인터페이스 처리 부분
+		int total = service.getApplyTotal(cl_id);
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+        //PageMaker 데이터를 view로 보내기 위함
+        model.addAttribute("pageMaker", pageMake);
+        
 		return "clientApplyList";
 	}
+	
 	
 	
 	

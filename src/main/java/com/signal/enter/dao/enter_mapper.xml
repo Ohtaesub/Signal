@@ -51,11 +51,32 @@
 	INSERT INTO offer(
 		re_no, jpo_no, reading_state, offer_state
 	)VALUES(
-		#{param1}, #{param2}, '읽지않음', '1'
+		#{param1}, #{param2}, '미열람', '1'
 	)
 	</insert>
 	
+	<!-- by태섭, 공고 클릭했을 때 열람여부 변경 -->
+	<update id="upHit">
+	UPDATE offer SET reading_state = "열람" WHERE offer_no = #{param1}
+	</update>
+	
 	<!-- by태섭, 받은 제안 리스트 보여주기 -->
+	<!-- <select id="clientOfferList" resultType="com.signal.all.dto.EnterDTO">
+	SELECT 
+		o.offer_no 
+		,o.reading_state
+		,o.offer_date
+		,jp.jpo_title
+		,c.com_name
+		,jp.jpo_no 
+		,o.offer_state
+	FROM offer o 
+	LEFT OUTER JOIN job_posting jp ON o.jpo_no = jp.jpo_no 
+	LEFT OUTER JOIN company c ON jp.com_id = c.com_id
+	WHERE o.offer_state = "1"
+	</select> -->
+	
+	<!-- by태섭, 받은 제안 페이징 처리한 리스트 보여주기 -->
 	<select id="clientOfferList" resultType="com.signal.all.dto.EnterDTO">
 	SELECT 
 		o.offer_no 
@@ -68,8 +89,21 @@
 	FROM offer o 
 	LEFT OUTER JOIN job_posting jp ON o.jpo_no = jp.jpo_no 
 	LEFT OUTER JOIN company c ON jp.com_id = c.com_id
-	WHERE o.offer_state = "1";
+	LEFT OUTER JOIN resume r on r.re_no = o.re_no 
+	LEFT OUTER JOIN client cl on cl.cl_id = r.cl_id
+	WHERE o.offer_state = "1" AND cl.cl_id = #{param1}
+	ORDER BY o.offer_no DESC
+	LIMIT #{param2}, #{param3};
 	</select>
+	
+	<!-- by태섭, 입사제안 총 개수 -->
+	<select id="getOfferTotal" resultType="int">
+	SELECT count(*) FROM offer o
+	LEFT OUTER JOIN resume r ON r.re_no = o.re_no
+	LEFT OUTER JOIN client c ON c.cl_id = r.cl_id
+	WHERE offer_state = '1' AND c.cl_id = #{param1};
+	</select>
+	<!-- SELECT count(*) FROM offer o WHERE o.offer_state = "1" -->
 	
 	<!-- by태섭, 입사제안 현황에서 받은 제안 리스트에서 삭제하기 -->
 	<update id="deleteOffer">
@@ -80,6 +114,7 @@
 	</update>
 	<!-- UPDATE offer SET offer_state = "0" WHERE offer_no = #{param1}; -->
 	
+	<!-- by태섭, 개인 마이페이지 입사지원 현황 확인 -->
 	<select id="clientApplyList" resultType="com.signal.all.dto.EnterDTO">
 	SELECT 
 		jpo_title
@@ -87,12 +122,23 @@
 		,apply_date
 		,inter_date
 		,inter_result
+		,a.apply_no
 	FROM apply a 
 	LEFT OUTER JOIN job_posting jp ON a.jpo_no = jp.jpo_no 
 	LEFT OUTER JOIN company c ON jp.com_id = c.com_id 
 	LEFT OUTER JOIN resume r ON a.re_no = r.re_no 
 	LEFT OUTER JOIN client cl ON r.cl_id = cl.cl_id
-	LEFT OUTER JOIN interview i ON i.cl_id = cl.cl_id;
+	LEFT OUTER JOIN interview i ON i.cl_id = cl.cl_id
+	WHERE cl.cl_id = #{param1} ORDER BY a.apply_no DESC
+	LIMIT #{param2}, #{param3};
+	</select>
+	
+	<!-- by태섭, 입사 지원 총 개수 -->
+	<select id="getApplyTotal" resultType="int">
+	SELECT count(*) FROM apply a 
+	LEFT OUTER JOIN resume r ON r.re_no = a.re_no 
+	LEFT OUTER JOIN client c ON c.cl_id = r.cl_id
+	WHERE c.cl_id = #{param1};
 	</select>
 	
 </mapper>
