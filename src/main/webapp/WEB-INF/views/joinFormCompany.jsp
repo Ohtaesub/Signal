@@ -2,14 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
 <body>
-	<!-- 폼방식 회원가입 <form action="clientJoin.do" method="post" enctype="multipart/form-data" onsubmit="return joinFormClient()"> -->
-		<h1>회원가입 - 개인</h1>
-		        <input type="hidden" name="cl_state" id="cl_state" value="개인회원"/>   
+	<!-- 폼방식 회원가입 <form action="companyJoin.do" method="post" enctype="multipart/form-data" onsubmit="return joinFormCompany()"> -->
+		<h1>회원가입 - 기업</h1>
+		        <input type="hidden" name="com_state" id="com_state" value="기업회원"/>   
 		    <table>
 		        <tr>
 		            <th>아이디</th>
 		            <td>
-		            	<input type="text" id="cl_id" name="cl_id" maxlength="20"/>
+		            	<input type="text" id="com_id" name="com_id" maxlength="20"/>
 		            	<button type="button" id="overChkId" onclick="overlayId()">중복확인</button>
 		            	※아이디는 영문 또는 영문(소문자)시작+숫자 조합으로 8~20자로 작성해주세요.
 		            </td>
@@ -17,7 +17,7 @@
 		        <tr>
 		            <th>비밀번호</th>
 		            <td>
-		            	<input type="password" name="cl_pw" id="cl_pw"  maxlength="20"/>
+		            	<input type="password" name="com_pw" id="com_pw"  maxlength="20"/>
 		            	※비밀번호는 영문 또는 영문(소문자)시작+숫자 조합으로 8~20자로 작성해주세요.
 		            </td>
 		        </tr>
@@ -28,63 +28,52 @@
 		            </td>
 		        </tr>
 		        <tr>
-		            <th>이름</th>
+		            <th>사업자 번호</th>
 		            <td>
-		            	<input type="text" name="cl_name" id="cl_name"/>
+		            	<input type="text" name="com_business_no" id="com_business_no"/>
+		            	<input type="button" onclick="sample4_execDaumPostcode()" value="번호찾기"/>
+		            	<button type="button" id="overChkId" onclick="overlayNumber()">중복확인</button>
 		            </td>
 		        </tr>
 		        <tr>
-		            <th>생년월일</th>
+		            <th>기업명</th>
 		            <td>
-		            	<input type="text" name="cl_birth"  id="cl_birth" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="8" placeholder="예)YYYYMMDD,19900701" />
+		            	<input type="text" name="com_name" id="com_name"/>
 		            </td>
 		        </tr>
 		        <tr>
-		            <th>나이</th>
-		            <td>
-		            	<input type="number" name="cl_age"  id="cl_age" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="3"/>&nbsp; 세
-		            </td>
-		        </tr>
-		        <tr>
-		        	<th>성 별</th>
- 						<td>
- 							<input type='radio' name='gender' value='남' />남성
-		        			<input type='radio' name='gender' value='여' />여성
-		        	</td>
-		        </tr>
-		        <tr>
-		            <th>주 소</th>
-		            <td>
-		            	<input type="text" name="cl_address" id="cl_address" size=50 style="font-size:10px" readonly/>
-		            	<input type="button" onclick="sample4_execDaumPostcode()" value="주소찾기"/>
-		            </td>
-		        </tr>
-		        <tr>
-		            <th>핸드폰 번호</th>
-		            <td>
-		            	<input type="text" name="cl_call" id="cl_call" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="11" placeholder="예)01012345678"/>
-		            </td>
-		        </tr>
-		        <tr>
-		            <th>이메일</th>
-		            <td>
-		            	<input type="text" name="cl_email"  id="cl_email" placeholder="예)admin@naver.com" />
-		            	<button type="button" onclick="overlayEmail()">중복확인</button>
-		            </td>
-		        </tr>
-		        <tr>
-		            <th>사진등록</th>
+		            <th>사업자 등록증 사본</th>
 		            <td>
 						<!-- 하지만 div 는 서버에 값을 전송 할 수 없다. -->
 						<!-- 결국엔 div 의 내용을 input 에 담아 서버에 전송할 예정 -->
-		            	<input type="file" multiple ="multiple" name="cl_photo" id="cl_photo" onchange="checkFile(this)" accept=".png , .jpeg, .jfif, .exif, .gif, .bmp"/>
+		            	<input type="file" multiple ="multiple" name="com_photo" id="com_photo" onchange="checkFile(this)" accept=".png , .jpeg, .jfif, .exif, .gif, .bmp"/>
 		            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
 		            </td>
 		        </tr>
 		        <tr>
+		            <th>기업주소</th>
+		            <td>
+		            	<input type="text" name="com_address" id="com_address" size=50 style="font-size:10px" readonly/>
+		            	<input type="button" onclick="sample4_execDaumPostcode()" value="주소찾기"/>
+		            </td>
+		        </tr>
+		        <tr>
+		        	<th>연락처</th>
+ 						<td>
+		            	<input type="text" name="com_call" id="com_call" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="11" placeholder="예)01012345678"/>
+		            	</td>
+		        </tr>
+		        <tr>
+		            <th>이메일</th>
+		            <td>
+		            	<input type="text" name="com_email"  id="com_email" placeholder="예)admin@naver.com" />
+		            	<button type="button" onclick="overlayEmail()">중복확인</button>
+		            </td>
+		        </tr>
+		        <tr>
 		            <th colspan="2">
-		                <input type="button" value="회원가입" onclick="joinFormClient()"/>
-			         	<input type="button" value="취소" onclick="location.href='main'"/>
+		                <input type="button" value="회원가입" onclick="joinFormCompany()"/>
+			         	<input type="button" value="취소" onclick="location.href='login'"/>
 		            </th>
 		        </tr>
 		    </table>
@@ -98,26 +87,26 @@
 	//아이디 중복 체크
 	var overChk= false;
 	function overlayId(){
-		var clId = $("#cl_id").val();
+		var comId = $("#com_id").val();
 		//console.log("중복된 아이디 확인 : "+clId);
 		
 		// 아이디 제한 기능
 		var expId=/^[a-z]+[a-z0-9]{7,20}$/g;
 		
-		if(expId.test($("#cl_id").val())){
+		if(expId.test($("#com_id").val())){
 		
 			//아이디 중복 또는 사용가능 유효성 검사
 			$.ajax({
 				type:'get',
-				url:'overlayClientId.ajax',
-				data:{chkclId:clId},
+				url:'overlayCompanyId.ajax',
+				data:{chkComId:comId},
 				datatype:"JSON",
 				success:function(data){
 					console.log(data);
-					if(data.overlayClientId){
+					if(data.overlayCompanyId){
 						alert("사용중인 아이디 입니다.");
-						$("#cl_id").val("");
-						$("#cl_id").focus();
+						$("#com_id").val("");
+						$("#com_id").focus();
 					}else{
 						alert("사용 가능한 아이디 입니다.");
 						overChk = true;
@@ -130,7 +119,7 @@
 			
 		}else{
 			alert("아이디는 영문(소문자) 또는 영문(소문자)시작+숫자 조합으로 8~20자로 작성해주세요.");
-			$("#cl_id").focus();
+			$("#com_id").focus();
 			return false;	
 		}
 	}
@@ -139,32 +128,32 @@
 	var overChk2=false;
 	
 	function overlayEmail(){
-		var email=$("#cl_email").val();
+		var email=$("#com_email").val();
 		
 		//이메일 정규화 표현
 		var expEmail = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
 		//console.log("이메일중복체크 : "+email);
 		if(email==""){
 			alert("이메일을 입력해 주세요.");
-			$("#cl_email").focus();
+			$("#com_email").focus();
 		}else if(!expEmail.test(email)){
 			alert("이메일 형식이 아닙니다.");
-			$("#cl_email").val("");
-			$("#cl_email").focus();
+			$("#com_email").val("");
+			$("#com_email").focus();
 			}else{
 				$.ajax({
 					type:'get',
-					url:'overlayEmail.ajax',
+					url:'overlayComEmail.ajax',
 					data:{
-						chkEmail:email
+						chkComEmail:email
 					},
 					datatype:"JSON",
 					success:function(data){
 						// true / false 리턴 console.log(data);
-						if(data.overlayEmail){
+						if(data.overlayComEmail){
 							alert("사용중인 이메일 입니다.");
-							$("#cl_email").val("");
-							$("#cl_email").focus();
+							$("#com_email").val("");
+							$("#com_email").focus();
 						}else{
 							alert("사용가능한 이메일입니다.");
 							overChk2=true;
@@ -217,8 +206,8 @@
 	                }
 	            }
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                document.getElementById('cl_address').value = data.zonecode;
-	                document.getElementById("cl_address").value = addr;               
+	                document.getElementById('com_address').value = data.zonecode;
+	                document.getElementById("com_address").value = addr;               
            	} 
         }).open();
     }
@@ -270,42 +259,39 @@
 	
 	
 	
-	function joinFormClient(){
-		var clId = $("#cl_id").val();
-		var clPw = $("#cl_pw").val();
+	function joinFormCompany(){
+		var comId = $("#com_id").val();
+		var comPw = $("#com_pw").val();
+		var comPw2 = $("#pw2").val();
 		var expPw = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
-		var clPw2 = $("#pw2").val();
-		var name = $("#cl_name").val();
-		var birth = $("#cl_birth").val();
-		var clAddress = $("#cl_address").val();
-		var clCall= $("#cl_call").val();
-		var email = $("#cl_email").val();
-		var age = $("#cl_age").val();
+		var comNumber = $("#com_business_no").val();
+		var name = $("#com_name").val();
+		var comAddress = $("#com_address").val();
+		var comCall= $("#com_call").val();
+		var email = $("#com_email").val();
 		var expEmail = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
-		var gender = $('[name=gender]:checked').val();
-		var state = $("#cl_state").val();
-		//개인회원 프로필 사진
-		var clPhoto = $("#cl_photo").val();
+		var state = $("#com_state").val();
+		//사업자등록증 사본 (사진파일..)
+		var comPhoto = $("#com_photo").val();
 		
-
-		//회원가입 요청 ajax
+		
+		//기업 회원가입 요청 ajax
 		if(overChk&&overChk2!=false){
 			$.ajax({
 				type:'post',
-				url:'joinClient.ajax',
+				url:'joinCompany.ajax',
 				data:{
-					cl_id:clId,
-					cl_pw:clPw,
-					cl_name:name,
-					cl_birth:birth,
-					cl_age:age,
-					cl_gender:gender,
-					cl_address:clAddress,
-					cl_call:clCall,
-					cl_email:email,
-					cl_photo:clPhoto,
-					cl_state:state
+					com_id:comId,
+					com_pw:comPw,
+					com_business_no:comNumber,
+					com_name:name,
+					com_address:comAddress,
+					com_call:comCall,
+					com_email:email,
+					com_photo:comPhoto,
+					com_state:state
 				},
+				//사진파일 ajax로 보낼땐 이걸 넣어야한다고 함..
 				datatype:"JSON",
 				success:function(data){
 					console.log(data);
@@ -318,69 +304,62 @@
 				},
 				error:function(e){
 					console.log(e);
-				}		
-			});
-		}else if(clId==""){
+				}	
+			});	
+		}else if(comId==""){
 			alert("아이디를 입력해주세요.");
-			$("#cl_id").focus();
+			$("#com_id").focus();
 			return false;
-		}else if(clPw==""){
+		}else if(comPw==""){
 			alert("비밀번호를 입력해주세요.");
-			$("#cl_pw").focus();
+			$("#com_pw").focus();
 			return false;
-		}else if(!expPw.test(clPw)){
+		}else if(!expPw.test(comPw)){
         	alert("비밀번호는 8 ~ 20자 영문,숫자 조합으로 만들어주세요.");
-        	$("#cl_pw").val("");
+        	$("#com_pw").val("");
         	$("#pw2").val("");
-        	$("#cl_pw").focus();
+        	$("#com_pw").focus();
         	return false;
-	    }else if(clPw2==""){
+	    }else if(comPw2==""){
            alert("비밀번호 확인을 입력해주세요.");
            $("#pw2").val("");
            $("#pw2").focus();
            return false;	
-	    }else if(clPw!==clPw2){
+	    }else if(comPw!==comPw2){
         	alert("비밀번호가 일치하지 않습니다.");
        	 	$("#pw2").val("");
             $("#pw2").focus();
         	return false;
-        }else if(name==""){
-			 alert("이름을 입력해주세요.");
-			 $("#cl_name").focus();
+        }else if(comNumber==""){
+			alert("사업자 번호를 입력해주세요.");
+			$("#com_business_no").focus();
+			return false;
+		}else if(name==""){
+			 alert("기업명을 입력해주세요.");
+			 $("#com_name").focus();
 			 return false;
-		 }else if(birth.length !==8){
-			 alert("생년월일을 올바르게 입력해주세요.");
-			 $("#cl_birth").val("");
-			 $("#cl_birth").focus();
-			 return false;
-		 }else if(age==""){
-			 alert("나이를 입력해주세요.");
-			 $("#cl_age").focus();
-			 return false;
-		 }else if($(':radio[name="gender"]:checked').length < 1){
-		    alert("성별을 선택해주세요");
-		    return false;
-		}else if(clAddress==""){
+		 }else if(comAddress==""){
 			alert("주소를 입력해주세요.");
 			return false;
-		}else if(clCall==""){
-			alert("핸드폰 번호를 입력해주세요.");
-			$("#cl_call").focus();
+		}else if(comCall==""){
+			alert("연락처를 입력해주세요.");
+			$("#com_call").focus();
 			return false;
 		}else if(email==""){
 			alert("이메일을 입력해주세요");
-			$("#cl_email").focus();
+			$("#com_email").focus();
 			return false; 
-		}else if(!expEmail.test(Email)){
+		}else if(!expEmail.test(email)){
         	alert("이메일 형식이 아닙니다.");
-        	$("#cl_email").val('');
-        	$("#cl_email").focus();
+        	$("#com_email").val('');
+        	$("#com_email").focus();
         	return false;  	
         }else{
 			alert("아이디 또는 이메일 중복체크를 진행해주세요.");
 		}
 		
 		
+	
 		
 		
 	}

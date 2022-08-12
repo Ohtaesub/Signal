@@ -12,23 +12,24 @@
 </head>
 <body>
 	<div id="header">
-	<p id="logo">
-	    <a href="/"><img src="resources/images/Logo.jpg" alt="Signal" width="150" height="130"/></a>
-	</p>
-	<ul class="nav">
-	    <li><a href="#">채용공고</a></li>
-	    <li><a href="/personList.go">인재채용</a></li>
-	</ul>
-	<hr/>
-	<div id="container"> 
-	        <aside><strong>${sessionScope.loginName}</strong>님 반갑습니다 <br> <a href="">마이페이지</a> <span>|</span> <a href="logout.do">로그아웃</a></aside>    
-	</div>
+		<p id="logo">
+		    <a href="/"><img src="resources/images/Logo.jpg" alt="Signal" width="150" height="130"/></a>
+		</p>
+		<ul class="nav">
+		    <li><a href="#">채용공고</a></li>
+		    <li><a href="/personList.go">인재채용</a></li>
+		</ul>
+		<hr/>
+		<div id="container" style="color:white">  
+	        <aside><strong>${sessionScope.loginId}</strong>님 반갑습니다 <br> <a href="">마이페이지</a> <span>|</span> <a href="logout.do">로그아웃</a></aside>
+		</div>        
 	    <input type="button" class="login" value="로그인" onclick="showPopup()"/>
 	    <input type="button" class="join" value="회원가입" onclick="location.href='joinSelect.go'"/>
 	</div>
     <div id="wrap">
     	<div id="aside">
         	<nav>
+				<c:if test="${sessionScope.isClient.equals('true')}">
 				<ul class="sidemenu">
 					<li><a href="">개인정보관리</a></li>
 	                <li><a href="/resumeList.go">이력서</a></li>
@@ -39,6 +40,7 @@
 	                <li><a href="">이의제기현황</a></li>
 	                <li><a href="">셀프평가</a></li>
 				</ul>
+				</c:if>
 		        <c:if test="${sessionScope.isCompany.equals('true')}">
 		            <ul class="sidemenu">
 		                <li><a href="">기업회원정보관리</a></li>
@@ -67,9 +69,11 @@
      </div>
 </body>
 <script>
+	//로그인 팝업창 by 상인
 	function showPopup() {
-	window.open("loginPopup.go", "login", "width=400, height=300, left=100, top=50");
+		window.open("loginPopup.go","", "width=400, height=300, left=100, top=50");
 	
 	}
+
 </script>
 </html>

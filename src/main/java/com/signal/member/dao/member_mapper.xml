@@ -3,8 +3,8 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.signal.member.dao.MemberDAO">
 	<select id="overlayClientId" parameterType="String" resultType="String">
-		SELECT cl_id
-		FROM client WHERE cl_id =#{chkclId}
+	SELECT cl_id
+	FROM client WHERE cl_id =#{chkclId}
 	</select>
 	
 	<select id="overlayEmail" parameterType="String" resultType="String">
@@ -12,7 +12,7 @@
 	FROM client WHERE cl_email=#{chkEmail}
 	</select>
 	
-	<insert id="clientJoin" parameterType="hashmap">
+	<insert id="joinClient" parameterType="hashmap">
 	INSERT INTO client
 	(cl_id
 	,cl_pw
@@ -23,7 +23,79 @@
 	,cl_address
 	,cl_call
 	,cl_email
-	,cl_photo)
-	VALUES (#{cl_id},PASSWORD(#{cl_pw}),#{cl_name},#{cl_birth},#{cl_age},#{gender},#{cl_address},#{cl_call},#{cl_email},#{cl_photo})
+	,cl_photo
+	,cl_state
+	)
+	VALUES (#{cl_id},PASSWORD(#{cl_pw}),#{cl_name},#{cl_birth},#{cl_age},#{cl_gender},#{cl_address},#{cl_call},#{cl_email},#{cl_photo},#{cl_state})
 	</insert>
+	
+	<select id="clientMember" resultType="int">
+	SELECT COUNT(cl_id) FROM client WHERE cl_id= #{param1} AND cl_pw = PASSWORD(#{param2}) AND cl_state =#{param3}
+	</select>
+	
+	<select id="companyMember" resultType="int">
+	SELECT COUNT(com_id) FROM company WHERE com_id= #{param1} AND com_pw = PASSWORD(#{param2}) AND com_state =#{param3}
+	</select>
+	
+	<select id="overlayCompanyId" parameterType="String" resultType="String">
+	SELECT com_id
+	FROM company WHERE com_id =#{chkComId}
+	</select>
+	
+	<select id="overlayComEmail" parameterType="String" resultType="String">
+	SELECT com_email 
+	FROM company WHERE com_email=#{chkComEmail}
+	</select>
+	
+	
+	<insert id="joinCompany" parameterType="hashmap">
+	INSERT INTO company
+	(com_id
+	,com_pw
+	,com_business_no
+	,com_name
+	,com_address
+	,com_call
+	,com_email
+	,com_photo
+	,com_state
+	)
+	VALUES(#{com_id},PASSWORD(#{com_pw}),#{com_business_no},#{com_name},#{com_address},#{com_call},#{com_email},#{com_photo},#{com_state})
+	</insert>
+	
+	
+	<select id="findClientId" resultType="String">
+	SELECT cl_id
+	FROM client
+	WHERE cl_name=#{param1} AND cl_email=#{param2}
+	</select>
+	
+	<select id="findCompanyId" resultType="String">
+	SELECT com_id
+	FROM company
+	WHERE com_email=#{param1} AND com_business_no=#{param2}
+	</select>
+	
+	<select id="findClientPw" resultType="int">
+	SELECT COUNT(cl_id)
+	FROM client
+	WHERE cl_id=#{param1} AND cl_name=#{param2} AND cl_email=#{param3}
+	</select>
+	
+	<update id="clientPwChange">
+	UPDATE client SET cl_pw = PASSWORD(#{param2}) WHERE cl_id = #{param1}
+	</update>
+	
+	<select id="findCompanyPw" resultType="int">
+	SELECT COUNT(com_id)
+	FROM company
+	WHERE com_id=#{param1} AND com_email=#{param2} AND com_business_no=#{param3}
+	</select>
+	
+	<update id="companyPwChange">
+	UPDATE company SET com_pw = PASSWORD(#{param2}) WHERE com_id = #{param1}
+	</update>
+	
+	
+	
 </mapper>

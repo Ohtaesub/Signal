@@ -67,7 +67,8 @@
     	</table>
 
     </body>
+<%@ include file="../../resources/inc/footer.jsp" %>
 <script>
-
+	
 </script>
 </html>

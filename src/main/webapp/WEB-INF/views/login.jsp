@@ -10,6 +10,7 @@
 	<input type="button" value="로그인" onclick="showPopup()" />
 	<input type="button" value="회원가입" onclick="location.href='joinSelect.go'"/>
 </body>
+<%@ include file="../../resources/inc/footer.jsp" %>
 <script>
 	function showPopup() {
 		window.open("loginPopup.go", "login", "width=400, height=300, left=100, top=50");

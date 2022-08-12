@@ -7,11 +7,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<form action="upload" method="post"  enctype="multipart/form-data">
+	<form action="clientPhotoUpload.do" method="post"  enctype="multipart/form-data">
 		<input type="file" name="file" onchange="fileUpload()"/>
 	</form>
 </body>
 <script>
+	//파일 업로드하기
 	function fileUpload(){
 		$("form").submit();
 	}
