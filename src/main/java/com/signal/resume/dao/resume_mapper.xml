@@ -9,19 +9,23 @@
 		LEFT OUTER JOIN job_ch jc ON r.jc_no = jc.jc_no  
 	</select>
 	
+	<!-- 필요한 컬럼 추가했습니다. by태섭 -->
 	<select id="personList" resultType="resume">
-		SELECT cl_age, cl_gender, (SUM(inter_grade)/COUNT(inter_comment)) AS avr_inter_grade, 
+		SELECT cl_age, cl_gender, (SUM(inter_grade)/COUNT(inter_comment)) AS avr_inter_grade,  r.re_title , r.re_no ,
 		COUNT(DISTINCT inter_comment) as cnt_inter, (SUM(st_score)/COUNT(st_comment)) AS avr_st_score FROM client c 
 		LEFT OUTER JOIN self_test_result str ON c.cl_id = str.cl_id 
-		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id 
+		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id
+		left outer join resume r on r.cl_id = c.cl_id 
 		GROUP BY c.cl_id 
 	</select>
 	
+	<!-- 필요한 컬럼 추가했습니다. by태섭 -->
 	<select id="personList2" parameterType="hashmap" resultType="resume">
-		SELECT cl_age, cl_gender, (SUM(inter_grade)/COUNT(inter_comment)) AS avr_inter_grade, 
+		SELECT cl_age, cl_gender, (SUM(inter_grade)/COUNT(inter_comment)) AS avr_inter_grade,  r.re_title , r.re_no ,
 		COUNT(DISTINCT inter_comment) as cnt_inter, (SUM(st_score)/COUNT(st_comment)) AS avr_st_score FROM client c 
 		LEFT OUTER JOIN self_test_result str ON c.cl_id = str.cl_id 
-		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id 
+		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id
+		left outer join resume r on r.cl_id = c.cl_id  
 		GROUP BY c.cl_id 
 		<where>
 			<if test="startAge != null and endAge != null and searchCondition != null">

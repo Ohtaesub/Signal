@@ -40,7 +40,7 @@
 			</tr>
 		</thead>
 		<tbody id="list">
-			
+		
 		</tbody>
 		<tr>
 			<td colspan="6" id="paging">
@@ -151,7 +151,7 @@ function drawList(personList){
 	var content="";
 	
 	personList.forEach(function(item){
-				
+	
 		//console.log(item);
 		content += '<tr>';
 		content += '<td>'+item.cl_age+'</td>';
@@ -159,13 +159,25 @@ function drawList(personList){
 		content += '<td>'+item.avr_inter_grade+'</td>';
 		content += '<td>'+item.cnt_inter+'</td>';
 		content += '<td>'+item.avr_st_score+'</td>';
-		content += '<td><button onclick="#">입사제안</button></td>';
+		content += '<td><a href="offer.go?re_no='+item.re_no+'">제안하기</td>';
 		content += '</tr>';
 	});
 	
 	$('#list').empty();
 	$('#list').append(content);
 }
+
+//by태섭, 입사제안 클릭 시 팝업창으로 채용공고 리스트 팝업창 호출
+/* function showJobPostingList() {
+	var url = "jobPostingList.go"
+	var name = "jpoListPopup";
+	var option = "width=700, height=400, left=200, top=50, scrollbars = yes, location= no"
+	
+	<input type="button" value="입사제안" onclick="offer.do?re_no"'+item.re_no+'/>
+	
+	window.open(url, name, option);
+} */
+
 
 </script>
 </html>

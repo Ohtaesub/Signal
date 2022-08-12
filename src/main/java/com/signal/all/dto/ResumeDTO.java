@@ -68,6 +68,15 @@ public class ResumeDTO {
 	private int cnt_inter;
 	private double avr_st_score;
 	
+	//by 태섭, 필요한 컬럼 추가
+	private int jpo_no;
+	
+	public int getJpo_no() {
+		return jpo_no;
+	}
+	public void setJpo_no(int jpo_no) {
+		this.jpo_no = jpo_no;
+	}
 	public String getCl_name() {
 		return cl_name;
 	}
