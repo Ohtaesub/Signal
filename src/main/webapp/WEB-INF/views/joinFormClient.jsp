@@ -42,7 +42,7 @@
 		        <tr>
 		            <th>나이</th>
 		            <td>
-		            	<input type="number" name="cl_age"  id="cl_age" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="3"/>&nbsp; 세
+		            	<input type="text" name="cl_age"  id="cl_age" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="3"/>&nbsp; 세
 		            </td>
 		        </tr>
 		        <tr>

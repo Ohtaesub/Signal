@@ -19,19 +19,33 @@
 		    <li><a href="#">채용공고</a></li>
 		    <li><a href="/personList.go">인재채용</a></li>
 		</ul>
-		<hr/>
-		<div id="container" style="color:white">  
-	        <aside><strong>${sessionScope.loginId}</strong>님 반갑습니다 <br> <a href="">마이페이지</a> <span>|</span> <a href="logout.do">로그아웃</a></aside>
-		</div>        
-	    <input type="button" class="login" value="로그인" onclick="showPopup()"/>
-	    <input type="button" class="join" value="회원가입" onclick="location.href='joinSelect.go'"/>
+		<hr style="border: solid 1px black;"/>
+		<c:if test="${sessionScope.isClient.equals('true') || sessionScope.isCompany.equals('true')}">
+			<div id="container" style="color:white">  
+		        <aside>
+		        	<strong>${sessionScope.loginId}</strong>님 반갑습니다 
+		        	<br>
+		        	<c:if test="${sessionScope.isClient.equals('true')}">
+		        		<a href="/clientInfoManagement.do">마이페이지</a> 
+		        	</c:if>
+		        	<c:if test="${sessionScope.isCompany.equals('true')}">
+		        		<a href="/companyInfoManagement.do">마이페이지</a> 
+		        	</c:if>
+		        	<span>|</span> <a href="logout.do">로그아웃</a>
+		        </aside>
+			</div>
+		</c:if>
+		<c:if test="${!sessionScope.isClient.equals('true') && !sessionScope.isCompany.equals('true')}">
+		    <input type="button" class="login" value="로그인" onclick="showPopup()"/>
+		    <input type="button" class="join" value="회원가입" onclick="location.href='joinSelect.go'"/>
+		</c:if>
 	</div>
     <div id="wrap">
     	<div id="aside">
         	<nav>
 				<c:if test="${sessionScope.isClient.equals('true')}">
 				<ul class="sidemenu">
-					<li><a href="">개인정보관리</a></li>
+					<li><a href="/clientInfoManagement.do">개인정보관리</a></li>
 	                <li><a href="/resumeList.go">이력서</a></li>
 	                <li><a href="/recommendMe.go">회원추천</a></li>
 	                <li><a href="/clientApplyList.go">입사지원현황</a></li>
@@ -43,7 +57,7 @@
 				</c:if>
 		        <c:if test="${sessionScope.isCompany.equals('true')}">
 		            <ul class="sidemenu">
-		                <li><a href="">기업회원정보관리</a></li>
+		                <li><a href="/companyInfoManagement.do">기업회원정보관리</a></li>
 		                <li><a href="">기업정보관리</a></li>
 		                <li><a href="">채용공고관리</a></li>
 		                <li><a href="">입사지원관리</a></li>

@@ -29,6 +29,45 @@
 	VALUES (#{cl_id},PASSWORD(#{cl_pw}),#{cl_name},#{cl_birth},#{cl_age},#{cl_gender},#{cl_address},#{cl_call},#{cl_email},#{cl_photo},#{cl_state})
 	</insert>
 	
+	<!-- 개인회원 로그인 String 으로 받기 -->
+	<select id="clientLogin" resultType="String">
+	SELECT cl_id FROM client WHERE cl_id = #{param1} AND cl_pw = PASSWORD(#{param2})
+	</select>
+	
+	<select id="clientdto" parameterType="String" resultType="com.signal.all.dto.MemberDTO">
+	SELECT cl_id
+	,cl_pw
+	,cl_name
+	,cl_birth
+	,cl_age
+	,cl_gender
+	,cl_address
+	,cl_call
+	,cl_email
+	,cl_photo
+	,cl_state
+	FROM client WHERE cl_id = #{param1}
+   </select>
+   
+   <!-- 기업회원 로그인 String 으로 받기 -->
+	<select id="companyLogin" resultType="String">
+	SELECT com_id FROM company WHERE com_id = #{param1} AND com_pw = PASSWORD(#{param2})
+	</select>
+	
+	<select id="companydto" parameterType="String" resultType="com.signal.all.dto.MemberDTO">
+	SELECT com_id
+	,com_pw
+	,com_business_no
+	,com_name
+	,com_address
+	,com_call
+	,com_email
+	,com_photo
+	,com_state
+	FROM company WHERE com_id = #{param1}
+   </select>
+	
+	<!-- 
 	<select id="clientMember" resultType="int">
 	SELECT COUNT(cl_id) FROM client WHERE cl_id= #{param1} AND cl_pw = PASSWORD(#{param2}) AND cl_state =#{param3}
 	</select>
@@ -36,6 +75,7 @@
 	<select id="companyMember" resultType="int">
 	SELECT COUNT(com_id) FROM company WHERE com_id= #{param1} AND com_pw = PASSWORD(#{param2}) AND com_state =#{param3}
 	</select>
+	 -->
 	
 	<select id="overlayCompanyId" parameterType="String" resultType="String">
 	SELECT com_id
@@ -95,6 +135,91 @@
 	<update id="companyPwChange">
 	UPDATE company SET com_pw = PASSWORD(#{param2}) WHERE com_id = #{param1}
 	</update>
+	
+	<select id="clientInfoManagement" parameterType="String" resultType="com.signal.all.dto.MemberDTO">
+	SELECT
+	cl_name
+	,cl_birth
+	,cl_age
+	,cl_gender
+	,cl_address
+	,cl_call
+	,cl_email
+	,cl_photo
+	FROM client
+	WHERE cl_id = #{cl_id}
+	</select>
+	
+	<select id="passwordConfirm" resultType="String">
+	SELECT DISTINCT cl_pw FROM client WHERE cl_pw = PASSWORD(#{param2})
+	</select>
+	
+	<update id="clientInfoUpdate" parameterType="hashmap">
+	UPDATE client SET
+		<if test="!pw.equals('')">
+			cl_pw = PASSWORD(#{pw}),
+		</if>
+		cl_name = #{cl_name}
+		,cl_age = #{cl_age}
+		,cl_gender = #{gender}
+		,cl_address = #{cl_address}
+		,cl_call = #{cl_call}
+		,cl_email = #{cl_email}
+		,cl_photo = #{cl_photo}
+	WHERE cl_id = #{cl_id} AND cl_pw = PASSWORD(#{cl_pw}) 
+	</update>
+		
+	<select id="companyInfoManagement" parameterType="String" resultType="com.signal.all.dto.MemberDTO">
+	SELECT
+	com_business_no
+	,com_name
+	,com_address
+	,com_call
+	,com_email
+	,com_photo
+	FROM company
+	WHERE com_id = #{com_id}
+	</select>
+	
+	<select id="passwordConfirm2" resultType="String">
+	SELECT DISTINCT com_pw FROM company WHERE com_pw = PASSWORD(#{param2})
+	</select>
+	
+	<update id="companyMemberInfoUpdate" parameterType="hashmap">
+	UPDATE company SET
+		<if test="!pw.equals('')">
+			com_pw = PASSWORD(#{pw}),
+		</if>
+		com_name = #{com_name}
+		,com_address = #{com_address}
+		,com_call = #{com_call}
+		,com_email = #{com_email}
+		,com_photo = #{com_photo}
+	WHERE com_id = #{com_id} AND com_pw = PASSWORD(#{com_pw}) 
+	</update>
+	
+	<update id="clientDelete">
+	UPDATE client SET cl_state ="탈퇴회원" where cl_id = #{cl_id}
+	</update>
+	
+	<insert id="clientManagement" parameterType="hashmap">
+	INSERT INTO cl_admin(
+	cl_id
+	,cl_break_re)
+	VALUES (#{cl_id},#{mg_content})
+	</insert>
+	
+	
+	<update id="companyDelete">
+	UPDATE company SET com_state ="탈퇴회원" where com_id = #{com_id}
+	</update>
+	
+	<insert id="companyManagement" parameterType="hashmap">
+	INSERT INTO com_admin(
+	com_id
+	,com_break_re)
+	VALUES (#{com_id},#{mg_content})
+	</insert>
 	
 	
 	

@@ -74,9 +74,33 @@ public class MemberService {
 		map.put("success", success);
 		return map;	
 	}
-		
-
 	
+	
+	// 개인회원 로그인서비스
+	public String clientLogin(String id, String pw) {
+		return dao.clientLogin(id,pw);
+	}
+
+
+	// 개인회원 로그인서비스
+	public MemberDTO clientdto(String clientLogin) {
+		return dao.clientdto(clientLogin);
+	}
+
+
+	// 기업회원 로그인서비스
+	public String companyLogin(String id, String pw) {
+		return dao.companyLogin(id,pw);
+	}
+
+
+	// 기업회원 로그인서비스
+	public MemberDTO companydto(String companyLogin) {
+		return dao.companydto(companyLogin);
+	}
+	
+	
+	/* int로 요청 보내는 경우
 	// 개인회원 로그인서비스
 	public int clientMember(String id, String pw, String state) {
 		logger.info("개인회원 로그인 서비스 요청");
@@ -86,7 +110,7 @@ public class MemberService {
 
 	// 기업회원 로그인서비스
 	public int companyMember(String id, String pw, String state) {
-		logger.info("개인회원 로그인 서비스 요청");
+		logger.info("기업회원 로그인 서비스 요청");
 		return dao.companyMember(id,pw,state);
 	}
 
@@ -96,6 +120,7 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	*/
 	
 	
 	/* 사진 업로드 포함 회원가입 방법 *************
@@ -334,6 +359,7 @@ public class MemberService {
 	}
 
 
+	// 기업회원 비밀번호 재설정과 관련된 정보입력 확인(새 비밀번호 설정 페이지로 넘어가기 위함)
 	public int findCompanyPw(String id, String email, String number) {
 		//서비스에서는 단순히 매퍼와 연결해주는 것이므로 해줄 것이 없다. dao에 받아온 변수를 담아 보내주자
 		return dao.findCompanyPw(id,email,number);
@@ -344,6 +370,99 @@ public class MemberService {
 	public void companyPwChange(String id, String com_pw) {
 		dao.companyPwChange(id,com_pw);	
 	}
+
+
+	// 개인회원 정보관리 페이지 이동 및 리스트 서비스 요청 + 개인회원 수정페이지 이동하여 리스트 보여주는 것도 가능하다
+	public MemberDTO clientInfoManagement(String loginId) {
+		logger.info("개인회원 개인정보관리 페이지 및 리스트 서비스 도착");
+		return dao.clientInfoManagement(loginId);
+	}
+
+
+	// 개인회원 정보수정 요청전 현재 비밀번호 확인
+	public HashMap<String, Object> passwordConfirm(String cl_pw) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		String pw = dao.passwordConfirm(cl_pw);
+		logger.info("비밀번호 ? : "+pw);
+		//중복된 이메일이면 중복 이메일:(중복이메일)이 보여짐 ->사용불가 이메일
+		//사용가능한 이메일이면 중복 이메일:(null)이 보여짐 ->사용가능 이메일
+		boolean over = pw ==null?false:true;
+		map.put("pw", over);
+		
+		return map;
+	}
+
+
+	// 개인회원 정보수정 요청 서비스
+	public void clientInfoUpdate(HashMap<String, String> params) {
+		dao.clientInfoUpdate(params);
+	}
+
+
+	
+	// 기업회원 정보관리 페이지 이동 및 리스트 서비스 요청 + 기업회원 수정페이지 이동하여 리스트 보여주는 것도 가능하다.
+	public MemberDTO companyInfoManagement(String loginId) {
+		logger.info("기업회원 기업회원정보관리 페이지 및 리스트 서비스 도착");
+		return dao.companyInfoManagement(loginId);
+	}
+
+
+	// 기업회원 회원정보수정 요청전 현재 비밀번호 확인
+	public HashMap<String, Object> passwordConfirm2(String com_pw) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		String pw = dao.passwordConfirm2(com_pw);
+		logger.info("비밀번호 ? : "+pw);
+		//중복된 이메일이면 중복 이메일:(중복이메일)이 보여짐 ->사용불가 이메일
+		//사용가능한 이메일이면 중복 이메일:(null)이 보여짐 ->사용가능 이메일
+		boolean over = pw ==null?false:true;
+		map.put("pw", over);
+		
+		return map;
+	}
+
+
+	// 기업회원 회원정보수정 요청
+	public void companyMemberInfoUpdate(HashMap<String, String> params) {
+		dao.companyMemberInfoUpdate(params);
+	}
+
+
+	// 개인회원 탈퇴 요청
+	public boolean clientDelete(String cl_id) {
+		logger.info("개인회원 탈퇴 서비스 요청");
+		return dao.clientDelete(cl_id);
+	}
+
+	// 개인회원 관리 인서트 요청
+	public void clientManagement(HashMap<String, String> params) {
+		dao.clientManagement(params);
+	}
+	
+	
+	// 기업회원 탈퇴 요청
+	public boolean companyDelete(String com_id) {
+		logger.info("기업회원 탈퇴 서비스 요청");
+		return dao.companyDelete(com_id);
+	}
+
+	// 기업회원 관리 인서트 요청
+	public void companyManagement(HashMap<String, String> params) {
+		dao.companyManagement(params);	
+	}
+
+
+
+
+
+
+
+
+
+
 
 
 	

@@ -31,7 +31,7 @@
 		            <th>사업자 번호</th>
 		            <td>
 		            	<input type="text" name="com_business_no" id="com_business_no"/>
-		            	<input type="button" onclick="sample4_execDaumPostcode()" value="번호찾기"/>
+		            	<input type="button" value="번호찾기" onclick="findNumber()"/>
 		            	<button type="button" id="overChkId" onclick="overlayNumber()">중복확인</button>
 		            </td>
 		        </tr>
@@ -258,7 +258,12 @@
 	
 	
 	
+	// 크롤링으로 사업자 번호 가져오기
+	function findNumber(){
+		window.open("https://bizno.net/","", "width=400, height=300, left=100, top=50");
+	}
 	
+	// 회원가입 요청하기 ajax
 	function joinFormCompany(){
 		var comId = $("#com_id").val();
 		var comPw = $("#com_pw").val();

@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<form action="login.do" method="post">
+	<form action="login.do" method="post" onsubmit="return login()">
 		<h1>Login</h1>
 			<input type='radio' name='memberSelect' value='개인회원' />개인회원
    			<input type='radio' name='memberSelect' value='기업회원' />기업회원
@@ -67,6 +67,21 @@
 			return false;
 		}
 	}
+	
+	function login(){
+        //console.log('test');
+        var id = $("#id");
+		var pw = $("#pw");
+        if(id.val()==""){
+            alert("아이디를 입력해주세요.");
+            id.focus();
+            return false;
+		}else if(pw.val()==""){
+           alert("비밀번호를 입력해주세요.");
+           pw.focus(); 
+           return false;
+        }
+    }
 	
 </script>
 </html>

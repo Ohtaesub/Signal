@@ -19,6 +19,79 @@ public class MemberDTO {
 	private String st_comment;
 	private int cl_age;
 	
+	private String com_id;
+	private String com_pw;
+	private String com_name;
+	private String com_business_no;
+	private String com_address;
+	private String com_call;
+	private String com_email;
+	private Date com_join_date;
+	private String com_state;
+	private String com_photo;
+	
+	
+	
+	public String getCom_id() {
+		return com_id;
+	}
+	public void setCom_id(String com_id) {
+		this.com_id = com_id;
+	}
+	public String getCom_pw() {
+		return com_pw;
+	}
+	public void setCom_pw(String com_pw) {
+		this.com_pw = com_pw;
+	}
+	public String getCom_name() {
+		return com_name;
+	}
+	public void setCom_name(String com_name) {
+		this.com_name = com_name;
+	}
+	public String getCom_business_no() {
+		return com_business_no;
+	}
+	public void setCom_business_no(String com_business_no) {
+		this.com_business_no = com_business_no;
+	}
+	public String getCom_address() {
+		return com_address;
+	}
+	public void setCom_address(String com_address) {
+		this.com_address = com_address;
+	}
+	public String getCom_call() {
+		return com_call;
+	}
+	public void setCom_call(String com_call) {
+		this.com_call = com_call;
+	}
+	public String getCom_email() {
+		return com_email;
+	}
+	public void setCom_email(String com_email) {
+		this.com_email = com_email;
+	}
+	public Date getCom_join_date() {
+		return com_join_date;
+	}
+	public void setCom_join_date(Date com_join_date) {
+		this.com_join_date = com_join_date;
+	}
+	public String getCom_state() {
+		return com_state;
+	}
+	public void setCom_state(String com_state) {
+		this.com_state = com_state;
+	}
+	public String getCom_photo() {
+		return com_photo;
+	}
+	public void setCom_photo(String com_photo) {
+		this.com_photo = com_photo;
+	}
 	public String getCl_id() {
 		return cl_id;
 	}
