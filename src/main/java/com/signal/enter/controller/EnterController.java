@@ -30,27 +30,42 @@ public class EnterController {
 	// by태섭, service 객체를 한 번만 선언하고 계속 사용한다.
 	@Autowired EnterService service;
 	
-	// by태섭, 입사제안현황 페이지로 이동 시 리스트 호출
-	// 나중에 로그인 세션 적용해서 해당 기업이 제안한 현황만 보여주자
+	// by태섭, 입사제안현황 페이지로 이동 시 리스트 호출_2022_08_13
 	@RequestMapping(value = "/companyOfferList.do", method = RequestMethod.GET)
-	public String companyOfferList(Model model /*@RequestParam String com_id*/) {
+	public String companyOfferList(Model model, HttpSession session, Criteria cri) {
 		logger.info("입사제안현황 리스트 요청");
-		ArrayList<EnterDTO> offerList = service.offerList();
+		// by태섭, 해당 기업 id를 인자값으로 넣어주기 변수에 세션 값 넣어주기
+		String com_id = (String) session.getAttribute("loginId");
+		
+		// by태섭, 페이징 처리를 Criteria 클래스에서 skip, amount 변수 가져오기
+		int skip = cri.getSkip();
+		int amount = cri.getAmount();
+		
+		// by태섭, 페이징처리를 적용한 기업이 입사제안한 리스트 호출
+		ArrayList<EnterDTO> offerList = service.offerList(com_id,skip,amount);
 		model.addAttribute("offerList", offerList);
+		
+		// by태섭, 페이징 인터페이스 처리 부분
+		int total = service.getComOfferTotal(com_id);
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+		//PageMaker 데이터를 view로 보내기 위함
+		model.addAttribute("pageMaker", pageMake);
 		return "companyOfferList"; 
 	}
 	
 	// by태섭, 기업이 일반회원에게 입사제안 페이지 이동_2022_08_10 
 	@RequestMapping(value = "/offer.go")
-	public String offer(Model model, @RequestParam int re_no) {
+	public String offer(Model model, @RequestParam int re_no, HttpSession session) {
 		logger.info("입사제안 요청 이력서 번호 : "+re_no);
 		logger.info("채용공고 리스트 호출");
-		// by태섭, 나중에 해당 기업이 올린 공고리스트만 보여줘야 한다. 인자값으로 com_id
+		// by태섭, 해당 기업 id를 인자값으로 넣어주기 변수에 세션 값 넣어주기
+		String com_id = (String) session.getAttribute("loginId");
+		
 		// by태섭, 기업 채용공고 리스트 호출
-		ArrayList<JobPostingDTO> jobPostingList = service.jobPostingList();
+		ArrayList<JobPostingDTO> jobPostingList = service.jobPostingList(com_id);
 		model.addAttribute("jobPostingList", jobPostingList);
 		model.addAttribute("re_no",re_no);
-		// by태섭, 해당 이력서에 대한 회원 정보
+		// by태섭, 해당 이력서에 대한 회원 정보 불러오기
 		ArrayList<ResumeDTO> personInfo = service.personInfo(re_no);
 		model.addAttribute("personInfo", personInfo);
 		return "personOffer";
@@ -61,7 +76,7 @@ public class EnterController {
 	public String offerDo(Model model, @RequestParam int re_no, int jpo_no ) {
 		logger.info("입사제안 요청 이력서 번호 : "+re_no);		
 		logger.info("입사제안 요청 공고 번호 : "+jpo_no);
-		
+		// by태섭, 제안 테이블에 넣기 위해 해당 이력서 번호와 채용공고 번호를 인자값으로 넣는다.
 		service.offer(re_no, jpo_no);
 		return "./resume/personList";
 	}
@@ -89,14 +104,15 @@ public class EnterController {
 		// by태섭, 페이징 처리에 skip, amount 변수
 		int skip = cri.getSkip();
 		int amount = cri.getAmount();
-		//ArrayList<EnterDTO> clientOfferList = service.clientOfferList();
+		
 		//  by태섭, 페이징 처리한 리스트 호출
 		ArrayList<EnterDTO> clientOfferList = service.clientOfferList(cl_id,skip,amount);
 		model.addAttribute("clientOfferList", clientOfferList);
-		//페이징 인터페이스 처리 부분
+		
+		// by태섭, 페이징 인터페이스 처리 부분
 		int total = service.getOfferTotal(cl_id);
         PageMakerDTO pageMake = new PageMakerDTO(cri, total);
-        //PageMaker 데이터를 view로 보내기 위함
+        // by태섭, PageMaker 데이터를 view로 보내기 위함
         model.addAttribute("pageMaker", pageMake);
 		
 		return "clientOfferList";
@@ -120,6 +136,7 @@ public class EnterController {
 		logger.info("채용공고 상세보기 요청");
 		
 		service.jobPostingDetail(offer_no);
+		// by태섭, 임시로 personOffer로 보내준다. 채용공고 완성 시 채용공고로 변경
 		return "personOffer";
 	}
 	
@@ -130,12 +147,15 @@ public class EnterController {
 		
 		// by태섭, 세션에서 회원 아이디 값 가져오기
 		String cl_id = (String) session.getAttribute("loginId");
+		
 		// by태섭, 페이징 처리에 skip, amount 변수
 		int skip = cri.getSkip();
 		int amount = cri.getAmount();
+		
 		//  by태섭, 페이징 처리한 리스트 호출
 		ArrayList<EnterDTO> clientApplyList = service.clientApplyList(cl_id,skip,amount);
 		model.addAttribute("clientApplyList", clientApplyList);
+		
 		// by태섭, 페이징 인터페이스 처리 부분
 		int total = service.getApplyTotal(cl_id);
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);

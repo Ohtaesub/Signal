@@ -14,6 +14,7 @@ public class EnterDTO {
 	private int st_score; //셀프 평점 
 	private double st_score_avg; // 셀프 평점 평균
 	private Date offer_date; //입사제안 날짜
+	private String cl_name; //이름
 	
 	//by태섭, 입사제안 버튼 눌렀을 때 채용공고 리스트 보여주기_2022_08_09
 	private String jpo_title; //채용공고명
@@ -30,6 +31,12 @@ public class EnterDTO {
 	private Date inter_date; //면접날짜
 	private String inter_result; //지원결과
 		
+	public String getCl_name() {
+		return cl_name;
+	}
+	public void setCl_name(String cl_name) {
+		this.cl_name = cl_name;
+	}
 	public Date getApply_date() {
 		return apply_date;
 	}

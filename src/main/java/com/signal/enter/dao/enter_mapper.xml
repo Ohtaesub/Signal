@@ -3,7 +3,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.signal.enter.dao.EnterDAO">
 	
-	<!-- by태섭, 입사제안리스트 호출 -->
+	<!-- by태섭, 입사제안리스트 호출 / companyOfferList.jsp -->
 	<select id="offerList" resultType="com.signal.all.dto.EnterDTO">
 	SELECT
 		off.offer_date
@@ -21,12 +21,38 @@
 	LEFT OUTER JOIN self_test_result str ON str.cl_id = cl.cl_id
 	LEFT OUTER JOIN job_posting jp ON jp.jpo_no = off.jpo_no
 	LEFT OUTER JOIN company c ON c.com_id = jp.com_id
-	WHERE c.com_id = "goodee" GROUP BY cl.cl_id;
+	WHERE c.com_id = #{param1} GROUP BY cl.cl_id ORDER BY off.offer_no DESC
+	LIMIT #{param2}, #{param3};
+	</select>
+	
+	<!-- by태섭, 입사제안리스트 호출 / companyOfferList2.jsp-->
+	<!-- <select id="offerList" resultType="com.signal.all.dto.EnterDTO">
+	SELECT
+		off.offer_date
+		,re.re_title
+		,cl.cl_name
+		,cl.cl_age
+		,cl.cl_gender
+	FROM offer off
+	LEFT OUTER JOIN resume re ON off.re_no = re.re_no
+	LEFT OUTER JOIN client cl ON re.cl_id = cl.cl_id 
+	LEFT OUTER JOIN job_posting jp ON jp.jpo_no = off.jpo_no
+	LEFT OUTER JOIN company c ON c.com_id = jp.com_id
+	WHERE c.com_id = #{param1} ORDER BY off.offer_no DESC
+	LIMIT #{param2}, #{param3};
+	</select> -->
+	
+	<!-- by태섭, 기업 회원한 입사제안 총 개수 -->
+	<select id="getComOfferTotal" resultType="int">
+	SELECT count(*) FROM offer o
+	LEFT OUTER JOIN job_posting jp  ON jp.jpo_no = o.jpo_no 
+	LEFT OUTER JOIN company c on c.com_id = jp.com_id 
+	WHERE c.com_id = #{param1};
 	</select>
 	
 	<!-- by태섭, 기업 채용공고 리스트 -->
 	<select id="jobPostingList" resultType="com.signal.all.dto.EnterDTO">
-	SELECT jpo_title, jpo_no FROM job_posting
+	SELECT jpo_title, jpo_no FROM job_posting WHERE com_id = #{com_id}
 	</select>
 	
 	<!-- by태섭, 인재현황 입사제안 페이지 -> 인재정보 가져오는 쿼리문 -->
@@ -96,7 +122,7 @@
 	LIMIT #{param2}, #{param3};
 	</select>
 	
-	<!-- by태섭, 입사제안 총 개수 -->
+	<!-- by태섭, 일반 회원이 받은 입사제안 총 개수 -->
 	<select id="getOfferTotal" resultType="int">
 	SELECT count(*) FROM offer o
 	LEFT OUTER JOIN resume r ON r.re_no = o.re_no
