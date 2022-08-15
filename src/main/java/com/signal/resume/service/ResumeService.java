@@ -50,6 +50,16 @@ public class ResumeService {
 		
 		return dao.licenseDetail(re_no);
 	}
+	
+	public ArrayList<ResumeDTO> recommendDetail(String re_no) {
+		
+		return dao.recommendDetail(re_no);
+	}
+	
+	public ArrayList<ResumeDTO> recommendUp(String id) {
+		
+		return dao.recommendUp(id);
+	}
 	// 이력서 상세보기 서비스 요청 끝	
 
 	public HashMap<String, Object> personList2(HashMap<String, String> params) {
@@ -193,6 +203,21 @@ ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
 		mav.addObject("success", success);
 		return mav;
 	}
+	
+	public ModelAndView recommendReg(HashMap<String, String> params) {
+		ModelAndView mav = new ModelAndView("./resume/recommendUp");
+		boolean success=false;
+		int row = dao.recommendReg(params);
+		if(row>0) {
+			success=true;
+		}
+		String reNo=params.get("re_no");
+		int re_no=Integer.parseInt(reNo);
+		
+		mav.addObject("re_no", re_no);
+		mav.addObject("success", success);
+		return mav;
+	}		
 
 	public ArrayList<ResumeDTO> recommendMe(String id) {
 		logger.info("추천현황 리스트 서비스");
@@ -207,6 +232,111 @@ ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
 		logger.info("내가추천 list 요청");
 		return dao.recommendUlist(id);
 	}
+
+	public ArrayList<ResumeDTO> jpList() {
+		return dao.jpList();
+	}
+
+	public ArrayList<ResumeDTO> jcList(String jp_no) {
+		return dao.jcList(jp_no);
+	}
+
+	public ArrayList<ResumeDTO> jcCheck(String jc_no) {
+		return dao.jcCheck(jc_no);
+	}
+
+	public ModelAndView careerUp(HashMap<String, String> params) {
+		String re_no = params.get("re_no");		
+		ModelAndView mav = new ModelAndView("./resume/careerUpPop");
+		boolean success=false;
+		int row = dao.careerUp(params);
+		if(row>0) {
+			success=true;
+			ArrayList<ResumeDTO>list=dao.careerDetail(re_no);
+			mav.addObject("careerDto", list);
+		}		
+		mav.addObject("re_no", re_no);
+		mav.addObject("success", success);
+		return mav;
+	}
+
+	public ModelAndView socialUp(HashMap<String, String> params) {
+		String re_no = params.get("re_no");		
+		ModelAndView mav = new ModelAndView("./resume/socialUpPop");
+		boolean success=false;
+		int row = dao.socialUp(params);
+		if(row>0) {
+			success=true;
+			ArrayList<ResumeDTO>list=dao.socialDetail(re_no);
+			mav.addObject("socialDto", list);
+		}		
+		mav.addObject("re_no", re_no);
+		mav.addObject("success", success);
+		return mav;
+	}
+
+	public ModelAndView licenseUp(HashMap<String, String> params) {
+		String re_no = params.get("re_no");		
+		ModelAndView mav = new ModelAndView("./resume/licenseUpPop");
+		boolean success=false;
+		int row = dao.licenseUp(params);
+		if(row>0) {
+			success=true;
+			ArrayList<ResumeDTO>list=dao.licenseDetail(re_no);
+			mav.addObject("licenseDto", list);
+		}		
+		mav.addObject("re_no", re_no);
+		mav.addObject("success", success);
+		return mav;
+	}
+
+	public ModelAndView careerDelete(String ca_no, String re_no) {		
+		ModelAndView mav = new ModelAndView("./resume/careerUpPop");
+		boolean result=false;
+		int row = dao.careerDelete(ca_no);
+		if(row>0) {
+			result=true;
+			ArrayList<ResumeDTO>list=dao.careerDetail(re_no);
+			mav.addObject("careerDto", list);
+		}
+		mav.addObject("re_no", re_no);
+		mav.addObject("result", result);
+		return mav;
+	}
+
+	public ModelAndView socialDelete(String soc_no, String re_no) {
+		ModelAndView mav = new ModelAndView("./resume/socialUpPop");
+		boolean result=false;
+		int row = dao.socialDelete(soc_no);
+		if(row>0) {
+			result=true;
+			ArrayList<ResumeDTO>list=dao.socialDetail(re_no);
+			mav.addObject("socialDto", list);
+		}
+		mav.addObject("re_no", re_no);
+		mav.addObject("result", result);
+		return mav;
+	}
+
+	public ModelAndView licenseDelete(String li_no, String re_no) {
+		ModelAndView mav = new ModelAndView("./resume/licenseUpPop");
+		boolean result=false;
+		int row = dao.licenseDelete(li_no);
+		if(row>0) {
+			result=true;
+			ArrayList<ResumeDTO>list=dao.licenseDetail(re_no);
+			mav.addObject("licenseDto", list);
+		}
+		mav.addObject("re_no", re_no);
+		mav.addObject("result", result);
+		return mav;
+	}
+
+	
+
+	
+
+	
 	
 	
 }

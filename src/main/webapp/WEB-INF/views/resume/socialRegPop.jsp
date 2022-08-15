@@ -14,20 +14,20 @@
 		<tr>
 			<th>분류</th>
 			<td><input type="text" name="soc_field"/></td>
-			<th>근무기간</th>
+			<th>활동명</th>
 			<td><input type="text" name="soc_name"/></td>
-			<th>직무</th>
+			<th>기간</th>
 			<td><input type="text" name="soc_period"/></td>
 		</tr>
 		<tr>
-			<th>근무내용</th>
+			<th>내용</th>
 			<td colspan="5">
 				<input type="text" name="soc_content"/>
 				<input type="hidden" name="re_no" value="${re_no }">
 			</td>
 		</tr>
 		<tr>
-			<th colspan="6"><input type="submit" value="등록"/><input type="button" value="닫기"/></th>
+			<th colspan="6"><input type="submit" value="등록"/><input type="button" onclick="window.close()"  value="닫기"/></th>
 		</tr>
 	</table>
 	</form>

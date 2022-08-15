@@ -89,6 +89,17 @@
 	WHERE r.re_no = #{re_no}
 	</select>
 	
+	<select id="recommendDetail" resultType="resume" parameterType="String">
+	SELECT r.reco_no, reco_cl_id, reco_req_memo, reco_date FROM resume r
+	LEFT OUTER JOIN recommend r2 ON r.reco_no = r2.reco_no
+	WHERE r.re_no = #{re_no}
+	</select>
+	
+	<select id="recommendUp" resultType="resume" parameterType="String">
+	SELECT reco_no, reco_cl_id, reco_req_memo, reco_date FROM recommend r
+	WHERE cl_id = #{id} AND reco_req_memo != ""
+	</select>
+	
 	<select id="resumeRegDetail" resultType="resume" parameterType="String">
 	SELECT cl_name, cl_call, cl_address, cl_birth, cl_email, cl_gender, cl_photo, cl_age FROM client c	
 	WHERE cl_id = #{id}
@@ -110,6 +121,22 @@
 	WHERE re_no = #{param3}
 	</update>
 	
+	<select id="jpList" resultType="resume">
+		SELECT jp_no, jp_name FROM job_pa
+		WHERE jp_no > 1
+	</select>
+	
+	<select id="jcList" resultType="resume" parameterType="String">
+		SELECT jp_no, jc_no, jc_name FROM job_ch
+		WHERE jp_no=#{jp_no}
+	</select>
+	
+	<select id="jcCheck" resultType="resume" parameterType="String">
+		SELECT jc.jp_no, jc_no, jp_name, jc_name FROM job_ch jc 
+		LEFT OUTER JOIN job_pa jp on jp.jp_no = jc.jp_no 
+		WHERE jc_no=#{jc_no};
+	</select>
+	
 	<insert id="careerReg" parameterType="hashmap">
 	INSERT INTO career(re_no, ca_com_name, ca_period, ca_job, ca_content)
 	VALUES (#{re_no},#{ca_com_name},#{ca_period},#{ca_job},#{ca_content})
@@ -125,6 +152,12 @@
 	VALUES (#{re_no},#{li_field},#{li_name},#{li_org},#{li_date})
 	</insert>
 	
+	<update id="recommendReg" parameterType="hashmap">
+	UPDATE resume SET
+	reco_no=#{reco_no}
+	WHERE re_no=#{re_no}
+	</update>
+	
 	<select id="recommendMe" resultType="resume" parameterType="String">
 		SELECT reco_no, cl_id, reco_cl_id, reco_req_memo,reco_relation, reco_date FROM recommend
 		WHERE cl_id=#{id} 
@@ -139,5 +172,44 @@
 		SELECT reco_no, cl_id, reco_req_memo, reco_content, reco_state, reco_relation, reco_date FROM recommend
 		WHERE reco_cl_id=#{id} 
 	</select>
+	
+	<update id="careerUp" parameterType="hashmap">
+	UPDATE career SET
+	ca_com_name=#{ca_com_name},
+	ca_period=#{ca_period},
+	ca_job=#{ca_job},
+	ca_content=#{ca_content}
+	WHERE ca_no=#{ca_no}
+	</update>
+	
+	<update id="socialUp" parameterType="hashmap">
+	UPDATE social SET
+	soc_field=#{soc_field},
+	soc_name=#{soc_name},
+	soc_period=#{soc_period},
+	soc_content=#{soc_content}
+	WHERE soc_no=#{soc_no}
+	</update>
+	
+	<update id="licenseUp" parameterType="hashmap">
+	UPDATE license SET
+	li_field=#{li_field},
+	li_name=#{li_name},
+	li_org=#{li_org},
+	li_date=#{li_date}
+	WHERE li_no=#{li_no}
+	</update>
+	
+	<delete id="careerDelete" parameterType="String">
+	DELETE FROM career WHERE ca_no = #{ca_no}
+	</delete>
+	
+	<delete id="socialDelete" parameterType="String">
+	DELETE FROM social WHERE soc_no = #{soc_no}
+	</delete>
+	
+	<delete id="licenseDelete" parameterType="String">
+	DELETE FROM license WHERE li_no = #{li_no}
+	</delete>
 	
 </mapper>

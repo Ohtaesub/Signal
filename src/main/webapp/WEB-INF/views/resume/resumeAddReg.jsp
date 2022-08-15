@@ -88,37 +88,68 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<br/>
+	<br/>
+	<table id="section">
+		<thead>
+			<tr>
+				<th colspan="3">내가받은 추천 <button onclick="recommendUp()">수정</button></th>
+			</tr>
+			<tr>
+				<th>분류</th>
+				<th>이름</th>
+				<th>취득일</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${recommendDto}" var="reco">
+				<tr>
+					<td id="reco_no" class="hidden">${reco.reco_no }</td>
+					<td>${reco.reco_cl_id}</td>
+					<td>${reco.reco_date}</td>
+					<td>${reco.reco_req_memo}</td>					
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 
 </body>
 <script>
 function careerAdd(){
-	var re_no = $("#re_no").val();
+	var re_no = $("#re_no").html();
 	 window.open("careerReg.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 
 function careerUp(){
-	var re_no = $("#re_no").val();
+	var re_no = $("#re_no").html();
 	 window.open("careerUp.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 	 
 function socialAdd(){
-	var re_no = $("#re_no").val();
+	var re_no = $("#re_no").html();
 	 window.open("socialReg.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 
 function socialUp(){
-	var re_no = $("#re_no").val();
+	var re_no = $("#re_no").html();
 	 window.open("socialUp.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 	 
 function licenseAdd(){
-	var re_no = $("#re_no").val();
+	var re_no = $("#re_no").html();
 	 window.open("licenseReg.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 
 function licenseUp(){
-	var re_no = $("#re_no").val();
+	var re_no = $("#re_no").html();
 	 window.open("licenseUp.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+	 }
+	 
+function recommendUp(){
+	var re_no = $("#re_no").html();
+	var reco_no = $("#reco_no").html();
+	console.log(re_no +'/'+reco_no);
+	 window.open("recommendUp.go?re_no="+re_no+"&&reco_no="+reco_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 	 
 </script>

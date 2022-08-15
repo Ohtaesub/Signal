@@ -26,12 +26,15 @@
 		<tbody>
 			<c:forEach items="${licenseDto}" var="license">
 				<tr>					
-					<td class="hidden"><input type="text" name="li_no" value="${license.li_no }"></td>
+					<td class="hidden">
+					<input type="text" name="li_no" value="${license.li_no }">
+					<input type="text" name="re_no" value="${re_no}">
+					</td>
 					<td><input type="text" name="li_field" value="${license.li_field}"/></td>
 					<td><input type="text" name="li_name" value="${license.li_name}"/></td>
 					<td><input type="text" name="li_org" value="${license.li_org}"/></td>
 					<td><input type="text" name="li_date" value="${license.li_date}"/></td>
-					<td><input type="submit" value="수정"/><button onclick="licenseDelete()">삭제</button></td>
+					<td><input type="submit" value="수정"/><input type="button" onclick="licenseDelete(${license.li_no},${re_no})" value="삭제"></td>
 				</tr>
 			</c:forEach>			
 		</tbody>	
@@ -41,5 +44,21 @@
 	</table>
 	</form>
 </body>
-<script></script>
+<script>
+var msg = "${success}";
+if(msg){
+	alert("수정이 완료되었습니다");
+	window.opener.location.reload();	
+}
+
+function licenseDelete(no,re_no){	
+	location.href="licenseDelete.do?li_no="+no+"&&re_no="+re_no;
+}
+
+var result = "${result}";
+if(result){
+	alert("삭제가 완료되었습니다");
+	window.opener.location.reload();	
+}
+</script>
 </html>

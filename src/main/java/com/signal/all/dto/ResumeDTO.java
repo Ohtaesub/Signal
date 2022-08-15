@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.apache.ibatis.type.Alias;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Alias("resume")
 public class ResumeDTO {
 
@@ -61,7 +63,7 @@ public class ResumeDTO {
 	private String reco_state;
 	private String reco_relation;
 	private String reco_content;
-	
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date reco_date;
 	
 	private double avr_inter_grade;

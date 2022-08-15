@@ -18,6 +18,8 @@ public interface ResumeDAO {
 	ArrayList<ResumeDTO> socialDetail(String re_no);
 
 	ArrayList<ResumeDTO> licenseDetail(String re_no);
+	
+	ArrayList<ResumeDTO> recommendDetail(String re_no);
 
 	int allCount(HashMap<String, Object> searchResult);
 
@@ -40,5 +42,29 @@ public interface ResumeDAO {
 	ArrayList<ResumeDTO> recommendYou(String id);
 
 	ArrayList<ResumeDTO> recommendUlist(String id);
+
+	ArrayList<ResumeDTO> jpList();
+
+	ArrayList<ResumeDTO> jcList(String jp_no);
+
+	ArrayList<ResumeDTO> jcCheck(String jc_no);
+
+	ArrayList<ResumeDTO> recommendUp(String id);
+
+	int recommendReg(HashMap<String, String> params);
+
+	int careerUp(HashMap<String, String> params);
+
+	int socialUp(HashMap<String, String> params);
+
+	int licenseUp(HashMap<String, String> params);
+
+	int careerDelete(String ca_no);
+
+	int socialDelete(String soc_no);
+
+	int licenseDelete(String li_no);
+
+	
 
 }

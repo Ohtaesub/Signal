@@ -27,7 +27,7 @@
 			</td>
 		</tr>
 		<tr>
-			<th colspan="6"><input type="submit" value="등록"/><input type="button" value="닫기"/></th>
+			<th colspan="6"><input type="submit" value="등록"/><input type="button" onclick="window.close()" value="닫기"/></th>
 		</tr>
 	</table>
 	</form>

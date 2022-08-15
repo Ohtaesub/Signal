@@ -26,12 +26,15 @@
 		<tbody>
 			<c:forEach items="${socialDto}" var="social">
 				<tr>
-					<td class="hidden"><input type="text" name="soc_no" value="${soc_no}"></td>	
-					<td><input type="text" name="soc_field" value="${social.soc_field}}"/></td>
+					<td class="hidden">
+					<input type="text" name="soc_no" value="${social.soc_no}">
+					<input type="text" name="re_no" value="${re_no}">
+					</td>	
+					<td><input type="text" name="soc_field" value="${social.soc_field}"/></td>
 					<td><input type="text" name="soc_name" value="${social.soc_name}"/></td>
 					<td><input type="text" name="soc_period" value="${social.soc_period}"/></td>
 					<td><input type="text" name="soc_content" value="${social.soc_content}"/></td>
-					<td><input type="submit" value="수정"/><button onclick="licenseDelete()">삭제</button></td>
+					<td><input type="submit" value="수정"/><input type="button" onclick="socialDelete(${social.soc_no},${re_no})" value="삭제"></td>
 				</tr>
 			</c:forEach>			
 		</tbody>	
@@ -41,5 +44,21 @@
 	</table>
 	</form>
 </body>
-<script></script>
+<script>
+var msg = "${success}";
+if(msg){
+	alert("수정이 완료되었습니다");
+	window.opener.location.reload();	
+}
+
+function socialDelete(no,re_no){	
+	location.href="socialDelete.do?soc_no="+no+"&&re_no="+re_no;
+}
+
+var result = "${result}";
+if(result){
+	alert("삭제가 완료되었습니다");
+	window.opener.location.reload();	
+}
+</script>
 </html>

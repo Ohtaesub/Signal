@@ -77,13 +77,15 @@ public class ResumeController {
 		ResumeDTO dto = service.resumeDetail(re_no);
 		ArrayList<ResumeDTO> careerDto = service.careerDetail(re_no);
 		ArrayList<ResumeDTO> socialDto = service.socialDetail(re_no);
-		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);		
+		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);
+		ArrayList<ResumeDTO> recommendDto = service.recommendDetail(re_no);
 		String page = "./resume/resumeDetail";
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("careerDto", careerDto);
 		model.addAttribute("socialDto", socialDto);
 		model.addAttribute("licenseDto", licenseDto);
+		model.addAttribute("recommendDto", recommendDto);
 		
 		return page;
 	}
@@ -110,19 +112,51 @@ public class ResumeController {
 		return service.resumeReg(params);
 	}
 	
+	@RequestMapping(value = "jobClassPop.go", method = RequestMethod.GET)
+	public String jobClassPopGo(Model model) {		
+		
+		ArrayList<ResumeDTO> list = service.jpList();
+		model.addAttribute("jpList", list);
+		return "./resume/jobClassPop";
+	}
+	
+	@RequestMapping(value = "jcList.go", method = RequestMethod.GET)
+	public String jcList(Model model, @RequestParam String jp_no) {		
+		
+		ArrayList<ResumeDTO> jplist = service.jpList();
+		ArrayList<ResumeDTO> list = service.jcList(jp_no);
+		model.addAttribute("jcList", list);
+		model.addAttribute("jpList", jplist);
+		return "./resume/jobClassPop";
+	}
+	
+	@RequestMapping(value = "jcCheck.go", method = RequestMethod.GET)
+	public String jcCheck(Model model, @RequestParam String jc_no) {		
+		
+		ArrayList<ResumeDTO> list = service.jcCheck(jc_no);
+		model.addAttribute("finList", list);
+		boolean success=true;
+		model.addAttribute("success", success);
+		return "./resume/jobClassPop";
+	}
+	
 	@RequestMapping(value = "resumeAddReg.go", method = RequestMethod.GET)
 	public String resumeAddReg(Model model, @RequestParam String re_no) {		
 		
+		String id = "aaaabbbb";
 		logger.info(re_no + "번 이력서 추가정보 등록 요청");
 		
 		ArrayList<ResumeDTO> careerDto = service.careerDetail(re_no);
 		ArrayList<ResumeDTO> socialDto = service.socialDetail(re_no);
-		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);	
+		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);
+		ArrayList<ResumeDTO> recommendDto = service.recommendDetail(re_no);
 		
+		model.addAttribute("cl_id", id);	
 		model.addAttribute("re_no", re_no);
 		model.addAttribute("careerDto", careerDto);
 		model.addAttribute("socialDto", socialDto);
 		model.addAttribute("licenseDto", licenseDto);
+		model.addAttribute("recommendDto", recommendDto);
 		return "./resume/resumeAddReg";
 	}
 	
@@ -189,6 +223,22 @@ public class ResumeController {
 		return "./resume/licenseUpPop";
 	}
 	
+	@RequestMapping(value = "recommendUp.go", method = RequestMethod.GET)
+	public String recommendUp(Model model, @RequestParam String re_no, @RequestParam String reco_no) {		
+		
+		logger.info(re_no + "번 이력서 추천내역 수정 요청");
+		String id = "aaaabbbb";		
+		
+		ArrayList<ResumeDTO> recommendDto = service.recommendUp(id);	
+		
+		model.addAttribute("cl_id", id);	
+		model.addAttribute("re_no", re_no);
+		model.addAttribute("reco_no", reco_no);
+		model.addAttribute("recommendDto", recommendDto);
+		
+		return "./resume/recommendUp";
+	}
+	
 	@RequestMapping(value = "resumeUpdate.go", method = RequestMethod.GET)
 	public String resumeUpdate(Model model, @RequestParam String re_no) {		
 		
@@ -236,6 +286,15 @@ public class ResumeController {
 		return service.licenseReg(params);
 	}
 	
+	@RequestMapping(value = "/recommendUp.do")
+	public ModelAndView recommendReg(@RequestParam HashMap<String, String> params, 
+			HttpSession session, Model model) {
+		
+		logger.info("params : {}",params);	
+		
+		return service.recommendReg(params);
+	}
+	
 	@RequestMapping(value = "recommendMe.go", method = RequestMethod.GET)
 	public String recommendMeGo(HttpSession session, Model model) {		
 		
@@ -261,6 +320,56 @@ public class ResumeController {
 			map.put("list", list);		
 		
 		return map;
+	}
+	
+	
+	@RequestMapping(value = "/careerUp.do")
+	public ModelAndView careerUp(@RequestParam HashMap<String, String> params, 
+			HttpSession session, Model model) {
+		
+		logger.info("params : {}",params);	
+		
+		return service.careerUp(params);
+	}
+	
+	@RequestMapping(value = "/socialUp.do")
+	public ModelAndView socialUp(@RequestParam HashMap<String, String> params, 
+			HttpSession session, Model model) {
+		
+		logger.info("params : {}",params);	
+		
+		return service.socialUp(params);
+	}
+	
+	@RequestMapping(value = "/licenseUp.do")
+	public ModelAndView licenseUp(@RequestParam HashMap<String, String> params, 
+			HttpSession session, Model model) {
+		
+		logger.info("params : {}",params);	
+		
+		return service.licenseUp(params);
+	}
+	
+	
+	@RequestMapping(value = "/careerDelete.do")
+	public ModelAndView careerDelete(@RequestParam String ca_no,@RequestParam String re_no,
+			HttpSession session, Model model) {		
+		
+		return service.careerDelete(ca_no,re_no);
+	}
+	
+	@RequestMapping(value = "/socialDelete.do")
+	public ModelAndView socialDelete(@RequestParam String soc_no,@RequestParam String re_no,
+			HttpSession session, Model model) {		
+		
+		return service.socialDelete(soc_no,re_no);
+	}
+	
+	@RequestMapping(value = "/licenseDelete.do")
+	public ModelAndView licenseDelete(@RequestParam String li_no,@RequestParam String re_no,
+			HttpSession session, Model model) {		
+		
+		return service.licenseDelete(li_no,re_no);
 	}
 	
 	

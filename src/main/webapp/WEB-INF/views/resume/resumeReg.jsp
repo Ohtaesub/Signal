@@ -46,13 +46,19 @@
 		    <td colspan="2">${dto.cl_email}</td>
 		  </tr>
 		  <tr>
-		    <th colspan="7">희망직무</th>
+		    <th colspan="7">희망직무 <input type="button" onclick="jobClassPopGo()" value="등록"></th>
 		  </tr>
 		  <tr>
 		    <th>대분류</th>
-		    <td colspan="3"><input type="text" name="jp_no"/></td>
+			    <td colspan="3">
+				    <input type="hidden" id="jp_no" name="jp_no">
+				    <input type="text" id="jp_name" name="jp_name" placeholder="등록버튼을 눌러주세요" readonly/>
+			    </td>
 		    <th>중분류</th>
-		    <td colspan="2"><input type="text" name="jc_no"/></td>
+			    <td colspan="2">
+				    <input type="hidden" id="jc_no" name="jc_no">
+				    <input type="text" id="jc_name" name="jc_name" placeholder="등록버튼을 눌러주세요" readonly/>
+			    </td>
 		  </tr>
 		  <tr>
 		    <th colspan="5">최종학력</th>
@@ -94,4 +100,10 @@
 		
 </form>
 </body>
+<script>
+function jobClassPopGo(){	
+	
+	 window.open("jobClassPop.go","new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+}
+</script>
 </html>
