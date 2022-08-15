@@ -18,11 +18,17 @@
 		WHERE reco_no=#{reco_no}
 	</select>
 	
+	<select id="recommendUb" parameterType="String" resultType="String">
+		SELECT reco_state FROM recommend
+		WHERE reco_no=#{reco_no}
+	</select>
+	
 	<update id="recommendUReg" parameterType="hashmap">
 		UPDATE recommend SET
 		reco_req_memo=#{reco_req_memo},
 		reco_relation=#{reco_relation},
 		reco_date=#{reco_date},
+		reco_state='응답'
 		WHERE reco_no=#{reco_no}
 	</update>
 	

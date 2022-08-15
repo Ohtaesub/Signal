@@ -1,5 +1,6 @@
 package com.signal.recommend.service;
 
+import java.sql.Date;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.signal.all.dto.ResumeDTO;
 import com.signal.recommend.dao.RecommendDAO;
 
 @Service
@@ -41,13 +43,18 @@ public class RecommendService {
 	}
 
 	public String recommendU(String reco_no) {
-
 		return dao.recommendU(reco_no);
+	}
+	
+	public String recommendUb(String reco_no) {
+		return dao.recommendUb(reco_no);
 	}
 
 	public int recommendUReg(HashMap<String, String> params) {
 		int row=dao.recommendUReg(params);
 		return row;
 	}
+
+	
 
 }

@@ -53,8 +53,10 @@ public class RecommendController {
 			
 			logger.info(reco_no + "의 추천응답하기");
 			String cl_id=service.recommendU(reco_no);
+			String reco_state=service.recommendUb(reco_no);
 			model.addAttribute("reco_no", reco_no);
 			model.addAttribute("cl_id",cl_id);
+			model.addAttribute("reco_state",reco_state);
 			return "./resume/recommendYouPop";
 		}
 		
@@ -62,9 +64,15 @@ public class RecommendController {
 		public String recommendUReg(@RequestParam HashMap<String, String> params, 
 				HttpSession session, Model model) {
 				
+				String page="./resume/recommendYouPop";
+				boolean success=false;
 				logger.info("params : {}",params);
 				int result = service.recommendUReg(params);
-			return "./resume/recommendYouPop";
+				if(result>0) {
+					success = true;
+				}
+				model.addAttribute("success", success);
+			return page;
 		}
 		
 		

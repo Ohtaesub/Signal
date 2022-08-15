@@ -50,7 +50,7 @@
 				<th>추천날짜</th>
 				<th>요청메모</th>
 				<th>추천내용</th>
-				<th></th>
+				<th class="hidden"></th>
 				<th>응답여부</th>
 			</tr>
 		</thead>
@@ -88,7 +88,7 @@ function drawList(list){
 		content += '<td>'+item.reco_date+'</td>';
 		content += '<td>'+item.reco_content+'</td>';
 		content += '<td>'+item.reco_req_memo+'</td>';
-		content += '<td>'+item.reco_no+'</td>';
+		content += '<td class="hidden">'+item.reco_no+'</td>';
 		content += '<td class="state">'+item.reco_state+'</td>';
 		content += '</tr>';		
 	});

@@ -15,6 +15,8 @@
 				<th>ID</th>
 				<td>
 					<input type="text" name="cl_id" value="${cl_id}" readonly>
+					<input type="hidden" name="reco_no" value="${reco_no}"/>
+					<input type="hidden" name="reco_state" value="${reco_state}"/>
 				</td>
 				<th>관계</th>
 				<td><input type="text" name="reco_relation"/></td>				
@@ -26,7 +28,7 @@
 			</tr>
 			<tr>
 				<th colspan="6">
-					<input type="button" value="응답하기"/>
+					<input type="submit" value="응답하기"/>
 					<button onclick="window.close()">닫기</button>
 				</th>
 			</tr>
@@ -51,5 +53,12 @@
 		console.log(nowDate);
 	$('input[name="reco_date"]').val(nowDate);
 	}
+	
+	var msg = "${success}";
+	if(msg){
+		alert("응답이 완료되었습니다");
+		window.opener.location.reload();
+		window.close(); 
+	} 
 </script>
 </html>
