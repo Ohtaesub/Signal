@@ -193,3 +193,61 @@ textarea {
 }
 
 
+
+/* 페이징 CSS */
+.pageInfo{
+    list-style : none;
+    display: inline-block;
+    margin-top: 30px;
+  }
+.pageInfo li{
+    float: left;
+    font-size: 20px;
+    margin-left: 18px;
+    padding: 7px;
+    font-weight: 500;
+}
+
+.active{
+      background-color: #cdd5ec;
+}
+
+/* 페이징2 CSS */
+ .pageInfo_wrap{
+     margin-top: 30px;
+    text-align: left;
+ }
+  
+.pagination{
+  display: inline-block;
+ }
+.pagination a{
+	font-size:11px;
+  	color:black;
+  	float:left;
+  	padding:8px 16px;
+  	text-decoration: none;
+}
+
+/* 검색 부분 */
+.search_area{
+    display: inline-block;
+    margin-top: 30px;
+    margin-left: 260px;
+}
+.search_area input{
+    height: 30px;
+    width: 250px;
+}
+.search_area button{
+    width: 100px;
+    height: 36px;
+}
+
+.search_area select{
+	height: 35px;
+}
+
+
+
+

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.signal.all.dto.MemberDTO;
+import com.signal.enter.controller.Criteria;
 
 public interface MemberDAO {
 
@@ -114,6 +115,18 @@ public interface MemberDAO {
 
 	//관리자 상태 수정 요청
 	void adminStateUpdate(HashMap<String, String> params);
+
+	// 개인회원 관리 리스트 호출 요청
+	ArrayList<MemberDTO> clientManagementList(Criteria cri);
+
+	// 개인회원 리스트 총 인원수 확인
+	int clientListTotal();
+
+	// 개인회원 검색하기
+	ArrayList<MemberDTO> clientListSearch(String searchOption, String search, int skip);
+
+	// 개인회원 검색 결과 수 가져오기
+	int clientSearchTotal(String searchOption, String search);
 
 
 

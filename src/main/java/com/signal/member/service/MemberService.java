@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.signal.all.dto.MemberDTO;
+import com.signal.enter.controller.Criteria;
 import com.signal.member.dao.MemberDAO;
 
 @Service
@@ -485,6 +486,31 @@ public class MemberService {
 	//관리자 상태 수정 요청 서비스
 	public void adminStateUpdate(HashMap<String, String> params) {
 		dao.adminStateUpdate(params);
+	}
+
+
+	// 개인회원 관리 페이지 이동 및 리스트 호출 서비스
+	public ArrayList<MemberDTO> clientManagementList(Criteria cri) {
+		logger.info("개인회원 관리 및 리스트 호출 서비스 도착");
+		return dao.clientManagementList(cri);
+	}
+
+
+	// 개인회원 숫자 확인
+	public int clientListTotal() {
+		return dao.clientListTotal();
+	}
+
+
+	// 개인회원 검색하기
+	public ArrayList<MemberDTO> clientListSearch(String searchOption, String search, int skip) {
+		return dao.clientListSearch(searchOption,search,skip);
+	}
+
+
+	// 개인회원 검색개수 가져오기
+	public int clientSearchTotal(String searchOption, String search) {
+		return dao.clientSearchTotal(searchOption,search);
 	}
 
 

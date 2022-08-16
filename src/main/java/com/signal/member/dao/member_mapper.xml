@@ -280,5 +280,95 @@
 	</update>
 	
 	
+	<!-- 개인 회원 전체 리스트 10개씩 보여주기 -->
+	<select id="clientManagementList" resultType="com.signal.all.dto.MemberDTO">
+	SELECT
+	cl_id
+	,cl_name
+	,cl_call
+	,cl_address
+	,cl_birth
+	,cl_email
+	,cl_gender
+	,cl_join_date
+	,cl_state
+	,cl_photo
+	,cl_age
+	FROM client LIMIT #{skip},10
+	</select>
+	
+	<!-- 개인회원 전체 숫자 세기 -->
+	<select id="clientListTotal" resultType="int">
+	SELECT count(cl_id)
+	FROM client
+	</select>
+	
+	<!-- 개인회원 검색하기 -->
+	<select id="clientListSearch" resultType="com.signal.all.dto.MemberDTO">
+	SELECT
+	cl_id
+	,cl_name
+	,cl_address
+	,cl_gender
+	,cl_email
+	,cl_call
+	,cl_birth
+	,cl_state
+	FROM client
+	WHERE 
+		<if test="param1.equals('') and !param2.equals('')">
+			cl_id LIKE CONCAT ('%',#{param2},'%')
+			OR cl_name LIKE CONCAT ('%',#{param2},'%')
+		</if>
+		<if test="param1.equals('개인회원') and param2.equals('')">
+			cl_state = "개인회원"
+		</if>
+		<if test="param1.equals('개인회원') and !param2.equals('')">
+			cl_id LIKE CONCAT ('%',#{param2},'%')
+			OR cl_name LIKE CONCAT ('%',#{param2},'%')
+		</if>
+		<if test="param1.equals('탈퇴회원') and !param2.equals('')">
+			(cl_id LIKE CONCAT ('%',#{param2},'%')
+			OR cl_name LIKE CONCAT ('%',#{param2},'%'))
+			AND cl_state = "탈퇴회원"
+		</if>
+		<if test="param1.equals('탈퇴회원') and param2.equals('')">
+			cl_state = "탈퇴회원"
+		</if>
+		<if test="param1.equals('') and param2.equals('')">
+			cl_state = "개인회원" OR cl_state = "탈퇴회원"
+		</if>
+	LIMIT #{param3},10
+	</select>
+	
+	<!-- 개인회원 검색결과 수 -->
+	<select id="clientSearchTotal" resultType="int">
+	SELECT count(cl_id)
+	FROM client
+	WHERE
+		<if test="param1.equals('') and !param2.equals('')">
+			cl_id LIKE CONCAT ('%',#{param2},'%')
+			OR cl_name LIKE CONCAT ('%',#{param2},'%')
+		</if>
+		<if test="param1.equals('개인회원') and param2.equals('')">
+			cl_state = "개인회원"
+		</if>
+		<if test="param1.equals('개인회원') and !param2.equals('')">
+			cl_id LIKE CONCAT ('%',#{param2},'%')
+			OR cl_name LIKE CONCAT ('%',#{param2},'%')
+		</if>
+		<if test="param1.equals('탈퇴회원') and !param2.equals('')">
+			(cl_id LIKE CONCAT ('%',#{param2},'%')
+			OR cl_name LIKE CONCAT ('%',#{param2},'%'))
+			AND cl_state = "탈퇴회원"
+		</if>
+		<if test="param1.equals('탈퇴회원') and param2.equals('')">
+			cl_state = "탈퇴회원"
+		</if>
+		<if test="param1.equals('') and param2.equals('')">
+			cl_state = "개인회원" OR cl_state = "탈퇴회원"
+		</if>
+	</select>
+	
 	
 </mapper>

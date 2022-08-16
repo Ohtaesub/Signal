@@ -1,6 +1,7 @@
 package com.signal.member.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.signal.all.dto.MemberDTO;
+import com.signal.all.dto.PageMakerDTO;
+import com.signal.enter.controller.Criteria;
 import com.signal.member.service.MemberService;
 
 @Controller
@@ -858,4 +861,59 @@ public class MemberController {
    			
    	}
    	
+   	
+   	// 개인회원 관리 페이지 이동 및 리스트 호출 요청 + 페이징 처리 (전체리스트)
+   	@RequestMapping(value="/clientManagementList.do")
+   	public String clientManagementList(Model model,Criteria cri) {
+   		
+   		//리스트 페이징 처리하기 위해 리스트를 보여주는 서비스를 보내는데 그안에 cri를 담는다.
+   		//service의 최종 목적지 mapper에는 10개씩 보여달라는 쿼리문이 작성되어 있어 10개 이상이어도 10개까지만 보여준다.
+   		ArrayList<MemberDTO> clientList = service.clientManagementList(cri);
+  		logger.info("list 갯수 : "+clientList.size()); //mapper에 limit 10개로 해놓았으므로 당연히 10개초과는 안나온다.
+  		model.addAttribute("clientList",clientList);
+  		int pageNum = cri.getPageNum();
+  		
+  		//pageNum 이동을 하기위해 담아서 jsp에 보내준다.
+  		model.addAttribute("pageNum",pageNum);
+  		
+  		//페이징 처리를 위한 게시글의 총 개수를 구해온다.
+  		int total = service.clientListTotal();
+  		// PageMakerDTO 라는 것에 총개수와 몇개씩 보여줄 것인지에 대한 내용을 담는다.
+  		// 단순히 총인원 리스트를 pageMaker에 맞게 잘라서 표현한 것일 뿐 이동에 대한 내용은 없다.
+  		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
+  		model.addAttribute("pageMaker",pageMaker);
+		logger.info("개인회원의 총 인원은?? : "+total);
+
+  		
+  		return "clientManagementList";
+   	}
+   	
+   	
+   	//개인회원 리스트 검색기능 + 페이징 처리
+   	@RequestMapping(value="/clientListSearch.do")
+   	public String clientListSearch(Model model,HttpSession session,@RequestParam String searchOption, String search, int pageNum) {
+   	
+   		logger.info("옵션 확인: "+searchOption+" / "+search+" / "+pageNum);
+   		
+   		model.addAttribute("searchOption",searchOption);
+   		
+   		//검색한 내용 페이징 처리하기
+   		int skip=(pageNum-1) * 10;
+   		
+   		ArrayList<MemberDTO> dto = service.clientListSearch(searchOption,search,skip);
+   		// 전체 리스트에서 넣었던 것을 검색을 통해 가져온 값을 바꿔넣어준다.
+   		model.addAttribute("clientList",dto);
+   		
+   		// 검색해서 나온 결과의 갯수를 세어본다.
+   		int clientSearchTotal = service.clientSearchTotal(searchOption,search);
+   		model.addAttribute("pageNum",pageNum);
+   		
+   		// 검색 결과를 어떻게 나눌것인지 페이지 메이커 변수에 담아준다.
+   		PageMakerDTO pageMaker = new PageMakerDTO(pageNum, clientSearchTotal);
+   		// 검색 결과숫자와 페이지 갯수를 처리한 변수를 담아서 jsp에 보내준다.
+   		model.addAttribute("pageMaker",pageMaker);
+   		
+   		   		
+   		return "clientManagementList";
+   	}
 }
