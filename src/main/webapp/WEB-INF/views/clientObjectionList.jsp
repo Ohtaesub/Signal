@@ -11,17 +11,6 @@
 </head>
 <body>
 <p>마이페이지 > 이의제기현황 <p>
-<form action="comInterviewList.do" method="get" id="form">
-     	<select name="searchOption" id="searchOption">
-			<option value="">전체</option>
-			<option value="이름" ${searchOption == '이름'? 'selected="selected"' : ''}>이름</option>
-			<option value="이력서제목" ${searchOption == '이력서제목'? 'selected="selected"' : ''}>이력서제목</option>
-	 	</select>
-			<input  type="text"  name="search" id="search" value="" required/>
-			<button type="submit" >검색</button>
-			<!-- 페이징  -->
-		 	<input type="hidden" name="pageNum" value="1"/>
-    </form>		
 <table>
     <colgroup>
        <col width="400"></col>
@@ -55,33 +44,29 @@
                 </c:forEach>
         </tbody>
     </table>
+ 
     <!--페이징 -->
-    <div class="pageInfo_wrap" >
+    <div class="pageInfo_wrap">
         <div class="pageInfo_area">
-        		<ul id="pageInfo" class="pageInfo">
-        		<!-- 이전페이지 버튼 -->
-	                <c:if test="${pageMaker.prev}">
-	                    <li class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
-	                </c:if>
-	        		
-	        		
-	 				<!-- 각 번호 페이지 버튼 -->
-	                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-	                    <li class='pageInfo_btn ${pageMaker.cri.pageNum == num ? "active": "" }'><a href="${num}">${num}</a></li>
-	                </c:forEach>
-	                
-	                <!-- 다음페이지 버튼 -->
-	                <c:if test="${pageMaker.next}">
-	                    <li class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">Next</a></li>
-	                </c:if> 
-        		</ul>
+       		<ul id="pageInfo" class="pageInfo">
+       		<!-- 이전페이지 버튼 -->
+                <c:if test="${pageMaker.prev}">
+                    <li class="pageInfo_btn previous"><a href="?obj_no=${obj_no}&pageNum=${pageMaker.startPage-1}">Previous</a></li>
+                </c:if>
+        		
+ 				<!-- 각 번호 페이지 버튼 -->
+                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? 'active': ''}"><a href="?obj_no=${obj_no}&&pageNum=${num}">${num}</a></li>
+                </c:forEach>
+                
+                <!-- 다음페이지 버튼 -->
+                <c:if test="${pageMaker.next}">
+                    <li class="pageInfo_btn next"><a href="?obj_no=${obj_no}&pageNum=${pageMaker.endPage + 1}">Next</a></li>
+                </c:if>
+       		</ul>
         </div>
-    </div>
-  
+    </div>		
 
-	  <form id="moveForm" method="get">
-	  	 <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-	  </form>				
 </body>
 <script>
 </script>

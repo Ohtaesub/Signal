@@ -14,7 +14,7 @@
 <form action="adminObjectionList.do" method="get" id="form">
      	<select name="searchOption" id="searchOption">
 			<option value="">전체</option>
-			<option value="일반회원" ${searchOption == '일반회원'? 'selected="selected"' : ''}>일반회원</option>
+			<option value="개인회원" ${searchOption == '개인회원'? 'selected="selected"' : ''}>개인회원</option>
 			<option value="기업회원" ${searchOption == '기업회원'? 'selected="selected"' : ''}>기업회원</option>
 			<option value="기업명" ${searchOption == '기업명'? 'selected="selected"' : ''}>기업명</option>
 	 	</select>

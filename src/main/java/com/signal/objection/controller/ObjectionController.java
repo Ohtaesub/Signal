@@ -27,17 +27,43 @@ public class ObjectionController {
 	
 	//이의제기관리(사용자)리스트
 	@RequestMapping(value = "/clientObjectionList.go", method = RequestMethod.GET)
-	public String clientObjectionList(Model model) {	
-		ArrayList<ObjectionDTO>clientObjectionList =service.clientObjectionList();
-		model.addAttribute("clientObjectionList",clientObjectionList);
-	
+	public String clientObjectionList(Model model,Criteria cri,@RequestParam HashMap<String, Object> params) {	
+		
+		
+		
+				//String com_id = (String) session.getAttribute("loginId");
+				//params.put("com_id", com_id);
+				
+				int pageNum = 1;
+				if(params.get("pageNum") != null) {
+					pageNum = (int) Integer.parseInt(String.valueOf(params.get("pageNum")));
+				}
+				
+				int skip = (pageNum -1) * 10;
+				
+				
+				//params.put("com_id", loginId);
+				params.put("skip", skip);
+				
+				//페이지 리스트 수
+				ArrayList<ObjectionDTO>clientObjectionList =service.clientObjectionList(params);
+				model.addAttribute("clientObjectionList",clientObjectionList);
+				
+				//페이징처리 토탈개수
+				int total = service.clientObjectionListTotal(params);
+				
+				PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
+				model.addAttribute("pageMaker", pageMaker);
+
+		
 		return "clientObjectionList";
 	}
 	//이의제기등록(사용자)
 	@RequestMapping(value = "/clientDbjectionReg.do")
 	public String clientDbjectionRegDo(HttpSession session,Model model,@RequestParam HashMap<String, String>params){		
 			service.clientDbjectionRegDo(params);
-				
+		
+			
 		return "redirect:/interviewList.go";
 	}
 	
@@ -67,9 +93,6 @@ public class ObjectionController {
 		
 		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
 		model.addAttribute("pageMaker", pageMaker);
-		
-		
-		
 		
 		return "comObjectionList";
 	}

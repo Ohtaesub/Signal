@@ -20,9 +20,9 @@ public class ObjectionService {
 Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	
-	public ArrayList<ObjectionDTO> clientObjectionList() {
+	public ArrayList<ObjectionDTO> clientObjectionList(HashMap<String, Object> params) {
 		
-		return dao.clientObjectionList();
+		return dao.clientObjectionList(params);
 	}
 	
 	public ArrayList<ObjectionDTO> comObjectionList(HashMap<String, Object> params) {
@@ -66,7 +66,10 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		dao.adminBlindCancel(inter_no);
 	}
 
-
+	public int clientObjectionListTotal(HashMap<String, Object> params) {
+		logger.info("게시글 수 가져오기 서비스 요청");
+		return dao.clientObjectionListTotal(params);
+	}
 
 	public int comObjectionListTotal(HashMap<String, Object> params) {
 		logger.info("게시글 수 가져오기 서비스 요청");
@@ -77,6 +80,8 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		
 		return dao.adminObjectionTotal();
 	}
+	
+	
 
 	public ArrayList<InterviewDTO> adminObjectionSearch(String searchOption, String search, int skip) {
 		
@@ -102,6 +107,8 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		
 		return dao.adminBlindTotal2(searchOption,search);
 	}
+
+
 
 
 

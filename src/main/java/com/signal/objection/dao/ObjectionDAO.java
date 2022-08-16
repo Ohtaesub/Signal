@@ -9,7 +9,7 @@ import com.signal.enter.controller.Criteria;
 
 public interface ObjectionDAO {
 
-	ArrayList<ObjectionDTO> clientObjectionList();
+	ArrayList<ObjectionDTO> clientObjectionList(HashMap<String, Object> params);
 
 	ArrayList<ObjectionDTO> comObjectionList(HashMap<String, Object> params);
 
@@ -40,5 +40,7 @@ public interface ObjectionDAO {
 	ArrayList<InterviewDTO> adminBlindSearch(String searchOption, String search, int skip);
 
 	int adminBlindTotal2(String searchOption, String search);
+
+	int clientObjectionListTotal(HashMap<String, Object> params);
 
 }
