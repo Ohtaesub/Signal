@@ -21,6 +21,168 @@ public class JobPostingDTO {
 	private String ci_intro;
 	private String ci_pass_intro;
 	private String ci_photo;
+	private Float comment_a;
+	private int comment;
+	private int apply;
+	private String jpo_no;
+	private String jpo_title;
+	private String jpo_type;
+	private String jpo_region;
+	private String jpo_field;
+	private String jpo_start;
+	private String jpo_deadline;
+	private String jpo_education;
+	private String jpo_salary;
+	private String jpo_contact;
+	private String jpo_name;
+	private String jpo_welfare;
+	private String jpo_photo;
+	private String jpo_state;
+	private int jpo_views;
+	private String jp_name;
+	private String jc_name;
+	private String jp_no;
+	private String jc_no;
+	
+	
+
+
+	public String getJc_no() {
+		return jc_no;
+	}
+	public void setJc_no(String jc_no) {
+		this.jc_no = jc_no;
+	}
+	public String getJp_no() {
+		return jp_no;
+	}
+	public void setJp_no(String jp_no) {
+		this.jp_no = jp_no;
+	}
+	public String getJpo_no() {
+		return jpo_no;
+	}
+	public void setJpo_no(String jpo_no) {
+		this.jpo_no = jpo_no;
+	}
+
+	public int getJpo_views() {
+		return jpo_views;
+	}
+	public void setJpo_views(int jpo_views) {
+		this.jpo_views = jpo_views;
+		}
+
+	public String getJp_name() {
+		return jp_name;
+	}
+	public void setJp_name(String jp_name) {
+		this.jp_name = jp_name;
+	}
+	public String getJc_name() {
+		return jc_name;
+	}
+	public void setJc_name(String jc_name) {
+		this.jc_name = jc_name;
+	}
+	public String getJpo_title() {
+		return jpo_title;
+	}
+	public void setJpo_title(String jpo_title) {
+		this.jpo_title = jpo_title;
+	}
+	public String getJpo_type() {
+		return jpo_type;
+	}
+	public void setJpo_type(String jpo_type) {
+		this.jpo_type = jpo_type;
+	}
+	public String getJpo_region() {
+		return jpo_region;
+	}
+	public void setJpo_region(String jpo_region) {
+		this.jpo_region = jpo_region;
+	}
+	public String getJpo_field() {
+		return jpo_field;
+	}
+	public void setJpo_field(String jpo_field) {
+		this.jpo_field = jpo_field;
+	}
+
+	public String getJpo_start() {
+		return jpo_start;
+	}
+	public void setJpo_start(String jpo_start) {
+		this.jpo_start = jpo_start;
+	}
+	public String getJpo_deadline() {
+		return jpo_deadline;
+	}
+	public void setJpo_deadline(String jpo_deadline) {
+		this.jpo_deadline = jpo_deadline;
+	}
+	public String getJpo_education() {
+		return jpo_education;
+	}
+	public void setJpo_education(String jpo_education) {
+		this.jpo_education = jpo_education;
+	}
+	public String getJpo_salary() {
+		return jpo_salary;
+	}
+	public void setJpo_salary(String jpo_salary) {
+		this.jpo_salary = jpo_salary;
+	}
+	public String getJpo_contact() {
+		return jpo_contact;
+	}
+	public void setJpo_contact(String jpo_contact) {
+		this.jpo_contact = jpo_contact;
+	}
+	public String getJpo_name() {
+		return jpo_name;
+	}
+	public void setJpo_name(String jpo_name) {
+		this.jpo_name = jpo_name;
+	}
+	public String getJpo_welfare() {
+		return jpo_welfare;
+	}
+	public void setJpo_welfare(String jpo_welfare) {
+		this.jpo_welfare = jpo_welfare;
+	}
+	public String getJpo_photo() {
+		return jpo_photo;
+	}
+	public void setJpo_photo(String jpo_photo) {
+		this.jpo_photo = jpo_photo;
+	}
+	public String getJpo_state() {
+		return jpo_state;
+	}
+	public void setJpo_state(String jpo_state) {
+		this.jpo_state = jpo_state;
+	}
+	
+	public int getApply() {
+		return apply;
+	}
+	public void setApply(int apply) {
+		this.apply = apply;
+	}
+	public Float getComment_a() {
+		return comment_a;
+	}
+	public void setComment_a(Float comment_a) {
+		this.comment_a = comment_a;
+	}
+	public int getComment() {
+		return comment;
+	}
+	public void setComment(int comment) {
+		this.comment = comment;
+	}
 	public String getCom_id() {
 		return com_id;
 	}

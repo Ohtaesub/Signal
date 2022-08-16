@@ -1,0 +1,146 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="../../resources/inc/header.jsp" %>
+
+		<form action="/jobPostingList.do" method="get" id="jobPostingForm">
+			<select style="float:right" name="sc_idx"  id="subjectChapList" onchange="subjectChapProblemList();">
+				<option value="">과목단원선택</option>
+				<c:forEach items="${subjectChapList}" var="subjectChapList">
+					<option value="${subjectChapList.sc_idx}" ${sc_idx == subjectChapList.sc_idx ? 'selected="selected"' : ''}>${subjectChapList.sc_name}</option>
+				</c:forEach>		
+			</select>
+			<select style="float:right" name="su_idx" id="subjectList" onchange="subjectListShow();">
+				<option value="">과목명</option>
+				<c:forEach items="${subjectList}" var="subjectList">
+					<option value="${subjectList.su_idx}" ${su_idx == subjectList.su_idx ? 'selected="selected"' : ''}>${subjectList.su_name}</option>
+				</c:forEach>	
+			</select>	
+		    <!-- 페이징  -->
+		    <input type="hidden" name="pageNum" value="1"/>
+		</form>
+	
+		<table>
+		<colgroup>
+	  		<col width="60"></col>
+			<col width="60"></col>
+			<col width="60"></col>
+			<col width="*"></col>
+			<col width="70"></col>
+			<col width="70"></col>
+			<col width="70"></col>
+			<col width="70"></col>
+			<col width="70"></col>
+			<col width="70"></col>
+		</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>과목명</th>
+					<th>단원명</th>
+					<th>문제</th>
+					<th>난이도</th>
+					<th>정답률</th>
+					<th>출제자 아이디</th>
+					<th>출제일</th>
+					<th>문제보관사용자수</th>
+					<th>수정하기</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:choose>
+				<c:when test="${problemList.size() >0}">
+					<c:forEach items="${problemList}" var="problemList" varStatus="i">
+						<tr>
+							<td align="center">${listCnt - (pageNum-1)*10 - i.index}</td>
+							<td align="center">${problemList.su_name}</td>
+							<td align="center">${problemList.sc_name}</td>
+							<td>${problemList.pc_problem}</td>
+							<td align="center">${problemList.pc_difficulty}</td>
+							<td align="center">${problemList.answerPercent}%</td>
+							<td align="center">${problemList.mb_id}</td>
+							<td align="center">${fn:substring(problemList.pc_date,0,10)}</td>
+							<td align="center">${problemList.saveCnt} 명</td>
+							<td><input class="move" type="button" value="수정하기" onclick="location.href='problemUpdate.go?pc_idx=${problemList.pc_idx}&su_idx=${problemList.su_idx}'"/></td>
+						</tr>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+	     			<tr>
+	     				<td colspan="10" style="text-align: center">찾으시는 데이터가 없습니다.</td>
+	     			</tr>
+	     		</c:otherwise>
+			</c:choose>
+			</tbody>
+		</table>		
+		
+		<!-- by 태섭, 아래는 페이징 위해 만든 부분 -->
+		<div class="pageInfo_wrap" >
+        	<div class="pageInfo_area">
+ 				<ul id="pageInfo" class="pageInfo">
+	 				<!-- by 태섭, 이전페이지 버튼 -->
+	                <c:if test="${pageMaker.prev}">
+	                    <li class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
+	                </c:if>
+ 					<!-- by 태섭, 각 번호 페이지 버튼 -->
+                	<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                    	<li class='pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }'><a href="${num}">${num}</a></li>
+                	</c:forEach>
+                	<!-- by 태섭, 다음페이지 버튼 -->
+	                <c:if test="${pageMaker.next}">
+	                    <li class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">Next</a></li>
+	                </c:if>			
+ 				</ul> 
+        	</div>
+    		
+    		<!-- by 태섭, 페이징 위해 만든 부분 이걸로 parameter 넘겨준다. -->
+	    	<form id="moveForm" method="get">
+	    		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+	    		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">	
+	    	</form>
+    	</div>
+		<input type="button" style="float:right" value="새로운 문제 출제" onclick="location.href='problem.go'"/>
+	
+<%@ include file="../../resources/inc/footer.jsp" %>
+<script>
+// by 태섭, 파라미터 전송
+function subjectListShow(){
+	$("#subjectForm").submit();	
+}	
+
+function subjectChapProblemList(){	
+	$("#subjectForm").submit();
+}
+
+
+// by 태섭, 페이징 부분
+$(".pageInfo a").on("click", function(e){
+	
+	e.preventDefault();
+    if($("#su_idx").val()=="" && $("#sc_idx").val()=="" && $("#mb_id").val()==""){
+		$("#moveForm").find("input[name='pageNum']").val($(this).attr("href"));
+		// by 태섭, form 태그 action 속성 추가
+	    $("#moveForm").attr("action", "/problemList.do");
+	    $("#moveForm").submit();	
+    }else{
+    	$("#subjectForm").find('input[name="pageNum"]').val($(this).attr("href"));
+    	$("#subjectForm").submit();
+    }
+        
+});
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

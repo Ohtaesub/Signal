@@ -34,7 +34,7 @@
 	    		<a href="/"><img src="resources/images/Logo.jpg" alt="Signal" width="150" height="130"/></a>
 			</p>
 			<div>
-			<strong>${sessionScope.loginName}</strong>님 반갑습니다<br>
+			<strong>${sessionScope.loginId}</strong>님 반갑습니다<br>
 			<a href="">마이페이지</a> 
 			<span>|</span>
 			<a href="logout.do">로그아웃</a>
@@ -63,8 +63,8 @@
 		        <c:if test="${sessionScope.isCompany.equals('true')}">
 		            <ul class="sidemenu">
 		                <li><a href="">기업회원정보관리</a></li>
-		                <li><a href="">기업정보관리</a></li>
-		                <li><a href="">채용공고관리</a></li>
+		                <li><a href="/companyInfo.go">기업정보관리</a></li>
+		                <li><a href="/jobPostingList.go">채용공고관리</a></li>
 		                <li><a href="">입사지원관리</a></li>
 		                <li><a href="">입사제안관리</a></li>
 		                <li><a href="">면접관리</a></li>
