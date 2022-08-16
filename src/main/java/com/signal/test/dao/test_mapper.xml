@@ -9,4 +9,26 @@
 		WHERE cl_id=#{id}
 	</select>
 	
+	<select id="selfRegGo" resultType="test">
+		SELECT st_que, st_keyword, st_no FROM self_test
+		WHERE st_hidden=1;
+	</select>
+	
+	<insert id="selfReg" parameterType="test">
+		INSERT INTO self_test_result(cl_id, st_no, st_score)
+		VALUES(#{cl_id},#{st_no},#{st_score})
+	</insert>
+	
+	<update id="selfContentReg" parameterType="String">
+		UPDATE client SET
+		st_comment = #{st_comment}
+		WHERE cl_id=#{cl_id}
+	</update>
+	
+	<insert id="scoreReg" parameterType="hashmap">
+		INSERT INTO self_test_result(cl_id, st_no, st_score)
+		VALUES(#{cl_id},#{st_no},#{st_score})
+		ON DUPLICATE KEY UPDATE st_score = #{st_score}
+	</insert>
+	
 </mapper>
