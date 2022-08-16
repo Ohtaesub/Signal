@@ -29,15 +29,17 @@
                 <c:forEach items="${comObjectionList}" var="comObjectionList" >
                     <tr>
                         <td align="center">
-                        	${comObjectionList.cl_photo} ${comObjectionList.cl_name} ${comObjectionList.cl_age}${comObjectionList.cl_gender}
-                        <a href="comInterviewUpdate.go?inter_no=${comObjectionList.inter_no}">${comObjectionList.jpo_title}</a>
+                        	${comObjectionList.cl_photo} ${comObjectionList.cl_name} ${comObjectionList.cl_age}${comObjectionList.cl_gender}<br>
+                        <a href="comInterviewUpdate.go?inter_no=${comObjectionList.inter_no}">${comObjectionList.re_title}</a><br>
                         	${comObjectionList.inter_date} ${comObjectionList.inter_result}  평점 ${comObjectionList.inter_grade}
                         		
                         </td>
                         <td align="center">${comObjectionList.obj_cl_content}</td>
                         <td align="center">
                         	<c:choose>
-									<c:when test="${comObjectionList.obj_state eq 0}">미처리</c:when>					
+									<c:when test="${comObjectionList.obj_state eq 0}">
+										<button type="button" onclick="location.href='comObjectionUpdate.go?obj_no=${comObjectionList.obj_no}'">미처리</button>
+									</c:when>					
 									<c:when test="${comObjectionList.obj_state eq 1}">${comObjectionList.obj_date}처리완료</c:when>					
 							</c:choose>
                         </td>
@@ -45,7 +47,29 @@
                     </tr>
                 </c:forEach>
         </tbody>
-    </table>		
+    </table>
+    
+        <!--페이징 -->
+    <div class="pageInfo_wrap">
+        <div class="pageInfo_area">
+       		<ul id="pageInfo" class="pageInfo">
+       		<!-- 이전페이지 버튼 -->
+                <c:if test="${pageMaker.prev}">
+                    <li class="pageInfo_btn previous"><a href="?obj_no=${obj_no}&pageNum=${pageMaker.startPage-1}">Previous</a></li>
+                </c:if>
+        		
+ 				<!-- 각 번호 페이지 버튼 -->
+                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? 'active': ''}"><a href="?obj_no=${obj_no}&&pageNum=${num}">${num}</a></li>
+                </c:forEach>
+                
+                <!-- 다음페이지 버튼 -->
+                <c:if test="${pageMaker.next}">
+                    <li class="pageInfo_btn next"><a href="?obj_no=${obj_no}&pageNum=${pageMaker.endPage + 1}">Next</a></li>
+                </c:if>
+       		</ul>
+        </div>
+    </div>		
 </body>
 <script>
 </script>

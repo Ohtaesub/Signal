@@ -13,6 +13,16 @@ public class Criteria {
     /* 스킵 할 게시물 수( (pageNum-1) * amount ) */
     private int skip;
     
+  //by동휘 검색페이징 하기위한 파라미터 DTO값 
+    /* 검색 키워드 */
+    private String keyword;
+    
+    /* 검색 타입 */
+    private String type;
+    
+    /* 검색 타입 배열 */
+    private String[] typeArr;
+    
     /* 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10 */
     public Criteria() {
         this(1,10);
@@ -54,6 +64,30 @@ public class Criteria {
 		this.skip = (this.pageNum-1)*amount;
 		
 		this.amount = amount;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String[] getTypeArr() {
+		return typeArr;
+	}
+
+	public void setTypeArr(String[] typeArr) {
+		this.typeArr = typeArr;
 	}
     
     

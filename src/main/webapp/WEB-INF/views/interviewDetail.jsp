@@ -11,7 +11,7 @@
 </head>
 <body>
 <p>마이페이지 > 면접현황 <p>
-<form action="clentobjection.do" method="get" >
+<form action="" method="get" >
     <table class="dto">
         
             <tr>

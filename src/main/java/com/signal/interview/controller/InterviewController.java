@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.signal.all.dto.InterviewDTO;
+import com.signal.all.dto.PageMakerDTO;
+import com.signal.enter.controller.Criteria;
 import com.signal.interview.service.InterviewService;
 @Controller
 public class InterviewController {
@@ -65,12 +67,80 @@ public class InterviewController {
 	}
 	//면접관리리스트(기업)
 	@RequestMapping(value = "/comInterviewList.go", method = RequestMethod.GET)
-	public String comInterviewList(Model model) {
-		ArrayList<InterviewDTO>comInterviewList =service.comInterviewList();
-		model.addAttribute("comInterviewList",comInterviewList);
+	public String comInterviewList(Model model,Criteria cri) {
 	
+		ArrayList<InterviewDTO>comInterviewList =service.comInterviewList(cri);
+		model.addAttribute("comInterviewList",comInterviewList);
+		int pageNum=cri.getPageNum();
+		model.addAttribute("pageNum",pageNum);
+		int total=service.getTotal();
+		
+		PageMakerDTO pageMaker =new PageMakerDTO(cri, total);
+		model.addAttribute("pageMaker",pageMaker);
 		return "comInterviewList";
 	}
+	//면접관리리스트(기업)검색
+	@RequestMapping(value="/comInterviewList.do")
+	public String comInterviewList(Model model,HttpSession session,@RequestParam String searchOption, String search, int pageNum ) {
+			
+			//String com_id = (String) session.getAttribute("loginId");
+			//params.put("com_id", com_id);
+		
+		
+			logger.info("옵션 확인: "+searchOption+search);
+		
+			model.addAttribute("searchOption",searchOption);
+			
+			//옵션 페이징처리
+			int skip=(pageNum-1) * 10;
+			ArrayList<InterviewDTO>dto = service.comSearchList(searchOption, search,skip);
+			model.addAttribute("comInterviewList",dto);
+			
+			int comSearchTotal=service.comSearchTotal(searchOption, search);
+			model.addAttribute("pageNum",pageNum);
+			
+			PageMakerDTO pageMake2= new PageMakerDTO(pageNum, comSearchTotal);
+			model.addAttribute("pageMaker", pageMake2);
+			
+		return "comInterviewList";
+	}
+	
+	
+	//면접관리리스트(기업)- 결과수정 페이지 이동 
+	@RequestMapping(value = "/comInterviewUpdate.go", method = RequestMethod.GET)
+	public String comInterviewUpdate(Model model,@RequestParam String inter_no) {
+		
+		//면접결과,코멘트
+		InterviewDTO dto =service.comInterviewUpdate(inter_no);
+		model.addAttribute("dto",dto);
+		
+		//등록된 질문 리스트 
+		//ArrayList<InterviewDTO> queList = service.queList();
+		//model.addAttribute("queList",queList);
+		
+		//선택한질문, 점수 선택 
+		ArrayList<InterviewDTO>comInterviewUpdateQue =service.comInterviewUpdateQue(inter_no);
+		model.addAttribute("que",comInterviewUpdateQue);
+		
+		return "comInterviewUpdate";
+	}
+	
+	
+	
+	//면접관리리스트(기업)-결과수정 - 수정 
+	@RequestMapping(value = "/comInterviewUpdate.do")
+	public String comInterviewUpdateDo(@RequestParam HashMap<String, String>params){
+		
+		
+		
+		
+		
+		return service.comInterviewUpdateDo(params);
+	}
+
+	
+	
+	
 	//면접관리(기업)-일정변경페이지 이동
 	@RequestMapping(value = "/comInterviewDate.go", method = RequestMethod.GET)
 	public String comInterviewDate(Model model,@RequestParam String inter_no) {

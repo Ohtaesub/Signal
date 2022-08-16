@@ -10,7 +10,7 @@
 <style></style>
 </head>
 <body>
-<form action="comInterviewDate.do" method="get" >
+<form action="comInterviewDate.do" method="get"  onsubmit="return comInterviewDate()">
 	<table class="dto">
 		<colgroup>
 			<col width="150"></col>
@@ -23,14 +23,11 @@
         <tr>
 			<th>변경 면접일</th>
 			<td>
-				<input type="date" id="start" name="inter_date" value="inter_date"
+				<input type="hidden" name="inter_no" value="${dto.inter_no}">
+				<input type="date" id="inter_date" name="inter_date" value=""
                     min="2022-01-01" max="2024-12-31">
 			</td>
 		</tr>
-
-		
-	
-	
     </table>
     
 		 <input type="submit" value="변경"/>
@@ -39,5 +36,12 @@
 	</form>
 </body>
 <script>
+function comInterviewDate()	{
+	
+	if($('#inter_date').val()==""){
+		alert("변경 면접일이 선택되지 않았습니다.");
+		return false;
+	}
+}
 </script>
 </html>

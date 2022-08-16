@@ -44,7 +44,7 @@
                         <td align="center">
                         	<c:choose>
 									<c:when test="${empty interviewList.obj_cl_content}">
-									<button type="button" onclick="location.href='clientObjectionReg.go?inter_no=${interviewList.inter_no}'">이의제기</button>
+										<button type="button" onclick="location.href='clientObjectionReg.go?inter_no=${interviewList.inter_no}'">이의제기</button>
 									</c:when>					
 									<c:otherwise>처리중</c:otherwise>
 									

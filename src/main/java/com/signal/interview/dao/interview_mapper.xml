@@ -18,7 +18,7 @@
 		
 		<select id="avgGrade" resultType="float">
 			SELECT 
-			AVG(inter_grade) 
+				AVG(inter_grade) 
 			FROM interview i 
 				left outer join apply a on i.apply_no = a.apply_no 
 				left outer join job_posting jp on a.jpo_no = jp.jpo_no 
@@ -28,16 +28,13 @@
 		
 		<select id="countComment" resultType="int" >
 			SELECT 
-			count(inter_comment) 
+				count(inter_comment) 
 			FROM interview i 
 				left outer join apply a on i.apply_no = a.apply_no 
 				left outer join job_posting jp on a.jpo_no = jp.jpo_no 
 				left outer join company c on jp.com_id = c.com_id;
 		</select>
 		<!-- 마무리작업시 추가  WHERE cl_id =#{cl_id} -->
-		
-		
-
 		
 		<select id="interviewDetail" resultType="com.signal.all.dto.InterviewDTO" parameterType="String">
 			SELECT 
@@ -49,7 +46,6 @@
 			WHERE inter_no =#{inter_no}
 		</select>
 	
-
 		<select id="interviewDetailResultList" resultType="com.signal.all.dto.InterviewDTO">
 		SELECT
 			 it.it_no,it.it_que,itr.inter_score 
@@ -58,7 +54,6 @@
 			left outer join interview i on i.inter_no =itr.inter_no 
 		WHERE i.inter_no =#{inter_no}
 		</select>
-
 
 		<select id="clientObjectionReg" resultType="com.signal.all.dto.InterviewDTO" parameterType="String">
 			SELECT 
@@ -70,21 +65,123 @@
 			WHERE inter_no =#{inter_no}
 		</select>
 		
-	
-		
 		<select id="comInterviewList" resultType="com.signal.all.dto.InterviewDTO">
-		SELECT inter_no,cl_photo ,cl_name ,cl_age ,cl_gender ,re_title,inter_date ,inter_result 
+		SELECT 
+			inter_no,cl_photo ,cl_name ,cl_age ,cl_gender ,re_title,inter_date ,inter_result 
 		FROM interview i
 			left outer join apply a on a.apply_no = i.apply_no 
 			left outer join job_posting jp on jp.jpo_no = a.jpo_no 
 			left outer join resume r on r.re_no = a.re_no 
 			left outer join client c on c.cl_id = r.cl_id
-		ORDER BY i.inter_no DESC;
+		ORDER BY i.inter_no DESC limit #{skip},10
 		</select>
+		<select id="getTotal" resultType="int">
+			SELECT 
+			count(inter_no)
+		FROM interview i
+			left outer join apply a on a.apply_no = i.apply_no 
+			left outer join job_posting jp on jp.jpo_no = a.jpo_no 
+			left outer join resume r on r.re_no = a.re_no 
+			left outer join client c on c.cl_id = r.cl_id;
+		</select>
+		<!-- 위둘다 where=#cl_id  붙여야한다-->
+		
+		<select id="comSearchList"  resultType="com.signal.all.dto.InterviewDTO">
+			SELECT 
+			inter_no,cl_photo ,cl_name ,cl_age ,cl_gender ,re_title,inter_date ,inter_result 
+		FROM interview i
+			left outer join apply a on a.apply_no = i.apply_no 
+			left outer join job_posting jp on jp.jpo_no = a.jpo_no 
+			left outer join resume r on r.re_no = a.re_no 
+			left outer join client c on c.cl_id = r.cl_id
+		where 1
+			<if  test = "param1.equals('') and  !param2.equals('')"> 
+				AND cl_name LIKE CONCAT ('%',#{param2},'%') 
+				OR re_title LIKE CONCAT ('%',#{param2},'%') 
+			</if>
+			<if  test = "!param2.equals('')">
+				<if test = "param1.equals('이름')">
+			      	AND cl_name LIKE CONCAT ('%',#{param2},'%')
+			  	 </if>
+			  	 <if test ="param1.equals('이력서제목')">
+			    	 AND re_title LIKE CONCAT ('%',#{param2},'%')
+			  	 </if>
+			</if>
+			ORDER BY i.inter_no DESC limit #{param3},10
+		</select>
+		
+		
+		<select id="comSearchTotal" resultType="int"  >
+	SELECT 
+			count(inter_no)
+		FROM interview i
+			left outer join apply a on a.apply_no = i.apply_no 
+			left outer join job_posting jp on jp.jpo_no = a.jpo_no 
+			left outer join resume r on r.re_no = a.re_no 
+			left outer join client c on c.cl_id = r.cl_id
+		where 1
+<if  test = "param1.equals('') and  !param2.equals('')"> 
+	AND cl_name LIKE CONCAT ('%',#{param2},'%') 
+	OR re_title LIKE CONCAT ('%',#{param2},'%')
+</if>
+<if  test = "!param2.equals('')">
+	<if test = "param1.equals('이름')">
+   		AND cl_name LIKE CONCAT ('%',#{param2},'%')
+	</if>
+	<if test ="param1.equals('이력서제목')">
+ 	  	AND re_title LIKE CONCAT ('%',#{param2},'%')
+	</if>
+</if>
+
+</select>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		<update id="comInterviewDateDo" parameterType="hashmap">
-		UPDATE interview SET inter_date=#{inter_date} WHERE inter_no =#{inter_no}
+		UPDATE 
+			interview 
+		SET 
+			inter_date=#{inter_date} WHERE inter_no =#{inter_no}
 		</update>
 		
+		
+		<select id="comInterviewUpdate" resultType="com.signal.all.dto.InterviewDTO" parameterType="String">
+			SELECT inter_no,inter_result,inter_comment
+			FROM interview i 
+			WHERE inter_no =#{inter_no}
+		</select>
+		
+		<!--  select id="queList" resultType="com.signal.all.dto.InterviewDTO">
+			SELECT it_no,it_que 
+			FROM interview_test it
+			WHERE it_hidden =1;
+		</select> -->
+		
+		<select id="comInterviewUpdateQue" resultType="com.signal.all.dto.InterviewDTO">
+			SELECT 
+				itr.inter_no,i.inter_result,it.it_no,it.it_que,itr.inter_score
+			FROM interview_test_result itr 
+				left outer join interview_test it on itr.it_no =it.it_no
+				left outer join interview i on itr.inter_no =i.inter_no
+			WHERE itr.inter_no =#{inter_no}AND it.it_hidden =1;
+		</select>
+		<update id="comInterviewUpdateState" parameterType="hashmap">
+		UPDATE 
+			interview 
+		SET 
+			inter_comment=#{inter_comment},
+			inter_result =#{inter_result}  
+			WHERE inter_no =#{inter_no};
+		</update>
+	
+
 		
 </mapper>

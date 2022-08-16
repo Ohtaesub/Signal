@@ -22,6 +22,7 @@ public class ObjectionDTO {
 	private String obj_content;
 	private String obj_cl_content;
 	private Date obj_date;
+	private int obj_no;
 	public String getJpo_title() {
 		return jpo_title;
 	}
@@ -135,6 +136,12 @@ public class ObjectionDTO {
 	}
 	public void setCl_id(String cl_id) {
 		this.cl_id = cl_id;
+	}
+	public int getObj_no() {
+		return obj_no;
+	}
+	public void setObj_no(int obj_no) {
+		this.obj_no = obj_no;
 	}
 	
 	
