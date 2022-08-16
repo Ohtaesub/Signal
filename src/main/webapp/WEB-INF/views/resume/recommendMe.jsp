@@ -36,9 +36,9 @@
 				<tr>
 					<td class="hidden" id="cl_id">${recoMe.cl_id }</td>
 					<td>${recoMe.reco_cl_id}</td>
-					<td>${recoMe.reco_relation}</td>
-					<td>${recoMe.reco_date}</td>
-					<td>${recoMe.reco_req_memo}</td>
+					<td id="reco_relation">${recoMe.reco_relation}</td>
+					<td id="reco_date">${recoMe.reco_date}</td>
+					<td id="reco_req_memo">${recoMe.reco_req_memo}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -80,14 +80,28 @@ function listCall(){
 }
 
 function drawList(list){
-	var content ='';
+	var content ='';	
 	list.forEach(function(item,idx){
 		console.log(item);
+		
+		var date = new Date(item.reco_date);
+		var year = date.getFullYear();
+		var month = date.getMonth()+1;
+		var day = date.getDate()+1;
+		if(month<10){
+			month = '0'+month;
+			if(day<10){
+				day = '0'+day;
+			}
+		}
+		var reco_date = year+'-'+month+'-'+day;
+		
+		
 		content += '<tr id="cl_'+item.reco_no+'">';		
 		content += '<td>'+item.cl_id+'</td>';
-		content += '<td>'+item.reco_date+'</td>';
+		content += '<td class="reco_date">'+reco_date+'</td>';
 		content += '<td>'+item.reco_content+'</td>';
-		content += '<td>'+item.reco_req_memo+'</td>';
+		content += '<td class="reco_req_memo">'+item.reco_req_memo+'</td>';
 		content += '<td class="hidden">'+item.reco_no+'</td>';
 		content += '<td class="state">'+item.reco_state+'</td>';
 		content += '</tr>';		
@@ -95,10 +109,17 @@ function drawList(list){
 	$('#list').empty();
 	$('#list').append(content);		
 	
-	list.forEach(function(item,idx){
-		console.log(item.reco_state);
+	list.forEach(function(item,idx){				
+		console.log(reco_date);
 		if($('#cl_'+item.reco_no+' .state').html()=='무응답'){
-			$('#cl_'+item.reco_no+' .state').html("<button onclick='recommendU("+item.reco_no+")'>응답하기</button>");			
+			$('#cl_'+item.reco_no+' .state').html("<button onclick='recommendU("+item.reco_no+")'>응답하기</button>");
+			if($('#cl_'+item.reco_no+' .reco_date').html()=='1970-01-02'){
+				console.log($('#cl_'+item.reco_no+' .reco_date').html());
+				$('#cl_'+item.reco_no+' .reco_date').html("");
+			}
+			if($('#cl_'+item.reco_no+' .reco_req_memo').html()=='null'){
+				$('#cl_'+item.reco_no+' .reco_req_memo').html("");			
+			}
 		}
 	});	
 }

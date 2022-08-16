@@ -18,9 +18,9 @@ public class ResumeService {
 	@Autowired ResumeDAO dao;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public ArrayList<ResumeDTO> list() {
+	public ArrayList<ResumeDTO> list(String id) {
 		logger.info("이력서 리스트 서비스 요청");
-		return dao.list();
+		return dao.list(id);
 	}
 
 	public ArrayList<ResumeDTO> personList() {
