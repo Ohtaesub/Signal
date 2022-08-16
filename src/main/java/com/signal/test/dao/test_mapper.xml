@@ -3,4 +3,10 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.signal.test.dao.TestDAO">
 	
+	<select id="selfInsert" parameterType="String" resultType="test">
+		SELECT st_que, st_hidden, st_keyword, cl_id, str.st_no, st_score  FROM self_test_result str 
+		LEFT OUTER JOIN self_test st ON st.st_no = str.st_no 
+		WHERE cl_id=#{id}
+	</select>
+	
 </mapper>

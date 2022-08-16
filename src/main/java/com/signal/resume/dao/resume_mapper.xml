@@ -3,10 +3,11 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.signal.resume.dao.ResumeDAO">
 
-	<select id="list" resultType="resume">
+	<select id="list" resultType="resume" parameterType="String">
 		SELECT re_no, re_title, jp_name, jc_name FROM resume r
 		LEFT OUTER JOIN job_pa jp ON r.jp_no = jp.jp_no
 		LEFT OUTER JOIN job_ch jc ON r.jc_no = jc.jc_no  
+		WHERE cl_id=#{id}
 	</select>
 	
 	<!-- 필요한 컬럼 추가했습니다. by태섭 -->

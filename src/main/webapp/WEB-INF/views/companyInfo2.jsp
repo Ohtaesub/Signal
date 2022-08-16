@@ -101,7 +101,7 @@
 							<th>기업로고</th>
 							<td>
 								<c:forEach items="${list}" var="path">
-                  					<p><img src="./resources/images/${dto.ci_photo}" width="150" alt="로고"></p>
+                  					<p><img src="/photo/${dto.ci_photo}" width="150" alt="로고"></p>
                   				</c:forEach>
                				</td>
 						</tr>

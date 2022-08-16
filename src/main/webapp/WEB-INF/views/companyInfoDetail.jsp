@@ -84,12 +84,12 @@
 				   			<tr>
 								<th>기업로고</th>
 								<td>
-									<input type="file" name="ci_photo" multiple="multiple" value="${dto.ci_photo}" />
+									<input type="file" name="ci_photo" multiple="multiple" src="/photo/${dto.ci_photo}" value="${dto.ci_photo}"/>
 								</td>
 							</tr>
 				    		<tr>
 								<th>기업소개</th>
-								<td><input type="text" name="ci_intro" value="./resources/images/${dto.ci_intro}" required/></td>
+								<td><input type="text" name="ci_intro" value="${dto.ci_intro}" required/></td>
 							</tr>
 				    		<tr>
 								<th colspan="2">합격자소서</th>

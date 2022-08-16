@@ -29,12 +29,14 @@ public class ResumeController {
 	// cl_id 세션값으로 해당 id에 맞는 리스트만 불러오기
 	// 우선 메인페이지 제작 전 전체 리스트 호출로 수정 진행
 	@RequestMapping(value = "resumeList.go", method = RequestMethod.GET)
-	public String resumeList(Model model) {		
+	public String resumeList(Model model, HttpSession session) {		
 		
 		logger.info("이력서 리스트 요청");
+		String id = (String) session.getAttribute("loginId");
+		logger.info("id=" + id);
+		// * 추후에 아이디 값 가져가기		
 		
-		// * 추후에 아이디 값 가져가기
-		ArrayList<ResumeDTO> list = service.list();
+		ArrayList<ResumeDTO> list = service.list(id);
 		logger.info("결과 확인 : 리스트 개수=" +list.size());
 		model.addAttribute("list", list);
 		
@@ -93,8 +95,7 @@ public class ResumeController {
 	@RequestMapping(value = "resumeReg.go", method = RequestMethod.GET)
 	public String resumeReg(HttpSession session, Model model) {		
 		
-		/* String id = (String) session.getAttribute("loginId"); */
-		String id = "aaaabbbb";
+		String id = (String) session.getAttribute("loginId");		
 		logger.info(id + " 의 이력서 등록페이지 이동");
 		ResumeDTO dto = service.resumeRegDetail(id);
 		model.addAttribute("cl_id", id);	
@@ -224,10 +225,10 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value = "recommendUp.go", method = RequestMethod.GET)
-	public String recommendUp(Model model, @RequestParam String re_no, @RequestParam String reco_no) {		
+	public String recommendUp(Model model, HttpSession session,@RequestParam String re_no, @RequestParam String reco_no) {		
 		
 		logger.info(re_no + "번 이력서 추천내역 수정 요청");
-		String id = "aaaabbbb";		
+		String id = (String) session.getAttribute("loginId");	
 		
 		ArrayList<ResumeDTO> recommendDto = service.recommendUp(id);	
 		
@@ -298,8 +299,7 @@ public class ResumeController {
 	@RequestMapping(value = "recommendMe.go", method = RequestMethod.GET)
 	public String recommendMeGo(HttpSession session, Model model) {		
 		
-		/* String id = (String) session.getAttribute("loginId"); */
-		String id = "bbbbcccc";
+		String id = (String) session.getAttribute("loginId");		
 		logger.info(id + " 의 추천현황 페이지 이동");
 		ArrayList<ResumeDTO> list = service.recommendMe(id);
 		/* ArrayList<ResumeDTO> listB = service.recommendYou(id); */
@@ -315,7 +315,7 @@ public class ResumeController {
 	public HashMap<String, Object> recommendUlist(HttpSession session) {
 		logger.info("리스트 요청");
 		HashMap<String, Object> map = new HashMap<String, Object>();		
-			String id="bbbbcccc";
+			String id=(String) session.getAttribute("loginId");
 			ArrayList<ResumeDTO> list = service.recommendUlist(id);
 			map.put("list", list);		
 		

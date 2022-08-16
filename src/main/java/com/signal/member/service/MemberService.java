@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -97,6 +98,18 @@ public class MemberService {
 	// 기업회원 로그인서비스
 	public MemberDTO companydto(String companyLogin) {
 		return dao.companydto(companyLogin);
+	}
+	
+	
+	// 관리자 로그인서비스
+	public String adminLogin(String id, String pw) {
+		return dao.adminLogin(id,pw);
+	}
+	
+	
+	// 관리자 로그인서비스
+	public MemberDTO admindto(String adminLogin) {
+		return dao.admindto(adminLogin);
 	}
 	
 	
@@ -453,6 +466,31 @@ public class MemberService {
 	public void companyManagement(HashMap<String, String> params) {
 		dao.companyManagement(params);	
 	}
+
+
+	// 관리자 상태관리 리스트 서비스 요청
+	public ArrayList<MemberDTO> adminInfoManagement() {
+		logger.info("관리자 계정관리 리스트 호출 서비스 도착");
+		return dao.adminInfoManagement();
+	}
+
+
+	// 관리자 상태 수정 페이지 및 항목보기 서비스 요청
+	public MemberDTO adminStateChangePopup(String ad_id) {
+		logger.info("관리자 상태 수정 페이지 서비스 도착");
+		return dao.adminStateChangePopup(ad_id);
+	}
+
+
+	//관리자 상태 수정 요청 서비스
+	public void adminStateUpdate(HashMap<String, String> params) {
+		dao.adminStateUpdate(params);
+	}
+
+
+
+
+	
 
 
 

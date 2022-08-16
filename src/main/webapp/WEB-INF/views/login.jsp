@@ -12,9 +12,6 @@
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
-	function showPopup() {
-		window.open("loginPopup.go", "login", "width=400, height=300, left=100, top=50");
-		
-	}
+//커밋함!
 </script>
 </html>

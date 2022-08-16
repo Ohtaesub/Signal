@@ -66,6 +66,24 @@
 	,com_state
 	FROM company WHERE com_id = #{param1}
    </select>
+   
+   
+   <!-- 관리자 로그인 String 으로 받기 -->
+	<select id="adminLogin" resultType="String">
+	SELECT ad_id FROM admin WHERE ad_id = #{param1} AND ad_pw = #{param2}
+	</select>
+	
+	<select id="admindto" parameterType="String" resultType="com.signal.all.dto.MemberDTO">
+	SELECT ad_id
+	,ad_pw
+	,ad_name
+	,ad_call
+	,ad_email
+	,ad_state
+	,ad_date
+	,ad_comment
+	FROM admin WHERE ad_id = #{param1}
+   </select>
 	
 	<!-- 
 	<select id="clientMember" resultType="int">
@@ -220,6 +238,46 @@
 	,com_break_re)
 	VALUES (#{com_id},#{mg_content})
 	</insert>
+	
+	
+	<select id="adminInfoManagement" resultType="com.signal.all.dto.MemberDTO" >
+	SELECT
+	ad_id
+	,ad_pw
+	,ad_name
+	,ad_call
+	,ad_email
+	,ad_state
+	,ad_date
+	,ad_comment
+	FROM admin
+	</select>
+	
+	<select id="adminStateChangePopup" resultType="com.signal.all.dto.MemberDTO" >
+	SELECT
+	ad_id
+	,ad_pw
+	,ad_name
+	,ad_call
+	,ad_email
+	,ad_state
+	,ad_date
+	,ad_comment
+	FROM admin
+	WHERE ad_id = #{ad_id}
+	</select>
+	
+	<update id="adminStateUpdate" parameterType="hashmap">
+	UPDATE admin SET
+	<if test="ad_state.equals('재직')">
+	ad_state = "관리자"
+	</if>
+	<if test="ad_state.equals('퇴사')">
+	ad_state = "탈퇴회원"
+	</if>
+	,ad_comment = #{ad_comment}
+	WHERE ad_id = #{ad_id}	
+	</update>
 	
 	
 	

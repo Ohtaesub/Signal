@@ -3,9 +3,11 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.signal.jobposting.dao.JobPostingDAO">
 	
+	<!--  
 	<select id="login" resultType="String">
       SELECT com_id FROM company WHERE com_id = #{param1} AND com_pw = #{param2}
    </select>
+	-->
 	
 	<select id="ComDetail" resultType="String">
 		SELECT
@@ -81,7 +83,7 @@
 		WHERE ci.com_id = #{param1}
 	</select>
 	
-	<update id="update" parameterType="hashmap">
+	<update id="update" parameterType="com.signal.all.dto.JobPostingDTO">
 			UPDATE com_info ci, company com SET 
 				ci.ci_ceo = #{ci_ceo},
 				com.com_name = #{com_name},
@@ -93,6 +95,172 @@
 			WHERE ci.com_id = com.com_id AND ci.com_id = #{com_id}
 	</update>
 
+	<!-- 기업로고 사진 상세보기 -->
+   <select id="photoList" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+      SELECT ci_photo FROM com_info WHERE com_id = #{com_id}  
+   </select>
+	
+	<select id="infoList" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+		SELECT 
+			c.com_name,
+			ci.ci_photo,
+			c.com_address,
+			count(i.apply_no) AS apply,
+			count(i.inter_comment) AS comment,
+			ROUND(count(i.inter_comment)*100/(count(i.apply_no)),0) AS comment_a 
+		FROM com_info ci 
+			left outer join company c on c.com_id = ci.com_id 
+			left outer join job_posting jp on jp.com_id = c.com_id 
+			left outer join apply a on a.jpo_no = jp.jpo_no 
+			left outer join interview i on i.apply_no = a.apply_no 
+		WHERE c.com_id = #{param1}
+	</select>
+	
+		<select id="posting" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+		SELECT
+			ci.com_id
+		FROM
+			com_info ci
+		WHERE ci.com_id = #{param1}
+	</select>
+	
+		<insert id="postingWrite" parameterType="com.signal.all.dto.JobPostingDTO">
+		INSERT  
+			INTO job_posting
+				(com_id,jpo_title,jpo_type,jpo_region,jpo_field,jpo_start,jpo_deadline,jpo_state,
+				jpo_education,jpo_salary,jpo_contact,jpo_name,jpo_welfare,jpo_photo,jp_no,jc_no) 
+			VALUES
+				(#{com_id},#{jpo_title},#{jpo_type},#{jpo_region},#{jpo_field},#{jpo_start},#{jpo_deadline},#{jpo_state},
+				#{jpo_education},#{jpo_salary},#{jpo_contact},#{jpo_name},#{jpo_welfare},#{jpo_photo},#{jp_no},#{jc_no})
+
+	</insert>
+	
+		<select id="postingList" resultType="com.signal.all.dto.JobPostingDTO">
+		SELECT 
+			jpo_no,
+			jpo_title,
+			jpo_start,
+			jpo_deadline,
+			jpo_views,
+			jpo_state
+		FROM job_posting 
+		WHERE com_id = #{param1}
+	</select>
+	
+		<update id="upHit" parameterType="String">
+ 		UPDATE job_posting SET jpo_views = jpo_views+1 WHERE jpo_no = #{jpo_no}
+ 	</update>
+	
+	 	<select id="jobPostingDetail" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+	   	SELECT 
+	   		co.com_id,
+	   		co.com_name,
+	   		jp.jpo_title,
+	   		jp.jpo_type,
+	   		jp.jpo_region,
+	   		jp.jpo_field,
+	   		jp.jpo_start,
+	   		jp.jpo_deadline,
+	   		jp.jpo_state,
+			jp.jpo_education,
+			jp.jpo_salary,
+			jp.jpo_contact,
+			jp.jpo_name,
+			jp.jpo_welfare,
+			jp.jpo_photo,
+			jp.jpo_views,
+			p.jp_no,
+			c.jc_no,
+			jp.jpo_no,
+			p.jp_name,
+			c.jc_name
+	   	FROM 
+	   		job_posting jp 
+	   		, job_pa p
+	   		, job_ch c 
+	   		,company co
+	   	WHERE 
+	   		jp.jpo_no = #{jpo_no} 
+	   		AND p.jp_no = jp.jp_no and c.jc_no = jp.jc_no and co.com_id = jp.com_id
+ 	</select>
+ 	
+	<!-- 채용공고 상세보기 사진 -->
+   <select id="postingPhoto" resultType="String">
+      SELECT jpo_photo FROM job_posting WHERE jpo_no = #{jpo_no}  
+   </select>
+ 	
+ 		<select id="UpdatePage" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+		 	SELECT 
+	   		co.com_id,
+	   		co.com_name,
+	   		jp.jpo_title,
+	   		jp.jpo_type,
+	   		jp.jpo_region,
+	   		jp.jpo_field,
+	   		jp.jpo_start,
+	   		jp.jpo_deadline,
+	   		jp.jpo_state,
+			jp.jpo_education,
+			jp.jpo_salary,
+			jp.jpo_contact,
+			jp.jpo_name,
+			jp.jpo_welfare,
+			jp.jpo_photo,
+			jp.jpo_views,
+			p.jp_no,
+			c.jc_no,
+			jp.jpo_no,
+			p.jp_name,
+			c.jc_name
+	   	FROM 
+	   		job_posting jp 
+	   		, job_pa p
+	   		, job_ch c 
+	   		,company co
+	   	WHERE 
+	   		jp.jpo_no = #{param2} 
+	   		AND p.jp_no = jp.jp_no and c.jc_no = jp.jc_no and co.com_id = #{param1}
+	</select>
+ 	
+ 		<update id="postingUpdate" parameterType="com.signal.all.dto.JobPostingDTO">
+			UPDATE 
+				job_posting jp, 
+				job_pa p, 
+				job_ch c,
+				company co 
+			SET 
+		   		jp.jpo_title = #{jpo_title},
+		   		jp.jpo_type = #{jpo_type},
+		   		jp.jpo_region = #{jpo_region},
+		   		jp.jpo_field = #{jpo_field},
+		   		jp.jpo_start = #{jpo_start},
+		   		jp.jpo_deadline = #{jpo_deadline},
+		   		jp.jpo_state = #{jpo_state},
+				jp.jpo_education = #{jpo_education},
+				jp.jpo_salary = #{jpo_salary},
+				jp.jpo_contact = #{jpo_contact},
+				jp.jpo_name = #{jpo_name},
+				jp.jpo_welfare = #{jpo_welfare},
+				jp.jpo_photo = #{jpo_photo},
+				jp.jp_no = #{jp_no},
+				jp.jc_no = #{jc_no},
+				jp.jpo_no = #{jpo_no}
+			WHERE jp.com_id = co.com_id AND jp.com_id = #{com_id} AND jp.jpo_no = #{jpo_no}
+	</update>
+	
+<!-- 	<select id="infoList" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+		SELECT 
+			com.com_name,
+			ci.ci_photo,
+			com.com_address,
+			com.com_id
+		FROM 
+			com_info ci
+		JOIN company com ON ci.com_id = com.com_id
+		WHERE com.com_id = #{param1}
+	</select> -->
+	
+	
 	
 	<!-- <insert id="info" parameterType="hashmap">
 		INSERT INTO com_info(

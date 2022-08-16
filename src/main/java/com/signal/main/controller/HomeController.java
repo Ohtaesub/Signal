@@ -15,7 +15,7 @@ public class HomeController {
 	public String home() {
 		logger.info("메인페이지 이동");
 		
-		return "companyInfo";
+		return "main";
 	}
 	
 }
