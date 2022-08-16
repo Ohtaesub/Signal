@@ -12,6 +12,9 @@
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
-	//필요없는 파일
+	function showPopup() {
+		window.open("loginPopup.go", "login", "width=400, height=300, left=100, top=50");
+		
+	}
 </script>
 </html>
