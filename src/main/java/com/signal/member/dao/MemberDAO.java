@@ -1,5 +1,6 @@
 package com.signal.member.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -36,6 +37,12 @@ public interface MemberDAO {
 	String companyLogin(String id, String pw);
 
 	MemberDTO companydto(String companyLogin);
+	
+	//관리자 로그인
+	String adminLogin(String id, String pw);
+
+	MemberDTO admindto(String adminLogin);
+	
 
 	//기업회원 id 중복체크
 	String overlayCompanyId(String com_id);
@@ -89,14 +96,25 @@ public interface MemberDAO {
 	//개인회원 탈퇴가 되었는지 true,false 반환
 	boolean clientDelete(String cl_id);
 
-	//개안회원 탈퇴가 true이면 개인회원 관리 테이블에 파라미터 인서트 요청
+	//개인회원 탈퇴가 true이면 개인회원 관리 테이블에 파라미터 인서트 요청
 	void clientManagement(HashMap<String, String> params);
 
-	
+	//기업회원 탈퇴 되었는지 true false 반환
 	boolean companyDelete(String com_id);
 
+	//기업회원 탈퇴가 true이면 기업회원 관리 테이블에 파라미터 인서트 요청
 	void companyManagement(HashMap<String, String> params);
+
 	
+	//관리자 리스트 호출
+	ArrayList<MemberDTO> adminInfoManagement();
+
+	//관리자 상태 수정 페이지 이동 및 항목 호출
+	MemberDTO adminStateChangePopup(String ad_id);
+
+	//관리자 상태 수정 요청
+	void adminStateUpdate(HashMap<String, String> params);
+
 
 
 	//파일 업로드 메서드

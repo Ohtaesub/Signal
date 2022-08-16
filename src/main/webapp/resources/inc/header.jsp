@@ -20,7 +20,7 @@
 		    <li><a href="/personList.go">인재채용</a></li>
 		</ul>
 		<hr style="border: solid 1px black;"/>
-		<c:if test="${sessionScope.isClient.equals('true') || sessionScope.isCompany.equals('true')}">
+		<c:if test="${sessionScope.isClient.equals('true') || sessionScope.isCompany.equals('true') || sessionScope.isAdmin.equals('true')}">
 			<div id="container" style="color:white">  
 		        <aside>
 		        	<strong>${sessionScope.loginId}</strong>님 반갑습니다 
@@ -31,11 +31,14 @@
 		        	<c:if test="${sessionScope.isCompany.equals('true')}">
 		        		<a href="/companyInfoManagement.do">마이페이지</a> 
 		        	</c:if>
+		        	<c:if test="${sessionScope.isAdmin.equals('true')}">
+		        		<a href="/adminManagementList.do">마이페이지</a> 
+		        	</c:if>
 		        	<span>|</span> <a href="logout.do">로그아웃</a>
 		        </aside>
 			</div>
 		</c:if>
-		<c:if test="${!sessionScope.isClient.equals('true') && !sessionScope.isCompany.equals('true')}">
+		<c:if test="${!sessionScope.isClient.equals('true') && !sessionScope.isCompany.equals('true') && !sessionScope.isAdmin.equals('true')}">
 		    <input type="button" class="login" value="로그인" onclick="showPopup()"/>
 		    <input type="button" class="join" value="회원가입" onclick="location.href='joinSelect.go'"/>
 		</c:if>
@@ -68,7 +71,7 @@
 		        </c:if>
 		        <c:if test="${sessionScope.isAdmin.equals('true')}">
 		            <ul class="sidemenu">
-		                <li><a href="">관리자계정관리</a></li>
+		                <li><a href="/adminManagementList.do">관리자계정관리</a></li>
 		                <li><a href="">직무분류관리</a></li>
 		                <li><a href="">셀프평가관리</a></li>
 		                <li><a href="">면접평가관리</a></li>

@@ -30,8 +30,64 @@ public class MemberDTO {
 	private String com_state;
 	private String com_photo;
 	
+	private String ad_id;
+	private String ad_pw;
+	private String ad_name;
+	private String ad_call;
+	private String ad_email;
+	private String ad_state;
+	private Date ad_date;
+	private String ad_comment;
 	
 	
+	public String getAd_id() {
+		return ad_id;
+	}
+	public void setAd_id(String ad_id) {
+		this.ad_id = ad_id;
+	}
+	public String getAd_pw() {
+		return ad_pw;
+	}
+	public void setAd_pw(String ad_pw) {
+		this.ad_pw = ad_pw;
+	}
+	public String getAd_name() {
+		return ad_name;
+	}
+	public void setAd_name(String ad_name) {
+		this.ad_name = ad_name;
+	}
+	public String getAd_call() {
+		return ad_call;
+	}
+	public void setAd_call(String ad_call) {
+		this.ad_call = ad_call;
+	}
+	public String getAd_email() {
+		return ad_email;
+	}
+	public void setAd_email(String ad_email) {
+		this.ad_email = ad_email;
+	}
+	public String getAd_state() {
+		return ad_state;
+	}
+	public void setAd_state(String ad_state) {
+		this.ad_state = ad_state;
+	}
+	public Date getAd_date() {
+		return ad_date;
+	}
+	public void setAd_date(Date ad_date) {
+		this.ad_date = ad_date;
+	}
+	public String getAd_comment() {
+		return ad_comment;
+	}
+	public void setAd_comment(String ad_comment) {
+		this.ad_comment = ad_comment;
+	}
 	public String getCom_id() {
 		return com_id;
 	}

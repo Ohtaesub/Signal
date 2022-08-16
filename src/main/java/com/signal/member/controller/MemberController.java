@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -201,20 +202,29 @@ public class MemberController {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String state = request.getParameter("memberSelect");
+		
+		// 개인회원 로그인
 		String clientLogin = service.clientLogin(id,pw);
 		MemberDTO client = service.clientdto(clientLogin);
 		
-		
+		// 기업회원 로그인
 		String companyLogin = service.companyLogin(id,pw);
 		MemberDTO company = service.companydto(companyLogin);
 		
+		// 관리자 로그인
+		String adminLogin = service.adminLogin(id,pw);
+		MemberDTO admin = service.admindto(adminLogin);
+		
+		
 		logger.info("개인회원 로그인 시도 아이디 : "+clientLogin);
 		logger.info("기업회원 로그인 시도 아이디 : "+companyLogin);
+		logger.info("관리자 로그인 시도 아이디 : "+adminLogin);
+		logger.info(state);
 		
 		String page = "main";
 		String msg = "로그인 실패!";
 		HttpSession session = request.getSession();
-		if(clientLogin !=null && companyLogin==null) {
+		if(clientLogin !=null && companyLogin==null && adminLogin==null) {
 			if(client.getCl_state().equals("탈퇴회원")) {
 				msg = "탈퇴된 회원입니다.";
 				model.addAttribute("msg",msg);
@@ -229,7 +239,7 @@ public class MemberController {
 				model.addAttribute("msg",msg);
 				page = "loginPopup";
 			}
-		}else if(companyLogin !=null && clientLogin==null) {
+		}else if(companyLogin !=null && clientLogin==null && adminLogin==null) {
 			if(company.getCom_state().equals("탈퇴회원")){
 				msg = "탈퇴된 회원입니다.";
 				model.addAttribute("msg",msg);
@@ -244,8 +254,23 @@ public class MemberController {
 				model.addAttribute("msg",msg);
 				page = "loginPopup";
 			}
+		}else if(adminLogin !=null && companyLogin==null && clientLogin==null) {
+			if(admin.getAd_state().equals("탈퇴회원")) {
+				msg = "탈퇴된 회원입니다.";
+				model.addAttribute("msg",msg);
+				page = "loginPopup";
+			}else if(state==null) {
+				msg = "관리자 로그인에 성공하였습니다!";
+				model.addAttribute("msg",msg);
+				session.setAttribute("loginId", adminLogin);
+				session.setAttribute("isAdmin", "true");
+			}else {
+				msg ="아이디 / 비밀번호 또는 회원상태를 확인해주세요.";
+				model.addAttribute("msg",msg);
+				page = "loginPopup";
+			}
 		}else {
-			msg = "탈퇴된 회원입니다.";
+			msg ="아이디 / 비밀번호 또는 회원상태를 확인해주세요.";
 			model.addAttribute("msg",msg);
 			page = "loginPopup";
 		}
@@ -331,6 +356,8 @@ public class MemberController {
         session.removeAttribute("isClient");
         // 기업회원 세션 날리기
         session.removeAttribute("isCompany");
+        // 관리자 세션 날리기 
+        session.removeAttribute("isAdmin");
         
         //추가되어야 할 것 관리자 로그아웃
         
@@ -777,4 +804,58 @@ public class MemberController {
    	}
   	
   	
+   	// 관리자 관리 페이지 이동 및 리스트 보여주기 요청
+   	@RequestMapping(value="/adminManagementList.do")
+   	public String adminInfoManagement(Model model){
+  		logger.info("관리자 계정관리 페이지 이동");
+  		
+  		ArrayList<MemberDTO> adminList = service.adminInfoManagement();
+  		logger.info("list 갯수 : "+adminList.size());
+  		model.addAttribute("adminList",adminList);
+  		
+  		
+  		return "adminManagementList";
+  	}
+   	
+   	
+   	// 관리자 상태 변경 팝업 페이지 이동 및 항목 보여주기 요청
+   	@RequestMapping(value="/adminStateChangePopup.go")
+   	public String adminStateChangePopup(Model model, @RequestParam String ad_id) {
+   		logger.info("어떤 아이디의 상태를 변경할건가? : "+ad_id);
+   		MemberDTO dto = service.adminStateChangePopup(ad_id);
+
+   		model.addAttribute("adminState",dto);
+   		
+   		
+   		
+   		return "adminStateChangePopup";
+   	}
+   	
+   	
+   	// 관리자 상태수정 요청
+   	@RequestMapping(value="/adminStateChange.do")
+   	public String adminStateChange(RedirectAttributes redirectAttr,@RequestParam HashMap<String, String> params) {
+   		
+   		logger.info("params : {}"+params);
+   		
+   		service.adminStateUpdate(params);
+   		
+   		redirectAttr.addFlashAttribute("msg","수정에 성공하였습니다.");
+   		
+   		return "redirect:/adminManagementList.do";
+   	}
+   	
+   	
+   	// 관리자 상태보기 팝업 요청
+   	@RequestMapping(value="/adminStateDetailPopup.do")
+   	public String adminStateDetailPopup(Model model,@RequestParam String ad_id) {
+   	
+   		logger.info("어떤 아이디의 상태를 확인할건가? : "+ad_id);
+   		MemberDTO dto = service.adminStateChangePopup(ad_id);
+   		model.addAttribute("adminState",dto);
+   	
+   		return "adminStateDetailPopup";
+   			
+   	}
+   	
 }
