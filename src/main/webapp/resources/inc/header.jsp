@@ -52,7 +52,7 @@
 	                <li><a href="/clientOfferList.go">입사제안현황</a></li>
 	                <li><a href="">면접현황</a></li>
 	                <li><a href="">이의제기현황</a></li>
-	                <li><a href="">셀프평가</a></li>
+	                <li><a href="/selfInsert.go">셀프평가</a></li>
 				</ul>
 				</c:if>
 		        <c:if test="${sessionScope.isCompany.equals('true')}">

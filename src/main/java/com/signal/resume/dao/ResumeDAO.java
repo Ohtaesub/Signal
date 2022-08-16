@@ -7,7 +7,7 @@ import com.signal.all.dto.ResumeDTO;
 
 public interface ResumeDAO {
 
-	ArrayList<ResumeDTO> list();
+	ArrayList<ResumeDTO> list(String id);
 
 	ArrayList<ResumeDTO> personList();
 
