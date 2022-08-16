@@ -89,7 +89,10 @@
 	                </c:if> 
         		</ul>
         </div>
-    </div>		
+    </div>	
+    	  <form id="moveForm" method="get">
+	  	 <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+	  </form>			
 </body>
 <script>
 function blind(inter_no) {

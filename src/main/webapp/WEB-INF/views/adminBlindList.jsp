@@ -87,8 +87,12 @@
 	                </c:if> 
         		</ul>
         </div>
-    </div>		
+    </div>	
+      <form id="moveForm" method="get">
+	  	 <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+	  </form>	
 </body>
+
 <script>
 function cancel(inter_no) {
 	var chk = confirm("블라인드 처리를 취소하시겠습니까?");
