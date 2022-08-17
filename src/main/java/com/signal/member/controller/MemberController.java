@@ -1,6 +1,7 @@
 package com.signal.member.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.signal.all.dto.MemberDTO;
+import com.signal.all.dto.PageMakerDTO;
+import com.signal.enter.controller.Criteria;
 import com.signal.member.service.MemberService;
 
 @Controller
@@ -142,15 +145,15 @@ public class MemberController {
 	
 	
 	// 개인회원 회원가입 요청 ajax 버전
-		@RequestMapping("/joinClient.ajax")
-		@ResponseBody
-		public HashMap<String, Object> joinClient(@RequestParam HashMap<String, Object> params){
-			logger.info("개인회원 가입요청 : "+params);
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			service.joinClient(params);
-			map.put("success", 1);
-			return map;
-		}
+	@RequestMapping("/joinClient.ajax")
+	@ResponseBody
+	public HashMap<String, Object> joinClient(@RequestParam HashMap<String, Object> params){
+		logger.info("개인회원 가입요청 : "+params);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		service.joinClient(params);
+		map.put("success", 1);
+		return map;
+	}
 	
 	
 	/*
@@ -818,6 +821,44 @@ public class MemberController {
   	}
    	
    	
+   	// 관리자 회원가입페이지 이동
+ 	@RequestMapping(value = "/joinFormAdmin.go")
+ 	public String joinFormAdmin() {
+
+ 		return "joinFormAdmin";
+ 	}
+ 	
+ 	
+ 	// 관리자 아이디 중복체크
+ 	@RequestMapping("/overlayAdminId.ajax")
+ 	@ResponseBody
+ 	public HashMap<String, Object>overlayAdminId(@RequestParam String chkadminId) {
+ 		logger.info("아이디 중복 체크 : "+chkadminId);
+ 		return service.overlayAdminId(chkadminId);
+ 	}
+ 	
+ 	
+ 	// 관리자 이메일 중복체크
+ 	@RequestMapping("/overlayAdminEmail.ajax")
+ 	@ResponseBody
+ 	public HashMap<String, Object>overlayAdminEmail(@RequestParam String chkAdminEmail) {
+ 		logger.info("이메일 중복 체크 : "+chkAdminEmail);
+ 		return service.overlayAdminEmail(chkAdminEmail);
+ 	}
+ 	
+ 	
+ 	// 관리자 계정등록(회원가입) 요청 ajax 버전
+ 	@RequestMapping("/joinAdmin.ajax")
+ 	@ResponseBody
+ 	public HashMap<String, Object> joinAdmin(@RequestParam HashMap<String, Object> params){
+ 		logger.info("관리자 계정등록 요청 : "+params);
+ 		HashMap<String, Object> map = new HashMap<String, Object>();
+ 		service.joinAdmin(params);
+ 		map.put("success", 1);
+ 		return map;
+ 	}
+ 		
+   	
    	// 관리자 상태 변경 팝업 페이지 이동 및 항목 보여주기 요청
    	@RequestMapping(value="/adminStateChangePopup.go")
    	public String adminStateChangePopup(Model model, @RequestParam String ad_id) {
@@ -846,7 +887,7 @@ public class MemberController {
    	}
    	
    	
-   	// 관리자 상태보기 팝업 요청
+   	// 관리자 상태 상세보기 팝업 요청
    	@RequestMapping(value="/adminStateDetailPopup.do")
    	public String adminStateDetailPopup(Model model,@RequestParam String ad_id) {
    	
@@ -857,5 +898,204 @@ public class MemberController {
    		return "adminStateDetailPopup";
    			
    	}
+   	
+   	
+   	// 개인회원 관리 페이지 이동 및 리스트 호출 요청 + 페이징 처리 (전체리스트)
+   	@RequestMapping(value="/clientManagementList.do")
+   	public String clientManagementList(Model model,Criteria cri) {
+   		
+   		//리스트 페이징 처리하기 위해 리스트를 보여주는 서비스를 보내는데 그안에 cri를 담는다.
+   		//service의 최종 목적지 mapper에는 10개씩 보여달라는 쿼리문이 작성되어 있어 10개 이상이어도 10개까지만 보여준다.
+   		ArrayList<MemberDTO> clientList = service.clientManagementList(cri);
+  		logger.info("list 갯수 : "+clientList.size()); //mapper에 limit 10개로 해놓았으므로 당연히 10개초과는 안나온다.
+  		model.addAttribute("clientList",clientList);
+  		int pageNum = cri.getPageNum();
+  		
+  		//pageNum 이동을 하기위해 담아서 jsp에 보내준다.
+  		model.addAttribute("pageNum",pageNum);
+  		
+  		//페이징 처리를 위한 게시글의 총 개수를 구해온다.
+  		int total = service.clientListTotal();
+  		// PageMakerDTO 라는 것에 총개수와 몇개씩 보여줄 것인지에 대한 내용을 담는다.
+  		// 단순히 총인원 리스트를 pageMaker에 맞게 잘라서 표현한 것일 뿐 이동에 대한 내용은 없다.
+  		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
+  		model.addAttribute("pageMaker",pageMaker);
+		logger.info("개인회원의 총 인원은?? : "+total);
+
+  		
+  		return "clientManagementList";
+   	}
+   	
+   	
+   	//개인회원 리스트 검색기능 + 페이징 처리
+   	@RequestMapping(value="/clientListSearch.do")
+   	public String clientListSearch(Model model,HttpSession session,@RequestParam String searchOption, String search, int pageNum) {
+   	
+   		logger.info("옵션 확인: "+searchOption+" / "+search+" / "+pageNum);
+   		
+   		model.addAttribute("searchOption",searchOption);
+   		
+   		//검색한 내용 페이징 처리하기
+   		int skip=(pageNum-1) * 10;
+   		
+   		ArrayList<MemberDTO> dto = service.clientListSearch(searchOption,search,skip);
+   		// 전체 리스트에서 넣었던 것을 검색을 통해 가져온 값을 바꿔넣어준다.
+   		model.addAttribute("clientList",dto);
+   		
+   		// 검색해서 나온 결과의 갯수를 세어본다.
+   		int clientSearchTotal = service.clientSearchTotal(searchOption,search);
+   		model.addAttribute("pageNum",pageNum);
+   		
+   		// 검색 결과를 어떻게 나눌것인지 페이지 메이커 변수에 담아준다.
+   		PageMakerDTO pageMaker = new PageMakerDTO(pageNum, clientSearchTotal);
+   		// 검색 결과숫자와 페이지 갯수를 처리한 변수를 담아서 jsp에 보내준다.
+   		model.addAttribute("pageMaker",pageMaker);
+   		
+   		   		
+   		return "clientManagementList";
+   	}
+   	
+   	
+   	// 개인회원 상태 변경 팝업 페이지 이동 및 항목 보여주기 요청
+   	@RequestMapping(value="/clientStateChangePopup.go")
+   	public String clientStateChangePopup(Model model, @RequestParam String cl_id) {
+   		logger.info("어떤 아이디의 상태를 변경할건가? : "+cl_id);
+   		MemberDTO dto = service.clientStateChangePopup(cl_id);
+
+   		model.addAttribute("clientState",dto);
+   		
+   		
+   		
+   		return "clientStateChangePopup";
+   	}
+   	
+   	
+   	// 개인회원 상태수정 요청
+   	@RequestMapping(value="/clientStateChange.do")
+   	public String clientStateChange(RedirectAttributes redirectAttr,@RequestParam HashMap<String, String> params) {
+   		
+   		logger.info("params : {}"+params);
+   		
+   		service.clientStateUpdate(params);
+   		
+   		redirectAttr.addFlashAttribute("msg","수정에 성공하였습니다.");
+   		
+   		return "redirect:/adminManagementList.do";
+   	}
+   	
+   	
+   	// 개인회원 상태 상세보기 팝업 요청
+   	@RequestMapping(value="/clientStateDetailPopup.do")
+   	public String clientStateDetailPopup(Model model,@RequestParam String cl_id) {
+   	
+   		logger.info("어떤 아이디의 상태를 확인할건가? : "+cl_id);
+   		MemberDTO dto = service.clientStateChangePopup(cl_id);
+   		model.addAttribute("clientState",dto);
+   	
+   		return "clientStateDetailPopup";
+   			
+   	}
+   	
+   	
+   	// 기업회원 관리 페이지 이동 및 리스트 호출 요청 + 페이징 처리 (전체리스트)
+   	@RequestMapping(value="/companyManagementList.do")
+   	public String companyManagementList(Model model,Criteria cri) {
+   		
+   		//리스트 페이징 처리하기 위해 리스트를 보여주는 서비스를 보내는데 그안에 cri를 담는다.
+   		//service의 최종 목적지 mapper에는 10개씩 보여달라는 쿼리문이 작성되어 있어 10개 이상이어도 10개까지만 보여준다.
+   		ArrayList<MemberDTO> companyList = service.companyManagementList(cri);
+  		logger.info("list 갯수 : "+companyList.size()); //mapper에 limit 10개로 해놓았으므로 당연히 10개초과는 안나온다.
+  		model.addAttribute("companyList",companyList);
+  		int pageNum = cri.getPageNum();
+  		
+  		//pageNum 이동을 하기위해 담아서 jsp에 보내준다.
+  		model.addAttribute("pageNum",pageNum);
+  		
+  		//페이징 처리를 위한 게시글의 총 개수를 구해온다.
+  		int total = service.companyListTotal();
+  		// PageMakerDTO 라는 것에 총개수와 몇개씩 보여줄 것인지에 대한 내용을 담는다.
+  		// 단순히 총인원 리스트를 pageMaker에 맞게 잘라서 표현한 것일 뿐 이동에 대한 내용은 없다.
+  		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
+  		model.addAttribute("pageMaker",pageMaker);
+		logger.info("기업회원의 총 갯수는?? : "+total);
+
+  		
+  		return "companyManagementList";
+   	}
+   	
+   	
+   	//기업회원 리스트 검색기능 + 페이징 처리
+   	@RequestMapping(value="/companyListSearch.do")
+   	public String companyListSearch(Model model,HttpSession session,@RequestParam String searchOption, String search, int pageNum) {
+   	
+   		logger.info("옵션 확인: "+searchOption+" / "+search+" / "+pageNum);
+   		
+   		model.addAttribute("searchOption",searchOption);
+   		
+   		//검색한 내용 페이징 처리하기
+   		int skip=(pageNum-1) * 10;
+   		
+   		ArrayList<MemberDTO> dto = service.companyListSearch(searchOption,search,skip);
+   		// 전체 리스트에서 넣었던 것을 검색을 통해 가져온 값을 바꿔넣어준다.
+   		model.addAttribute("companyList",dto);
+   		
+   		// 검색해서 나온 결과의 갯수를 세어본다.
+   		int companySearchTotal = service.companySearchTotal(searchOption,search);
+   		model.addAttribute("pageNum",pageNum);
+   		
+   		// 검색 결과를 어떻게 나눌것인지 페이지 메이커 변수에 담아준다.
+   		PageMakerDTO pageMaker = new PageMakerDTO(pageNum, companySearchTotal);
+   		// 검색 결과숫자와 페이지 갯수를 처리한 변수를 담아서 jsp에 보내준다.
+   		model.addAttribute("pageMaker",pageMaker);
+   		
+   		   		
+   		return "companyManagementList";
+   	}
+   	
+   	  	
+   	// 기업회원 상태 변경 팝업 페이지 이동 및 항목 보여주기 요청
+   	@RequestMapping(value="/companyStateChangePopup.go")
+   	public String companyStateChangePopup(Model model, @RequestParam String com_id) {
+   		logger.info("어떤 아이디의 상태를 변경할건가? : "+com_id);
+   		MemberDTO dto = service.companyStateChangePopup(com_id);
+
+   		model.addAttribute("companyState",dto);
+   		
+   		
+   		
+   		return "companyStateChangePopup";
+   	}
+   	
+   	
+   	// 기업회원 상태수정 요청
+   	@RequestMapping(value="/companyStateChange.do")
+   	public String companyStateChange(RedirectAttributes redirectAttr,@RequestParam HashMap<String, String> params) {
+   		
+   		logger.info("params : {}"+params);
+   		
+   		service.companyStateChange(params);
+   		
+   		redirectAttr.addFlashAttribute("msg","수정에 성공하였습니다.");
+   		
+   		return "redirect:/companyManagementList.do";
+   	}
+   	
+   	
+   	// 개인회원 상태 상세보기 팝업 요청
+   	@RequestMapping(value="/companyStateDetailPopup.do")
+   	public String companyStateDetailPopup(Model model,@RequestParam String com_id) {
+   	
+   		logger.info("어떤 아이디의 상태를 확인할건가? : "+com_id);
+   		MemberDTO dto = service.companyStateChangePopup(com_id);
+   		model.addAttribute("companyState",dto);
+   	
+   		return "companyStateDetailPopup";
+   			
+   	}
+   	
+   	
+   	
+
+   	
    	
 }

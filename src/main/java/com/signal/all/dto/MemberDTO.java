@@ -39,7 +39,84 @@ public class MemberDTO {
 	private Date ad_date;
 	private String ad_comment;
 	
+	// 개인회원 관리 관련 DTO
+	private int cl_no;
+	private Date cl_break_date;
+	private String cl_break_re;
+	private String cl_admin_re;
 	
+	// 기업회원 관리 관련 DTO
+	private int com_no;
+	private Date com_break_date;
+	private String com_break_re;
+	private String com_admin_re;
+	
+	// 상태변경 날짜
+	private Date com_update_date;
+	private Date cl_update_date;
+	
+	
+	
+	public Date getCl_update_date() {
+		return cl_update_date;
+	}
+	public void setCl_update_date(Date cl_update_date) {
+		this.cl_update_date = cl_update_date;
+	}
+	public Date getCom_update_date() {
+		return com_update_date;
+	}
+	public void setCom_update_date(Date com_update_date) {
+		this.com_update_date = com_update_date;
+	}
+	public int getCom_no() {
+		return com_no;
+	}
+	public void setCom_no(int com_no) {
+		this.com_no = com_no;
+	}
+	public Date getCom_break_date() {
+		return com_break_date;
+	}
+	public void setCom_break_date(Date com_break_date) {
+		this.com_break_date = com_break_date;
+	}
+	public String getCom_break_re() {
+		return com_break_re;
+	}
+	public void setCom_break_re(String com_break_re) {
+		this.com_break_re = com_break_re;
+	}
+	public String getCom_admin_re() {
+		return com_admin_re;
+	}
+	public void setCom_admin_re(String com_admin_re) {
+		this.com_admin_re = com_admin_re;
+	}
+	public int getCl_no() {
+		return cl_no;
+	}
+	public void setCl_no(int cl_no) {
+		this.cl_no = cl_no;
+	}
+	public Date getCl_break_date() {
+		return cl_break_date;
+	}
+	public void setCl_break_date(Date cl_break_date) {
+		this.cl_break_date = cl_break_date;
+	}
+	public String getCl_break_re() {
+		return cl_break_re;
+	}
+	public void setCl_break_re(String cl_break_re) {
+		this.cl_break_re = cl_break_re;
+	}
+	public String getCl_admin_re() {
+		return cl_admin_re;
+	}
+	public void setCl_admin_re(String cl_admin_re) {
+		this.cl_admin_re = cl_admin_re;
+	}
 	public String getAd_id() {
 		return ad_id;
 	}
