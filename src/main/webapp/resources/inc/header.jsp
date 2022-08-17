@@ -78,7 +78,7 @@
 		                <li><a href="">이의제기관리</a></li>
 		                <li><a href="">블라인드관리</a></li>
 		                <li><a href="/clientManagementList.do">개인회원관리</a></li>
-		                <li><a href="">기업회원관리</a></li>
+		                <li><a href="/companyManagementList.do">기업회원관리</a></li>
 		            </ul>
 		        </c:if>
 			</nav>

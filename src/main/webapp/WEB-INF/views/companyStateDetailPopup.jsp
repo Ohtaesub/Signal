@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 </head>
 <body>
-		<input type="hidden" name="cl_id" value="${clientState.cl_id}"/>
+		<input type="hidden" name="com_id" value="${companyState.com_id}"/>
 		<table>
 			<thead>
 				<tr>
@@ -21,21 +21,21 @@
 			</thead>
 			<tbody>
 			<tr>
-	            <td>${clientState.cl_id}</td>
-	            <td>${clientState.cl_state}</td>
+	            <td>${companyState.com_id}</td>
+	            <td>${companyState.com_state}</td>
 	            <td>
 	            	<c:choose>
-   						<c:when test="${empty clientState.cl_update_date}">
-   							${clientState.cl_break_date}
+   						<c:when test="${empty companyState.com_update_date}">
+   							${companyState.com_break_date}
    						</c:when>
-   						<c:when test="${empty clientState.cl_admin_re}">
+   						<c:when test="${empty companyState.com_admin_re}">
    							
    						</c:when>            
-   						<c:otherwise>${clientState.cl_update_date}</c:otherwise>
+   						<c:otherwise>${companyState.com_update_date}</c:otherwise>
 					</c:choose>
 				</td>
-	            <td>${clientState.cl_break_re}</td>
-	            <td>${clientState.cl_admin_re}</td>
+	            <td>${companyState.com_break_re}</td>
+	            <td>${companyState.com_admin_re}</td>
 	        </tr>
 			</tbody>
 		</table>

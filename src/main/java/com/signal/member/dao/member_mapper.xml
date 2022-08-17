@@ -240,6 +240,7 @@
 	</insert>
 	
 	
+	<!-- 관리자 정보 리스트 -->
 	<select id="adminInfoManagement" resultType="com.signal.all.dto.MemberDTO" >
 	SELECT
 	ad_id
@@ -253,6 +254,33 @@
 	FROM admin
 	</select>
 	
+	<!-- 관리자 아이디 중복체크 -->
+	<select id="overlayAdminId" parameterType="String" resultType="String">
+	SELECT ad_id
+	FROM admin WHERE ad_id =#{chkadminId}
+	</select>
+	
+	<!-- 관리자 이메일 중복체크 -->
+	<select id="overlayAdminEmail" parameterType="String" resultType="String">
+	SELECT ad_email 
+	FROM admin WHERE ad_email=#{chkAdminEmail}
+	</select>
+	
+	<!-- 관리자 계정등록(회원가입) -->
+	<insert id="joinAdmin" parameterType="hashmap">
+	INSERT INTO admin
+	(ad_id
+	,ad_pw
+	,ad_name
+	,ad_call
+	,ad_email
+	,ad_state
+	)
+	VALUES (#{ad_id},#{ad_pw},#{ad_name},#{ad_call},#{ad_email},#{ad_state})
+	</insert>
+	
+	
+
 	<select id="adminStateChangePopup" resultType="com.signal.all.dto.MemberDTO" >
 	SELECT
 	ad_id
@@ -276,6 +304,7 @@
 	ad_state = "탈퇴회원"
 	</if>
 	,ad_comment = #{ad_comment}
+	,ad_date = curdate()
 	WHERE ad_id = #{ad_id}	
 	</update>
 	
@@ -379,12 +408,13 @@
 	,c.cl_admin_re
 	,cl_break_date
 	,cl_break_re
+	,cl_update_date
 	FROM client c
 	LEFT OUTER JOIN cl_admin ca ON c.cl_id= ca.cl_id
 	WHERE c.cl_id = #{cl_id}
 	</select>
 	
-	<!-- 개인회원 상태 변경하기 -->
+	<!-- 개인회원 상태 변경 및 변경사유 작성하기 -->
 	<update id="clientStateUpdate" parameterType="hashmap">
 	UPDATE client SET
 	<if test="cl_state.equals('개인회원')">
@@ -394,6 +424,7 @@
 	cl_state = "탈퇴회원"
 	</if>
 	,cl_admin_re = #{cl_admin_re}
+	,cl_update_date =curdate()
 	WHERE cl_id = #{cl_id}	
 	</update>
 	
@@ -406,6 +437,123 @@
 	VALUES (#{cl_id},#{cl_admin_re})
 	</insert>
 	 -->
+	 
+	 
+ 	<!-- 기업 회원 전체 리스트 10개씩 보여주기 -->
+	<select id="companyManagementList" resultType="com.signal.all.dto.MemberDTO">
+	SELECT
+	com_id
+	,com_name
+	,com_business_no
+	,com_address
+	,com_call
+	,com_email
+	,com_state
+	FROM company LIMIT #{skip},10
+	</select>
+	
+	<!-- 기업회원 전체 숫자 세기 -->
+	<select id="companyListTotal" resultType="int">
+	SELECT count(com_id)
+	FROM company
+	</select>
+	
+	<!-- 기업회원 검색하기 -->
+	<select id="companyListSearch" resultType="com.signal.all.dto.MemberDTO">
+	SELECT
+	com_id
+	,com_name
+	,com_business_no
+	,com_address
+	,com_call
+	,com_email
+	,com_state
+	FROM company
+	WHERE 
+		<if test="param1.equals('') and !param2.equals('')">
+			com_id LIKE CONCAT ('%',#{param2},'%')
+			OR com_name LIKE CONCAT ('%',#{param2},'%')
+		</if>
+		<if test="param1.equals('기업회원') and param2.equals('')">
+			com_state = "기업회원"
+		</if>
+		<if test="param1.equals('기업회원') and !param2.equals('')">
+			com_id LIKE CONCAT ('%',#{param2},'%')
+			OR com_name LIKE CONCAT ('%',#{param2},'%')
+		</if>
+		<if test="param1.equals('탈퇴회원') and !param2.equals('')">
+			(com_id LIKE CONCAT ('%',#{param2},'%')
+			OR com_name LIKE CONCAT ('%',#{param2},'%'))
+			AND com_state = "탈퇴회원"
+		</if>
+		<if test="param1.equals('탈퇴회원') and param2.equals('')">
+			com_state = "탈퇴회원"
+		</if>
+		<if test="param1.equals('') and param2.equals('')">
+			com_state = "기업회원" OR com_state = "탈퇴회원"
+		</if>
+	LIMIT #{param3},10
+	</select>
+	
+	<!-- 기업회원 검색결과 수 -->
+	<select id="companySearchTotal" resultType="int">
+	SELECT count(com_id)
+	FROM company
+	WHERE
+		<if test="param1.equals('') and !param2.equals('')">
+			com_id LIKE CONCAT ('%',#{param2},'%')
+			OR com_name LIKE CONCAT ('%',#{param2},'%')
+		</if>
+		<if test="param1.equals('기업회원') and param2.equals('')">
+			com_state = "기업회원"
+		</if>
+		<if test="param1.equals('기업회원') and !param2.equals('')">
+			com_id LIKE CONCAT ('%',#{param2},'%')
+			OR com_name LIKE CONCAT ('%',#{param2},'%')
+		</if>
+		<if test="param1.equals('탈퇴회원') and !param2.equals('')">
+			(com_id LIKE CONCAT ('%',#{param2},'%')
+			OR com_name LIKE CONCAT ('%',#{param2},'%'))
+			AND com_state = "탈퇴회원"
+		</if>
+		<if test="param1.equals('탈퇴회원') and param2.equals('')">
+			com_state = "탈퇴회원"
+		</if>
+		<if test="param1.equals('') and param2.equals('')">
+			com_state = "기업회원" OR com_state = "탈퇴회원"
+		</if>
+	</select>
+	
+	<!-- 기업회원 상태 변경 팝업창에 리스트 가져오기 -->
+	<select id="companyStateChangePopup" resultType="com.signal.all.dto.MemberDTO" >
+	SELECT
+	co.com_id
+	,com_name
+	,com_state
+	,co.com_admin_re
+	,com_break_date
+	,com_break_re
+	,com_update_date
+	FROM company co
+	LEFT OUTER JOIN com_admin ca ON co.com_id= ca.com_id
+	WHERE co.com_id = #{com_id}
+	</select>
+	
+	<!-- 기업회원 상태 변경 및 변경사유 작성하기 -->
+	<update id="companyStateChange" parameterType="hashmap">
+	UPDATE company SET
+	<if test="com_state.equals('기업회원')">
+	com_state = "기업회원"
+	</if>
+	<if test="com_state.equals('탈퇴회원')">
+	com_state = "탈퇴회원"
+	</if>
+	,com_admin_re = #{com_admin_re}
+	,com_update_date =curdate()
+	WHERE com_id = #{com_id}
+	</update>
+	
+	
 	
 	
 </mapper>
