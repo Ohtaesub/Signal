@@ -57,58 +57,83 @@
 		.cen{
 			text-align: center;
 		}
-		img{
+		img.comLogo{
 			width: 200px;
 			height: 160px;
 		}
-		
+		/* 페이지 이동 CSS 작업 */
+		.pageInfo{
+		      list-style : none;
+		      display: inline-block;
+		    margin: 50px 0 0 100px;      
+		  }
+		  .pageInfo li{
+		      float: left;
+		    font-size: 20px;
+		    margin-left: 18px;
+		    padding: 7px;
+		    font-weight: 500;
+		  }
+		 a:link {color:black; text-decoration: none;}
+		 a:visited {color:black; text-decoration: none;}
+		 a:hover {color:black; text-decoration: underline;}
+		 .active{
+		      background-color: #cdd5ec;
+		  }
+				
 	</style>
 </head>
 <body>
    <section>
-    <div id="jp_list">
-       	<h6>기업페이지 > 채용공고관리</h6>
-       	<br/>
-       	<h3>기업정보</h3>
-       	<div>
-       		<table id="infoList">
-       			<tr>
-       				<th rowspan="4">
-       					<c:forEach items="${list}" var="path">
-                  				<p><img src="/photo/${dto.ci_photo}" alt="로고"></p>
-                  		</c:forEach>
-               		</th>
-       			</tr>
-       			<tr>
-       				<td colspan="5">${dto.com_name}</td>
-       			</tr>
-   			    <tr>
-       				<td>기업주소 : </td>
-       				<td colspan="4">${dto.com_address}</td>
-       			</tr>
-   			    <tr>
-       				<td colspan="2">면접 코멘트 작성률 : </td>
-       				<td>${dto.comment_a}%</td>
+    	<div id="jp_list">
+       		<h6>기업페이지 > 채용공고관리</h6>
+       		<br/>
+       		<h3>기업정보</h3>
+       		<div>
+       			<table id="infoList">
+       				<tr>
+       					<th rowspan="4">
+       						<c:forEach items="${list}" var="path">
+                  				<p><img src="/photo/${dto.ci_photo}" alt="로고" class="comLogo"></p>
+                  			</c:forEach>
+               			</th>
+       				</tr>
+       				<tr>
+       					<td colspan="5">${dto.com_name}</td>
+       				</tr>
+   			    	<tr>
+       					<td>기업주소 : </td>
+       					<td colspan="4">${dto.com_address}</td>
+       				</tr>
+   			    	<tr>
+       					<td colspan="2">면접 코멘트 작성률 : </td>
+       					<td>${dto.comment_a}%</td>
       					<td>코멘트 수: </td>
-       				<td>${dto.comment}/${dto.apply}개</td>
-       			</tr>
-       		</table>
-     	  	<br/>	
-       		<div class="find-btn">
-       			<input class="find-btn1" type="button" value="신규 공고 등록" onclick="location.href='/jobPostingWrite.go'">
-			</div>
-       	</div>
+       					<td>${dto.comment}/${dto.apply}개</td>
+       				</tr>
+       			</table>
+     	  		<br/>	
+       			<div class="find-btn">
+       				<input class="find-btn1" type="button" value="신규 공고 등록" onclick="location.href='/jobPostingWrite.go'">
+				</div>
+       		</div>
+   		</div>
+	</section>
        	<br/>
-       	
-       	
+       
+
+
+	<form action="jobPostingList.do" method="get" id="form">
+     	<select name="searchOption" id="searchOption">
+			<option value="">전체</option>
+			<option value="진행중" ${searchOption == '진행중'? 'selected="selected"' : ''}>진행중</option>
+			<option value="마감" ${searchOption == '마감'? 'selected="selected"' : ''}>마감</option>
+	 	</select>
+			<button type="submit" >검색</button>
+			<!-- 페이징  -->
+		 	<input type="hidden" name="pageNum" value="1"/>
+ 	</form>
 			<div>
-			<select id="pagePerNum" >
-				<option value="all">채용공고 상태</option>
-				<option value="진행중">진행중</option>
-				<option value="마감">마감</option>
-			</select>
-
-
 			<table id="postingList">
 				<thead>
 			   		<tr>
@@ -127,70 +152,56 @@
 						<td><a href="jobPostingDetail.do?jpo_no=${jpoList.jpo_no}" >${jpoList.jpo_title}</a></td>
 						<td class="cen">${jpoList.jpo_start} ~ ${jpoList.jpo_deadline}</td>
 						<td class="cen">${jpoList.jpo_views}</td>
-						<td class="cen">${jpoList.jpo_state}</td>
+						<td class="cen">
+							<c:choose>
+	                       		<c:when test="${jpoList.jpo_state eq '진행중'}">진행중</c:when>
+	                       		<c:when test="${jpoList.jpo_state eq '마감'}">마감</c:when>
+	                       	</c:choose>
+	                	</td>
 					</tr>
 			</c:forEach>
 	     		</tbody>
      		</table>
-            	<input id="button1" type="button" value="삭제하기" onclick="cstDel()"/>
-	            <!-- plugin 사용법(twbspagination) , 이렇게 쓰라고 명시되어있음. -->
-	            <div class="container">
-	               <nav arial-label="Page navigation">
-	              	 <ul class="pagination" id="pagination"></ul>
-	               </nav>
-				</div>
-			</div>
-		</div>
-	</section>
+	        <div class="pageInfo_wrap" >
+        	<div class="pageInfo_area">
+        		<ul id="pageInfo" class="pageInfo">
+        		<!-- 이전페이지 버튼 -->
+	                <c:if test="${pageMaker.prev}">
+	                    <li class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
+	                </c:if>
+	        		
+	        		
+	 				<!-- 각 번호 페이지 버튼 -->
+	                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+	                    <li class='pageInfo_btn ${pageMaker.cri.pageNum == num ? "active": "" }'><a href="${num}">${num}</a></li>
+	                </c:forEach>
+	                
+	                <!-- 다음페이지 버튼 -->
+	                <c:if test="${pageMaker.next}">
+	                    <li class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">Next</a></li>
+	                </c:if> 
+        		</ul>
+        </div>
+    </div>	
+	        <form id="moveForm" method="get">
+	  	 <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+	  </form>	
+
 	<br/>   
 </body>
 <script>
-var currPage = 1;
-
-eduListCall(currPage);
-//페이징 처리
-$('#pagePerNum').on('change',function(){
-	console.log("currPage: " + currPage);
-  //페이지당 보여줄 수 변경시 계산된 페이지 적용이 안된다.(플러그인의 문제)
-  //페이지당 보여줄 수 변경시 기존 페이지 요소를 없애고 다시 만들어 준다.
-  $("#pagination").twbsPagination('destroy');   
-  eduListCall(currPage);
+$(".pageInfo a").on("click", function(e){
+    e.preventDefault();
+        if($("#searchOption").val()=="" && $("#search").val()==""){
+    		$("#moveForm").find("input[name='pageNum']").val($(this).attr("href"));
+        	$("#moveForm").attr("action", "/jobPostingList.go");
+    		$("#moveForm").submit();
+        } else {
+        	$("#form").find('input[name="pageNum"]').val($(this).attr("href"));
+        	$("#form").submit();
+        }
+        
 });
-
-function eduListCall(jp_list){
-	
-   var pagePerNum = $('#pagePerNum').val();
-   console.log("param page : " +jp_list);
-   $.ajax({
-      type:'GET',
-      url:'jobPosting.ajax',
-      data:{
-         cnt : pagePerNum,
-         page : jp_list
-			},
-      dataType:'JSON',
-      success:function(data){
-         console.log(data);
-         drawList(data.eduList);
-         currPage = data.currPage;
-         //불러오기가 성공되면 플러그인을 이용해 페이징 처리
-         $("#pagination").twbsPagination({
-       		startPage: data.currPage,//시작 페이지
-           	totalPages: data.pages,//총 페이지(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
-           	visiblePages: 5,//한번에 보여줄 페이지 수[1][2][3][4][5]
-           	onPageClick:function(e,page){
-               //console.log(e);//클릭한 페이지와 관련된 이벤츠 객체
-             	console.log(jp_list);//사용자가 클릭한 페이지
-               	currPage = jp_list;
-               	eduListCall(jp_list);
-            }
-         });		         
-      },
-      error:function(e){
-         console.log(e);
-      }
-   });
-}
 
 
 

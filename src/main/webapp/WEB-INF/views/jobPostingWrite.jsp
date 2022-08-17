@@ -66,7 +66,7 @@
         	<h6>기업페이지 > 채용공고관리 > 등록</h6>
         	</br>
 	        		<h2>채용공고 등록하기</h2></br>
-	        	<form action="/jobPostingWrite.do" method="post" enctype="multipart/form-data">
+	        	<form action="/jobPostingWrite.do" method="post" enctype="multipart/form-data" id="checkDate">
 		        	<div>
 			        	<table id="PostingWrite">
 							<input type="hidden" name="com_id" value="${dto.com_id}"/></td>
@@ -77,11 +77,17 @@
 							</tr>
 				    		<tr>
 								<th>근무형태</th>
-								<td><input type="text" name="jpo_type" required /></td>
+								<td>
+									<lable><input type="radio" name="jpo_type" value="정규직" required="required"/> 정규직</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<lable><input type="radio" name="jpo_type" value="비정규직" required="required"/> 비정규직</lable>
+								</td>
 							</tr>
 							<tr>
 								<th>모집분야</th>
-								<td><input type="text" name="jpo_field" required /></td>
+								<td>
+									<lable><input type="radio" name="jpo_field" value="신입" required="required"/> 신입</lable>&nbsp;&nbsp;
+									<lable><input type="radio" name="jpo_field" value="경력" required="required"/> 경력</lable>&nbsp;&nbsp;
+									<lable><input type="radio" name="jpo_field" value="무관" required="required"/> 무관</lable>
 							</tr>
 				   			<tr>
 								<th>직무분류</th>
@@ -143,8 +149,8 @@
 				    		<tr>
 								<th>모집기간</th>
 								<td>
-									<input type="date" name="jpo_start" required/> ~
-									<input type="date" name="jpo_deadline" required/>
+									<input type="date" name="jpo_start" id="jpo_start" required/> ~
+									<input type="date" name="jpo_deadline" id="jpo_deadline" required />
 								</td>
 							</tr>
 				   			<tr>
@@ -191,6 +197,23 @@
    </section>
 </body>
 <script>
+	$(function(){ 
+		$("#checkDate").submit(function(){
+			var jpo_start = $('#jpo_start').val();
+			var jpo_deadline = $('#jpo_deadline').val();        
+			var startArray = jpo_start.split('-');         //-을 구분자로 연,월,일로 잘라내어 배열로 반환 
+			var endArray = jpo_deadline.split('-');     
+			       //배열에 담겨있는 연,월,일을 사용해서 Date 객체 생성         
+			var start_date = new Date(startArray[0], startArray[1], startArray[2]);         
+			var end_date = new Date(endArray[0], endArray[1], endArray[2]);   //날짜를 숫자형태의 날짜 정보로 변환하여 비교한다.         
+			
+			if(start_date.getTime() > end_date.getTime()) {
+				 alert("종료날짜보다 시작날짜가 작아야합니다.");            
+				 return false;
+				}     
+			}); 
+		});
+
 
 </script>
 </html>
