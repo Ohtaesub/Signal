@@ -2,6 +2,8 @@ package com.signal.test.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.signal.all.dto.ResumeDTO;
 import com.signal.all.dto.TestDTO;
 import com.signal.test.dao.TestDAO;
 
@@ -59,6 +62,38 @@ public class TestService {
 		}
 		logger.info("결과는? " + success);
 		return success;
+	}
+
+	public HashMap<String, Object> stReg(HashMap<String, Object> params) {
+		logger.info("사이즈는?" + params.size());
+		logger.info("흠? " + params.get("st_list"));
+		logger.info("흠? " + params.get("st_list[0]"));	
+		return null;
+	}
+
+	public ArrayList<TestDTO> selfQueList() {
+
+		return dao.selfQueList();
+	}
+	
+	public ArrayList<TestDTO> selfQueListA() {
+
+		return dao.selfQueListA();
+	}
+	
+	public ArrayList<TestDTO> selfQueListB() {
+
+		return dao.selfQueListB();
+	}
+
+	public ArrayList<TestDTO> interviewQueList() {
+
+		return dao.interviewQueList();
+	}
+
+	public void stHiddenUp(String st_no, String st_hidden) {
+		dao.stHiddenUp(st_no, st_hidden);
+		
 	}
 
 }

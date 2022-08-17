@@ -23,12 +23,30 @@
 		UPDATE client SET
 		st_comment = #{st_comment}
 		WHERE cl_id=#{cl_id}
+	</update>	
+	
+	<select id="selfQueList" resultType="test">
+		SELECT st_no, st_que, st_hidden, st_keyword FROM self_test
+	</select>
+	
+	<select id="selfQueListA" resultType="test">
+		SELECT st_no, st_que, st_hidden, st_keyword FROM self_test
+		WHERE st_hidden=0
+	</select>
+	
+	<select id="selfQueListB" resultType="test">
+		SELECT st_no, st_que, st_hidden, st_keyword FROM self_test
+		WHERE st_hidden=1
+	</select>
+	
+	<update id="stHiddenUp">
+		UPDATE self_test SET
+		st_hidden = #{param2}
+		WHERE st_no=#{param1}
 	</update>
 	
-	<insert id="scoreReg" parameterType="hashmap">
-		INSERT INTO self_test_result(cl_id, st_no, st_score)
-		VALUES(#{cl_id},#{st_no},#{st_score})
-		ON DUPLICATE KEY UPDATE st_score = #{st_score}
-	</insert>
+	<select id="interviewQueList" resultType="test">
+		SELECT it_no, it_que, it_hidden, it_keyword FROM interview_test
+	</select>
 	
 </mapper>

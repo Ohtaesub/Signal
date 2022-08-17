@@ -2,7 +2,9 @@ package com.signal.test.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,8 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.signal.all.dto.ResumeDTO;
 import com.signal.all.dto.TestDTO;
 import com.signal.test.service.TestService;
 
@@ -54,14 +58,72 @@ public class TestController {
 		}
 		return "./selfTest/selfReg";
 	}
-	
-	@RequestMapping(value = "scoreReg.do", method = RequestMethod.GET)
-	public String scoreReg(Model model, @RequestParam HashMap<String, Object>params) {	
+
+	@RequestMapping("/stReg.ajax")
+	@ResponseBody
+	public HashMap<String, Object> stReg(HttpServletRequest request,@RequestParam(value="st_list") ArrayList<String> params) {
+		logger.info("사이즈는?"+params.size());
+		logger.info("흠? " + params.get(2) );
 		logger.info("params : {}",params);
-		boolean result = service.scoreReg(params);
-		logger.info("결과는? "+result);
-		model.addAttribute("result",result);
-		return "./selfTest/selfReg";
+		/*
+		 * logger.info("흠? " + params.get("st_list")); logger.info("흠? " +
+		 * params.get("st_list[0]")); return service.stReg(params);
+		 */
+		return null;
 	}
+	
+	@RequestMapping(value = "selfTestQue.go", method = RequestMethod.GET)
+	public String selfTestQueGo(HttpSession session, Model model) {		
+		
+		ArrayList<TestDTO> list = service.selfQueList();		
+		model.addAttribute("list", list);
+		model.addAttribute("state","all");
+		return "./selfTest/selfTestQue";
+	}
+	
+	@RequestMapping(value = "selfTestQueA.go", method = RequestMethod.GET)
+	public String selfTestQueAGo(HttpSession session, Model model) {		
+		
+		ArrayList<TestDTO> list = service.selfQueListA();		
+		model.addAttribute("list", list);
+		model.addAttribute("state","hide");
+		return "./selfTest/selfTestQue";
+	}
+	
+	@RequestMapping(value = "selfTestQueB.go", method = RequestMethod.GET)
+	public String selfTestQueBGo(HttpSession session, Model model) {		
+		
+		ArrayList<TestDTO> list = service.selfQueListB();		
+		model.addAttribute("list", list);
+		model.addAttribute("state","show");
+		return "./selfTest/selfTestQue";
+	}
+	
+	@RequestMapping(value = "stHiddenUp.do", method = RequestMethod.GET)
+	public String stHiddenUp(HttpSession session, Model model,
+			@RequestParam String st_no, @RequestParam String st_hidden, @RequestParam String state) {
+		logger.info("state "+state);
+		service.stHiddenUp(st_no, st_hidden);
+		ArrayList<TestDTO> list;
+		if(state.equals("all")) {
+		list = service.selfQueList();
+		} else if(state.equals("show")) {
+			list=service.selfQueListB();
+		} else {
+			list = service.selfQueListA();
+		}
+		model.addAttribute("list", list);
+		return "./selfTest/selfTestQue";
+	}
+	
+	@RequestMapping(value = "interviewTestQue.go", method = RequestMethod.GET)
+	public String interviewTestQueGo(HttpSession session, Model model) {		
+		
+		ArrayList<TestDTO> list = service.interviewQueList();
+		model.addAttribute("list", list);
+		return "/selfTest/interviewTestQue";
+	}
+	
+	
 	
 }

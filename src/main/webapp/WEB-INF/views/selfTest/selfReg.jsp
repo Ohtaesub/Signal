@@ -17,7 +17,7 @@
 				<th>점수</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="list">
 			<c:forEach items="${list}" var="selfTest">
 				<tr id="st_${selfTest.st_no}">
 					<td>
@@ -48,7 +48,7 @@
 			</tr>
 			<tr>
 				<th colspan="2">
-					<input type="submit" value="완료"/>
+					<input type="button" onclick="getResult()" value="완료"/>
 					<input type="button" onclick="window.close()" value="닫기"/>
 				</th>				
 			</tr>
@@ -57,7 +57,7 @@
 </form>
 </body>
 <script>
-	$('select[name="st_score"]').change(function(){
+	/* $('select[name="st_score"]').change(function(){
 		$tr = $(this).parent().parent();
 		console.log($tr);			
 		var cl_id = $tr.find('#cl_id').val();
@@ -65,6 +65,46 @@
 		var st_score = this.value;
 		console.log(cl_id + '/' + st_no + '/' + st_score);
 		location.href="scoreReg.do?cl_id="+cl_id+"&&st_no="+st_no+"&&st_score="+st_score;
-	})
+	}) */
+	var arr = [];
+	var arrB =[];
+	
+	function getResult(){		
+		for (var i = 0; i < $('#list').find('input[name="st_no"]').length; i++) {
+			console.log($('#list').find('input[name="cl_id"]')[i].value);
+			console.log($('#list').find('input[name="st_no"]')[i].value);		
+			console.log($('#list').find('select[name="st_score"]')[i].value);
+			
+			arr[i] = {
+					"cl_id" : $('#list').find('input[name="cl_id"]')[i].value,
+					"st_no" : $('#list').find('input[name="st_no"]')[i].value,
+					"st_score" : $('#list').find('select[name="st_score"]')[i].value
+					}
+			
+		}
+		
+		console.log(arr);
+		console.log(arrB);
+		
+		var st_list = {
+				"st_list" : JSON.stringify(arr)
+		}
+		
+		$.ajax({
+			type:'post',
+			url:'stReg.ajax',
+			data:st_list,
+			dataType:'JSON',			
+			success:function(data){
+				
+			},
+			error:function(e){
+				console.log(e);
+			}
+		
+		})
+		
+		
+	}
 </script>
 </html>
