@@ -18,7 +18,7 @@ table {font-size: 75%;}
 		<button type="submit">검색</button>
 		<br>
 		<br>
-		<p>※ 회원이름 또는 아이디로 검색할 수 있습니다.</p>
+		<p>※ 회원이름 또는 아이디로도 검색할 수 있습니다.</p>
 		<!-- 페이징 관련 -->
 		<input type="hidden" name="pageNum" value="1"/>
 	</form>
@@ -49,7 +49,7 @@ table {font-size: 75%;}
 							<td>${client.cl_call}</td>
 							<td>${client.cl_birth}</td>
 							<td>${client.cl_state}</td>				
-							<td><a href="clientStateChangePopup.go?ad_id=${client.cl_id}" onclick="window.open(this.href, '', 'width=500, height=300, left=100, top=50'); return false;">변경하기</a></td>
+							<td><a href="clientStateChangePopup.go?cl_id=${client.cl_id}" onclick="window.open(this.href, '', 'width=500, height=300, left=100, top=50'); return false;">변경하기</a></td>
 						</tr>
 					</c:forEach>
 				</c:when>

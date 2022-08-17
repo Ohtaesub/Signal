@@ -370,5 +370,42 @@
 		</if>
 	</select>
 	
+	<!-- 개인회원 상태 변경 팝업창에 리스트 가져오기 -->
+	<select id="clientStateChangePopup" resultType="com.signal.all.dto.MemberDTO" >
+	SELECT
+	c.cl_id
+	,cl_name
+	,cl_state
+	,c.cl_admin_re
+	,cl_break_date
+	,cl_break_re
+	FROM client c
+	LEFT OUTER JOIN cl_admin ca ON c.cl_id= ca.cl_id
+	WHERE c.cl_id = #{cl_id}
+	</select>
+	
+	<!-- 개인회원 상태 변경하기 -->
+	<update id="clientStateUpdate" parameterType="hashmap">
+	UPDATE client SET
+	<if test="cl_state.equals('개인회원')">
+	cl_state = "개인회원"
+	</if>
+	<if test="cl_state.equals('탈퇴회원')">
+	cl_state = "탈퇴회원"
+	</if>
+	,cl_admin_re = #{cl_admin_re}
+	WHERE cl_id = #{cl_id}	
+	</update>
+	
+	<!-- 
+	개인회원 상태 수정 사유 변경하기 
+	<insert id="clientCommentUpdate" parameterType="hashmap">
+	INSERT INTO cl_admin(
+	cl_id
+	,cl_admin_re)
+	VALUES (#{cl_id},#{cl_admin_re})
+	</insert>
+	 -->
+	
 	
 </mapper>

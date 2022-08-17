@@ -128,6 +128,15 @@ public interface MemberDAO {
 	// 개인회원 검색 결과 수 가져오기
 	int clientSearchTotal(String searchOption, String search);
 
+	// 개인회원 상태변경 팝업창 이동 및 리스트 호출
+	MemberDTO clientStateChangePopup(String cl_id);
+
+	// 개인회원 상태 변경
+	void clientStateUpdate(HashMap<String, String> params);
+
+	// 개인회원 상태 변경 사유
+	//void clientCommentUpdate(HashMap<String, String> params);
+
 
 
 	//파일 업로드 메서드

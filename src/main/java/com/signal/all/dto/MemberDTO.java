@@ -39,7 +39,37 @@ public class MemberDTO {
 	private Date ad_date;
 	private String ad_comment;
 	
+	// 개인회원 관리 관련 DTO
+	private int cl_no;
+	private Date cl_break_date;
+	private String cl_break_re;
+	private String cl_admin_re;
 	
+	
+	public int getCl_no() {
+		return cl_no;
+	}
+	public void setCl_no(int cl_no) {
+		this.cl_no = cl_no;
+	}
+	public Date getCl_break_date() {
+		return cl_break_date;
+	}
+	public void setCl_break_date(Date cl_break_date) {
+		this.cl_break_date = cl_break_date;
+	}
+	public String getCl_break_re() {
+		return cl_break_re;
+	}
+	public void setCl_break_re(String cl_break_re) {
+		this.cl_break_re = cl_break_re;
+	}
+	public String getCl_admin_re() {
+		return cl_admin_re;
+	}
+	public void setCl_admin_re(String cl_admin_re) {
+		this.cl_admin_re = cl_admin_re;
+	}
 	public String getAd_id() {
 		return ad_id;
 	}

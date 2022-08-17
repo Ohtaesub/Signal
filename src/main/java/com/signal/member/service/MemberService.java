@@ -514,6 +514,20 @@ public class MemberService {
 	}
 
 
+	// 개인회원 상태 수정 페이지 및 항목보기 서비스 요청
+	public MemberDTO clientStateChangePopup(String cl_id) {
+		logger.info("개인회원 상태 수정 페이지 서비스 도착");
+		return dao.clientStateChangePopup(cl_id);
+	}
+
+
+	// 개인회원 상태 및 사유 변경 서비스 요청
+	public void clientStateUpdate(HashMap<String, String> params) {
+		dao.clientStateUpdate(params);
+		//dao.clientCommentUpdate(params);
+	}
+
+
 
 
 	

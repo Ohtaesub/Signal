@@ -916,4 +916,51 @@ public class MemberController {
    		   		
    		return "clientManagementList";
    	}
+   	
+   	
+   	// 개인회원 상태 변경 팝업 페이지 이동 및 항목 보여주기 요청
+   	@RequestMapping(value="/clientStateChangePopup.go")
+   	public String clientStateChangePopup(Model model, @RequestParam String cl_id) {
+   		logger.info("어떤 아이디의 상태를 변경할건가? : "+cl_id);
+   		MemberDTO dto = service.clientStateChangePopup(cl_id);
+
+   		model.addAttribute("clientState",dto);
+   		
+   		
+   		
+   		return "clientStateChangePopup";
+   	}
+   	
+   	
+   	// 관리자 상태수정 요청
+   	@RequestMapping(value="/clientStateChange.do")
+   	public String clientStateChange(RedirectAttributes redirectAttr,@RequestParam HashMap<String, String> params) {
+   		
+   		logger.info("params : {}"+params);
+   		
+   		service.clientStateUpdate(params);
+   		
+   		redirectAttr.addFlashAttribute("msg","수정에 성공하였습니다.");
+   		
+   		return "redirect:/adminManagementList.do";
+   	}
+   	
+   	
+   	// 개인회원 상태보기 팝업 요청
+   	@RequestMapping(value="/clientStateDetailPopup.do")
+   	public String clientStateDetailPopup(Model model,@RequestParam String cl_id) {
+   	
+   		logger.info("어떤 아이디의 상태를 확인할건가? : "+cl_id);
+   		MemberDTO dto = service.clientStateChangePopup(cl_id);
+   		model.addAttribute("clientState",dto);
+   	
+   		return "clientStateDetailPopup";
+   			
+   	}
+   	
+   	
+   	
+   	
+   	
+   	
 }
