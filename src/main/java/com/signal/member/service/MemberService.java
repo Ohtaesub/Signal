@@ -67,7 +67,7 @@ public class MemberService {
 	}
 	*/
 	
-	// 기업회원 회원가입 서비스 ajax
+	// 개인회원 회원가입 서비스 ajax
 	public HashMap<String, Object> joinClient(HashMap<String, Object> params) {
 		logger.info("개인회원 가입 서비스이동");
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -474,6 +474,48 @@ public class MemberService {
 		logger.info("관리자 계정관리 리스트 호출 서비스 도착");
 		return dao.adminInfoManagement();
 	}
+	
+	
+	// 관리자 아이디 중복체크 서비스
+	public HashMap<String, Object> overlayAdminId(String ad_id) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String overAdminId = dao.overlayAdminId(ad_id);
+		logger.info("중복된 아이디 인가요? : "+overAdminId);
+		//중복된 아이디이면 중복 아이디:(중복아이디)가 보여짐 -> 사용불가 아이디
+		//사용가능한 아이디이면 중복 아이디:(null)이 보여짐 ->사용가능 아이디
+		boolean over = overAdminId == null?false:true;
+		map.put("overlayAdminId", over);
+		
+		return map;
+	}
+	
+	
+	// 관리자 이메일 중복확인
+	public HashMap<String, Object> overlayAdminEmail(String  ad_email) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String overAdminEmail=dao.overlayAdminEmail(ad_email);
+		logger.info("중복된 이메일 인가요? : "+overAdminEmail);
+		//중복된 이메일이면 중복 이메일:(중복이메일)이 보여짐 ->사용불가 이메일
+		//사용가능한 이메일이면 중복 이메일:(null)이 보여짐 ->사용가능 이메일
+		boolean over = overAdminEmail ==null?false:true;
+		map.put("overlayAdminEmail", over);
+		
+		return map;
+	}
+	
+	
+	// 관리자 계정등록(회원가입) 서비스 ajax
+	public HashMap<String, Object> joinAdmin(HashMap<String, Object> params) {
+		logger.info("관리자 계정등록 서비스이동");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int row = dao.joinAdmin(params);
+		boolean success = row>0?true:false;
+		map.put("success", success);
+		return map;	
+	}
+	
 
 
 	// 관리자 상태 수정 페이지 및 항목보기 서비스 요청
@@ -512,6 +554,65 @@ public class MemberService {
 	public int clientSearchTotal(String searchOption, String search) {
 		return dao.clientSearchTotal(searchOption,search);
 	}
+
+
+	// 개인회원 상태 수정 페이지 및 항목보기 서비스 요청
+	public MemberDTO clientStateChangePopup(String cl_id) {
+		logger.info("개인회원 상태 수정 페이지 서비스 도착");
+		return dao.clientStateChangePopup(cl_id);
+	}
+
+
+	// 개인회원 상태 및 사유 변경 서비스 요청
+	public void clientStateUpdate(HashMap<String, String> params) {
+		dao.clientStateUpdate(params);
+		//dao.clientCommentUpdate(params);
+	}
+
+
+	// 기업회원 관리 페이지 이동 및 리스트 호출 서비스
+	public ArrayList<MemberDTO> companyManagementList(Criteria cri) {
+		logger.info("기업회원 관리 및 리스트 호출 서비스 도착");
+		return dao.companyManagementList(cri);
+	}
+
+
+	// 기업회원 수 세기
+	public int companyListTotal() {
+		return dao.companyListTotal();
+	}
+
+
+	// 기업회원 검색하기
+	public ArrayList<MemberDTO> companyListSearch(String searchOption, String search, int skip) {
+		return dao.companyListSearch(searchOption,search,skip);
+	}
+
+
+	// 기업회원 검색 개수 가져오기
+	public int companySearchTotal(String searchOption, String search) {
+		return dao.companySearchTotal(searchOption,search);
+	}
+
+
+	// 기업회원 상태 수정 페이지 및 항목보기 서비스 요청
+	public MemberDTO companyStateChangePopup(String com_id) {
+		logger.info("기업회원 상태 수정 페이지 서비스 도착");
+		return dao.companyStateChangePopup(com_id);
+	}
+
+
+	// 기업회원 상태 및 사유 변경 서비스 요청
+	public void companyStateChange(HashMap<String, String> params) {
+		dao.companyStateChange(params);
+	}
+
+
+
+
+
+
+	
 
 
 

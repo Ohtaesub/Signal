@@ -5,20 +5,20 @@
 table {font-size: 75%;}
 </style>
 <body>
-	<h2>개인회원 리스트</h2>
+	<h2>기업회원 리스트</h2>
 	<!-- form 방식으로 select의 선택 값과 검색의 내용을 컨트롤러에 보내준다. -->
-	<form action="clientListSearch.do" method="get" id="form">
+	<form action="companyListSearch.do" method="get" id="form">
 		<!-- select option 넣기 -->
 		<select name="searchOption" id="searchOption">
 			<option value="">회원전체</option>
-			<option value="개인회원" ${searchOption == '개인회원'? 'selected="selected"' : ''}>개인회원</option>
+			<option value="기업회원" ${searchOption == '기업회원'? 'selected="selected"' : ''}>기업회원</option>
 			<option value="탈퇴회원" ${searchOption == '탈퇴회원'? 'selected="selected"' : ''}>탈퇴회원</option>
 		</select>
 		<input type="text" name="search" id="search" value=""/>
 		<button type="submit">검색</button>
 		<br>
 		<br>
-		<p>※ 회원이름 또는 아이디로도 검색할 수 있습니다.</p>
+		<p>※ 기업명 또는 아이디로도 검색할 수 있습니다.</p>
 		<!-- 페이징 관련 -->
 		<input type="hidden" name="pageNum" value="1"/>
 	</form>
@@ -26,30 +26,28 @@ table {font-size: 75%;}
 		<thead>
 			<tr>
 				<th>아이디</th>
-				<th>이름</th>
-				<th>주소</th>
-				<th>성별</th>
-				<th>이메일</th>
+				<th>기업명</th>
+				<th>사업자 번호</th>
+				<th>기업주소</th>
 				<th>연락처</th>
-				<th>생년월일</th>
+				<th>이메일</th>
 				<th>회원상태</th>
 				<th>상태수정</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:choose>
-				<c:when test="${clientList.size()>0}">
-					<c:forEach items="${clientList}" var="client">
+				<c:when test="${companyList.size()>0}">
+					<c:forEach items="${companyList}" var="company">
 						<tr>
-							<td><a href="clientStateDetailPopup.do?cl_id=${client.cl_id}" onclick="window.open(this.href, '', 'width=700, height=300, left=100, top=50'); return false;">${client.cl_id}</a></td>
-							<td>${client.cl_name}</td>
-							<td>${client.cl_address}</td>
-							<td>${client.cl_gender}</td>
-							<td>${client.cl_email}</td>
-							<td>${client.cl_call}</td>
-							<td>${client.cl_birth}</td>
-							<td>${client.cl_state}</td>				
-							<td><a href="clientStateChangePopup.go?cl_id=${client.cl_id}" onclick="window.open(this.href, '', 'width=500, height=300, left=100, top=50'); return false;">변경하기</a></td>
+							<td><a href="companyStateDetailPopup.do?com_id=${company.com_id}" onclick="window.open(this.href, '', 'width=700, height=300, left=100, top=50'); return false;">${company.com_id}</a></td>
+							<td>${company.com_name}</td>
+							<td>${company.com_business_no}</td>
+							<td>${company.com_address}</td>
+							<td>${company.com_call}</td>
+							<td>${company.com_email}</td>
+							<td>${company.com_state}</td>				
+							<td><a href="companyStateChangePopup.go?com_id=${company.com_id}" onclick="window.open(this.href, '', 'width=500, height=300, left=100, top=50'); return false;">변경하기</a></td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -96,7 +94,7 @@ table {font-size: 75%;}
     	e.preventDefault();
         if($("#searchOption").val()=="" && $("#search").val()==""){
     		$("#moveForm").find("input[name='pageNum']").val($(this).attr("href"));
-        	$("#moveForm").attr("action", "/clientManagementList.do");
+        	$("#moveForm").attr("action", "/companyManagementList.do");
     		$("#moveForm").submit();
         } else {
         	$("#form").find('input[name="pageNum"]').val($(this).attr("href"));

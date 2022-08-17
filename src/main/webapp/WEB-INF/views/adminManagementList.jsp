@@ -27,10 +27,11 @@
 					<!-- <td><input type="button" value="변경하기" class="adminStatePopup" onclick=" adminStateChangePopup()"/></td> -->
 					<td><a href="adminStateChangePopup.go?ad_id=${admin.ad_id}" onclick="window.open(this.href, '', 'width=500, height=300, left=100, top=50'); return false;">변경하기</a></td>
 				</tr>
-			</c:forEach>
+			 </c:forEach>
 		</tbody>
-		
 	</table>
+	<br>
+    <input type="button" value="관리자 계정 등록" onclick="location.href='joinFormAdmin.go'"/>		
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
