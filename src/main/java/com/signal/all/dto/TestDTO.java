@@ -10,6 +10,34 @@ public class TestDTO {
 	private String st_que;
 	private int st_hidden;
 	private String st_keyword;
+	private int it_no;
+	private String it_que;
+	private int it_hidden;
+	private String it_keyword;
+	public int getIt_no() {
+		return it_no;
+	}
+	public void setIt_no(int it_no) {
+		this.it_no = it_no;
+	}
+	public String getIt_que() {
+		return it_que;
+	}
+	public void setIt_que(String it_que) {
+		this.it_que = it_que;
+	}
+	public int getIt_hidden() {
+		return it_hidden;
+	}
+	public void setIt_hidden(int it_hidden) {
+		this.it_hidden = it_hidden;
+	}
+	public String getIt_keyword() {
+		return it_keyword;
+	}
+	public void setIt_keyword(String it_keyword) {
+		this.it_keyword = it_keyword;
+	}
 	public String getCl_id() {
 		return cl_id;
 	}
