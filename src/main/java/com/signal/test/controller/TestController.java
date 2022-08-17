@@ -93,10 +93,13 @@ public class TestController {
 		ArrayList<TestDTO> list;
 		if(state.equals("all")) {
 		list = service.selfQueList();
+		model.addAttribute("state","all");
 		} else if(state.equals("show")) {
 			list=service.selfQueListB();
+			model.addAttribute("state","show");
 		} else {
 			list = service.selfQueListA();
+			model.addAttribute("state","hide");
 		}
 		model.addAttribute("list", list);
 		return "./selfTest/selfTestQue";

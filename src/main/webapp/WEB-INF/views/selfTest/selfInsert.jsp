@@ -26,7 +26,7 @@
 	
 	<table class="selfResult" id="section">
 		<thead>
-			<tr><th><button onclick="selfTestUp()">셀프평가 수정</button></th></tr>
+			<tr><th colspan="2"><button style="float:right;" onclick="selfTestUp()">셀프평가 수정</button></th></tr>
 			<tr>
 				<th>키워드</th>
 				<th>점수</th>
