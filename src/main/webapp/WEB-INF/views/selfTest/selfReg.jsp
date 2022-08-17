@@ -44,7 +44,7 @@
 				<th colspan="2">셀프코멘트</th>				
 			</tr>
 			<tr>
-				<td colspan="2"><textarea name="st_comment"></textarea></td>
+				<td colspan="2"><textarea id="st_comment" name="st_comment"></textarea></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -66,43 +66,38 @@
 		console.log(cl_id + '/' + st_no + '/' + st_score);
 		location.href="scoreReg.do?cl_id="+cl_id+"&&st_no="+st_no+"&&st_score="+st_score;
 	}) */
-	var arr = [];
-	var arrB =[];
+	var arr1 = [];
+	var arr2 = [];
+	var arr3 = [];	
 	
 	function getResult(){		
-		for (var i = 0; i < $('#list').find('input[name="st_no"]').length; i++) {
-			console.log($('#list').find('input[name="cl_id"]')[i].value);
-			console.log($('#list').find('input[name="st_no"]')[i].value);		
-			console.log($('#list').find('select[name="st_score"]')[i].value);
-			
-			arr[i] = {
-					"cl_id" : $('#list').find('input[name="cl_id"]')[i].value,
-					"st_no" : $('#list').find('input[name="st_no"]')[i].value,
-					"st_score" : $('#list').find('select[name="st_score"]')[i].value
-					}
-			
+		for (var i = 0; i < $('#list').find('input[name="st_no"]').length; i++) {			
+			arr1[i] = $('#list').find('input[name="cl_id"]')[i].value
+			arr2[i] = $('#list').find('input[name="st_no"]')[i].value
+			arr3[i] = $('#list').find('select[name="st_score"]')[i].value			
 		}
-		
-		console.log(arr);
-		console.log(arrB);
-		
-		var st_list = {
-				"st_list" : JSON.stringify(arr)
-		}
+		var st_comment = $('#st_comment').val()
+		var obj={};
+		obj.cl_id=arr1;
+		obj.st_no=arr2;
+		obj.st_score=arr3;
+		obj.st_comment=st_comment;
+		var param ={"values":obj};		
+		console.log(param);
 		
 		$.ajax({
 			type:'post',
-			url:'stReg.ajax',
-			data:st_list,
-			dataType:'JSON',			
+			url:'rest/stReg',
+			data:JSON.stringify(param),
+			dataType:'JSON',
+			contentType:'application/json; charset=utf-8',
 			success:function(data){
-				
+				console.log(data);
 			},
 			error:function(e){
 				console.log(e);
-			}
-		
-		})
+			}		
+		});
 		
 		
 	}

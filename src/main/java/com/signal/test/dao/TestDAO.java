@@ -14,7 +14,7 @@ public interface TestDAO {
 
 	int selfReg(HashMap<String, Object> params);
 
-	int selfContentReg(String self_content, String cl_id);
+	int selfContentReg(String id, String st_comment);
 
 	int scoreReg(HashMap<String, Object> params);
 
@@ -27,5 +27,9 @@ public interface TestDAO {
 	ArrayList<TestDTO> selfQueListB();
 
 	void stHiddenUp(String st_no, String st_hidden);
+
+	void stReg(HashMap<String, Object> map);
+
+	String selfComment(String id);
 
 }

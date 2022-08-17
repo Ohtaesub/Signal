@@ -14,6 +14,11 @@
 	}
 </style>
 <body>
+	<div id="section">
+		<h1>나를 판단하는 힘</h1>
+		<h4>'그날의 분위기' 셀프평가</h4>
+	</div>
+	
 	<div class="selfTestReg" id="section">
 		<button onclick="selfTestReg()">셀프평가 등록</button>
 		<input type="hidden" id="cl_id" value="${cl_id}"/>
@@ -21,6 +26,7 @@
 	
 	<table class="selfResult" id="section">
 		<thead>
+			<tr><th><button onclick="selfTestUp()">셀프평가 수정</button></th></tr>
 			<tr>
 				<th>키워드</th>
 				<th>점수</th>
@@ -33,6 +39,12 @@
 					<td>${self.st_score}</td>
 				</tr>
 			</c:forEach>
+			<tr>
+				<th colspan="2">셀프 코멘트</th>				
+			</tr>
+			<tr>
+				<td colspan="2">${st_comment }</td>
+			</tr>
 		</tbody>
 	</table>
 	

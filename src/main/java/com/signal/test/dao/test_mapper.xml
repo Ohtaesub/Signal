@@ -9,6 +9,11 @@
 		WHERE cl_id=#{id}
 	</select>
 	
+	<select id="selfComment" parameterType="String" resultType="String">
+		SELECT st_comment FROM client
+		WHERE cl_id=#{id}
+	</select>
+	
 	<select id="selfRegGo" resultType="test">
 		SELECT st_que, st_keyword, st_no FROM self_test
 		WHERE st_hidden=1;
@@ -21,8 +26,8 @@
 	
 	<update id="selfContentReg" parameterType="String">
 		UPDATE client SET
-		st_comment = #{st_comment}
-		WHERE cl_id=#{cl_id}
+		st_comment = #{param2}
+		WHERE cl_id=#{param1}
 	</update>	
 	
 	<select id="selfQueList" resultType="test">
@@ -48,5 +53,10 @@
 	<select id="interviewQueList" resultType="test">
 		SELECT it_no, it_que, it_hidden, it_keyword FROM interview_test
 	</select>
+	
+	<insert id="stReg" parameterType="hashmap">
+		INSERT INTO self_test_result (cl_id, st_no, st_score)
+		VALUES(#{cl_id},#{st_no},#{st_score})		
+	</insert>
 	
 </mapper>

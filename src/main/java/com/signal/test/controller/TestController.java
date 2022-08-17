@@ -2,7 +2,6 @@ package com.signal.test.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,13 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.signal.all.dto.ResumeDTO;
 import com.signal.all.dto.TestDTO;
 import com.signal.test.service.TestService;
 
@@ -57,19 +56,6 @@ public class TestController {
 			model.addAttribute("msg", msg);
 		}
 		return "./selfTest/selfReg";
-	}
-
-	@RequestMapping("/stReg.ajax")
-	@ResponseBody
-	public HashMap<String, Object> stReg(HttpServletRequest request,@RequestParam(value="st_list") ArrayList<String> params) {
-		logger.info("사이즈는?"+params.size());
-		logger.info("흠? " + params.get(2) );
-		logger.info("params : {}",params);
-		/*
-		 * logger.info("흠? " + params.get("st_list")); logger.info("흠? " +
-		 * params.get("st_list[0]")); return service.stReg(params);
-		 */
-		return null;
 	}
 	
 	@RequestMapping(value = "selfTestQue.go", method = RequestMethod.GET)
