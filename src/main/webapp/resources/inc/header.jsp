@@ -72,9 +72,9 @@
 		        <c:if test="${sessionScope.isAdmin.equals('true')}">
 		            <ul class="sidemenu">
 		                <li><a href="/adminManagementList.do">관리자계정관리</a></li>
-		                <li><a href="">직무분류관리</a></li>
-		                <li><a href="/selfInsert.go">셀프평가관리</a></li>
-		                <li><a href="">면접평가관리</a></li>
+		                <li><a href="/jobClassReg.go">직무분류관리</a></li>
+		                <li><a href="/selfTestQue.go">셀프평가관리</a></li>
+		                <li><a href="/interviewTestQue.go">면접평가관리</a></li>
 		                <li><a href="">이의제기관리</a></li>
 		                <li><a href="">블라인드관리</a></li>
 		                <li><a href="/clientManagementList.do">개인회원관리</a></li>
