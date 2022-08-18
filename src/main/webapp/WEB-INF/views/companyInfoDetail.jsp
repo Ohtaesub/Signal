@@ -84,7 +84,7 @@
 				   			<tr>
 								<th rowspan="2">기업로고</th>
 								<td>
-									<input type="file" name="ci_photo" multiple="multiple" src="/photo/${dto.ci_photo}" value="${dto.ci_photo}"  width="200"/>
+									<input type="file" name="ci_photo" multiple="multiple" src="/photo/${dto.ci_photo}" value="${dto.ci_photo}" width="200"/>
 								</td>
 							</tr>
 								<tr>
