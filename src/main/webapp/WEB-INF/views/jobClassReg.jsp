@@ -24,7 +24,13 @@
 		<tbody id="jobClass">
 			<c:forEach items="${jpList}" var="jp">
 				<tr>									
-					<td><button onclick="jpClick(${jp.jp_no})">${jp.jp_name}</button></td>					
+					<td>
+						<button onclick="jpClick(${jp.jp_no})">${jp.jp_name}</button>
+						<select style="float:right;" name="jp_hidden">
+							<option value="0" ${jp.jp_hidden==0?'selected="selected"':''}>숨김</option>
+							<option value="1" ${jp.jp_hidden==1?'selected="selected"':''}>노출</option>
+						</select>
+					</td>					
 				</tr>
 			</c:forEach>			
 		</tbody>
@@ -37,8 +43,15 @@
 		</thead>
 		<tbody id="jobClass">
 			<c:forEach items="${jcList}" var="jc">
-				<tr>									
-					<td><button onclick="jcClick(${jc.jc_no})">${jc.jc_name}</button></td>					
+				<tr>								
+					<td>
+						<input type="hidden" value="${jc.jc_no}"/>
+						${jc.jc_name}
+						<select style="float:right;" name="jc_hidden">
+							<option value="0" ${jc.jc_hidden==0?'selected="selected"':''}>숨김</option>
+							<option value="1" ${jc.jc_hidden==1?'selected="selected"':''}>노출</option>
+						</select>
+					</td>				
 				</tr>
 			</c:forEach>			
 		</tbody>

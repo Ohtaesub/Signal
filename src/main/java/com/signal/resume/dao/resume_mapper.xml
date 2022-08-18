@@ -123,17 +123,17 @@
 	</update>
 	
 	<select id="jpList" resultType="resume">
-		SELECT jp_no, jp_name FROM job_pa
+		SELECT jp_no, jp_name, jp_hidden FROM job_pa
 		WHERE jp_no > 1
 	</select>
 	
 	<select id="jcList" resultType="resume" parameterType="String">
-		SELECT jp_no, jc_no, jc_name FROM job_ch
+		SELECT jp_no, jc_no, jc_name, jc_hidden FROM job_ch
 		WHERE jp_no=#{jp_no}
 	</select>
 	
 	<select id="jcCheck" resultType="resume" parameterType="String">
-		SELECT jc.jp_no, jc_no, jp_name, jc_name FROM job_ch jc 
+		SELECT jc.jp_no, jc_no, jp_name, jc_name, jc_hidden FROM job_ch jc 
 		LEFT OUTER JOIN job_pa jp on jp.jp_no = jc.jp_no 
 		WHERE jc_no=#{jc_no};
 	</select>
