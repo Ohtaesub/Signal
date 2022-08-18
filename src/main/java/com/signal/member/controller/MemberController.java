@@ -201,6 +201,90 @@ public class MemberController {
 	public String login(Model model,HttpServletRequest request) throws Exception{
 		logger.info("로그인 요청!");
 		
+		String pclose = "pclose";
+		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String state = request.getParameter("memberSelect");
+		
+		// 개인회원 로그인
+		String clientLogin = service.clientLogin(id,pw);
+		MemberDTO client = service.clientdto(clientLogin);
+		
+		// 기업회원 로그인
+		String companyLogin = service.companyLogin(id,pw);
+		MemberDTO company = service.companydto(companyLogin);
+		
+		// 관리자 로그인
+		String adminLogin = service.adminLogin(id,pw);
+		MemberDTO admin = service.admindto(adminLogin);
+		
+		
+		logger.info("개인회원 로그인 시도 아이디 : "+clientLogin);
+		logger.info("기업회원 로그인 시도 아이디 : "+companyLogin);
+		logger.info("관리자 로그인 시도 아이디 : "+adminLogin);
+		logger.info(state);
+		
+		String page = "loginPopup";
+		String msg = "로그인 실패!";
+		HttpSession session = request.getSession();
+		if(clientLogin !=null && companyLogin==null && adminLogin==null) {
+			if(client.getCl_state().equals("탈퇴회원")) {
+				msg = "탈퇴된 회원입니다.";
+				model.addAttribute("msg",msg);
+			}else if(state.equals("개인회원")){				
+				msg = "개인회원 로그인에 성공하였습니다!";
+				model.addAttribute("pclose",pclose);
+				model.addAttribute("msg",msg);
+				session.setAttribute("loginId", clientLogin);
+				session.setAttribute("isClient", "true");
+			}else {
+				msg ="아이디 / 비밀번호 또는 회원상태를 확인해주세요.";
+				model.addAttribute("msg",msg);
+			}
+		}else if(companyLogin !=null && clientLogin==null && adminLogin==null) {
+			if(company.getCom_state().equals("탈퇴회원")){
+				msg = "탈퇴된 회원입니다.";
+				model.addAttribute("msg",msg);
+			}else if(state.equals("기업회원")){
+			msg = "기업회원 로그인에 성공하였습니다!";
+			model.addAttribute("pclose",pclose);
+			model.addAttribute("msg",msg);
+			session.setAttribute("loginId", companyLogin);
+			session.setAttribute("isCompany", "true");
+			}else {
+				msg ="아이디 / 비밀번호 또는 회원상태를 확인해주세요.";
+				model.addAttribute("msg",msg);
+				page = "loginPopup";
+			}
+		}else if(adminLogin !=null && companyLogin==null && clientLogin==null) {
+			if(admin.getAd_state().equals("탈퇴회원")) {
+				msg = "탈퇴된 회원입니다.";
+				model.addAttribute("msg",msg);
+			}else if(state==null) {
+				msg = "관리자 로그인에 성공하였습니다!";
+				model.addAttribute("pclose",pclose);
+				model.addAttribute("msg",msg);
+				session.setAttribute("loginId", adminLogin);
+				session.setAttribute("isAdmin", "true");
+			}else {
+				msg ="아이디 / 비밀번호 또는 회원상태를 확인해주세요.";
+				model.addAttribute("msg",msg);
+			}
+		}else {
+			msg ="아이디 / 비밀번호 또는 회원상태를 확인해주세요.";
+			model.addAttribute("msg",msg);
+		}
+		
+		return page;
+	}
+	
+	/*
+	// 개인회원,기업회원,관리자 로그인 (String으로 받아옴)
+	@RequestMapping(value = "/login.do", method= RequestMethod.POST)
+	public String login(Model model,HttpServletRequest request) throws Exception{
+		logger.info("로그인 요청!");
+		
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -279,7 +363,8 @@ public class MemberController {
 		}
 		
 		return page;
-	}	
+	}
+	*/
 		
 		
 		
@@ -875,15 +960,18 @@ public class MemberController {
    	
    	// 관리자 상태수정 요청
    	@RequestMapping(value="/adminStateChange.do")
-   	public String adminStateChange(RedirectAttributes redirectAttr,@RequestParam HashMap<String, String> params) {
+   	public String adminStateChange(Model model,@RequestParam HashMap<String, String> params) {
+   		
+   		String pclose = "pclose";
    		
    		logger.info("params : {}"+params);
    		
    		service.adminStateUpdate(params);
    		
-   		redirectAttr.addFlashAttribute("msg","수정에 성공하였습니다.");
+   		model.addAttribute("pclose",pclose);
+   		model.addAttribute("msg","수정에 성공하였습니다.");
    		
-   		return "redirect:/adminManagementList.do";
+   		return "adminStateChangePopup";
    	}
    	
    	
@@ -972,15 +1060,17 @@ public class MemberController {
    	
    	// 개인회원 상태수정 요청
    	@RequestMapping(value="/clientStateChange.do")
-   	public String clientStateChange(RedirectAttributes redirectAttr,@RequestParam HashMap<String, String> params) {
-   		
+   	public String clientStateChange(Model model,@RequestParam HashMap<String, String> params) {
    		logger.info("params : {}"+params);
+   		
+   		String pclose = "pclose";
    		
    		service.clientStateUpdate(params);
    		
-   		redirectAttr.addFlashAttribute("msg","수정에 성공하였습니다.");
+   		model.addAttribute("pclose",pclose);
+   		model.addAttribute("msg","수정에 성공하였습니다.");
    		
-   		return "redirect:/adminManagementList.do";
+   		return "clientStateChangePopup";
    	}
    	
    	
@@ -1069,15 +1159,18 @@ public class MemberController {
    	
    	// 기업회원 상태수정 요청
    	@RequestMapping(value="/companyStateChange.do")
-   	public String companyStateChange(RedirectAttributes redirectAttr,@RequestParam HashMap<String, String> params) {
+   	public String companyStateChange(Model model,@RequestParam HashMap<String, String> params) {
    		
    		logger.info("params : {}"+params);
    		
+   		String pclose = "pclose";
+   		
    		service.companyStateChange(params);
    		
-   		redirectAttr.addFlashAttribute("msg","수정에 성공하였습니다.");
+   		model.addAttribute("pclose",pclose);
+   		model.addAttribute("msg","수정에 성공하였습니다.");
    		
-   		return "redirect:/companyManagementList.do";
+   		return "companyStateChangePopup";
    	}
    	
    	

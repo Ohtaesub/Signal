@@ -38,6 +38,7 @@
 		<input type="submit" value="수정"/>
 	</form>
 </body>
+<%@ include file="../../resources/inc/footer.jsp" %>
 <script>
 	function companyStateUpdate(){
 		confirm("정말로 수정하시겠습니까?");
@@ -46,6 +47,13 @@
 			opener.document.location.href="redirect:/companyManagementList.do";
 			self.close();
 		}
+	}
+	
+	//팝업창 닫기
+	var pclose = "${pclose}";
+	if(pclose){
+		opener.document.location.reload();
+		window.close();
 	}
 </script>
 </html>

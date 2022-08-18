@@ -33,9 +33,9 @@
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
 
-	// 팝업창 닫기가 안대요..하...
-	var loginId = "${loginId}";
-	if(loginId=="true"){
+	// 팝업창 닫기
+	var pclose = "${pclose}";
+	if(pclose){
 		opener.document.location.reload();
 		window.close();
 	}
