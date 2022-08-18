@@ -126,6 +126,7 @@ public class ResumeController {
 		
 		ArrayList<ResumeDTO> jplist = service.jpList();
 		ArrayList<ResumeDTO> list = service.jcList(jp_no);
+		model.addAttribute("jp_no", jp_no);
 		model.addAttribute("jcList", list);
 		model.addAttribute("jpList", jplist);
 		return "./resume/jobClassPop";
