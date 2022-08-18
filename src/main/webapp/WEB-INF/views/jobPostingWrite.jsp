@@ -93,7 +93,7 @@
 								<th>직무분류</th>
 								<td>	
 									<select name="jp_no" required="required">
-										<option value="none">대분류</option>
+										<option value="">대분류</option>
 										<option value="2">IT</option>
 										<option value="3">건축</option>
 										<option value="4">항공</option>																				
@@ -102,7 +102,7 @@
 									</select>
 									 > 
 									<select name="jc_no" required="required">
-										<option value="none">중분류</option>									
+										<option value="">중분류</option>									
 										<option value="6">퍼블리셔</option>
 										<option value="2">SI개발</option>
 										<option value="3">데이터분석가</option>

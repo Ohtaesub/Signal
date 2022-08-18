@@ -116,7 +116,7 @@
 										<lable><input type="radio" name="jpo_field" value="경력" required="required"/> 경력</lable>&nbsp;&nbsp;
 										<lable><input type="radio" name="jpo_field" value="무관" checked="checked" required="required"/> 무관</lable>
 									</c:if>
-								<td>
+								</td>
 							</tr>
 				   			<tr>
 								<th>근무형태</th>
@@ -136,31 +136,31 @@
 								<th>직무분류</th>
 								<td>	
 									<select name="jp_no" required="required" value="${dto1.jp_no}" >
-										<option value="none">대분류</option>
-										<option value="2">IT</option>
-										<option value="3">건축</option>
-										<option value="4">항공</option>																				
-										<option value="5">전기</option>
-										<option value="6">축산</option>
+										<option value="" >대분류</option>
+										<option value="2" <c:if test="${(dto1.jp_no).equals('2')}">selected</c:if>>IT</option>
+										<option value="3" <c:if test="${(dto1.jp_no).equals('3')}">selected</c:if>>건축</option>
+										<option value="4" <c:if test="${(dto1.jp_no).equals('4')}">selected</c:if>>항공</option>																				
+										<option value="5" <c:if test="${(dto1.jp_no).equals('5')}">selected</c:if>>전기</option>
+										<option value="6" <c:if test="${(dto1.jp_no).equals('6')}">selected</c:if>>축산</option>
 									</select> 
 									 > 
 									<select name="jc_no" required="required" value="${dto1.jc_no}" >
-										<option value="none">중분류</option>									
-										<option value="6">퍼블리셔</option>
-										<option value="2">SI개발</option>
-										<option value="3">데이터분석가</option>
-										<option value="4">건설관리</option>
-										<option value="5">토목설계</option>
-										<option value="7">내진설계</option>
-										<option value="10">승무원</option>
-										<option value="8">항공운송</option>
-										<option value="9" >항공정비</option>
-										<option value="11">전기설계</option>
-										<option value="12">전기기사</option>
-										<option value="13">조경설계</option>
-										<option value="14">축산식품가공</option>
-										<option value="15">축산식품유통</option>
-										<option value="16">도축</option>																																						
+										<option value="">중분류</option>									
+										<option value="6" <c:if test="${(dto1.jc_no).equals('6')}">selected</c:if>>퍼블리셔</option>
+										<option value="2" <c:if test="${(dto1.jc_no).equals('2')}">selected</c:if>>SI개발</option>
+										<option value="3" <c:if test="${(dto1.jc_no).equals('3')}">selected</c:if>>데이터분석가</option>
+										<option value="4" <c:if test="${(dto1.jc_no).equals('4')}">selected</c:if>>건설관리</option>
+										<option value="5" <c:if test="${(dto1.jc_no).equals('5')}">selected</c:if>>토목설계</option>
+										<option value="7" <c:if test="${(dto1.jc_no).equals('7')}">selected</c:if>>내진설계</option>
+										<option value="10" <c:if test="${(dto1.jc_no).equals('10')}">selected</c:if>>승무원</option>
+										<option value="8" <c:if test="${(dto1.jc_no).equals('8')}">selected</c:if>>항공운송</option>
+										<option value="9" <c:if test="${(dto1.jc_no).equals('9')}">selected</c:if>>항공정비</option>
+										<option value="11" <c:if test="${(dto1.jc_no).equals('11')}">selected</c:if>>전기설계</option>
+										<option value="12" <c:if test="${(dto1.jc_no).equals('12')}">selected</c:if>>전기기사</option>
+										<option value="13" <c:if test="${(dto1.jc_no).equals('13')}">selected</c:if>>조경설계</option>
+										<option value="14" <c:if test="${(dto1.jc_no).equals('14')}">selected</c:if>>축산식품가공</option>
+										<option value="15" <c:if test="${(dto1.jc_no).equals('15')}">selected</c:if>>축산식품유통</option>
+										<option value="16" <c:if test="${(dto1.jc_no).equals('16')}">selected</c:if>>도축</option>																																						
 									</select>
 								</td>
 							</tr>
@@ -168,24 +168,24 @@
 								<th>근무지역</th>
 								<td>
 									<select name="jpo_region" required="required" value="${dto1.jpo_region}">
-										<option value="전체">전체</option>
-										<option value="서울">서울</option>
-										<option value="경기">경기</option>
-										<option value="인천">인천</option>
-										<option value="대전">대전</option>
-										<option value="강원">강원</option>
-										<option value="충남">충남</option>
-										<option value="충북">충북</option>
-										<option value="경남">경남</option>
-										<option value="경북">경북</option>
-										<option value="세종">세종</option>
-										<option value="전남">전남</option>
-										<option value="전북">전북</option>
-										<option value="대구">대구</option>
-										<option value="부산">부산</option>
-										<option value="울산">울산</option>
-										<option value="광주">광주</option>
-										<option value="제주">제주</option>
+										<option value="전체" <c:if test="${(dto1.jpo_region).equals('전체')}">selected</c:if>>전체</option>
+										<option value="서울" <c:if test="${(dto1.jpo_region).equals('서울')}">selected</c:if>>서울</option>
+										<option value="경기" <c:if test="${(dto1.jpo_region).equals('경기')}">selected</c:if>>경기</option>
+										<option value="인천" <c:if test="${(dto1.jpo_region).equals('인천')}">selected</c:if>>인천</option>
+										<option value="대전" <c:if test="${(dto1.jpo_region).equals('대전')}">selected</c:if>>대전</option>
+										<option value="강원" <c:if test="${(dto1.jpo_region).equals('강원')}">selected</c:if>>강원</option>
+										<option value="충남" <c:if test="${(dto1.jpo_region).equals('충남')}">selected</c:if>>충남</option>
+										<option value="충북" <c:if test="${(dto1.jpo_region).equals('충북')}">selected</c:if>>충북</option>
+										<option value="경남" <c:if test="${(dto1.jpo_region).equals('경남')}">selected</c:if>>경남</option>
+										<option value="경북" <c:if test="${(dto1.jpo_region).equals('경북')}">selected</c:if>>경북</option>
+										<option value="세종" <c:if test="${(dto1.jpo_region).equals('세종')}">selected</c:if>>세종</option>
+										<option value="전남" <c:if test="${(dto1.jpo_region).equals('전남')}">selected</c:if>>전남</option>
+										<option value="전북" <c:if test="${(dto1.jpo_region).equals('전북')}">selected</c:if>>전북</option>
+										<option value="대구" <c:if test="${(dto1.jpo_region).equals('대구')}">selected</c:if>>대구</option>
+										<option value="부산" <c:if test="${(dto1.jpo_region).equals('부산')}">selected</c:if>>부산</option>
+										<option value="울산" <c:if test="${(dto1.jpo_region).equals('울산')}">selected</c:if>>울산</option>
+										<option value="광주" <c:if test="${(dto1.jpo_region).equals('광주')}">selected</c:if>>광주</option>
+										<option value="제주" <c:if test="${(dto1.jpo_region).equals('제주')}">selected</c:if>>제주</option>
 									</select>
 								</td>
 							</tr>
@@ -198,12 +198,12 @@
 							</tr>
 							<tr>
 								<th>최종학력</th>
-								<td>
+								<td>		
 									<select name="jpo_education" value="${dto1.jpo_education}" required="required">
-										<option value="고등학교 졸업">고등학교 졸업</option>
-										<option value="전문대학교 졸업">전문대학교 졸업</option>
-										<option value="대학교 졸업">대학교 졸업</option>
-										<option value="대학원 졸업">대학원 졸업</option>
+										<option value="고등학교 졸업" <c:if test="${(dto1.jpo_education).equals('고등학교 졸업')}">selected</c:if>>고등학교 졸업</option>
+										<option value="전문대학교 졸업" <c:if test="${(dto1.jpo_education).equals('전문대학교 졸업')}">selected</c:if>>전문대학교 졸업</option>
+										<option value="대학교 졸업" <c:if test="${(dto1.jpo_education).equals('대학교 졸업')}">selected</c:if>>대학교 졸업</option>
+										<option value="대학원 졸업" <c:if test="${(dto1.jpo_education).equals('대학원 졸업')}">selected</c:if>>대학원 졸업</option>
 									</select> 이상
 								</td>
 							</tr>

@@ -65,9 +65,11 @@ public interface JobPostingDAO {
 	//int jobPostingMainTotal(String searchOption,String searchOption1,String searchOption2, String search);
 
 	
-	ArrayList<InterviewDTO> jobPostingMainSearch(String searchOption,String search, int skip);
+	ArrayList<JobPostingDTO> jobPostingMainSearch(String searchOption,String search, int skip);
 
 	int jobPostingMainTotal(String searchOption, String search);
+
+	JobPostingDTO PostingDetailMainPage(String jpo_no, String com_id);
 	
 
 	

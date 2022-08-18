@@ -334,7 +334,7 @@ public class JobPostingController {
 
 			//옵션 페이징처리
 			int skip=(pageNum-1) * 10;
-			ArrayList<InterviewDTO> dto = service.jobPostingMainSearch(searchOption, search,skip);
+			ArrayList<JobPostingDTO> dto = service.jobPostingMainSearch(searchOption, search,skip);
 			model.addAttribute("jobPostingMain",dto);
 			
 			int mainPostingPasingTotal=service.jobPostingMainTotal(searchOption, search);
@@ -374,7 +374,24 @@ public class JobPostingController {
 		return "jobPostingMain";
 	}
 	*/
-
+	
+	// 메인 채용공고 상세보기
+	@RequestMapping(value = "/PostingDetailMain.go")
+	public String PostingDetailMainPage(Model model, @RequestParam String jpo_no,@RequestParam String com_id, HttpSession session) {
+		
+			logger.info( jpo_no+"상세보기 요청: " + com_id);
+		      
+		    String id = (String) session.getAttribute("loginId"); 
+			// 모집마감일이 오늘날짜보다 전이라면 jpo_state를 '마감'으로 업데이트 하는 기능
+			service.close();
+			logger.info("모집여부 마감 요청");
+			if(session.getAttribute("isClient")!= null || session.getAttribute("loginId") == null) {
+				service.upHit(jpo_no);
+			};
+		    service.PostingDetailMainPage(model,jpo_no,com_id); 
+		  	
+		return "PostingDetailMain";
+	}	
 
 	
 	

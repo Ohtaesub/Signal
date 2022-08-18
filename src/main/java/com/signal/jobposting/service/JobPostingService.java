@@ -347,13 +347,25 @@ public class JobPostingService {
 		return dao.mainPostingPasingTotal(params);
 	}
 
-	public ArrayList<InterviewDTO> jobPostingMainSearch(String searchOption, String search, int skip) {
+	public ArrayList<JobPostingDTO> jobPostingMainSearch(String searchOption, String search, int skip) {
 		return dao.jobPostingMainSearch(searchOption,search,skip);
 	}
 
 	public int jobPostingMainTotal(String searchOption,  String search) {
 		return dao.jobPostingMainTotal(searchOption,search);
 	}
+
+	public void PostingDetailMainPage(Model model, String jpo_no, String com_id) {
+	          
+		JobPostingDTO dto = dao.PostingDetailMainPage(jpo_no,com_id);
+	      logger.info("상세보기 번호?" + jpo_no +" / "+ com_id);
+	      
+	      model.addAttribute("dto", dto);
+	   
+	   }
+	
+	
+	
 	
 	/*
 	public ArrayList<InterviewDTO> jobPostingMainSearch(String searchOption, String searchOption1, String searchOption2, String search, int skip) {

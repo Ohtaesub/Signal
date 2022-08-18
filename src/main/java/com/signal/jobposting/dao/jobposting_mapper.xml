@@ -318,6 +318,7 @@
 			jp.jpo_state,
 			jp.jpo_region,
 			com.com_name,
+			com.com_id,
 			p.jp_name,
 			c.jc_name
 		FROM job_posting jp 
@@ -414,7 +415,45 @@
 			</if>
 		</select>
 
-	
+	<select id="PostingDetailMainPage" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
+		SELECT 
+	   		co.com_id,
+	   		co.com_name,
+	   		jp.jpo_title,
+	   		jp.jpo_type,
+	   		jp.jpo_region,
+	   		jp.jpo_field,
+	   		jp.jpo_start,
+	   		jp.jpo_deadline,
+	   		jp.jpo_state,
+			jp.jpo_education,
+			jp.jpo_salary,
+			jp.jpo_contact,
+			jp.jpo_name,
+			jp.jpo_welfare,
+			jp.jpo_photo,
+			(SELECT jpo_views FROM job_posting where jpo_no = #{param1}) AS jpo_views,
+			p.jp_name,
+			c.jc_name,
+			jp.jpo_no,
+			p.jp_name,
+			c.jc_name,
+			ci.ci_web,
+			ci.ci_photo,
+			count(i.apply_no) AS apply,
+			count(i.inter_comment) AS comment,
+			ROUND(count(i.inter_comment)*100/(count(i.apply_no)),0) AS comment_a 
+	   	FROM 
+	   		job_posting jp 
+	   	LEFT OUTER JOIN job_pa p ON p.jp_no = jp.jp_no 
+	   	LEFT OUTER JOIN job_ch c ON c.jc_no = jp.jc_no 
+	   	LEFT OUTER JOIN company co ON co.com_id = jp.com_id 
+	   	LEFT OUTER JOIN com_info ci ON ci.com_id = jp.com_id 
+	   	LEFT OUTER JOIN apply a ON a.jpo_no = jp.jpo_no 
+		LEFT OUTER JOIN interview i ON i.apply_no = a.apply_no 
+	   	WHERE 
+	   		jp.jpo_no = #{param1} OR jp.com_id = #{param2}
+ 	</select>
 	
 	
 	

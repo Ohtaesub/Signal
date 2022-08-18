@@ -175,7 +175,7 @@
 	   					<tr>
 							<td class="cen">${mainJpoList.jpo_no}</td>
 							<td class="cen">${mainJpoList.com_name}</td>
-							<td><a href="jobPostingDetail.do?jpo_no=${mainJpoList.jpo_no}" >${mainJpoList.jpo_title}</a></td>
+							<td><a href="PostingDetailMain.go?jpo_no=${mainJpoList.jpo_no}&&com_id=${mainJpoList.com_id}" >${mainJpoList.jpo_title}</a></td>
 							<td class="cen">${mainJpoList.jp_name} > ${mainJpoList.jc_name}</td>
 							<td class="cen">${mainJpoList.jpo_region}</td>
 							<td class="cen">${mainJpoList.jpo_start} ~ ${mainJpoList.jpo_deadline}</td>
