@@ -1,0 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../resources/js/jquery.twbsPagination.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<style>
+	hr{
+	 width: 100%;	
+	}
+</style>
+</head>
+<body>
+	<div id="header">
+		<p id="logo">
+		    <a href="/"><img src="resources/images/Logo.jpg" alt="Signal" width="150" height="130"/></a>
+		</p>
+		<ul class="nav">
+		    <li><a href="/jobPostingMain.go">채용공고</a></li>
+		    <li><a href="/personList.go">인재채용</a></li>
+		</ul>
+		<hr style="border: solid 1px black;"/>
+		<c:if test="${sessionScope.isClient.equals('true') || sessionScope.isCompany.equals('true')}">
+			<div id="container" style="color:white">  
+		        <aside>
+		        	<strong>${sessionScope.loginId}</strong>님 반갑습니다 
+		        	<br>
+		        	<c:if test="${sessionScope.isClient.equals('true')}">
+		        		<a href="/clientInfoManagement.do">마이페이지</a> 
+		        	</c:if>
+		        	<c:if test="${sessionScope.isCompany.equals('true')}">
+		        		<a href="/companyInfoManagement.do">마이페이지</a> 
+		        	</c:if>
+		        	<span>|</span> <a href="logout.do">로그아웃</a>
+		        </aside>
+			</div>
+		</c:if>
+	</div>
+    
+</body>
+<script>
+	//로그인 팝업창 by 상인
+	function showPopup() {
+		window.open("loginPopup.go","", "width=400, height=300, left=100, top=50");
+	
+	}
+
+</script>
+</html>

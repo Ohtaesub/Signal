@@ -3,7 +3,10 @@ package com.signal.jobposting.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.signal.all.dto.InterviewDTO;
 import com.signal.all.dto.JobPostingDTO;
+import com.signal.all.dto.ObjectionDTO;
+import com.signal.enter.controller.Criteria;
 
 public interface JobPostingDAO {
 
@@ -35,8 +38,6 @@ public interface JobPostingDAO {
 
 	int postingWrite(JobPostingDTO dto);
 
-	ArrayList<JobPostingDTO> postingList(String id);
-
 	void upHit(String jpo_no);
 
 	JobPostingDTO jobPostingDetail(String jpo_no);
@@ -44,6 +45,36 @@ public interface JobPostingDAO {
 	JobPostingDTO UpdatePage(String id, String jpo_no);
 
 	int postingUpdate(JobPostingDTO dto);
+
+	int close();
+
+	ArrayList<JobPostingDTO>postingList(HashMap<String, Object> params);
+
+	int comPostingPasingTotal(HashMap<String, Object> params);
+
+	ArrayList<InterviewDTO> jobPostingSearch(String searchOption, int skip, String id);
+
+	int jobPostingListTotal2(String searchOption, String id);
+
+	ArrayList<JobPostingDTO> mainPostingList(HashMap<String, Object> params);
+
+	int mainPostingPasingTotal(HashMap<String, Object> params);
+
+	//ArrayList<InterviewDTO> jobPostingMainSearch(String searchOption,String searchOption1,String searchOption2,String search, int skip);
+
+	//int jobPostingMainTotal(String searchOption,String searchOption1,String searchOption2, String search);
+
+	
+	ArrayList<InterviewDTO> jobPostingMainSearch(String searchOption,String search, int skip);
+
+	int jobPostingMainTotal(String searchOption, String search);
+	
+
+	
+	
+	//ArrayList<ObjectionDTO> comPostingPasing(Criteria cri);
+
+	//int comPostingPasingTotal();
 
 	// ArrayList<JobPostingDTO> postingPhoto(String jpo_no);
 

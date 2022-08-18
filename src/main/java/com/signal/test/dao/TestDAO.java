@@ -3,6 +3,7 @@ package com.signal.test.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.signal.all.dto.ResumeDTO;
 import com.signal.all.dto.TestDTO;
 
 public interface TestDAO {
@@ -13,8 +14,22 @@ public interface TestDAO {
 
 	int selfReg(HashMap<String, Object> params);
 
-	int selfContentReg(String self_content, String cl_id);
+	int selfContentReg(String id, String st_comment);
 
 	int scoreReg(HashMap<String, Object> params);
+
+	ArrayList<TestDTO> selfQueList();
+
+	ArrayList<TestDTO> interviewQueList();
+
+	ArrayList<TestDTO> selfQueListA();
+
+	ArrayList<TestDTO> selfQueListB();
+
+	void stHiddenUp(String st_no, String st_hidden);
+
+	void stReg(HashMap<String, Object> map);
+
+	String selfComment(String id);
 
 }

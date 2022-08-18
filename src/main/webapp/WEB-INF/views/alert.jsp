@@ -16,6 +16,7 @@
 		var url = "${url}";
 		alert(message);
 		document.location.href = url;
+
 	</script>
 </body>
 <script></script>

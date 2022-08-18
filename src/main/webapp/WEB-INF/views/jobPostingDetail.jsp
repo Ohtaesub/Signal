@@ -57,7 +57,7 @@
 	.find-btn2{
 		background-color: #7f7f7fff;
 	}
-	img{
+	img.comPosting{
 		width: 100%;
 	}
 
@@ -66,13 +66,12 @@
 <body>
  	<section>
 		<div id="jp-list">
-        	<h6>기업페이지 > 채용공고관리 > 수정</h6>
+        	<h6>기업페이지 > 채용공고관리 > 수정 및 상세보기</h6>
         	<br/>
-	        		<h2>채용공고 수정하기</h2><br/>
-	        	<form action="/jobPostingUpdate.do?jpo_no='${dto1.jpo_no}'" method="post" enctype="multipart/form-data">
+	        		<h2>채용공고 수정 및 상세보기</h2><br/>
+	        	<form action="/jobPostingUpdate.do?jpo_no='${dto1.jpo_no}'" method="post" enctype="multipart/form-data" id="checkDate">
 		        <div>
-					<h2>${dto1.jpo_title}</h2>	
-					<input type="text" name="jpo_no" value="${dto1.jpo_no}"/>
+					<input type="hidden" name="jpo_no" value="${dto1.jpo_no}"/>
 			        	<table id="jobPostingDetail">
     						<tr>
 								<th>공고제목</th>
@@ -80,7 +79,16 @@
 							</tr>
 							<tr>
 								<th>마감여부</th>
-								<td><input type="text" name="jpo_state" value="${dto1.jpo_state}" required/></td>
+								<td>
+									<c:if test="${dto1.jpo_state.equals('진행중')}">
+        								<lable><input type="radio" name="jpo_state" value="진행중" checked="checked" required="required"/> 진행중</lable>&nbsp;&nbsp;
+										<lable><input type="radio" name="jpo_state" value="마감" required="required"/> 마감</lable>&nbsp;&nbsp;
+									</c:if>
+									<c:if test="${dto1.jpo_state.equals('마감')}">
+        								<lable><input type="radio" name="jpo_state" value="진행중" required="required"/> 진행중</lable>&nbsp;&nbsp;
+										<lable><input type="radio" name="jpo_state" value="마감" checked="checked" required="required"/> 마감</lable>&nbsp;&nbsp;
+									</c:if>
+								</td>
 							</tr>
     						<tr>
 								<th>조회수</th>
@@ -92,11 +100,37 @@
 							</tr>
 				    		<tr>
 								<th>모집분야</th>
-								<td><input type="text" name="jpo_field" value="${dto1.jpo_field}" required /></td>
+								<td>
+									<c:if test="${dto1.jpo_field.equals('신입')}">
+        								<lable><input type="radio" name="jpo_field" value="신입" checked="checked" required="required"/> 신입</lable>&nbsp;&nbsp;
+										<lable><input type="radio" name="jpo_field" value="경력" required="required"/> 경력</lable>&nbsp;&nbsp;
+										<lable><input type="radio" name="jpo_field" value="무관" required="required"/> 무관</lable>
+									</c:if>
+									<c:if test="${dto1.jpo_field.equals('경력')}">
+        								<lable><input type="radio" name="jpo_field" value="신입" required="required"/> 신입</lable>&nbsp;&nbsp;
+										<lable><input type="radio" name="jpo_field" value="경력" checked="checked" required="required"/> 경력</lable>&nbsp;&nbsp;
+										<lable><input type="radio" name="jpo_field" value="무관" required="required"/> 무관</lable>
+									</c:if>
+									<c:if test="${dto1.jpo_field.equals('무관')}">
+        								<lable><input type="radio" name="jpo_field" value="신입" required="required"/> 신입</lable>&nbsp;&nbsp;
+										<lable><input type="radio" name="jpo_field" value="경력" required="required"/> 경력</lable>&nbsp;&nbsp;
+										<lable><input type="radio" name="jpo_field" value="무관" checked="checked" required="required"/> 무관</lable>
+									</c:if>
+								<td>
 							</tr>
 				   			<tr>
 								<th>근무형태</th>
-								<td><input type="text" name="jpo_type" value="${dto1.jpo_type}" required /></td>
+								<td>
+									<c:if test="${dto1.jpo_type.equals('정규직')}">
+										<lable><input type="radio" name="jpo_type" value="정규직" checked="checked" required="required"/> 정규직</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<lable><input type="radio" name="jpo_type" value="비정규직" required="required"/> 비정규직</lable>
+									</c:if>
+									<c:if test="${dto1.jpo_type.equals('비정규직')}">
+										<lable><input type="radio" name="jpo_type" value="정규직"  required="required"/> 정규직</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<lable><input type="radio" name="jpo_type" value="비정규직" checked="checked" required="required"/> 비정규직</lable>
+									</c:if>
+								</td>
+								<!--  <td><input type="text" name="jpo_type" value="${dto1.jpo_type}" required /></td>  -->
 							</tr>
 				    		<tr>
 								<th>직무분류</th>
@@ -109,6 +143,7 @@
 										<option value="5">전기</option>
 										<option value="6">축산</option>
 									</select> 
+									 > 
 									<select name="jc_no" required="required" value="${dto1.jc_no}" >
 										<option value="none">중분류</option>									
 										<option value="6">퍼블리셔</option>
@@ -157,8 +192,8 @@
 				    		<tr>
 								<th>모집기간</th>
 								<td>
-									<input type="date" name="jpo_start" value="${dto1.jpo_start}" required/> ~
-									<input type="date" name="jpo_deadline" value="${dto1.jpo_deadline}" required/>
+									<input type="date" name="jpo_start" value="${dto1.jpo_start}" id="jpo_start" required/> ~
+									<input type="date" name="jpo_deadline" value="${dto1.jpo_deadline}" id="jpo_deadline" required/>
 								</td>
 							</tr>
 							<tr>
@@ -196,7 +231,7 @@
 					        </tr>
 					        <tr>
 					            <td>	
-					            	<p><img src="/photo/${dto1.jpo_photo}" alt="채용공고"></p>
+					            	<p><img src="/photo/${dto1.jpo_photo}" alt="채용공고" class="comPosting"></p>
 					            </td>
 							</tr>
 							
@@ -212,6 +247,21 @@
   
 </body>
 <script>
-
+	$(function(){ 
+		$("#checkDate").submit(function(){
+			var jpo_start = $('#jpo_start').val();
+			var jpo_deadline = $('#jpo_deadline').val();        
+			var startArray = jpo_start.split('-');         //-을 구분자로 연,월,일로 잘라내어 배열로 반환 
+			var endArray = jpo_deadline.split('-');     
+			       //배열에 담겨있는 연,월,일을 사용해서 Date 객체 생성         
+			var start_date = new Date(startArray[0], startArray[1], startArray[2]);         
+			var end_date = new Date(endArray[0], endArray[1], endArray[2]);   //날짜를 숫자형태의 날짜 정보로 변환하여 비교한다.         
+			
+			if(start_date.getTime() > end_date.getTime()) {
+				 alert("종료날짜보다 시작날짜가 작아야합니다.");            
+				 return false;
+				}     
+			}); 
+	});
 </script>
 </html>

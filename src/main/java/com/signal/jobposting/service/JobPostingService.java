@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.signal.all.dto.InterviewDTO;
 import com.signal.all.dto.JobPostingDTO;
 import com.signal.jobposting.dao.JobPostingDAO;
 
@@ -180,14 +181,6 @@ public class JobPostingService {
 		
 		return dto;
 	}
-
-	public ArrayList<JobPostingDTO> postingList(String id) {
-		logger.info("채용공고 리스트 서비스 요청");
-		logger.info("받아온 아이디: "+id);
-
-		return dao.postingList(id);
-	}
-	
 	
 	public JobPostingDTO posting(String id) {
 		JobPostingDTO dto =new JobPostingDTO();
@@ -322,6 +315,55 @@ public class JobPostingService {
 	return dao.postingUpdate(dto);
 	   }
 
+	public void close() {
+		logger.info("모집여부 마감 서비스 요청");
+		int result = dao.close();
+		logger.info("모집여부 수정 데이터 수 : " + result);
+	}
+
+	public ArrayList<JobPostingDTO> postingList(HashMap<String, Object> params) {
+		return dao.postingList(params);
+	}
+
+	public int comPostingPasingTotal(HashMap<String, Object> params) {
+		logger.info("게시글 수 가져오기 서비스 요청");
+		return dao.comPostingPasingTotal(params);
+	}
+
+	public ArrayList<InterviewDTO> jobPostingSearch(String searchOption, int skip, String id) {
+		return dao.jobPostingSearch(searchOption,skip,id);
+	}
+
+	public int jobPostingListTotal2(String searchOption, String id) {
+		return dao.jobPostingListTotal2(searchOption,id);
+	}
+
+	public ArrayList<JobPostingDTO> mainPostingList(HashMap<String, Object> params) {
+		return dao.mainPostingList(params);
+	}
+
+	public int mainPostingPasingTotal(HashMap<String, Object> params) {
+		logger.info("채용공고 갯수 가져오기 서비스 요청");
+		return dao.mainPostingPasingTotal(params);
+	}
+
+	public ArrayList<InterviewDTO> jobPostingMainSearch(String searchOption, String search, int skip) {
+		return dao.jobPostingMainSearch(searchOption,search,skip);
+	}
+
+	public int jobPostingMainTotal(String searchOption,  String search) {
+		return dao.jobPostingMainTotal(searchOption,search);
+	}
+	
+	/*
+	public ArrayList<InterviewDTO> jobPostingMainSearch(String searchOption, String searchOption1, String searchOption2, String search, int skip) {
+		return dao.jobPostingMainSearch(searchOption,searchOption1,searchOption2,search,skip);
+	}
+
+	public int jobPostingMainTotal(String searchOption, String searchOption1, String searchOption2, String search) {
+		return dao.jobPostingMainTotal(searchOption,searchOption1,searchOption2,search);
+	}
+	*/
 
 
 

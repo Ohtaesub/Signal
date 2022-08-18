@@ -2,6 +2,8 @@ package com.signal.test.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.signal.all.dto.ResumeDTO;
 import com.signal.all.dto.TestDTO;
 import com.signal.test.dao.TestDAO;
 
@@ -22,6 +25,7 @@ public class TestService {
 		ModelAndView mav = new ModelAndView("./selfTest/selfInsert");		
 		boolean result = false;
 		ArrayList<TestDTO> selfInsert = dao.selfInsert(id);
+		String st_comment = dao.selfComment(id);
 		if(selfInsert.size()>0) {			
 			result = true;
 			mav.addObject("list", selfInsert);
@@ -29,6 +33,7 @@ public class TestService {
 		logger.info("사이즈="+selfInsert.size()+'/'+result);
 		mav.addObject("result", result);
 		mav.addObject("cl_id", id);
+		mav.addObject("st_comment", st_comment);
 		return mav;
 	}
 
@@ -59,6 +64,58 @@ public class TestService {
 		}
 		logger.info("결과는? " + success);
 		return success;
+	}
+
+	
+
+	public ArrayList<TestDTO> selfQueList() {
+
+		return dao.selfQueList();
+	}
+	
+	public ArrayList<TestDTO> selfQueListA() {
+
+		return dao.selfQueListA();
+	}
+	
+	public ArrayList<TestDTO> selfQueListB() {
+
+		return dao.selfQueListB();
+	}
+
+	public ArrayList<TestDTO> interviewQueList() {
+
+		return dao.interviewQueList();
+	}
+
+	public void stHiddenUp(String st_no, String st_hidden) {
+		dao.stHiddenUp(st_no, st_hidden);
+		
+	}
+
+	public boolean stReg(HashMap<String, Object> param) {
+		boolean success=false;
+		
+		HashMap<String, Object> values = (HashMap<String, Object>) param.get("values");
+		ArrayList<String> cl_id = (ArrayList<String>) values.get("cl_id");
+		ArrayList<String> st_no = (ArrayList<String>) values.get("st_no");
+		ArrayList<String> st_score = (ArrayList<String>) values.get("st_score");
+		System.out.println("cl_id="+cl_id+"st_no="+st_no+"st_score="+st_score+cl_id.size());		
+		
+		String st_comment = (String) values.get("st_comment");
+		String id=cl_id.get(0);
+		dao.selfContentReg(id,st_comment);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		for (int i = 0; i < cl_id.size(); i++) {
+			map.put("cl_id", cl_id.get(i));
+			map.put("st_no", st_no.get(i));
+			map.put("st_score", st_score.get(i));
+			dao.stReg(map);
+		}	
+		
+		return false;
 	}
 
 }

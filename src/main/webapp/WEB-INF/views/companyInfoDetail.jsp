@@ -82,10 +82,15 @@
 								<td><input type="url" name="ci_web" value="${dto.ci_web}" required/></td>
 							</tr>
 				   			<tr>
-								<th>기업로고</th>
+								<th rowspan="2">기업로고</th>
 								<td>
-									<input type="file" name="ci_photo" multiple="multiple" src="/photo/${dto.ci_photo}" value="${dto.ci_photo}"/>
+									<input type="file" name="ci_photo" multiple="multiple" src="/photo/${dto.ci_photo}" value="${dto.ci_photo}"  width="200"/>
 								</td>
+							</tr>
+								<tr>
+									<td>
+										<p><img src="/photo/${dto.ci_photo}" alt="기업로고""></p>
+									</td>
 							</tr>
 				    		<tr>
 								<th>기업소개</th>

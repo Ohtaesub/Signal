@@ -73,14 +73,6 @@
 				<c:if test="${dto.ci_ceo != null}">
 	        		<h2>기업정보</h2>
 		        	<table id="ComInfoDetail">
-		        		<tr>
-							<th>기업번호</th>
-							<td>${dto.ci_no}</td>
-						</tr>
-		        		<tr>
-							<th>사진이름</th>
-							<td>${dto.ci_photo}</td>
-						</tr>
 			    		<tr>
 							<th>기업명</th>
 							<td>${dto.com_name}</td>
@@ -101,7 +93,7 @@
 							<th>기업로고</th>
 							<td>
 								<c:forEach items="${list}" var="path">
-                  					<p><img src="/photo/${dto.ci_photo}" width="150" alt="로고"></p>
+                  					<p><img src="/photo/${dto.ci_photo}" width="200" alt="로고"></p>
                   				</c:forEach>
                				</td>
 						</tr>
@@ -117,7 +109,7 @@
 							<textarea maxlength="1000" readonly>${dto.ci_pass_intro}</textarea>
 		        	</table>
 	        		<div class="find-btn">
-        				<input class="find-btn1" type="button" value="수정하기" onclick="location.href='/companyInfoUpdate.go?ci_no=${dto.ci_no}'"/>
+        				<input class="find-btn1" type="button" value="수정하기" onclick="location.href='/companyInfoUpdate.go?ci_no=${dto.ci_no}&ci_photo=${dto.ci_photo}'"/>
        				</div>
 	        	</c:if>
         </div>
