@@ -9,24 +9,35 @@
 		left : 350px;
 	}
 	
-	.hidden {
+	#hidden {
 		display : none;
 	}
 </style>
 <body>
 	<table id="section">
 		<thead>
+			<tr>	
+				<th colspan="3">
+					<input type="button" onclick="interviewQueReg()" value="등록"/>
+					<div style="float:right;">
+					<input type="button" onclick="listAll()" value="전체"> 
+					<input type="button" onclick="listShow()" value="노출">
+					<input type="button" onclick="listHide()" value="숨김">
+					<input type="hidden" id="state" value="${state}">
+					</div>
+				</th>
+			</tr>
 			<tr>
-				<th class="hidden"></th>
+				<th id="hidden"></th>
 				<th>질문</th>
 				<th>키워드</th>
 				<th>노출상태</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="list">
 			<c:forEach items="${list}" var="inter">
 				<tr>
-					<td class="hidden">${inter.it_no }</td>
+					<td class="it_no" id="hidden">${inter.it_no }</td>
 					<td>${inter.it_que }</td>
 					<td>${inter.it_keyword }</td>
 					<td>
@@ -42,7 +53,32 @@
 	
 </body>
 <script>
+var state;
 
+function listAll(){
+	location.href="interviewTestQue.go";	
+}
+
+function listShow(){
+	location.href="interviewTestQueB.go";	
+}
+
+function listHide(){
+	location.href="interviewTestQueA.go";	
+}
+
+$('select[name="it_hidden"]').change(function(){
+	var it_no = $(this).parent().parent().find('.it_no').html();
+	var it_hidden = $(this).val();
+	console.log($("#state").val());
+	var state = $("#state").val(); 
+	location.href="itHiddenUp.do?it_no="+it_no+"&&it_hidden="+it_hidden+"&&state="+state;
+});
+
+
+function interviewQueReg(){
+	window.open("interviewTestReg.go","new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+}
 
 </script>
 </html>

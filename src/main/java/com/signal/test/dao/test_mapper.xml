@@ -54,9 +54,35 @@
 		SELECT it_no, it_que, it_hidden, it_keyword FROM interview_test
 	</select>
 	
+	<select id="interviewQueListA" resultType="test">
+		SELECT it_no, it_que, it_hidden, it_keyword FROM interview_test
+		WHERE it_hidden=0
+	</select>
+	
+	<select id="interviewQueListB" resultType="test">
+		SELECT it_no, it_que, it_hidden, it_keyword FROM interview_test
+		WHERE it_hidden=1
+	</select>
+	
+	<update id="itHiddenUp">
+		UPDATE interview_test SET
+		it_hidden = #{param2}
+		WHERE it_no=#{param1}
+	</update>
+	
 	<insert id="stReg" parameterType="hashmap">
 		INSERT INTO self_test_result (cl_id, st_no, st_score)
 		VALUES(#{cl_id},#{st_no},#{st_score})		
+	</insert>
+	
+	<insert id="selfQueReg" parameterType="hashmap">
+		INSERT INTO self_test (st_que, st_keyword)
+		VALUES(#{st_que},#{st_keyword})		
+	</insert>
+	
+	<insert id="interQueReg" parameterType="hashmap">
+		INSERT INTO interview_test (it_que, it_keyword)
+		VALUES(#{it_que},#{it_keyword})		
 	</insert>
 	
 </mapper>

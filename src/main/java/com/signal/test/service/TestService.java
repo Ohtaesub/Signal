@@ -2,8 +2,6 @@ package com.signal.test.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.signal.all.dto.ResumeDTO;
 import com.signal.all.dto.TestDTO;
 import com.signal.test.dao.TestDAO;
 
@@ -87,9 +84,24 @@ public class TestService {
 
 		return dao.interviewQueList();
 	}
+	
+	public ArrayList<TestDTO> interviewQueListA() {
+
+		return dao.interviewQueListA();
+	}
+	
+	public ArrayList<TestDTO> interviewQueListB() {
+
+		return dao.interviewQueListB();
+	}
 
 	public void stHiddenUp(String st_no, String st_hidden) {
 		dao.stHiddenUp(st_no, st_hidden);
+		
+	}
+	
+	public void itHiddenUp(String it_no, String it_hidden) {
+		dao.itHiddenUp(it_no, it_hidden);
 		
 	}
 
@@ -117,5 +129,30 @@ public class TestService {
 		
 		return false;
 	}
+
+	public boolean selfQueReg(HashMap<String, Object> params) {
+		
+		boolean success=false;
+		int result = dao.selfQueReg(params);
+		
+		if(result > 0) {
+			success=true;
+		}
+				
+		return success;
+	}
+
+	public boolean interQueReg(HashMap<String, Object> params) {
+		boolean success=false;
+		int result = dao.interQueReg(params);
+		
+		if(result > 0) {
+			success=true;
+		}
+				
+		return success;
+	}
+
+	
 
 }

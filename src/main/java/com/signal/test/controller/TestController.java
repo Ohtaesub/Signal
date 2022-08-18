@@ -110,9 +110,80 @@ public class TestController {
 		
 		ArrayList<TestDTO> list = service.interviewQueList();
 		model.addAttribute("list", list);
+		model.addAttribute("state","all");
 		return "/selfTest/interviewTestQue";
 	}
 	
+	@RequestMapping(value = "interviewTestQueA.go", method = RequestMethod.GET)
+	public String interviewTestQueAGo(HttpSession session, Model model) {		
+		
+		ArrayList<TestDTO> list = service.interviewQueListA();		
+		model.addAttribute("list", list);
+		model.addAttribute("state","hide");
+		return "./selfTest/interviewTestQue";
+	}
 	
+	@RequestMapping(value = "interviewTestQueB.go", method = RequestMethod.GET)
+	public String interviewTestQueBGo(HttpSession session, Model model) {		
+		
+		ArrayList<TestDTO> list = service.interviewQueListB();		
+		model.addAttribute("list", list);
+		model.addAttribute("state","show");
+		return "./selfTest/interviewTestQue";
+	}
+	
+	@RequestMapping(value = "itHiddenUp.do", method = RequestMethod.GET)
+	public String itHiddenUp(HttpSession session, Model model,
+			@RequestParam String it_no, @RequestParam String it_hidden, @RequestParam String state) {
+		logger.info("state "+state);
+		service.itHiddenUp(it_no, it_hidden);
+		ArrayList<TestDTO> list;
+		if(state.equals("all")) {
+		list = service.interviewQueList();
+		model.addAttribute("state","all");
+		} else if(state.equals("show")) {
+			list=service.interviewQueListB();
+			model.addAttribute("state","show");
+		} else {
+			list = service.interviewQueListA();
+			model.addAttribute("state","hide");
+		}
+		model.addAttribute("list", list);
+		return "./selfTest/interviewTestQue";
+	}
+	
+	@RequestMapping(value = "selfTestReg.go", method = RequestMethod.GET)
+	public String selfTestRegGo() {	
+		
+		return "/selfTest/selfTestReg";
+	}
+	
+	@RequestMapping(value = "selfQueReg.do", method = RequestMethod.POST)
+	public String selfQueReg(Model model, @RequestParam HashMap<String, Object>params) {	
+		logger.info("셀프평가 질문 등록");
+		logger.info("params : {}",params);
+		boolean result = service.selfQueReg(params);
+		
+		model.addAttribute("success", result);
+		
+		return "./selfTest/selfTestReg";
+	}
+	
+	@RequestMapping(value = "interviewTestReg.go", method = RequestMethod.GET)
+	public String interviewTestRegGo() {	
+		
+		return "/selfTest/interviewTestReg";
+	}
+	
+	@RequestMapping(value = "interQueReg.do", method = RequestMethod.POST)
+	public String interQueReg(Model model, @RequestParam HashMap<String, Object>params) {	
+		logger.info("면접평가 질문 등록");
+		logger.info("params : {}",params);
+		boolean result = service.interQueReg(params);
+		
+		model.addAttribute("success", result);
+		
+		return "./selfTest/interviewTestReg";
+	}
 	
 }

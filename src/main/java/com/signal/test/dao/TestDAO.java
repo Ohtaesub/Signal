@@ -32,4 +32,14 @@ public interface TestDAO {
 
 	String selfComment(String id);
 
+	int selfQueReg(HashMap<String, Object> params);
+
+	ArrayList<TestDTO> interviewQueListA();
+
+	ArrayList<TestDTO> interviewQueListB();
+
+	void itHiddenUp(String it_no, String it_hidden);
+
+	int interQueReg(HashMap<String, Object> params);
+
 }

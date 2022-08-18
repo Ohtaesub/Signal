@@ -75,5 +75,10 @@ $('select[name="st_hidden"]').change(function(){
 	location.href="stHiddenUp.do?st_no="+st_no+"&&st_hidden="+st_hidden+"&&state="+state;
 });
 
+
+function selfQueReg(){
+	window.open("selfTestReg.go","new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+}
+
 </script>
 </html>
