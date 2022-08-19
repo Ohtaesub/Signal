@@ -31,4 +31,9 @@
 		WHERE jc_no=#{param1}
 	</update>
 	
+	<select id="hiddenGet" resultType="int">
+		SELECT jp_hidden FROM job_pa
+		WHERE jp_no=#{param1}
+	</select>
+	
 </mapper>

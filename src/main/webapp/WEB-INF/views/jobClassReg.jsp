@@ -80,20 +80,18 @@ $('select[name="jp_hidden"]').change(function(){
 	location.href="jp_hiddenUp.do?jp_no="+jp_no+"&&jp_hidden="+jp_hidden;
 });
 
-$('select[name="jc_hidden"]').change(function(){
-	console.log($('select[name="jp_hidden"]').val());
-	if($('select[name="jp_hidden"]').val()==0){
+$('select[name="jc_hidden"]').change(function(){		
 	var jc_no = $(this).parent().parent().find('.jc_no').val();
 	var jc_hidden = $(this).val();
 	var jp_no = $(this).parent().parent().find('.jp_no').val();
 	console.log(jc_no + '/' + jc_hidden);
-	location.href="jc_hiddenUp.do?jc_no="+jc_no+"&&jc_hidden="+jc_hidden+"&&jp_no="+jp_no;
-	} else{
-		var jp_no = $(this).parent().parent().find('.jp_no').val();
-		alert("직무대분류 노출현황을 확인해주세요");
-		location.href="jobchList.go?jp_no="+jp_no;
-	}
+	location.href="jc_hiddenUp.do?jc_no="+jc_no+"&&jc_hidden="+jc_hidden+"&&jp_no="+jp_no;	
 });
+
+var success ="${success}"
+if(success){
+	alert("직무대분류 노출현황을 확인해주세요");
+}
 
 </script>
 </html>

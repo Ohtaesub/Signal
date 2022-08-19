@@ -14,4 +14,6 @@ public interface JobDAO {
 
 	void jcHiddenUp(String jc_no, String jc_hidden);
 
+	int hiddenGet(String jp_no);
+
 }

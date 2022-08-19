@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.signal.all.dto.ResumeDTO;
 import com.signal.job.service.JobService;
@@ -89,15 +90,17 @@ public class JobController {
 	}
 	
 	@RequestMapping(value = "jc_hiddenUp.do", method = RequestMethod.GET)
-	public String jc_hiddenUp(HttpSession session, Model model,
+	public String jc_hiddenUp(HttpSession session, Model model, RedirectAttributes rAttr,
 			@RequestParam String jc_no, @RequestParam String jc_hidden, @RequestParam String jp_no) {	
-		logger.info("jp_no = "+jp_no);
-		jobService.jcHiddenUp(jc_no, jc_hidden);
-		ArrayList<ResumeDTO> list;		
-		list = service.jcList(jp_no);
-		
-		model.addAttribute("jp_no", jp_no);
-		model.addAttribute("list", list);
+		logger.info("jp_no = "+jp_no);		
+		int hiddenGet=jobService.hiddenGet(jp_no);
+		logger.info("hidden= " + hiddenGet);
+		if(hiddenGet>0) {
+		jobService.jcHiddenUp(jc_no, jc_hidden);		
+		} else {			
+			rAttr.addFlashAttribute("success", true);
+		}		
+		rAttr.addAttribute("jp_no", jp_no);
 		return "redirect:/jobchList.go";
 	}
 	
