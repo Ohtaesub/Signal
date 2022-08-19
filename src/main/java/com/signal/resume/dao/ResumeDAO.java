@@ -65,6 +65,8 @@ public interface ResumeDAO {
 
 	int licenseDelete(String li_no);
 
+	void portfolioUp(int re_no, String newFileName, String oriFileName);
+
 	
 
 	

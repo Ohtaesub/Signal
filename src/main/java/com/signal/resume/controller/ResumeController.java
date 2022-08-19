@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.signal.all.dto.ResumeDTO;
@@ -90,13 +91,50 @@ public class ResumeController {
 		return "./resume/resumeReg";
 	}
 	
-	@RequestMapping(value = "/resumeReg.do")
-	public String resumeReg(@RequestParam HashMap<String, String> params, 
-			HttpSession session, Model model) {
+	@RequestMapping(value = "/resumeReg.ajax")
+	@ResponseBody
+	public HashMap<String, Object> resumeReg(@RequestParam(value = "re_title") String re_title,
+			@RequestParam(value = "cl_id") String cl_id,
+			@RequestParam(value = "re_fn_status") String re_fn_status,
+			@RequestParam(value = "jp_no", required=false) String jp_no,
+			@RequestParam(value = "jc_no", required=false) String jc_no,
+			@RequestParam(value = "re_sch_name", required=false) String re_sch_name,
+			@RequestParam(value = "enterYear") String enterYear,
+			@RequestParam(value = "enterMonth") String enterMonth,
+			@RequestParam(value = "outYear") String outYear,
+			@RequestParam(value = "outMonth") String outMonth,
+			@RequestParam(value = "re_major", required=false) String re_major,
+			@RequestParam(value = "re_average", required=false) String re_average,
+			@RequestParam(value = "re_total", required=false) String re_total,
+			@RequestParam(value = "re_register") String re_register,
+			@RequestParam(value = "re_intro", required=false) String re_intro,
+			@RequestParam(value = "re_portfolio", required=false) MultipartFile re_portfolio) {
 		
-			logger.info("params : {}",params);
-					
-		return service.resumeReg(params);
+			logger.info("이력서 등록 페이지");
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, String> params = new HashMap<String, String>();
+			
+			String re_sch_period = enterYear+'.'+enterMonth+'~'+enterYear+'.'+enterMonth;
+			
+			params.put("re_title",re_title);
+			params.put("cl_id",cl_id);
+			params.put("re_fn_status",re_fn_status);
+			params.put("jp_no",jp_no);
+			params.put("jc_no",jc_no);
+			params.put("re_sch_name",re_sch_name);
+			params.put("re_sch_period",re_sch_period);
+			params.put("re_major",re_major);
+			params.put("re_average",re_average);
+			params.put("re_total",re_total);
+			params.put("re_register",re_register);
+			params.put("re_intro",re_intro);
+			
+			int re_no = service.resumeReg(params);
+			service.portfolioUp(re_no,re_portfolio);
+			map.put("re_no", re_no);
+			
+			
+		return map;
 	}
 	
 	@RequestMapping(value = "jobClassPop.go", method = RequestMethod.GET)
