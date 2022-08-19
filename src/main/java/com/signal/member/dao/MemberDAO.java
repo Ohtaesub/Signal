@@ -53,12 +53,21 @@ public interface MemberDAO {
 
 	//기업회원 email 중복체크
 	String overlayComEmail(String com_email);
+	
+	//기업회원 사업자 번호 중복체크
+	String overlayNumber(String com_business_no);
 
 	// 기업회원 가입 ajax
-	int joinCompany(HashMap<String, Object> params);
+	int joinCompany(HashMap<String, String> params);
+	
+	// 기업회원 사업자등록증 사진 등록
+	void fileWrite2(String newFileName, String id);
 
-	// 기업회원 가입 ajax
-	int joinClient(HashMap<String, Object> params);
+	// 개인회원 가입 ajax
+	int joinClient(HashMap<String, String> params);
+	
+	// 개인회원 사진 등록
+	void fileWrite(String newFileName, String id);
 
 
 	// 개인회원 Id찾기
@@ -83,8 +92,13 @@ public interface MemberDAO {
 	//개인회원 비밀번호 DB에서 확인(암호화 때문)
 	String passwordConfirm(String cl_pw);
 
+	/*
 	//개인회원 정보 수정하기
 	void clientInfoUpdate(HashMap<String, String> params);
+	*/
+	
+	//개인회원 정보 수정하기
+	int clientInfoUpdate(HashMap<String, String> params);
 
 	//기업회원 기업회원정보관리 페이지 이동 및 리스트 보여주기
 	MemberDTO companyInfoManagement(String com_id);
@@ -92,8 +106,13 @@ public interface MemberDAO {
 	//기업회원 비밀번호 DB에서 확인(암호화 때문)
 	String passwordConfirm2(String com_pw);
 
+	/*
 	//기업회원 회원정보 수정하기
 	void companyMemberInfoUpdate(HashMap<String, String> params);
+	*/
+	
+	//기업회원 회원정보 수정하기
+	int companyMemberInfoUpdate(HashMap<String, String> params);
 
 	HashMap<String, Object> passwordConfirm3(String memberPw);
 
@@ -163,6 +182,10 @@ public interface MemberDAO {
 
 	// 기업회원 상태 변경
 	void companyStateChange(HashMap<String, String> params);
+
+
+
+
 
 	
 	

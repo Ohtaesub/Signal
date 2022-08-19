@@ -3,7 +3,8 @@
 <%@ include file="../../resources/inc/header.jsp" %>
 <body>
 	<h3>개인정보수정</h3>
-	<form action="clientInfoUpdate.do" method="post" onsubmit="return checkForm()">
+	<form action="clientInfoUpdate.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
+        <input type="hidden" name="cl_id" value="${clientInfo.cl_id}"/>
         <input type="hidden" name="cl_state" id="cl_state" value="개인회원"/>   
 	    <table>
 	        <tr>
@@ -36,7 +37,7 @@
 	        <tr>
 	            <th>나이</th>
 	            <td>
-	            <input type="text" name="cl_age"  id="cl_age" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="3" value="${clientInfo.cl_age}"/>&nbsp; 세
+	            <input type="text" name="cl_age" id="cl_age" value="${clientInfo.cl_age}" style="border:none; width:40px;"/>&nbsp;세
 	            </td>
 	        </tr>
 	        <tr>
@@ -71,7 +72,8 @@
 	            <td>
 						<!-- 하지만 div 는 서버에 값을 전송 할 수 없다. -->
 						<!-- 결국엔 div 의 내용을 input 에 담아 서버에 전송할 예정 -->
-		            	<input type="file" multiple ="multiple" name="cl_photo" id="cl_photo" onchange="checkFile(this)" accept=".png , .jpeg, .jfif, .exif, .gif, .bmp" value="${clientInfo.cl_photo }"/>
+		            	<input type="file" multiple ="multiple" name="file" onchange="checkFile(this)" accept=".jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp"/>
+		            	${clientInfo.cl_photo}
 		            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
 	            </td>
 	        </tr>
@@ -134,21 +136,21 @@
 	}
 
 
-	//파일 업로드 제한 경고창
-	function checkFile(f){
+	// 파일 업로드 제한 경고창
+    function checkFile(f){
 
-		var file = f.files;
-	
-		//for문으로 파일 갯수만큼 확인
-		for(var i = 0; i<file.length; i++){
-		//경고창 한번으로 수정
-		if(!/\.(png|jpeg|jfif|exif|gif|bmp)$/i.test(file[i].name)) alert('이미지(.png , .jpeg, .jfif, .exif, .gif, .bmp) 파일만 선택해 주세요.\n\n현재 파일 : ' + file[i].name);
-		
-		else return;
-		
-		f.outerHTML = f.outerHTML;
-		}
-	}	
+    	var file = f.files;
+
+    	//for문으로 파일 갯수만큼 확인
+    	for(var i = 0; i<file.length; i++){
+    	//경고창 한번으로 수정
+    	if(!/\.(jpg|png|jpeg|jfif|exif|gif|bmp)$/i.test(file[i].name)) alert('이미지(.jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp) 파일만 선택해 주세요.\n\n현재 파일 : ' + file[i].name);
+    	
+    	else return;
+    	
+    	f.outerHTML = f.outerHTML;
+    	}
+    }	
 
 	
 	var overChk2=false;
@@ -200,6 +202,7 @@
 		//암호화 된 비밀번호 확인 요청 ajax
 		if(clPw==""){
 			alert("현재 비밀번호를 입력해주세요.");
+			$("#cl_pw").focus();
 			return false;
 		}else if(clPw!=""){
 			$.ajax({

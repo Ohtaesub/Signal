@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../../resources/inc/header.jsp" %>
 <body>
 	<h2>회원탈퇴</h2>
 	    <h3>탈퇴안내</h3>
@@ -87,5 +86,12 @@
 			
 			return false;
 		}
+	}
+	
+	//팝업창 닫기
+	var pclose = "${pclose}";
+	if(pclose){
+		opener.document.location.reload();
+		window.close();
 	}
 </script>

@@ -14,7 +14,7 @@ table {font-size: 75%;}
 			<option value="기업회원" ${searchOption == '기업회원'? 'selected="selected"' : ''}>기업회원</option>
 			<option value="탈퇴회원" ${searchOption == '탈퇴회원'? 'selected="selected"' : ''}>탈퇴회원</option>
 		</select>
-		<input type="text" name="search" id="search" value=""/>
+		<input type="text" name="search" id="search" value="${search}"/>
 		<button type="submit">검색</button>
 		<br>
 		<br>

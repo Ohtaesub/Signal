@@ -30,9 +30,8 @@
 		        <tr>
 		            <th>사업자 번호</th>
 		            <td>
-		            	<input type="text" name="com_business_no" id="com_business_no"/>
-		            	<input type="button" value="번호찾기" onclick="findNumber()"/>
-		            	<button type="button" id="overChkId" onclick="overlayNumber()">중복확인</button>
+		            	<input type="text" name="com_business_no" id="com_business_no" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="예)13184982743" maxlength="15"/>
+		            	<button type="button" id="overChkNum" onclick="overlayNumber()">중복확인</button>
 		            </td>
 		        </tr>
 		        <tr>
@@ -46,8 +45,8 @@
 		            <td>
 						<!-- 하지만 div 는 서버에 값을 전송 할 수 없다. -->
 						<!-- 결국엔 div 의 내용을 input 에 담아 서버에 전송할 예정 -->
-		            	<input type="file" multiple ="multiple" name="com_photo" id="com_photo" onchange="checkFile(this)" accept=".png , .jpeg, .jfif, .exif, .gif, .bmp"/>
-		            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
+		            	<input type="file" multiple ="multiple" id="com_photo" onchange="checkFile(this)" accept=".png , .jpeg, .jfif, .exif, .gif, .bmp"/>
+		            	<br>※ 파일은 JPG,PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
 		            </td>
 		        </tr>
 		        <tr>
@@ -73,7 +72,7 @@
 		        <tr>
 		            <th colspan="2">
 		                <input type="button" value="회원가입" onclick="joinFormCompany()"/>
-			         	<input type="button" value="취소" onclick="location.href='login'"/>
+			         	<input type="button" value="취소" onclick="location.href='main.do'"/>
 		            </th>
 		        </tr>
 		    </table>
@@ -167,6 +166,41 @@
 	}
 	
 	
+	//사업자번호 중복체크
+	var overChk3=false;
+	function overlayNumber(){
+		var number = $("#com_business_no").val();
+		if(number==""){
+			alert("사업자번호를 입력해주세요.");
+			$("#com_business_no").focus();
+		}else{
+			$.ajax({
+				type:'get',
+				url:'overlayNumber.ajax',
+				data:{
+					chkNumber:number
+				},
+				datatype:"JSON",
+				success:function(data){
+					// true / false 리턴 console.log(data);
+					if(data.overlayNumber){
+						alert("이미 등록된 사업자 번호 입니다.");
+						$("#com_business_no").val("");
+						$("#com_business_no").focus();
+					}else{
+						alert("등록 가능한 사업자 번호 입니다.");
+						overChk3=true;
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});
+		}
+		
+	}
+	
+	
 	//주소 찾기 API 이용
 	//주소 찾기 버튼 클릭시 팝업창 띄우기
     function sample4_execDaumPostcode() {
@@ -220,7 +254,7 @@
     	//for문으로 파일 갯수만큼 확인
     	for(var i = 0; i<file.length; i++){
     	//경고창 한번으로 수정
-    	if(!/\.(png|jpeg|jfif|exif|gif|bmp)$/i.test(file[i].name)) alert('이미지(.png , .jpeg, .jfif, .exif, .gif, .bmp) 파일만 선택해 주세요.\n\n현재 파일 : ' + file[i].name);
+    	if(!/\.(jpg|png|jpeg|jfif|exif|gif|bmp)$/i.test(file[i].name)) alert('이미지(.jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp) 파일만 선택해 주세요.\n\n현재 파일 : ' + file[i].name);
     	
     	else return;
     	
@@ -257,12 +291,6 @@
 	*/
 	
 	
-	
-	// 크롤링으로 사업자 번호 가져오기
-	function findNumber(){
-		window.open("https://bizno.net/","", "width=400, height=300, left=100, top=50");
-	}
-	
 	// 회원가입 요청하기 ajax
 	function joinFormCompany(){
 		var comId = $("#com_id").val();
@@ -276,31 +304,35 @@
 		var email = $("#com_email").val();
 		var expEmail = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
 		var state = $("#com_state").val();
-		//사업자등록증 사본 (사진파일..)
-		var comPhoto = $("#com_photo").val();
+		//사업자등록증 사본 사진 변수 선언은 배열로 선언한다.
+		var file = $("#com_photo")[0].files[0];
+		
+		var formData = new FormData();
+		
+		//data에 보내는 값 정하기
+		formData.append("com_id",comId);
+		formData.append("com_pw",comPw);
+		formData.append("com_business_no",comNumber);
+		formData.append("com_name",name);
+		formData.append("com_address",comAddress);
+		formData.append("com_call",comCall);
+		formData.append("com_email",email);
+		formData.append("com_state",state);
+		formData.append("file",file);
 		
 		
 		//기업 회원가입 요청 ajax
-		if(overChk&&overChk2!=false){
+		if(overChk&&overChk2&&overChk3!=false){
 			$.ajax({
 				type:'post',
 				url:'joinCompany.ajax',
-				data:{
-					com_id:comId,
-					com_pw:comPw,
-					com_business_no:comNumber,
-					com_name:name,
-					com_address:comAddress,
-					com_call:comCall,
-					com_email:email,
-					com_photo:comPhoto,
-					com_state:state
-				},
-				//사진파일 ajax로 보낼땐 이걸 넣어야한다고 함..
+				data:formData,
 				datatype:"JSON",
+				processData : false ,
+	            contentType : false ,
 				success:function(data){
 					console.log(data);
-					if(data.success){
+					if(data.joinCompany){
 						alert("회원가입에 성공하셨습니다.");
 						location.href='/';
 					}else{
@@ -360,7 +392,7 @@
         	$("#com_email").focus();
         	return false;  	
         }else{
-			alert("아이디 또는 이메일 중복체크를 진행해주세요.");
+			alert("아이디 / 이메일 또는 사업자 번호 중복체크를 진행해주세요.");
 		}
 		
 		

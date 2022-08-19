@@ -3,7 +3,8 @@
 <%@ include file="../../resources/inc/header.jsp" %>
 <body>
 	<h3>개인정보관리</h3>
-        <input type="hidden" name="cl_state" id="cl_state" value="개인회원"/>   
+        <input type="hidden" name="cl_state" id="cl_state" value="개인회원"/>
+        <input type="hidden" name="cl_id" id="cl_id" value="${clientInfo.cl_id}"/>
 	    <table>
 	        <tr>
 	            <th>아이디</th>
@@ -39,17 +40,23 @@
 	        </tr>
 	        <tr>
 	            <th>사진</th>
-	            <td>${clientInfo.cl_photo}</td>
+	            <td><img src="/photo/${clientInfo.cl_photo}" width="100" height="100"/></td>
 	        </tr>
 	        <tr>
 	            <th colspan="2">
 	                <input type="button" value="수정하기" onclick="location.href='clientInfoUpdateForm.go'"/>
-		         	<input type="button" value="회원탈퇴" onclick="location.href='clientBreakForm.go'"/>
+		         	<input type="button" value="회원탈퇴" onclick="clientBreakForm()"/>
 	            </th>
 	        </tr>
 	    </table>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
+
+function clientBreakForm(){
+	var cl_id = $("#cl_id").val();
+	window.open("clientBreakFormPopup.go?cl_id="+cl_id,"", "width=600, height=400, left=100, top=50");	
+}
+
 
 </script>

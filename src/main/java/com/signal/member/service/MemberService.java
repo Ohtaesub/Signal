@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.signal.all.dto.MemberDTO;
 import com.signal.enter.controller.Criteria;
@@ -67,7 +69,9 @@ public class MemberService {
 	}
 	*/
 	
-	// 개인회원 회원가입 서비스 ajax
+	
+
+	/* 개인회원 회원가입 서비스 ajax 파일업로드 불가
 	public HashMap<String, Object> joinClient(HashMap<String, Object> params) {
 		logger.info("개인회원 가입 서비스이동");
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -76,6 +80,85 @@ public class MemberService {
 		map.put("success", success);
 		return map;	
 	}
+	*/
+
+	
+
+	// 개인회원 회원가입 서비스 ajax
+	public boolean joinClient(HashMap<String, String> params) {
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		
+		
+		int row = dao.joinClient(params);
+		boolean success = false;
+		
+		
+		if(row>0) {
+			success = true;
+		}
+		result.put("success", success);
+		
+		return success;
+	}
+	
+	
+	// 개인회원 가입 성공시 파일 저장 + 새로운 파일명
+	public void fileSave(MultipartFile file, String cl_id) {
+		String oriFileName = file.getOriginalFilename(); // 원본 파일명
+		
+		logger.info("원본파일명 : "+oriFileName);
+		
+		if(!oriFileName.equals("")) {
+			String ext = oriFileName.substring(oriFileName.lastIndexOf(".")).toLowerCase();
+			String newFileName = System.currentTimeMillis()+ext;
+		
+			try {
+				byte[] arr = file.getBytes();
+				Path path = Paths.get("C:/upload/"+newFileName);
+				Files.write(path, arr);
+				logger.info(newFileName+" save ok");
+				//4. 업로드 후 photo 테이블에 데이터 입력	
+				dao.fileWrite(newFileName,cl_id);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		}
+		
+		
+	}
+
+
+	/*
+	private void fileSave(MultipartFile file) {
+		String ba_org_name= file.getOriginalFilename();//파일명 추출
+		
+		if(!ba_org_name.equals("")) {
+			logger.info("업로드 진행");
+			//확장자 분리
+			String ba_ext = ba_org_name
+					.substring(ba_org_name.lastIndexOf(".")).toLowerCase();			
+			// 새 이름 만들기
+			String ba_new_name = System.currentTimeMillis()+ba_ext;
+			
+			logger.info(ba_org_name+" => "+ba_new_name);
+							
+			//파일 받아서 저장하기
+			try {
+				byte[] arr = file.getBytes();
+				Path path = Paths.get("C:/upload/"+ba_new_name);
+				Files.write(path, arr);
+				logger.info(ba_new_name+" save ok");
+				dao.fileWrite(ba_new_name);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}				
+		}
+	}
+	*/
+	
 	
 	
 	// 개인회원 로그인서비스
@@ -331,17 +414,64 @@ public class MemberService {
 		
 		return map;
 	}
+	
+	
+	// 기업회원 사업자 번호 중복확인
+	public HashMap<String, Object> overlayNumber(String com_business_no) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String overlayNumber=dao.overlayNumber(com_business_no);
+		logger.info("중복된 사업자번호 인가요? : "+overlayNumber);
+		//중복된 이메일이면 중복 이메일:(중복이메일)이 보여짐 ->사용불가 이메일
+		//사용가능한 이메일이면 중복 이메일:(null)이 보여짐 ->사용가능 이메일
+		boolean over = overlayNumber ==null?false:true;
+		map.put("overlayNumber", over);
+		
+		return map;
+	}
 
 
 	// 기업회원 회원가입 서비스 ajax
-	public HashMap<String, Object> joinCompany(HashMap<String, Object> params) {
-		logger.info("기업회원 가입 서비스이동");
-		HashMap<String, Object> map = new HashMap<String, Object>();
+	public boolean joinCompany(HashMap<String, String> params) {
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		
 		int row = dao.joinCompany(params);
-		boolean success = row>0?true:false;
-		map.put("success", success);
-		return map;	
+		boolean success = false;
+		
+		if(row>0) {
+		success = true;
+		}
+		result.put("success", success);
+		
+		return success;
 	}
+		
+		
+	// 기업회원 가입 성공시 파일 저장 + 새로운 파일명
+	public void fileSave2(MultipartFile file, String com_id) {
+		String oriFileName = file.getOriginalFilename(); // 원본 파일명
+		
+		if(!oriFileName.equals("")) {
+			String ext = oriFileName.substring(oriFileName.lastIndexOf(".")).toLowerCase();
+			String newFileName = System.currentTimeMillis()+ext;
+		
+			try {
+				byte[] arr = file.getBytes();
+				Path path = Paths.get("C:/upload/"+newFileName);
+				Files.write(path, arr);
+				logger.info(newFileName+" save ok");
+				//4. 업로드 후 photo 테이블에 데이터 입력	
+				dao.fileWrite2(newFileName,com_id);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		}
+		
+		
+	}
+	
 
 
 	// 개인회원 아이디 찾기 서비스 form 방식
@@ -409,9 +539,24 @@ public class MemberService {
 	}
 
 
+	/*
 	// 개인회원 정보수정 요청 서비스
 	public void clientInfoUpdate(HashMap<String, String> params) {
 		dao.clientInfoUpdate(params);
+	}
+	*/
+	
+	// 개인회원 정보수정 요청 서비스
+	public String clientInfoUpdate(HashMap<String, String> params,MultipartFile file) {
+		String id = params.get("cl_id");
+		
+		int row = dao.clientInfoUpdate(params);
+		
+		if(row>0) {
+			fileSave(file,id);
+		}
+		
+		return "redirect:/clientInfoManagement.do";
 	}
 
 
@@ -439,10 +584,26 @@ public class MemberService {
 	}
 
 
+	/*
 	// 기업회원 회원정보수정 요청
 	public void companyMemberInfoUpdate(HashMap<String, String> params) {
 		dao.companyMemberInfoUpdate(params);
 	}
+	*/
+	
+	// 기업회원 정보수정 요청 서비스
+	public String companyMemberInfoUpdate(HashMap<String, String> params,MultipartFile file) {
+		String id = params.get("com_id");
+		
+		int row = dao.companyMemberInfoUpdate(params);
+		
+		if(row>0) {
+			fileSave2(file,id);
+		}
+		
+		return "redirect:/companyInfoManagement.do";
+	}
+	
 
 
 	// 개인회원 탈퇴 요청
@@ -606,6 +767,11 @@ public class MemberService {
 	public void companyStateChange(HashMap<String, String> params) {
 		dao.companyStateChange(params);
 	}
+
+
+
+
+
 
 
 
