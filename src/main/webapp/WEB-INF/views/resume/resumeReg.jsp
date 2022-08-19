@@ -219,8 +219,7 @@ function resumeReg(){
 				processData: false,
 				dataType:'JSON',
 				success:function(data){
-					console.log(data);
-					alert("등록 완료");
+					console.log(data);					
 					location.href="resumeAddReg.go?re_no="+data.re_no;
 				},
 				error:function(e){

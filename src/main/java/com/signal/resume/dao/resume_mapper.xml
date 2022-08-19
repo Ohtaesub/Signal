@@ -88,12 +88,12 @@
 	
 	<select id="jpList" resultType="resume">
 		SELECT jp_no, jp_name, jp_hidden FROM job_pa
-		WHERE jp_no > 1
+		WHERE jp_no > 1 and jp_hidden=1
 	</select>
 	
 	<select id="jcList" resultType="resume" parameterType="String">
 		SELECT jp_no, jc_no, jc_name, jc_hidden FROM job_ch
-		WHERE jp_no=#{jp_no}
+		WHERE jp_no=#{jp_no} AND jc_hidden=1
 	</select>
 	
 	<select id="jcCheck" resultType="resume" parameterType="String">
