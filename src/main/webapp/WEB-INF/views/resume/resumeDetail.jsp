@@ -77,7 +77,7 @@
 		  </tr>
 		  <tr>
 		    <th colspan="2">포트폴리오</th>
-		    <td colspan="5">${dto.re_portfolio}</td>
+		    <td colspan="5">${dto.re_portfolio_ori}</td>
 		  </tr>		
 		</table>
 	

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.signal.all.dto.InterviewDTO;
 import com.signal.all.dto.ObjectionDTO;
@@ -60,11 +61,17 @@ public class ObjectionController {
 	}
 	//이의제기등록(사용자)
 	@RequestMapping(value = "/clientDbjectionReg.do")
-	public String clientDbjectionRegDo(HttpSession session,Model model,@RequestParam HashMap<String, String>params){		
-			service.clientDbjectionRegDo(params);
+	public ModelAndView clientDbjectionRegDo(HttpSession session,Model model,@RequestParam HashMap<String, String>params){		
+	
+		ModelAndView mav =new ModelAndView();
+		String pclose="pclose";
+		String page="clientObjectionReg";
+		service.clientDbjectionRegDo(params);
 		
-			
-		return "redirect:/interviewList.go";
+		mav.setViewName(page);
+		mav.addObject("pclose",pclose);
+		
+		return mav;
 	}
 	
 	//이의제기관리(기업)리스트
@@ -81,7 +88,7 @@ public class ObjectionController {
 		int skip = (pageNum -1) * 10;
 		
 		
-		//params.put("com_id", loginId);
+		//params.put("com_id", com_id);
 		params.put("skip", skip);
 		
 		//페이지 리스트 수
@@ -108,14 +115,17 @@ public class ObjectionController {
 	}
 	//이의제기 처리페이지(기업) -업데이트
 		@RequestMapping(value = "/comObjectionUpdate.do")
-		public String comObjectionUpdateDo(HttpSession session,Model model
+		public ModelAndView comObjectionUpdateDo(HttpSession session,Model model
 				,@RequestParam HashMap<String, String>params){
-			String page ="redirect:/comObjectionList.go";
-			
-		
+			ModelAndView mav =new ModelAndView();
+			String pclose="pclose";
+			String page="comObjectionUpdate";
+
 			service.comObjectionUpdateDo(params);
+			mav.setViewName(page);
+			mav.addObject("pclose",pclose);
 			
-			return page;
+			return mav;
 		}
 	
 	//이의제기관리(관리자)리스트 페이징
@@ -168,7 +178,7 @@ public class ObjectionController {
 	}
 	
 
-	//블라인드관리(관리자)리스트 -페이징
+		//블라인드관리(관리자)리스트 -페이징
 		@RequestMapping(value = "/adminBlindList.go", method = RequestMethod.GET)
 		public String adminBlindList(Model model,Criteria cri) {
 			

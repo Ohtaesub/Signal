@@ -1,5 +1,9 @@
 package com.signal.resume.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.signal.all.dto.ResumeDTO;
@@ -62,54 +67,7 @@ public class ResumeService {
 	}
 	// 이력서 상세보기 서비스 요청 끝	
 
-	public HashMap<String, Object> personList2(HashMap<String, String> params) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		//cnt : 리스트 갯수, page : 보여줄 페이지 수
-		int cnt = Integer.parseInt(params.get("cnt"));
-		int page = Integer.parseInt(params.get("page"));
-		logger.info("보여줄 페이지 : "+page);
-		
-		String searchCondition = params.get("searchCondition");
-		String startAge = params.get("startAge");
-		String endAge = params.get("endAge");
-		
-		
-		HashMap<String, Object> searchResult = new HashMap<String, Object>();
-		searchResult.put("searchCondition", searchCondition);
-		searchResult.put("startAge", startAge);
-		searchResult.put("endAge", endAge);
-		
-		//총 갯수(allCnt) / 페이지당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
-
-		int allCnt = dao.allCount(searchResult);
-
-		logger.info("allCnt : "+allCnt);
-		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
-		logger.info("pages : "+pages);
-		
-		if(pages==0) {pages=1;}
-		
-		if(page > pages) { //5개씩 보는 마지막 페이지로 갔을 때, 15개씩 보는 걸로 바꿨을때 뜨는 에러 해결
-			page = pages;
-		}
-		
-		map.put("pages", pages); //만들 수 있는 최대 페이지 수
-		
-		map.put("currPage", page); //현재 페이지
-		
-		int offset = (page-1) * cnt;
-		logger.info("offset,cnt : "+offset+","+cnt); //offset:게시글 시작번호		
-		
-		searchResult.put("cnt", cnt);
-		searchResult.put("offset", offset);
-		
-		ArrayList<ResumeDTO> personList = dao.personList2(searchResult);
-
-		map.put("personList", personList);
-		
-		return map;
-	}
+	
 
 	public ResumeDTO resumeRegDetail(String id) {
 		ResumeDTO dto = new ResumeDTO();
@@ -117,7 +75,7 @@ public class ResumeService {
 		return dto;
 	}
 
-	public String resumeReg(HashMap<String, String> params) {
+	public int resumeReg(HashMap<String, String> params) {
 		
 		logger.info("이력서 기본정보 등록 서비스");
 		ResumeDTO dto = new ResumeDTO();
@@ -128,8 +86,7 @@ public class ResumeService {
 		dto.setRe_sch_period(params.get("re_sch_period"));
 		dto.setRe_major(params.get("re_major"));		
 		dto.setRe_register(params.get("re_register"));
-		dto.setRe_intro(params.get("re_intro"));
-		dto.setRe_portfolio(params.get("re_portfolio"));
+		dto.setRe_intro(params.get("re_intro"));		
 		dto.setRe_average(params.get("re_average"));
 		dto.setRe_total(params.get("re_total"));
 		
@@ -137,21 +94,45 @@ public class ResumeService {
 		int jp_no = Integer.parseInt(jp);
 		String jc = params.get("jc_no");		
 		int jc_no = Integer.parseInt(jc);
-		
+				
 		if(jp_no != 0 || jc_no != 0) {
 			int rowB=dao.resumeRegB(dto);
 			int re_no = dto.getRe_no();
 			int row=dao.resumeReg(jp_no, jc_no, re_no);
 			logger.info("이력서 등록 결과 : " + rowB + '/' + row);
 		} else {
-			int rowB=dao.resumeRegB(dto);
+			int rowB=dao.resumeRegB(dto);			
 			logger.info("이력서 등록 결과 : " + rowB);			
 		}	
 		
 		int re_no = dto.getRe_no();
 		logger.info("이력서 등록 결과 : " + re_no);
 		
-		return "redirect:/resumeAddReg.go?re_no="+re_no;
+		return re_no;
+	}
+	
+	public void portfolioUp(int re_no, MultipartFile re_portfolio) {
+		
+		ResumeDTO dto = new ResumeDTO();
+		
+		String oriFileName = re_portfolio.getOriginalFilename();
+		if(!oriFileName.equals("")) {
+			String ext = oriFileName.substring(oriFileName.lastIndexOf(".")).toLowerCase();
+			String newFileName = System.currentTimeMillis()+ext;
+			
+			try {
+				byte[] arr = re_portfolio.getBytes();
+				Path path = Paths.get("C:/STUDY/SPRING_ADVANCE/Signal/src/main/webapp/resources/images/portfolio/" + newFileName);
+				Files.write(path, arr);
+				logger.info(newFileName + " 포트폴리오 save ok");
+				dto.setRe_portfolio(newFileName);
+				dto.setRe_portfolio_ori(oriFileName);
+				dto.setRe_no(re_no);
+				dao.portfolioUp(re_no, newFileName, oriFileName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
@@ -331,6 +312,10 @@ ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
 		mav.addObject("result", result);
 		return mav;
 	}
+
+	
+
+
 
 	
 

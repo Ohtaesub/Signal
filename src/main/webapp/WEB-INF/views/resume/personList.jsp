@@ -40,7 +40,16 @@
 			</tr>
 		</thead>
 		<tbody id="list">
-		
+			<c:forEach items="${list}" var="person">
+				<tr>
+					<td>${person.cl_age }</td>
+					<td>${person.cl_gender }</td>
+					<td>${person.avr_inter_grade }</td>
+					<td>${person.cnt_inter }</td>
+					<td>${person.avr_st_score }</td>
+					<td><button onclick="popOpen('${person.cl_id }')">입사제안</button></td>
+				</tr>
+			</c:forEach>
 		</tbody>
 		<tr>
 			<td colspan="6" id="paging">
@@ -55,117 +64,7 @@
 	</table>	
 </body>
 <script>
-var currPage = 1;
 
-listCall(currPage);
-
-function listCall(page){	
-	var pagePerNum = 10;
-	//console.log("param page : " + page);	
-	$.ajax({
-		type:'get',
-		url:'personList.ajax',
-		data:{
-			cnt : pagePerNum,
-			page : page
-		},
-		dataType:'JSON',
-		success:function(data){
-			//console.log(data);
-			drawList(data.personList);
-			currPage=data.currPage;
-			
-			//플러그인 사용 페이징
-			$("#pagination").twbsPagination({
-				startPage:data.currPage, //시작페이지
-				totalPages:data.pages, //총 페이지(전체게시물 / 한 페이지에 보여줄 게시물 수)
-				visiblePages: 10, // 한번에 보여줄 페이지 수
-				onPageClick:function(e,page){
-					console.log(page);
-					currPage=page;
-					listCall(page);
-				}
-			});			
-		},
-		error:function(e){
-			console.log(e);
-		}
-	});	
-}
-
-$('#personSearch').on('click',function(){
-	$("#pagination").twbsPagination('destroy');
-	personSearch(currPage);
-});
-
-function personSearch(page){
-	
-	var pagePerNum = 10;
-	
-	 var searchCondition = $("#searchCondition option:selected").val();
-	 console.log(searchCondition);
-		 
-	 var startAge = $("#startAge").val();
-	 console.log(startAge);
-	 
-	 var endAge = $("#endAge").val();
-	 console.log(endAge);
-	 
-	 $.ajax({
-		 type:'get',
-		 url:'personSearch.ajax',
-		 data:{
-			 cnt : pagePerNum,
-			 page : page,
-			 searchCondition : searchCondition,			 
-			 startAge : startAge,
-			 endAge : endAge 
-		 },
-		dataType:'json',
-		success:function(data){
-			console.log(data);
-			drawList(data.personList);
-			currPage = data.currPage;
-			
-			//플러그인 사용 페이징
-			$("#pagination").twbsPagination({
-				startPage:data.currPage, //시작페이지
-				totalPages:data.pages, //총 페이지(전체게시물 / 한 페이지에 보여줄 게시물 수)
-				visiblePages: 10, // 한번에 보여줄 페이지 수
-				onPageClick:function(e,page){
-					console.log(page);
-					currPage=page;
-					personSearch(page);
-				}
-			});
-		},
-		error:function(e){
-			console.log(e);
-		}
-	 });
-
-	}
-
-function drawList(personList){
-	
-	var content="";
-	
-	personList.forEach(function(item){
-	
-		//console.log(item);
-		content += '<tr>';
-		content += '<td>'+item.cl_age+'</td>';
-		content += '<td>'+item.cl_gender+'</td>';
-		content += '<td>'+item.avr_inter_grade+'</td>';
-		content += '<td>'+item.cnt_inter+'</td>';
-		content += '<td>'+item.avr_st_score+'</td>';
-		content += '<td><a href="offer.go?re_no='+item.re_no+'">제안하기</td>';
-		content += '</tr>';
-	});
-	
-	$('#list').empty();
-	$('#list').append(content);
-}
 
 //by태섭, 입사제안 클릭 시 팝업창으로 채용공고 리스트 팝업창 호출
 /* function showJobPostingList() {
@@ -178,6 +77,9 @@ function drawList(personList){
 	window.open(url, name, option);
 } */
 
+function popOpen(id){
+	window.open("offer.go?cl_id="+id,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+}
 
 </script>
 </html>

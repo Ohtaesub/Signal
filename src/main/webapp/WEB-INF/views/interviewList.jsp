@@ -44,10 +44,9 @@
                         <td align="center">
                         	<c:choose>
 									<c:when test="${empty interviewList.obj_cl_content}">
-										<button type="button" onclick="location.href='clientObjectionReg.go?inter_no=${interviewList.inter_no}'">이의제기</button>
+										<button type="button" onclick="pop(${interviewList.inter_no});">이의제기</button>
 									</c:when>					
 									<c:otherwise>처리중</c:otherwise>
-									
 							</c:choose>
 	                            <button type="button" onclick="location.href='interviewDetail.go?inter_no=${interviewList.inter_no}'">상세보기</button>
                          </td>
@@ -58,5 +57,17 @@
     </table>		
 </body>
 <script>
+
+
+ 
+function pop(inter_no){
+	
+	 window.open("clientObjectionReg.go?inter_no="+inter_no, '', 'width=800, height=600, left=100, top=50'); 
+	 
+	 return false;
+
+}
+ 
+ 
 </script>
 </html>

@@ -34,7 +34,14 @@ public class ResumeDTO {
 	private String re_register;
 	private String re_intro;
 	private String re_portfolio;
+	private String re_portfolio_ori;
 	
+	public String getRe_portfolio_ori() {
+		return re_portfolio_ori;
+	}
+	public void setRe_portfolio_ori(String re_portfolio_ori) {
+		this.re_portfolio_ori = re_portfolio_ori;
+	}
 	private int jp_no;
 	private String jp_name;
 	private int jp_hidden;

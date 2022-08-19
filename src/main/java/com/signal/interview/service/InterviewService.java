@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.signal.all.dto.EnterDTO;
 import com.signal.all.dto.InterviewDTO;
 import com.signal.enter.controller.Criteria;
 import com.signal.interview.dao.InterviewDAO;
@@ -75,16 +76,16 @@ public class InterviewService {
 		return dao.comInterviewUpdateQue(inter_no);
 	}
 
-	public String comInterviewUpdateDo(HashMap<String, String> params) {
+	public void comInterviewUpdateDo(HashMap<String, String> params) {
 		
 	
 		
+		int row =dao.comInterviewUpdateState(params);
 		
-		
- 		dao.comInterviewUpdateState(params);
+ 		
 
 		
-		return "redirect:/comInterviewList.go";
+		
 	}
 
 	public int getTotal() {
@@ -93,7 +94,7 @@ public class InterviewService {
 	}
 
 	public ArrayList<InterviewDTO> comSearchList(String searchOption, String search, int skip) {
-		// TODO Auto-generated method stub
+		
 		return dao.comSearchList(searchOption,search,skip);
 	}
 
@@ -102,7 +103,35 @@ public class InterviewService {
 		return dao.comSearchTotal(searchOption, search);
 	}
 
-	
+	// by태섭, 기업 마이페이지 입사지원현황_2022_08_17
+		public ArrayList<EnterDTO> companyApplyList(String com_id, int skip, int amount) {
+			logger.info("기업 마이페이지 입사지원현황 리스트 서비스 요청");
+			return dao.companyApplyList(com_id, skip, amount);
+		}
+
+		// by태섭, 기업 마이페이지 입사지원 총 갯수_2022_08_17
+		public int getCompanyApplyTotal(String com_id) {
+			return dao.getCompanyApplyTotal(com_id);
+		}
+
+		// by태섭, 기업 마이페이지 입사지원에서 면접 상태 변경하기_2022_08_18
+		public boolean interviewSave(int inter_no, String inter_date, String inter_result) {
+			return dao.interviewSave(inter_no, inter_date, inter_result);		
+		}
+
+		// by태섭, 면접 결과
+		 /*
+		public String interResult(String inter_no) {
+			logger.info("면접 결과 리스트 요청 서비스");
+			return dao.interResult(inter_no);
+		}*/
+
+		public EnterDTO interResultList(String inter_no) {
+			logger.info("면접 결과 리스트 요청 서비스");
+			return dao.interResultList(inter_no);
+		}
+
+
 
 
 	

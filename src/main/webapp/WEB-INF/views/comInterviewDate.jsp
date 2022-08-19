@@ -25,13 +25,13 @@
 			<td>
 				<input type="hidden" name="inter_no" value="${dto.inter_no}">
 				<input type="date" id="inter_date" name="inter_date" value=""
-                    min="2022-01-01" max="2024-12-31">
+                    min="2022-01-01" max="2023-12-31">
 			</td>
 		</tr>
     </table>
     
 		 <input type="submit" value="변경"/>
-        <input type="button" value="닫기" onclick="location.href='problemList.do'"/>
+        <input type="button" value="닫기" onclick="pclose2()"/>
 		
 	</form>
 </body>
@@ -43,5 +43,18 @@ function comInterviewDate()	{
 		return false;
 	}
 }
+
+var pclose = "${pclose}";
+if(pclose){
+	   opener.location.reload();
+	    window.close();
+}
+
+function pclose2(){
+	opener.location.reload();
+    window.close();
+}
+
+
 </script>
 </html>

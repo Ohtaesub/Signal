@@ -10,7 +10,7 @@
 <style></style>
 </head>
 <body>
-<form action="clientDbjectionReg.do" method="get" onsubmit="return clientDbjectionReg()" >
+<form action="clientDbjectionReg.do" method="get"  onsubmit="return clientDbjectionReg()" >
     <table class="dto">
         
             <tr>
@@ -42,11 +42,13 @@
                 	</td>
            </tr>
         </table>
-        <input type="submit" value="등록"/>
-        <input type="button" value="목록" onclick="location.href='/interviewList.go'"/>
+        <input type="submit" value="등록" id="btn"/>
+        <input type="button" value="닫기" onclick="pclose2()"/>
     </form>		
 </body>
 <script>
+
+
 
 
 function clientDbjectionReg()	{
@@ -57,6 +59,22 @@ function clientDbjectionReg()	{
 			$("#obj_cl_content").focus();
 			return false;
 		}
+		
+		
 }
+function pclose2(){
+	opener.location.reload();
+    window.close();
+}
+
+var pclose = "${pclose}";
+if(pclose){
+	   opener.location.reload();
+	    window.close();
+}
+
+
+
+
 </script>
 </html>
