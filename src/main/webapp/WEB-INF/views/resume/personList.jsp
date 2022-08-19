@@ -47,7 +47,7 @@
 					<td>${person.avr_inter_grade }</td>
 					<td>${person.cnt_inter }</td>
 					<td>${person.avr_st_score }</td>
-					<td><button onclick="popOpen(${person.cl_id })">입사제안</button></td>
+					<td><button onclick="popOpen('${person.cl_id }')">입사제안</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>
