@@ -64,9 +64,21 @@
         </table>
         	<input type="hidden" name="inter_no" value="${dto.inter_no}">
         <input type= "submit" value="등록/수정">
-        <input type="button" value="목록" onclick="location.href='/comInterviewList.go'"/>
+        <input type="button" value="닫기" onclick="pclose2()"/>
     </form>		
 </body>
 <script>
+var pclose = "${pclose}";
+if(pclose){
+	   opener.location.reload();
+	    window.close();
+}
+
+function pclose2(){
+	opener.location.reload();
+    window.close();
+}
+
+
 </script>
 </html>

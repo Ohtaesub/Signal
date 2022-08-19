@@ -55,10 +55,10 @@
                     	  <td align="center">${comInterviewList.cl_gender}</td>
                     	  <td align="center">${comInterviewList.re_title}</td>
                     	  <td align="center">${comInterviewList.inter_date}
-                    	  <button type="button" onclick="location.href='comInterviewDate.go?inter_no=${comInterviewList.inter_no}'">일정 변경</button>
+                    	  <button type="button" onclick="pop(${comInterviewList.inter_no});">일정 변경</button>
                     	  </td>
                     	  <td align="center">${comInterviewList.inter_result}
-                    	  <button type="button" onclick="location.href='comInterviewUpdate.go?inter_no=${comInterviewList.inter_no}'">결과 수정</button>
+                    	  <button type="button" onclick="pop2(${comInterviewList.inter_no});">결과 수정</button>
                     	  </td>
                     </tr>
                 </c:forEach>
@@ -106,5 +106,23 @@ $(".pageInfo a").on("click", function(e){
         }
         
 });
+
+
+function pop(inter_no){
+	
+	 window.open("comInterviewDate.go?inter_no="+inter_no, '', 'width=550, height=300, left=100, top=50'); 
+	 
+	 return false;
+
+}
+
+function pop2(inter_no){
+	
+	 window.open("comInterviewUpdate.go?inter_no="+inter_no, '', 'width=800, height=450, left=100, top=50'); 
+	 
+	 return false;
+
+}
+
 </script>
 </html>

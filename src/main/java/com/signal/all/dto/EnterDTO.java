@@ -16,6 +16,10 @@ public class EnterDTO {
 	private Date offer_date; //입사제안 날짜
 	private String cl_name; //이름
 	
+	private String inter_comment;
+	private int inter_no;
+	private String cl_photo;
+	
 	//by태섭, 입사제안 버튼 눌렀을 때 채용공고 리스트 보여주기_2022_08_09
 	private String jpo_title; //채용공고명
 	private int jpo_no; //공고번호
@@ -144,6 +148,24 @@ public class EnterDTO {
 	}
 	public void setOffer_date(Date offer_date) {
 		this.offer_date = offer_date;
+	}
+	public String getCl_photo() {
+		return cl_photo;
+	}
+	public void setCl_photo(String cl_photo) {
+		this.cl_photo = cl_photo;
+	}
+	public int getInter_no() {
+		return inter_no;
+	}
+	public void setInter_no(int inter_no) {
+		this.inter_no = inter_no;
+	}
+	public String getInter_comment() {
+		return inter_comment;
+	}
+	public void setInter_comment(String inter_comment) {
+		this.inter_comment = inter_comment;
 	}
 	
 	

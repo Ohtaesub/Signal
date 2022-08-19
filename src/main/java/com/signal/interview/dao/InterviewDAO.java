@@ -3,6 +3,7 @@ package com.signal.interview.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.signal.all.dto.EnterDTO;
 import com.signal.all.dto.InterviewDTO;
 import com.signal.enter.controller.Criteria;
 
@@ -32,7 +33,7 @@ public interface InterviewDAO {
 
 
 
-	void comInterviewUpdateState(HashMap<String, String> params);
+	int comInterviewUpdateState(HashMap<String, String> params);
 
 	int getTotal();
 
@@ -42,7 +43,18 @@ public interface InterviewDAO {
 
 
 
+	ArrayList<EnterDTO> companyApplyList(String com_id, int skip, int amount);
 
+	int getCompanyApplyTotal(String com_id);
 
+	// by태섭, 기업이 지원자 면접 상태 변경_2022_08_18
+	boolean interviewSave(int inter_no, String inter_date, String inter_result);
+
+	// by태섭, 면접 결과 리스트_2022_08_18
+	//String interResult(String inter_no);
+
+	EnterDTO interResultList(String inter_no);
+
+	
 
 }

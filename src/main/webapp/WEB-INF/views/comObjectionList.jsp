@@ -38,7 +38,7 @@
                         <td align="center">
                         	<c:choose>
 									<c:when test="${comObjectionList.obj_state eq 0}">
-										<button type="button" onclick="location.href='comObjectionUpdate.go?obj_no=${comObjectionList.obj_no}'">미처리</button>
+										<button type="button" onclick="pop(${comObjectionList.obj_no});">미처리</button>
 									</c:when>					
 									<c:when test="${comObjectionList.obj_state eq 1}">${comObjectionList.obj_date}처리완료</c:when>					
 							</c:choose>
@@ -72,5 +72,15 @@
     </div>		
 </body>
 <script>
+function pop(obj_no){
+	
+	 window.open("comObjectionUpdate.go?obj_no="+obj_no, '', 'width=800, height=600, left=100, top=50'); 
+	 
+	 return false;
+
+}
+
+
+
 </script>
 </html>

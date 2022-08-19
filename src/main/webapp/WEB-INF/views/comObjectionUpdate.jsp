@@ -11,7 +11,7 @@
 </head>
 <body>
 <p>이의제기처리 <p>
-<form action="comObjectionUpdate.do" method="get" >
+<form action="comObjectionUpdate.do" method="get" onsubmit="return comObjectionUpdate()">
     <table class="dto">
         
            <tr>
@@ -23,12 +23,10 @@
 				</td>
 			<tr>
             <tr>
-                <th>	
-	                <select style="float:center" name="obj_state" id="obj_state">
-						<option value="0" ${dto.obj_state == '0' ? 'selected="selected"' : ''}>미처리</option>
-						<option value="1" ${dto.obj_state == '1' ? 'selected="selected"' : ''}>처리완료</option>
-					</select>
+                <th>
+                	 <input type="hidden" name="obj_state" value="1">
    				     <input type="submit" value="저장하기" />
+   				    <input type="button" value="닫기" onclick="pclose2()"/>
    					<input type="hidden" name="obj_no" value="${dto.obj_no}">
 				</th>
   				</tr>
@@ -36,5 +34,29 @@
     </form>		
 </body>
 <script>
+
+function comObjectionUpdate()	{
+		
+		if($('#obj_content').val()==""){
+			alert("이의제기 처리내용이 작성해주세요.");
+			$("#obj_content").focus();
+			return false;
+		}else {
+			alert("이의제기처리 완료되었습니다");
+		}
+}
+
+var pclose = "${pclose}";
+if(pclose){
+	   opener.location.reload();
+	    window.close();
+}
+
+function pclose2(){
+	opener.location.reload();
+    window.close();
+}
+
+
 </script>
 </html>

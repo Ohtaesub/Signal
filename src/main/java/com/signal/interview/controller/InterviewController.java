@@ -14,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.signal.all.dto.EnterDTO;
 import com.signal.all.dto.InterviewDTO;
 import com.signal.all.dto.PageMakerDTO;
 import com.signal.enter.controller.Criteria;
@@ -24,10 +26,13 @@ public class InterviewController {
 	@Autowired InterviewService service;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	
 	//면접현황리스트 (개인)
 	@RequestMapping(value = "/interviewList.go", method = RequestMethod.GET)
 	public String interviewList(Model model) {
+		
+		//String cl_id = (String) session.getAttribute("loginId");
+		//params.put("com_id", com_id);
+		
 		//면접현황리스트부분
 		ArrayList<InterviewDTO>interviewList =service.interviewList();
 		model.addAttribute("interviewList",interviewList);
@@ -106,6 +111,29 @@ public class InterviewController {
 	}
 	
 	
+	
+	
+	//면접관리리스트(기업) 결과등록 페이지 이동
+	//comInterviewReg.go
+	
+	
+	//면접관리리스트(기업) 결과등록 
+	//comInterviewReg.do
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//면접관리리스트(기업)- 결과수정 페이지 이동 
 	@RequestMapping(value = "/comInterviewUpdate.go", method = RequestMethod.GET)
 	public String comInterviewUpdate(Model model,@RequestParam String inter_no) {
@@ -125,21 +153,26 @@ public class InterviewController {
 		return "comInterviewUpdate";
 	}
 	
-	
-	
 	//면접관리리스트(기업)-결과수정 - 수정 
 	@RequestMapping(value = "/comInterviewUpdate.do")
-	public String comInterviewUpdateDo(@RequestParam HashMap<String, String>params){
+	public ModelAndView comInterviewUpdateDo(@RequestParam HashMap<String, String>params){	
+		ModelAndView mav =new ModelAndView();
+		String pclose="pclose";
+		String page="comInterviewUpdate";
+		logger.info("params:{}",params);
+		System.out.println(params);
+	
+		//ArrayList<String> inter_no = (ArrayList<String>) params.get("inter_no");
+		//ArrayList<String> it_no = (ArrayList<String>) values.get("it_no");
+		//ArrayList<String> inter_score = (ArrayList<String>) values.get("inter_score");
+	
 		
+		service.comInterviewUpdateDo(params);
+		mav.setViewName(page);
+		mav.addObject("pclose",pclose);
 		
-		
-		
-		
-		return service.comInterviewUpdateDo(params);
+		return mav;
 	}
-
-	
-	
 	
 	//면접관리(기업)-일정변경페이지 이동
 	@RequestMapping(value = "/comInterviewDate.go", method = RequestMethod.GET)
@@ -147,17 +180,107 @@ public class InterviewController {
 		
 		InterviewDTO dto =service.interviewDetail(inter_no);
 		model.addAttribute("dto",dto);
+		
+		
+		
 		return "comInterviewDate";
 	}
 	//면접관리(기업)-일정변경 업데이트
 	@RequestMapping(value = "/comInterviewDate.do")
-	public String update(HttpSession session,Model model
+	public ModelAndView update(HttpSession session,Model model
 			,@RequestParam HashMap<String, String>params){
-		String page ="redirect:/comInterviewList.go";
-		
+		ModelAndView mav =new ModelAndView();
+		String pclose="pclose";
+		String page="comInterviewDate";
 	
 		service.comInterviewDateDo(params);
-		return page;
+		mav.setViewName(page);
+		mav.addObject("pclose",pclose);
+	
+		return mav;
 	}
+	
+	
+	
+	
+	// by태섭, 기업 마이페이지 입사지원 관리 리스트 호출_2022_08_17
+		@RequestMapping(value = "/companyApplyList.go")
+		public String companyApplyList(Model model, Criteria cri, HttpSession session) {
+			logger.info("기업 입사지원 리스트 호출");
+			
+			// by태섭, 세션에서 회원 아이디 값 가져오기
+			String com_id = (String) session.getAttribute("loginId");
+			
+			// by태섭, 페이징 처리에 skip, amount 변수
+			int skip = cri.getSkip();
+			int amount = cri.getAmount();
+			
+			//  by태섭, 페이징 처리한 리스트 호출
+			ArrayList<EnterDTO> companyApplyList = service.companyApplyList(com_id,skip,amount);
+			model.addAttribute("companyApplyList", companyApplyList);
+			
+			// by태섭, 페이징 인터페이스 처리 부분
+			int total = service.getCompanyApplyTotal(com_id);
+			PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+	        //PageMaker 데이터를 view로 보내기 위함
+	        model.addAttribute("pageMaker", pageMake);
+	        
+			return "companyApplyList";
+		}
+		
+		// by태섭, 기업 마이페이지 입사지원 관리 리스트에서 면접 상태 선택 팝업창_2022_08_17
+		@RequestMapping(value = "/companyApplyPopup.go")
+		public String companyApplyPopup(Model model, @RequestParam String inter_no) {
+			logger.info("팝업창 띄우기");
+	        logger.info("면접 번호 : "+inter_no);
+	        //String interResult = service.interResult(inter_no);
+	        EnterDTO dto = service.interResultList(inter_no);
+	        model.addAttribute("interResult", dto);
+			return "interviewResultPopup";
+		}
+		
+		// by태섭, 기업 마이페이지 입사지원 관리 팝업창에서 면접 상태 저장하기_2022_08_17
+		@RequestMapping(value = "/interviewSave.do", method = RequestMethod.GET)
+		public String interviewSave(Model model, @RequestParam int inter_no, String inter_date, String inter_result) {
+			logger.info("면접 번호 : "+inter_no);
+			
+			// by태섭, 팝업창 닫기 위해 변수 선언
+			String popupClose = "popupClose";
+
+			//String page = "redirect:/companyApplyList.go";
+			
+			// by태섭, 수정이 성공했는지 확인하기 위해 
+			boolean success = service.interviewSave(inter_no, inter_date, inter_result);
+			logger.info("상태 변경 성공 여부 : "+success);
+			
+			model.addAttribute("popupClose", popupClose);		
+			
+			return "interviewResultPopup";
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
