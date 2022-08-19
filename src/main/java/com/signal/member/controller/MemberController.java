@@ -143,7 +143,7 @@ public class MemberController {
 	}
 	*/
 	
-	
+	/* 파일 업로드 불가 
 	// 개인회원 회원가입 요청 ajax 버전
 	@RequestMapping("/joinClient.ajax")
 	@ResponseBody
@@ -153,18 +153,48 @@ public class MemberController {
 		service.joinClient(params);
 		map.put("success", 1);
 		return map;
-	}
-	
-	
-	/*
-	// 개인회원 회원가입 요청 ajax
-	@RequestMapping(value = "/clientJoin.ajax")
-	@ResponseBody
-	public HashMap<String, Object> clientJoin(@RequestParam HashMap<String, Object> params) {
-		logger.info("회원 가입 요청 : "+params);
-		return service.clientJoin(params);
+
 	}
 	*/
+
+	
+	// 개인회원 회원가입 요청 ajax 버전 + 파일 저장
+	@RequestMapping("/joinClient.ajax")
+	@ResponseBody
+	public HashMap<String, Object> joinClient(
+			@RequestParam(value="cl_id") String cl_id, @RequestParam(value="cl_pw") String cl_pw,
+			@RequestParam(value="cl_name") String cl_name, @RequestParam(value="cl_birth") String cl_birth,
+			@RequestParam(value="cl_age") String cl_age,@RequestParam(value="cl_gender") String cl_gender,
+			@RequestParam(value="cl_address") String cl_address,@RequestParam(value="cl_call") String cl_call,
+			@RequestParam(value="cl_email") String cl_email,@RequestParam(value="cl_state") String cl_state,
+			@RequestParam(value="file",required=false) MultipartFile file){
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, String> params = new HashMap<String, String>();
+		
+		params.put("cl_id", cl_id);
+		params.put("cl_pw",cl_pw);
+		params.put("cl_name",cl_name);
+		params.put("cl_birth",cl_birth);
+		params.put("cl_age",cl_age);
+		params.put("cl_gender",cl_gender);
+		params.put("cl_address",cl_address);
+		params.put("cl_call",cl_call);
+		params.put("cl_email",cl_email);
+		params.put("cl_state",cl_state);
+		
+		logger.info("params : {}"+params);
+		logger.info("어떤 사진 파일을 보내시나요? :"+file);
+		
+		boolean joinClient = service.joinClient(params);
+		if(file!=null) {
+			service.fileSave(file,cl_id);
+		}
+		map.put("success", joinClient);
+		
+		
+		return map;
+	}
 	
 	
 	/*
@@ -196,6 +226,9 @@ public class MemberController {
 	*/
 	
 		
+	
+	
+	
 	// 개인회원,기업회원,관리자 로그인 (String으로 받아옴)
 	@RequestMapping(value = "/login.do", method= RequestMethod.POST)
 	public String login(Model model,HttpServletRequest request) throws Exception{
@@ -435,7 +468,7 @@ public class MemberController {
 	
 	//로그아웃 기능 구현
 	@RequestMapping(value = "/logout.do")
-	public String logout(Model model,HttpSession session) {
+	public String logout(RedirectAttributes attr,HttpSession session) {
 		
 		//위에 이름 날리기
 		session.removeAttribute("loginId");
@@ -449,9 +482,9 @@ public class MemberController {
         
         //추가되어야 할 것 관리자 로그아웃
         
-		model.addAttribute("msg", "로그아웃 되었습니다.");
+		attr.addFlashAttribute("msg", "로그아웃 되었습니다.");
 		//페이지는 임시
-		return "main";
+		return "redirect:/main.do";
 		}
 	
 	
@@ -481,17 +514,48 @@ public class MemberController {
 	}
 	
 	
-	// 기업회원 회원가입 요청 ajax 버전
-	@RequestMapping("/joinCompany.ajax")
+	// 기업회원 사업자 번호 중복체크
+	@RequestMapping("/overlayNumber.ajax")
 	@ResponseBody
-	public HashMap<String, Object> joinCompany(@RequestParam HashMap<String, Object> params){
-		logger.info("기업회원 가입요청 : "+params);
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		service.joinCompany(params);
-		map.put("success", 1);
-		return map;
+	public HashMap<String, Object>overlayNumber(@RequestParam String chkNumber) {
+		logger.info("사업자 번호 중복 체크 : "+chkNumber);
+		return service.overlayNumber(chkNumber);
 	}
 	
+	
+	// 기업회원 회원가입 요청 ajax 버전 + 파일 저장
+	@RequestMapping("/joinCompany.ajax")
+	@ResponseBody
+	public HashMap<String, Object> joinCompany(
+			@RequestParam(value="com_id") String com_id, @RequestParam(value="com_pw") String com_pw,
+			@RequestParam(value="com_business_no") String com_business_no, @RequestParam(value="com_name") String com_name,
+			@RequestParam(value="com_address") String com_address, @RequestParam(value="com_call") String com_call,
+			@RequestParam(value="com_email") String com_email, @RequestParam(value="com_state") String com_state,
+			@RequestParam(value="file",required=false) MultipartFile file){
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, String> params = new HashMap<String, String>();
+		
+		params.put("com_id", com_id);
+		params.put("com_pw",com_pw);
+		params.put("com_business_no",com_business_no);
+		params.put("com_name",com_name);
+		params.put("com_address",com_address);
+		params.put("com_call",com_call);
+		params.put("com_email", com_email);
+		params.put("com_state", com_state);
+		
+		logger.info("params : {}"+params);
+		logger.info("어떤 사진 파일을 보내시나요? :"+file);
+		
+		boolean joinCompany = service.joinCompany(params);
+		if(file!=null) {
+			service.fileSave2(file,com_id);
+		}
+		map.put("joinCompany", joinCompany);
+		return map;
+	}
+
 	
 	// 개인회원 아이디 찾기 페이지 이동요청
 	@RequestMapping(value = "/findClientId.go")
@@ -742,7 +806,7 @@ public class MemberController {
 		return service.passwordConfirm(cl_pw);
 	}
  	
- 	
+ 	/*
  	// 개인회원 정보수정 하기 요청
  	@RequestMapping(value="/clientInfoUpdate.do")
  	public String clientInfoUpdate(RedirectAttributes redirectAttr,HttpSession session, @RequestParam HashMap<String, String> params) {
@@ -762,6 +826,20 @@ public class MemberController {
  		
  		return "redirect:/clientInfoManagement.do";
  	}
+ 	*/
+ 	
+ 	// 개인회원 정보수정 하기 요청
+  	@RequestMapping(value="/clientInfoUpdate.do")
+  	public String clientInfoUpdate(RedirectAttributes rttr,@RequestParam HashMap<String, String> params,MultipartFile file) {
+
+
+  		logger.info("수정 요청 : "+params);
+  		rttr.addFlashAttribute("msg","수정이 완료되었습니다.");
+
+  		return service.clientInfoUpdate(params,file);
+  	}
+ 	
+ 	
  	
  	
  	//기업회원 기업회원정보관리 페이지 이동 요청 및 리스트 뿌려주기 + 정보수정 페이지 리스트까지 같이 보여줌
@@ -806,38 +884,31 @@ public class MemberController {
   	
   	
   	// 기업회원 정보수정 하기 요청
-  	@RequestMapping(value="/companyMemberInfoUpdate.do")
-  	public String companyMemberInfoUpdate(RedirectAttributes redirectAttr,HttpSession session, @RequestParam HashMap<String, String> params) {
-  		
-  		// 어떤 아이디의 정보를 수정할 것인지 확인하기 위해 로그인 세션 가져와서 담아줌 + 세션을 String으로 형변환
-  		String loginId = (String) session.getAttribute("loginId");
-  		
-  		params.put("com_id", loginId);
-  		logger.info("params : {}"+params);
-  		
-  		//서비스에 어떤 값을 수정할 것인지 담아서 요청을 보낸다.
-  		service.companyMemberInfoUpdate(params);
-  		
-  		// ※중요 redirect 전에 경고창 출력할 때는 RedirectAttributes 를 이용해서 출력한다.
-  		String msg = "수정이 완료되었습니다.";
-  		redirectAttr.addFlashAttribute("msg",msg);
-  		
-  		return "redirect:/companyInfoManagement.do";
-  	}
+   	@RequestMapping(value="/companyMemberInfoUpdate.do")
+   	public String companyMemberInfoUpdate(RedirectAttributes rttr,@RequestParam HashMap<String, String> params,MultipartFile file) {
+
+
+   		logger.info("수정 요청 : "+params);
+   		rttr.addFlashAttribute("msg","수정이 완료되었습니다.");
+
+   		return service.companyMemberInfoUpdate(params,file);
+   	}
   	
   	
   	// 개인회원 탈퇴 페이지 이동 요청
-  	@RequestMapping(value="/clientBreakForm.go")
-  	public String clientBreakForm(){
+  	@RequestMapping(value="/clientBreakFormPopup.go")
+  	public String clientBreakFormPopup(){
  		logger.info("회원탈퇴 페이지 이동");
- 		return "clientBreakForm";
+ 		return "clientBreakFormPopup";
  	}
   	
   	
   	// 개인회원 탈퇴 요청
   	@RequestMapping(value="/clientDelete.do")
-  	public String clientDelete(RedirectAttributes redirectAttr, HttpSession session, @RequestParam HashMap<String, String> params) {
+  	public String clientDelete(Model model, HttpSession session, @RequestParam HashMap<String, String> params) {
   	String cl_id = (String) session.getAttribute("loginId");
+  	
+  	String pclose = "pclose";
   	
   	params.put("cl_id", cl_id);
   	//회원 탈퇴가 완료된 경우 조건을 걸어서 회원관리 테이블에 인서트하는 요청을 보낸다.
@@ -849,13 +920,14 @@ public class MemberController {
   		
   		service.clientManagement(params);
   		String msg = "탈퇴가 완료되었습니다.";
-  		redirectAttr.addFlashAttribute("msg",msg);
+  		model.addAttribute("msg",msg);
+  		model.addAttribute("pclose",pclose);
   	}
   	
   	session.removeAttribute("loginId");
   	session.removeAttribute("isClient");
   	
-  	return "redirect:/main.do";
+  	return "clientBreakFormPopup";
   	}
   	
   	
@@ -1022,6 +1094,7 @@ public class MemberController {
    		logger.info("옵션 확인: "+searchOption+" / "+search+" / "+pageNum);
    		
    		model.addAttribute("searchOption",searchOption);
+   		model.addAttribute("search",search);
    		
    		//검색한 내용 페이징 처리하기
    		int skip=(pageNum-1) * 10;
@@ -1121,6 +1194,7 @@ public class MemberController {
    		logger.info("옵션 확인: "+searchOption+" / "+search+" / "+pageNum);
    		
    		model.addAttribute("searchOption",searchOption);
+   		model.addAttribute("search",search);
    		
    		//검색한 내용 페이징 처리하기
    		int skip=(pageNum-1) * 10;

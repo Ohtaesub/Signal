@@ -42,7 +42,7 @@
 		        <tr>
 		            <th>나이</th>
 		            <td>
-		            	<input type="text" name="cl_age"  id="cl_age" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="3"/>&nbsp; 세
+		            	<input type="text" name="cl_age"  id="cl_age" readonly style="border:none; width:40px;">&nbsp; 세
 		            </td>
 		        </tr>
 		        <tr>
@@ -77,14 +77,14 @@
 		            <td>
 						<!-- 하지만 div 는 서버에 값을 전송 할 수 없다. -->
 						<!-- 결국엔 div 의 내용을 input 에 담아 서버에 전송할 예정 -->
-		            	<input type="file" multiple ="multiple" name="cl_photo" id="cl_photo" onchange="checkFile(this)" accept=".png , .jpeg, .jfif, .exif, .gif, .bmp"/>
-		            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
+		            	<input type="file" multiple ="multiple" id="cl_photo" onchange="checkFile(this)" accept=".png , .jpeg, .jfif, .exif, .gif, .bmp"/>
+		            	<br>※ 파일은 JPG,PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
 		            </td>
 		        </tr>
 		        <tr>
 		            <th colspan="2">
 		                <input type="button" value="회원가입" onclick="joinFormClient()"/>
-			         	<input type="button" value="취소" onclick="location.href='main'"/>
+			         	<input type="button" value="취소" onclick="location.href='main.do'"/>
 		            </th>
 		        </tr>
 		    </table>
@@ -94,6 +94,16 @@
 <!-- 통합 로딩 방식 카카오 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+		let date = new Date();
+		var year = date.getFullYear();
+	//나이 자동 입력하기
+	$("#cl_birth").keydown(function(){
+		var clbirth = $("#cl_birth").val();
+		var birth = clbirth.substr(0, 4);
+		$("#cl_age").val(year-birth+1);
+	});
+	
 
 	//아이디 중복 체크
 	var overChk= false;
@@ -231,7 +241,7 @@
     	//for문으로 파일 갯수만큼 확인
     	for(var i = 0; i<file.length; i++){
     	//경고창 한번으로 수정
-    	if(!/\.(png|jpeg|jfif|exif|gif|bmp)$/i.test(file[i].name)) alert('이미지(.png , .jpeg, .jfif, .exif, .gif, .bmp) 파일만 선택해 주세요.\n\n현재 파일 : ' + file[i].name);
+    	if(!/\.(jpg|png|jpeg|jfif|exif|gif|bmp)$/i.test(file[i].name)) alert('이미지(.jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp) 파일만 선택해 주세요.\n\n현재 파일 : ' + file[i].name);
     	
     	else return;
     	
@@ -284,29 +294,35 @@
 		var expEmail = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
 		var gender = $('[name=gender]:checked').val();
 		var state = $("#cl_state").val();
-		//개인회원 프로필 사진
-		var clPhoto = $("#cl_photo").val();
+		//개인회원 프로필 사진 변수 선언은 배열로 선언한다.
+		var file = $("#cl_photo")[0].files[0];
 		
-
+		var formData = new FormData();
+		
+		//data에 보내는 값 정하기
+		formData.append("cl_id",clId);
+		formData.append("cl_pw",clPw);
+		formData.append("cl_name",name);
+		formData.append("cl_birth",birth);
+		formData.append("cl_age",age);
+		formData.append("cl_gender",gender);
+		formData.append("cl_address",clAddress);
+		formData.append("cl_call",clCall);
+		formData.append("cl_email",email);
+		formData.append("cl_state",state);
+		formData.append("file",file);
+		
+		
 		//회원가입 요청 ajax
+		//파일 업로드를 ajax로 하기위해서는 processData : false, contentType : false 넣어야한다.
 		if(overChk&&overChk2!=false){
 			$.ajax({
 				type:'post',
 				url:'joinClient.ajax',
-				data:{
-					cl_id:clId,
-					cl_pw:clPw,
-					cl_name:name,
-					cl_birth:birth,
-					cl_age:age,
-					cl_gender:gender,
-					cl_address:clAddress,
-					cl_call:clCall,
-					cl_email:email,
-					cl_photo:clPhoto,
-					cl_state:state
-				},
+				data:formData,
 				datatype:"JSON",
+				processData : false ,
+	            contentType : false ,
 				success:function(data){
 					console.log(data);
 					if(data.success){
@@ -379,6 +395,7 @@
         }else{
 			alert("아이디 또는 이메일 중복체크를 진행해주세요.");
 		}
+		
 		
 		
 		

@@ -23,11 +23,17 @@
 	,cl_address
 	,cl_call
 	,cl_email
-	,cl_photo
 	,cl_state
 	)
-	VALUES (#{cl_id},PASSWORD(#{cl_pw}),#{cl_name},#{cl_birth},#{cl_age},#{cl_gender},#{cl_address},#{cl_call},#{cl_email},#{cl_photo},#{cl_state})
+	VALUES (#{cl_id},PASSWORD(#{cl_pw}),#{cl_name},#{cl_birth},#{cl_age},#{cl_gender},#{cl_address},#{cl_call},#{cl_email},#{cl_state})
 	</insert>
+	
+	<!-- 개인회원가입후 파일 업데이트 시켜주기 -->
+	<update id="fileWrite">
+	UPDATE client
+	SET cl_photo = #{param1} 
+	WHERE cl_id = #{param2}
+	</update>
 	
 	<!-- 개인회원 로그인 String 으로 받기 -->
 	<select id="clientLogin" resultType="String">
@@ -105,6 +111,11 @@
 	FROM company WHERE com_email=#{chkComEmail}
 	</select>
 	
+	<select id="overlayNumber" parameterType="String" resultType="String">
+	SELECT com_business_no 
+	FROM company WHERE com_business_no=#{chkNumber}
+	</select>
+	
 	
 	<insert id="joinCompany" parameterType="hashmap">
 	INSERT INTO company
@@ -115,11 +126,17 @@
 	,com_address
 	,com_call
 	,com_email
-	,com_photo
 	,com_state
 	)
-	VALUES(#{com_id},PASSWORD(#{com_pw}),#{com_business_no},#{com_name},#{com_address},#{com_call},#{com_email},#{com_photo},#{com_state})
+	VALUES(#{com_id},PASSWORD(#{com_pw}),#{com_business_no},#{com_name},#{com_address},#{com_call},#{com_email},#{com_state})
 	</insert>
+	
+	<!-- 기업회원가입후 파일 업데이트 시켜주기 -->
+	<update id="fileWrite2">
+	UPDATE company
+	SET com_photo = #{param1} 
+	WHERE com_id = #{param2}
+	</update>
 	
 	
 	<select id="findClientId" resultType="String">
@@ -156,7 +173,8 @@
 	
 	<select id="clientInfoManagement" parameterType="String" resultType="com.signal.all.dto.MemberDTO">
 	SELECT
-	cl_name
+	cl_id
+	,cl_name
 	,cl_birth
 	,cl_age
 	,cl_gender
@@ -183,13 +201,14 @@
 		,cl_address = #{cl_address}
 		,cl_call = #{cl_call}
 		,cl_email = #{cl_email}
-		,cl_photo = #{cl_photo}
+		,cl_photo = #{file}
 	WHERE cl_id = #{cl_id} AND cl_pw = PASSWORD(#{cl_pw}) 
 	</update>
 		
 	<select id="companyInfoManagement" parameterType="String" resultType="com.signal.all.dto.MemberDTO">
 	SELECT
-	com_business_no
+	com_id
+	,com_business_no
 	,com_name
 	,com_address
 	,com_call
@@ -212,7 +231,7 @@
 		,com_address = #{com_address}
 		,com_call = #{com_call}
 		,com_email = #{com_email}
-		,com_photo = #{com_photo}
+		,com_photo = #{file}
 	WHERE com_id = #{com_id} AND com_pw = PASSWORD(#{com_pw}) 
 	</update>
 	
@@ -406,7 +425,7 @@
 	,cl_name
 	,cl_state
 	,c.cl_admin_re
-	,cl_break_date
+	,max(cl_break_date)
 	,cl_break_re
 	,cl_update_date
 	FROM client c

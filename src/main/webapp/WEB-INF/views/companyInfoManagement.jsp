@@ -3,7 +3,8 @@
 <%@ include file="../../resources/inc/header.jsp" %>
 <body>
 	<h3>기업회원 정보관리</h3>
-        <input type="hidden" name="com_state" id="com_state" value="기업회원"/>   
+        <input type="hidden" name="com_state" id="com_state" value="기업회원"/>
+        <input type="hidden" name="com_id" id="com_id" value="${companyInfo.com_id}"/>   
 	    <table>
 	        <tr>
 	            <th>아이디</th>
@@ -31,7 +32,7 @@
 	        </tr>
 	        <tr>
 	            <th>사업자 등록증 사본</th>
-	            <td>${companyInfo.com_photo}</td>
+	            <td><img src="/photo/${companyInfo.com_photo}" width="100" height="100"/></td>
 	        </tr>
 	        <tr>
 	            <th colspan="2">

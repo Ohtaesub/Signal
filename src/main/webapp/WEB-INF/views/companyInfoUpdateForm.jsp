@@ -2,9 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
 <body>
-	<form action="companyMemberInfoUpdate.do" method="post" onsubmit="return checkForm()">
+	<form action="companyMemberInfoUpdate.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
 	<h3>기업회원 정보수정</h3>
-        <input type="hidden" name="com_state" id="com_state" value="기업회원"/>   
+        <input type="hidden" name="com_state" id="com_state" value="기업회원"/>
+        <input type="hidden" name="com_id" value="${companyInfo.com_id}"/>   
 	    <table>
 	        <tr>
 	            <th>아이디</th>
@@ -63,7 +64,7 @@
 					${companyInfo.com_photo}
 					<br>
 					<br>
-	            	<input type="file" multiple ="multiple" name="com_photo" id="com_photo" onchange="checkFile(this)" accept=".png , .jpeg, .jfif, .exif, .gif, .bmp"/>
+	            	<input type="file" multiple ="multiple" name="file" onchange="checkFile(this)" accept=".jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp"/>
 	            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
 	            </td>
 	        </tr>

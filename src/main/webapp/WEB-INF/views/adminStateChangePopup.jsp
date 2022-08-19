@@ -43,10 +43,6 @@
 	function adminStateUpdate(){
 		confirm("정말로 수정하시겠습니까?");
 		var msg = "${msg}";
-		if(msg){
-			opener.document.location.href="redirect:/adminManagementList.do";
-			self.close();
-		}
 	}
 
 	// 팝업창 닫기
