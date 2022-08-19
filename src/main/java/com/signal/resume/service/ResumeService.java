@@ -90,23 +90,17 @@ public class ResumeService {
 		dto.setRe_average(params.get("re_average"));
 		dto.setRe_total(params.get("re_total"));
 		
-		String jp = params.get("jp_no");
-		int jp_no = Integer.parseInt(jp);
-		String jc = params.get("jc_no");		
-		int jc_no = Integer.parseInt(jc);
-				
-		if(jp_no != 0 || jc_no != 0) {
-			int rowB=dao.resumeRegB(dto);
-			int re_no = dto.getRe_no();
-			int row=dao.resumeReg(jp_no, jc_no, re_no);
-			logger.info("이력서 등록 결과 : " + rowB + '/' + row);
-		} else {
-			int rowB=dao.resumeRegB(dto);			
-			logger.info("이력서 등록 결과 : " + rowB);			
-		}	
-		
-		int re_no = dto.getRe_no();
+		int rowB=dao.resumeRegB(dto);			
+		logger.info("이력서 등록 결과 : " + rowB);	
+		int re_no=dto.getRe_no();
 		logger.info("이력서 등록 결과 : " + re_no);
+		
+		String jp = params.get("jp_no");		
+		String jc = params.get("jc_no");		
+		logger.info("jp="+ jp + "jc=" + jc);
+				
+		
+		
 		
 		return re_no;
 	}

@@ -93,7 +93,8 @@ public class ResumeController {
 	
 	@RequestMapping(value = "/resumeReg.ajax")
 	@ResponseBody
-	public HashMap<String, Object> resumeReg(@RequestParam(value = "re_title") String re_title,
+	public HashMap<String, Object> resumeReg(
+			@RequestParam(value = "re_title") String re_title,
 			@RequestParam(value = "cl_id") String cl_id,
 			@RequestParam(value = "re_fn_status") String re_fn_status,
 			@RequestParam(value = "jp_no", required=false) String jp_no,
@@ -129,8 +130,13 @@ public class ResumeController {
 			params.put("re_register",re_register);
 			params.put("re_intro",re_intro);
 			
+			logger.info("jp_no="+jp_no+'/'+"re_portfolio=" +re_portfolio);
+			
 			int re_no = service.resumeReg(params);
+			
+			if(re_portfolio != null) {
 			service.portfolioUp(re_no,re_portfolio);
+			}
 			map.put("re_no", re_no);
 			
 			
