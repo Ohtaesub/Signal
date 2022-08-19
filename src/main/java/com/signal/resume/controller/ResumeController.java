@@ -51,27 +51,13 @@ public class ResumeController {
 		
 		logger.info("인재현황 리스트 요청");
 
-		/*
-		 * ArrayList<ResumeDTO> list = service.personList();
-		 * logger.info("결과 확인 : 리스트 개수=" +list.size()); model.addAttribute("list",
-		 * list);
-		 */
+		
+		  ArrayList<ResumeDTO> list = service.personList();
+		  logger.info("결과 확인 : 리스트 개수=" +list.size());
+		  model.addAttribute("list",list);		 
 		
 		return "./resume/personList";
 	}
-	
-	
-	//리스트 호출
-	@RequestMapping("/personList.ajax")
-	@ResponseBody
-	public HashMap<String, Object> personList2(@RequestParam HashMap<String, String> params) {
-		logger.info("과정 리스트 요청 : "+params);	
-	
-		HashMap<String, Object> map = service.personList2(params);		
-		logger.info("리스트 불러오기");
-		return map;
-	}
-	
 	
 	// 이력서 상세보기
 	@RequestMapping(value = "resumeDetail.do", method = RequestMethod.GET)
