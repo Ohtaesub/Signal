@@ -40,7 +40,14 @@ public class EnterDTO {
 	
 	//by태섭, 기업 아이디 컬럼 추가_2022_08_20
 	private String com_id;
+	private String re_no;
 	
+	public String getRe_no() {
+		return re_no;
+	}
+	public void setRe_no(String re_no) {
+		this.re_no = re_no;
+	}
 	public String getCom_id() {
 		return com_id;
 	}

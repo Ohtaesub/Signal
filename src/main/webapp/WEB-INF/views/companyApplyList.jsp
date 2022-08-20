@@ -116,7 +116,7 @@ a:hover {color:black; text-decoration: underline;}
 						    </td>
 						</tr>
 						<tr>
-					    	<td colspan="3">${item.re_title}</td>
+					    	<td colspan="3"><a href="/resumeDetail.do?re_no=${item.re_no}">${item.re_title}</a></td>
 						</tr>
 					</c:forEach>
 				</c:when>
