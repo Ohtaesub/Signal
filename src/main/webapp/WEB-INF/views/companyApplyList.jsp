@@ -207,7 +207,7 @@ $(".pageInfo a").on("click", function(e){
  
  function pop3(inter_no){
 		
-	 window.open("comInterview.go?inter_no="+inter_no, '', 'width=800, height=450, left=100, top=50'); 
+	 window.open("comInterviewReg.go?inter_no="+inter_no, '', 'width=800, height=450, left=100, top=50'); 
 	 
 	 return false;
 

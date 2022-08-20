@@ -69,6 +69,14 @@ public interface InterviewDAO {
 
 	void comUp1(String interno, String inter_comment, String inter_result);
 
+	InterviewDTO comInterviewRegState(String inter_no);
+
+	ArrayList<InterviewDTO> comInterviewRegQue();
+
+	void comReg1(String interno, String inter_comment, String inter_result);
+
+	void comReg2(HashMap<String, Object> map);
+
 	
 
 }
