@@ -148,34 +148,6 @@ public class InterviewService {
 			return dao.getJobPostingApplyTotal(com_id, jpo_no);
 		}
 
-		public boolean comUp(HashMap<String, Object> param) {
-			boolean success=false;
-			
-			HashMap<String, Object> values = (HashMap<String, Object>) param.get("values");
-			ArrayList<String> inter_no = (ArrayList<String>) values.get("inter_no");
-			ArrayList<String> it_no	= (ArrayList<String>) values.get("it_no");
-			ArrayList<String> inter_score2 = (ArrayList<String>) values.get("inter_score2");
-			System.out.println("inter_no="+inter_no+"it_no="+it_no	+"inter_score2 ="+inter_score2 +inter_no.size());		
-			
-			String inter_comment = (String) values.get("inter_comment");
-			String inter_result = (String) values.get("inter_result");
-			String interno=inter_no.get(0);
-			
-			dao.comUp1(interno,inter_comment,inter_result);
-			
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			
-			for (int i = 0; i < inter_no.size(); i++) {
-				map.put("inter_no", inter_no.get(i));
-				map.put("it_no", it_no.get(i));
-				map.put("inter_score", inter_score2.get(i));
-				dao.comUp2(map);
-			}	
-			
-			return false;
-
-		}
-
 
 
 

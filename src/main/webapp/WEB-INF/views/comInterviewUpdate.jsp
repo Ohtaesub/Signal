@@ -11,8 +11,8 @@
 </head>
 <body>
 <p>마이페이지 > 면접현황 <p>
-<form action="comInterviewUpdate.do" method="post" >
-    <table class="dto" id="list">
+<form action="comInterviewUpdate.do" method="get" >
+    <table class="dto">
            <tr>
 				<th>면접결과선택</th>
 				<td>
@@ -31,12 +31,11 @@
 	                	<c:forEach items="${que}" var="que" >
 		                    <tr>
 		                        <td align="center">${que.it_no}
-		                        <input type="hidden" name="inter_no" value="${dto.inter_no}">
 		                        <input type="hidden" name="it_no" value="${que.it_no}">
 		                        </td>
 		                        <td align="center">${que.it_que}</td>
-		                        <td id="hh" align="center">
-			                        <select name="inter_score2" id="ss_${que.it_no}">
+		                        <td align="center">
+			                        <select name="inter_score" id="inter_score">
 				                        <option value=""${que.inter_score == '' ? 'selected="selected"' : ''}>점수선택</option>
 										<option value="1"${que.inter_score == '1' ? 'selected="selected"' : ''}>1</option>
 										<option value="2"${que.inter_score == '2' ? 'selected="selected"' : ''}>2</option>
@@ -59,12 +58,12 @@
               <tr>
                 <th>코멘트작성</th>
                 <td>
-               		 <textarea rows="10" cols="40" name="inter_comment"  id="inter_comment">${dto.inter_comment}</textarea>
+               		 <textarea rows="10" cols="40" name="inter_comment" >${dto.inter_comment}</textarea>
                 </td>
            </tr>
         </table>
-        	
-        <input type= "button" value="등록/수정" onclick="getResult()">
+        	<input type="hidden" name="inter_no" value="${dto.inter_no}">
+        <input type= "submit" value="등록/수정">
         <input type="button" value="닫기" onclick="pclose2()"/>
     </form>		
 </body>
@@ -79,54 +78,6 @@ function pclose2(){
 	opener.location.reload();
     window.close();
 }
-
-
-var arr1 = [];
-var arr2 = [];
-var arr3 = [];	
-
-function getResult(){		
-	for (var i = 0; i < $('#list').find('input[name="it_no"]').length; i++) {			
-		arr1[i] = $('#list').find('input[name="inter_no"]')[i].value
-		arr2[i] = $('#list').find('input[name="it_no"]')[i].value
-		arr3[i] = $('#list').find('select[name="inter_score2"]')[i].value	
-	}
-	var inter_comment = $('#inter_comment').val();
-	var inter_result = $('#inter_result').val();
-	var obj={};
-	obj.inter_no=arr1;
-	obj.it_no=arr2;
-	obj.inter_score2=arr3;
-	
-	obj.inter_comment=inter_comment;
-	obj.inter_result=inter_result;
-	
-	var param ={"values":obj};		
-	console.log(param);
-	
-	$.ajax({
-		type:'post',
-		url:'rest/comUp',
-		data:JSON.stringify(param),
-		dataType:'JSON',
-		contentType:'application/json; charset=utf-8',
-		success:function(data){
-			console.log(data);
-		},
-		error:function(e){
-			console.log(e);
-		}		
-	});
-	
-	
-}
-
-
-
-
-
-
-
 
 
 </script>
