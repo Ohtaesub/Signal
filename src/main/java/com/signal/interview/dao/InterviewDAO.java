@@ -65,6 +65,10 @@ public interface InterviewDAO {
 	//  by태섭, 선택된 채용공고 지원자 총 수
 	int getJobPostingApplyTotal(String com_id, String jpo_no);
 
+	void comUp1(String interno, String inter_comment, String inter_result);
+
+	void comUp2(HashMap<String, Object> map);
+
 	
 
 }
