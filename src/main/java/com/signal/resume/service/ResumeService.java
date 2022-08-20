@@ -307,6 +307,16 @@ ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
 		return mav;
 	}
 
+	public boolean resumeDelete(String re_no) {
+		boolean result = false;
+		
+		int resumeDelete = dao.resumeDelete(re_no);
+		if(resumeDelete>0) {
+			result = true;
+		}				
+		return result;
+	}
+
 	
 
 

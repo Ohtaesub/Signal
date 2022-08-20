@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.signal.all.dto.ResumeDTO;
 import com.signal.resume.service.ResumeService;
@@ -289,6 +290,17 @@ public class ResumeController {
 		model.addAttribute("re_no", re_no);
 		return page;
 		
+	}
+	
+	@RequestMapping(value = "resumeDelete.go", method = RequestMethod.GET)
+	public String resumeDelete(Model model, @RequestParam String re_no, RedirectAttributes rattr) {		
+		
+		logger.info(re_no + "번 이력서 삭제 요청");
+		
+		boolean success=service.resumeDelete(re_no);
+		
+		rattr.addFlashAttribute("success", success);
+		return "redirect:/resumeList.go";
 	}
 	
 	@RequestMapping(value = "/careerReg.do")

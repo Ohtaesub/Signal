@@ -122,7 +122,9 @@
 		  </tr>
 		  <tr>
 		    <th colspan="4">포트폴리오</th>
-		    <td colspan="24">"${dto.re_portfolio_ori}"<input type="file" id="re_portfolio" multiple="multiple" value="${dto.re_portfolio}"/></td>
+		    <td colspan="24">
+		    <p>${dto.re_portfolio_ori}</p>
+		    <input type="file" id="re_portfolio" multiple="multiple"/></td>
 		  </tr>
 		  <tr>
 		  	<td colspan="28">

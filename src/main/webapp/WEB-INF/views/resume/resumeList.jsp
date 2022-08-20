@@ -17,8 +17,8 @@
 	
 	<div id="section">
 		<div>
-			<button onclick="location.href='resumeReg.go'">등록</button>
-			<button onclick="resumeUpdate()">수정</button>
+			<button onclick="location.href='resumeReg.go'">신규등록</button>
+			<button onclick="resumeUpdate()">수정보완</button>
 			<button onclick="resumeDelete()">삭제</button>
 		</div>
 	<table>
@@ -49,7 +49,7 @@ function resumeUpdate(){
 	if(re_no>0){
 		location.href='resumeUpdate.go?re_no='+re_no;	
 	}else{
-		alert("수정할 이력서를 선택하세요!");   
+		alert("수정,보완할 이력서를 선택하세요!");   
 	}	
 }
 
@@ -60,6 +60,12 @@ function resumeDelete(){
 	}else{
 		alert("삭제할 이력서를 선택하세요!");   
 	}	
+}
+
+var msg = "${success}";
+if(msg){
+	alert("삭제가 완료되었습니다");
+	location.reload();
 }
 
 </script>

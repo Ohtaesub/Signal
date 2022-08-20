@@ -67,6 +67,8 @@ public interface ResumeDAO {
 
 	void portfolioUp(int re_no, String newFileName, String oriFileName);
 
+	int resumeDelete(String re_no);
+
 	
 
 	
