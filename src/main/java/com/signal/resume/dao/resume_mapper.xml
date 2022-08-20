@@ -4,10 +4,11 @@
 <mapper namespace="com.signal.resume.dao.ResumeDAO">
 
 	<select id="list" resultType="resume" parameterType="String">
-		SELECT re_no, re_title, jp_name, jc_name FROM resume r
+		SELECT re_no, re_title, re_regDate, jp_name, jc_name FROM resume r
 		LEFT OUTER JOIN job_pa jp ON r.jp_no = jp.jp_no
 		LEFT OUTER JOIN job_ch jc ON r.jc_no = jc.jc_no  
 		WHERE cl_id=#{id} AND re_hidden = 1
+		ORDER BY re_no DESC
 	</select>
 	
 	<update id="resumeDelete">
@@ -27,8 +28,8 @@
 	</select>
 	
 	<select id="resumeDetail" resultType="resume" parameterType="String">
-	SELECT re_title, re_fn_status, re_sch_name, re_sch_period, re_major, re_average, re_total, re_register, re_intro, re_portfolio_ori, jp_name, jc_name
-	,cl_name, cl_call, cl_address, cl_birth, cl_email, cl_gender, cl_photo, cl_age FROM resume r 
+	SELECT re_title, re_fn_status, re_sch_name, re_sch_period, re_major, re_average, re_total, re_register, re_intro, re_portfolio_ori,r.jp_no,r.jc_no, jp_name, jc_name
+	,cl_name, cl_call, cl_address, cl_birth, cl_email, cl_gender, cl_photo, cl_age, reco_no FROM resume r 
 	LEFT OUTER JOIN job_pa jp ON jp.jp_no = r.jp_no
 	LEFT OUTER JOIN job_ch jc ON jc.jc_no = r.jc_no 
 	LEFT OUTER JOIN client c ON c.cl_id = r.cl_id
@@ -85,16 +86,22 @@
 	WHERE re_no = #{param3}
 	</update>
 	
+	<update id="recoReg">
+	UPDATE resume SET 
+	reco_no = #{param2}	
+	WHERE re_no = #{param1}
+	</update>
+	
 	<update id="portfolioUp">
 	UPDATE resume SET 
-	re_portfolio = #{re_portfolio}, 
-	re_portfolio_ori = #{re_portfolio_ori}
-	WHERE re_no = #{re_no}
+	re_portfolio = #{param2}, 
+	re_portfolio_ori = #{param3}
+	WHERE re_no = #{param1}
 	</update>
 	
 	<select id="jpList" resultType="resume">
 		SELECT jp_no, jp_name, jp_hidden FROM job_pa
-		WHERE jp_no > 1 and jp_hidden=1
+		WHERE jp_hidden=1
 	</select>
 	
 	<select id="jcList" resultType="resume" parameterType="String">
@@ -182,5 +189,21 @@
 	<delete id="licenseDelete" parameterType="String">
 	DELETE FROM license WHERE li_no = #{li_no}
 	</delete>
+	
+	<insert id="careerAddUp">
+	INSERT INTO career (re_no , ca_com_name, ca_period, ca_job, ca_content)
+	SELECT #{param2}, ca_com_name , ca_period , ca_job , ca_content from career where re_no = #{param1};
+	</insert>
+	
+	<insert id="socialAddUp">
+	INSERT INTO social (re_no , soc_field , soc_name , soc_content , soc_period)
+	SELECT #{param2}, soc_field , soc_name , soc_content , soc_period from social where re_no = #{param1};
+	</insert>
+	
+	<insert id="licenseAddUp">
+	INSERT INTO license (re_no , li_field, li_name, li_org, li_date)
+	SELECT #{param2}, li_field , li_name , li_org , li_date from license where re_no = #{param1};
+	</insert>
+	
 	
 </mapper>

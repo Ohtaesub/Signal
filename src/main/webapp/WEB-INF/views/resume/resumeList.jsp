@@ -27,7 +27,8 @@
 				<th></th>
 				<th>이력서 제목</th>
 				<th>직무 대분류</th>
-				<th>직무 소분류</th>				
+				<th>직무 소분류</th>
+				<th>작성일</th>				
 			</tr>
 		</thead>
 		<tbody>
@@ -37,6 +38,7 @@
 					<td><a href="resumeDetail.do?re_no=${resume.re_no}">${resume.re_title}</a></td>
 					<td>${resume.jp_name}</td>
 					<td>${resume.jc_name}</td>
+					<td>${resume.re_regDate}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

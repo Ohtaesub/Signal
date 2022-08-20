@@ -14,6 +14,20 @@ public class TestDTO {
 	private String it_que;
 	private int it_hidden;
 	private String it_keyword;
+	private int inter_no;
+	public int getInter_no() {
+		return inter_no;
+	}
+	public void setInter_no(int inter_no) {
+		this.inter_no = inter_no;
+	}
+	public int getInter_score() {
+		return inter_score;
+	}
+	public void setInter_score(int inter_score) {
+		this.inter_score = inter_score;
+	}
+	private int inter_score;
 	public int getIt_no() {
 		return it_no;
 	}

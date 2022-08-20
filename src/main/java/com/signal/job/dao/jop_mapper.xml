@@ -36,4 +36,13 @@
 		WHERE jp_no=#{param1}
 	</select>
 	
+	<select id="jpAdminList" resultType="resume">
+		SELECT jp_no, jp_name, jp_hidden FROM job_pa		
+	</select>
+	
+	<select id="jcAdminList" resultType="resume" parameterType="String">
+		SELECT jp_no, jc_no, jc_name, jc_hidden FROM job_ch
+		WHERE jp_no=#{jp_no}
+	</select>
+	
 </mapper>

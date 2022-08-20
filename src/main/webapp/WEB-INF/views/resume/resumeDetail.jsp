@@ -80,7 +80,8 @@
 		    <td colspan="5">${dto.re_portfolio_ori}</td>
 		  </tr>		
 		</table>
-	
+	<br/>
+	<br/>
 	<table id="section">
 		<thead>
 			<tr>
@@ -104,6 +105,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<br/>
+	<br/>
 	<table id="section">
 		<thead>
 			<tr>
@@ -127,6 +130,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<br/>
+	<br/>
 	<table id="section">
 		<thead>
 			<tr>
@@ -158,9 +163,9 @@
 				<th colspan="3">내가받은 추천</th>
 			</tr>
 			<tr>
-				<th>분류</th>
+				<th>아이디</th>
 				<th>이름</th>
-				<th>취득일</th>				
+				<th>추천일</th>				
 			</tr>
 		</thead>
 		<tbody>
@@ -174,6 +179,75 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<br/>
+	<br/>
+	<div id="section">
+		<h3>셀프평가</h3>
+		<h4>평점 : ${selfTest6 }점</h4>
+	</div>
+	<table id="section">		
+		<tr>
+			<th>셀프코멘트</th>
+			<td colspan="4">${selfComment }</td>
+		</tr>
+		<tr>
+			<th>책임감</th>
+			<th>침착함</th>
+			<th>적극성</th>
+			<th>자신감</th>
+			<th>성실함</th>
+		</tr>
+		<tr>
+			<td>${selfTest1 }</td>
+			<td>${selfTest2 }</td>
+			<td>${selfTest3 }</td>
+			<td>${selfTest4 }</td>
+			<td>${selfTest5 }</td>
+		</tr>
+	</table>
+	<br/>
+	<br/>	
+	<div id="section">
+		<h3>면접평가</h3>
+		<h4>평점 : ${selfTest6 }점  개수 : 개</h4>
+	</div>
+	<table id="section">		
+		<tr>
+			<th>책임감</th>
+			<th>침착함</th>
+			<th>적극성</th>
+			<th>자신감</th>
+			<th>성실함</th>
+			<th>면접 코멘트</th>
+		</tr>
+		<tr>
+			<c:forEach items="${interviewTestDto1}" var="inter1">
+				<td>${inter1.inter_score}</td>
+			</c:forEach>
+			<c:forEach items="${interviewTestDto2}" var="inter2">
+				<td>${inter2.inter_score}</td>
+			</c:forEach>
+			<c:forEach items="${interviewTestDto3}" var="inter3">
+				<td>${inter3.inter_score}</td>
+			</c:forEach>
+			<c:forEach items="${interviewTestDto4}" var="inter4">
+				<td>${inter4.inter_score}</td>
+			</c:forEach>
+			<c:forEach items="${interviewTestDto5}" var="inter5">
+				<td>${inter5.inter_score}</td>
+			</c:forEach>
+			<c:forEach items="${interviewComment}" var="comment">
+				<td>${comment.inter_comment}</td>
+			</c:forEach>	
+		</tr>
+	</table>
+	<br/>
+	<br/>
+	<div id="section" style="text-align:center;">
+		<button onclick="location.href='resumeUpdate.go?re_no='+${re_no}">수정보완</button>
+		<button onclick="location.href='resumeList.go'">목록</button>
+	</div>
+	
 
 </body>
 <script></script>

@@ -90,18 +90,32 @@ public class ResumeService {
 		dto.setRe_average(params.get("re_average"));
 		dto.setRe_total(params.get("re_total"));
 		
+		String jp = params.get("jp_no");	
+		String jc = params.get("jc_no");
+		String reco = params.get("reco_no");
+		logger.info("jp="+ jp + "jc=" + jc + "reco_no=" +reco);
+		
 		int rowB=dao.resumeRegB(dto);			
 		logger.info("이력서 등록 결과 : " + rowB);	
 		int re_no=dto.getRe_no();
-		logger.info("이력서 등록 결과 : " + re_no);
-		
-		String jp = params.get("jp_no");		
-		String jc = params.get("jc_no");		
-		logger.info("jp="+ jp + "jc=" + jc);
-				
+		logger.info("이력서 등록 결과 : " + re_no);		
 		
 		
+		if(!jp.isEmpty()) {
+			if(!jc.isEmpty()) {
+		int jp_no=Integer.parseInt(jp);
+		int jc_no=Integer.parseInt(jc);
+		dto.setJp_no(jp_no);
+		dto.setJc_no(jc_no);
+		dao.resumeReg(jp_no, jc_no, re_no);
+			}
+		}
 		
+		if(reco!=null) {
+			int reco_no=Integer.parseInt(reco);
+			dto.setReco_no(reco_no);
+			dao.recoReg(re_no,reco_no);
+		}
 		return re_no;
 	}
 	
@@ -315,6 +329,12 @@ ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
 			result = true;
 		}				
 		return result;
+	}
+
+	public void resumeAddUp(String old_re_no, int re_no, String reco_no) {
+		dao.careerAddUp(old_re_no, re_no);
+		dao.socialAddUp(old_re_no, re_no);
+		dao.licenseAddUp(old_re_no, re_no);		
 	}
 
 	

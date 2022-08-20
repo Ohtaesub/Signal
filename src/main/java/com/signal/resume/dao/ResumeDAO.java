@@ -69,6 +69,16 @@ public interface ResumeDAO {
 
 	int resumeDelete(String re_no);
 
+	void careerAddUp(String old_re_no, int re_no);
+
+	void socialAddUp(String old_re_no, int re_no);
+
+	void licenseAddUp(String old_re_no, int re_no);
+
+	void recommendSelect(String reco_no, int re_no);
+
+	void recoReg(int re_no, int reco_no);
+
 	
 
 	

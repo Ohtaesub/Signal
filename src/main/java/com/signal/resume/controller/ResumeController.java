@@ -19,12 +19,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.signal.all.dto.ResumeDTO;
+import com.signal.all.dto.TestDTO;
 import com.signal.resume.service.ResumeService;
+import com.signal.test.service.TestService;
 
 @Controller
 public class ResumeController {
 
 	@Autowired ResumeService service;
+	@Autowired TestService testService;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	// 이력서 리스트 불러오기
@@ -63,19 +66,49 @@ public class ResumeController {
 	
 	// 이력서 상세보기
 	@RequestMapping(value = "resumeDetail.do", method = RequestMethod.GET)
-	public String resumeDetail(Model model, @RequestParam String re_no) {
+	public String resumeDetail(HttpSession session ,Model model, @RequestParam String re_no) {
+		String cl_id=(String) session.getAttribute("loginId");
 		ResumeDTO dto = service.resumeDetail(re_no);
 		ArrayList<ResumeDTO> careerDto = service.careerDetail(re_no);
 		ArrayList<ResumeDTO> socialDto = service.socialDetail(re_no);
 		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);
 		ArrayList<ResumeDTO> recommendDto = service.recommendDetail(re_no);
+		String selfTest1=testService.selfTestDetail1(cl_id);
+		String selfTest2=testService.selfTestDetail2(cl_id);
+		String selfTest3=testService.selfTestDetail3(cl_id);
+		String selfTest4=testService.selfTestDetail4(cl_id);
+		String selfTest5=testService.selfTestDetail5(cl_id);
+		String selfTest6=testService.selfTestDetail6(cl_id);
+		String selfComment=testService.selfComment(cl_id);
+		ArrayList<TestDTO> interviewTestDto1 = testService.interviewTestDetail1(cl_id);
+		ArrayList<TestDTO> interviewTestDto2 = testService.interviewTestDetail2(cl_id);
+		ArrayList<TestDTO> interviewTestDto3 = testService.interviewTestDetail3(cl_id);
+		ArrayList<TestDTO> interviewTestDto4 = testService.interviewTestDetail4(cl_id);
+		ArrayList<TestDTO> interviewTestDto5 = testService.interviewTestDetail5(cl_id);
+		ArrayList<TestDTO> interviewComment = testService.interviewTestComment(cl_id);
+		
 		String page = "./resume/resumeDetail";
 		
+		model.addAttribute("re_no", re_no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("careerDto", careerDto);
 		model.addAttribute("socialDto", socialDto);
 		model.addAttribute("licenseDto", licenseDto);
 		model.addAttribute("recommendDto", recommendDto);
+		model.addAttribute("selfTest1", selfTest1);
+		model.addAttribute("selfTest2", selfTest2);
+		model.addAttribute("selfTest3", selfTest3);
+		model.addAttribute("selfTest4", selfTest4);
+		model.addAttribute("selfTest5", selfTest5);
+		model.addAttribute("selfTest6", selfTest6);
+		model.addAttribute("selfComment", selfComment);
+		model.addAttribute("interviewTestDto1", interviewTestDto1);
+		model.addAttribute("interviewTestDto2", interviewTestDto2);
+		model.addAttribute("interviewTestDto3", interviewTestDto3);
+		model.addAttribute("interviewTestDto4", interviewTestDto4);
+		model.addAttribute("interviewTestDto5", interviewTestDto5);
+		model.addAttribute("interviewComment", interviewComment);
+		/* model.addAttribute("interviewTestDto", interviewTestDto); */
 		
 		return page;
 	}
@@ -116,7 +149,7 @@ public class ResumeController {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			HashMap<String, String> params = new HashMap<String, String>();
 			
-			String re_sch_period = enterYear+'.'+enterMonth+'~'+enterYear+'.'+enterMonth;
+			String re_sch_period = enterYear+'.'+enterMonth+'~'+outYear+'.'+outMonth;
 			
 			params.put("re_title",re_title);
 			params.put("cl_id",cl_id);
@@ -143,6 +176,8 @@ public class ResumeController {
 			
 		return map;
 	}
+	
+	
 	
 	@RequestMapping(value = "jobClassPop.go", method = RequestMethod.GET)
 	public String jobClassPopGo(Model model) {		
@@ -273,7 +308,9 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value = "resumeUpdate.go", method = RequestMethod.GET)
-	public String resumeUpdate(Model model, @RequestParam String re_no) {		
+	public String resumeUpdate(HttpSession session, Model model, @RequestParam String re_no) {		
+		
+		String cl_id=(String) session.getAttribute("loginId");
 		
 		logger.info(re_no + "번 이력서 수정 요청");
 		
@@ -283,6 +320,7 @@ public class ResumeController {
 		ArrayList<ResumeDTO> licenseDto = service.licenseDetail(re_no);		
 		String page = "./resume/resumeUpdate";
 		
+		model.addAttribute("cl_id", cl_id);
 		model.addAttribute("dto", dto);
 		model.addAttribute("careerDto", careerDto);
 		model.addAttribute("socialDto", socialDto);
@@ -290,6 +328,64 @@ public class ResumeController {
 		model.addAttribute("re_no", re_no);
 		return page;
 		
+	}
+	
+	@RequestMapping(value = "/resumeUp.ajax")
+	@ResponseBody
+	public HashMap<String, Object> resumeUp(
+			@RequestParam(value = "old_re_no") String old_re_no,
+			@RequestParam(value = "reco_no", required=false) String reco_no,
+			@RequestParam(value = "re_title") String re_title,
+			@RequestParam(value = "cl_id") String cl_id,
+			@RequestParam(value = "re_fn_status") String re_fn_status,
+			@RequestParam(value = "jp_no", required=false) String jp_no,
+			@RequestParam(value = "jc_no", required=false) String jc_no,
+			@RequestParam(value = "re_sch_name", required=false) String re_sch_name,
+			@RequestParam(value = "enterYear") String enterYear,
+			@RequestParam(value = "enterMonth") String enterMonth,
+			@RequestParam(value = "outYear") String outYear,
+			@RequestParam(value = "outMonth") String outMonth,
+			@RequestParam(value = "re_major", required=false) String re_major,
+			@RequestParam(value = "re_average", required=false) String re_average,
+			@RequestParam(value = "re_total", required=false) String re_total,
+			@RequestParam(value = "re_register") String re_register,
+			@RequestParam(value = "re_intro", required=false) String re_intro,
+			@RequestParam(value = "re_portfolio", required=false) MultipartFile re_portfolio) {
+		
+			logger.info("이력서 등록 페이지");
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, String> params = new HashMap<String, String>();			
+			
+			String re_sch_period = enterYear+'.'+enterMonth+'~'+outYear+'.'+outMonth;
+			
+			params.put("old_re_no", old_re_no);
+			params.put("reco_no", reco_no);
+			params.put("re_title",re_title);
+			params.put("cl_id",cl_id);
+			params.put("re_fn_status",re_fn_status);
+			params.put("jp_no",jp_no);
+			params.put("jc_no",jc_no);
+			params.put("re_sch_name",re_sch_name);
+			params.put("re_sch_period",re_sch_period);
+			params.put("re_major",re_major);
+			params.put("re_average",re_average);
+			params.put("re_total",re_total);
+			params.put("re_register",re_register);
+			params.put("re_intro",re_intro);
+			
+			logger.info("jp_no="+jp_no+'/'+"re_portfolio=" +re_portfolio);
+			
+			int re_no = service.resumeReg(params);
+			
+			service.resumeAddUp(old_re_no, re_no, reco_no);
+			
+			if(re_portfolio != null) {
+			service.portfolioUp(re_no,re_portfolio);
+			}
+			map.put("re_no", re_no);
+			
+			
+		return map;
 	}
 	
 	@RequestMapping(value = "resumeDelete.go", method = RequestMethod.GET)

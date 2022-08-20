@@ -80,16 +80,16 @@
 		    <th colspan="4">재학기간</th>
 		    <td colspan="14">
 				<select id="enterYear" style="text-align:center;">
-					<option value="없음">---</option>
+					<option value="0000">---</option>
 				</select> 년
 				<select id="enterMonth" style="text-align:center;">
-					<option value="없음">---</option>
+					<option value="00">---</option>
 				</select> 월 ~ 
 				<select id="outYear" style="text-align:center;">
-					<option value="없음">---</option>
+					<option value="0000">---</option>
 				</select> 년
 				<select id="outMonth" style="text-align:center;">
-					<option value="없음">---</option>
+					<option value="00">---</option>
 				</select> 월										
 			</td>		    
 		  </tr>

@@ -1,6 +1,9 @@
 package com.signal.job.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.signal.all.dto.ResumeDTO;
 
 public interface JobDAO {
 
@@ -15,5 +18,9 @@ public interface JobDAO {
 	void jcHiddenUp(String jc_no, String jc_hidden);
 
 	int hiddenGet(String jp_no);
+
+	ArrayList<ResumeDTO> jpAdminList();
+
+	ArrayList<ResumeDTO> jcAdminList(String jp_no);	
 
 }

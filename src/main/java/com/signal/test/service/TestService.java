@@ -153,6 +153,54 @@ public class TestService {
 		return success;
 	}
 
+	public String selfTestDetail1(String cl_id) {
+		return dao.selfTestDetail1(cl_id);
+	}
+	public String selfTestDetail2(String cl_id) {
+		return dao.selfTestDetail2(cl_id);
+	}
+	public String selfTestDetail3(String cl_id) {
+		return dao.selfTestDetail3(cl_id);
+	}
+	public String selfTestDetail4(String cl_id) {
+		return dao.selfTestDetail4(cl_id);
+	}
+	public String selfTestDetail5(String cl_id) {
+		return dao.selfTestDetail5(cl_id);
+	}
+	public String selfTestDetail6(String cl_id) {
+		return dao.selfTestDetail6(cl_id);
+	}
+
+	public String selfComment(String cl_id) {
+		return dao.selfComment(cl_id);
+	}
+
+	
+	  public ArrayList<TestDTO> interviewTestDetail1(String cl_id) { 
+		  return dao.interviewTestDetail1(cl_id); 
+		  } 
+	  
+	  public ArrayList<TestDTO> interviewTestDetail2(String cl_id) { 
+		  return dao.interviewTestDetail2(cl_id); 
+		  } 
+	  
+	  public ArrayList<TestDTO> interviewTestDetail3(String cl_id) { 
+		  return dao.interviewTestDetail3(cl_id); 
+		  } 
+	  
+	  public ArrayList<TestDTO> interviewTestDetail4(String cl_id) { 
+		  return dao.interviewTestDetail4(cl_id); 
+		  } 
+	  
+	  public ArrayList<TestDTO> interviewTestDetail5(String cl_id) { 
+		  return dao.interviewTestDetail5(cl_id); 
+		  }
+
+	public ArrayList<TestDTO> interviewTestComment(String cl_id) {
+		return dao.interviewTestComment(cl_id);
+	} 
+
 	
 
 }

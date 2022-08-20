@@ -35,7 +35,14 @@ public class ResumeDTO {
 	private String re_intro;
 	private String re_portfolio;
 	private String re_portfolio_ori;
+	private Date re_regDate;
 	
+	public Date getRe_regDate() {
+		return re_regDate;
+	}
+	public void setRe_regDate(Date re_regDate) {
+		this.re_regDate = re_regDate;
+	}
 	public String getRe_portfolio_ori() {
 		return re_portfolio_ori;
 	}

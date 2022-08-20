@@ -40,6 +40,30 @@ public interface TestDAO {
 
 	void itHiddenUp(String it_no, String it_hidden);
 
-	int interQueReg(HashMap<String, Object> params);
+	int interQueReg(HashMap<String, Object> params);	 
+
+	String selfTestDetail1(String cl_id);
+
+	String selfTestDetail2(String cl_id);
+	
+	String selfTestDetail3(String cl_id);
+	
+	String selfTestDetail4(String cl_id);
+	
+	String selfTestDetail5(String cl_id);	
+
+	String selfTestDetail6(String cl_id);
+	
+	ArrayList<TestDTO> interviewTestDetail1(String cl_id);
+
+	ArrayList<TestDTO> interviewTestDetail2(String cl_id);
+
+	ArrayList<TestDTO> interviewTestDetail3(String cl_id);
+
+	ArrayList<TestDTO> interviewTestDetail4(String cl_id);
+
+	ArrayList<TestDTO> interviewTestDetail5(String cl_id);
+
+	ArrayList<TestDTO> interviewTestComment(String cl_id);
 
 }

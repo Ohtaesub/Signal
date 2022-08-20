@@ -1,11 +1,13 @@
 package com.signal.job.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.signal.all.dto.ResumeDTO;
 import com.signal.job.dao.JobDAO;
 
 @Service
@@ -13,6 +15,13 @@ public class JobService {
 	
 	@Autowired JobDAO dao;
 	
+	public ArrayList<ResumeDTO> jpAdminList() {
+		return dao.jpAdminList();
+	}
+
+	public ArrayList<ResumeDTO> jcAdminList(String jp_no) {
+		return dao.jcAdminList(jp_no);
+	}
 
 	public boolean jpReg(HashMap<String, Object> params) {
 		boolean success=false;

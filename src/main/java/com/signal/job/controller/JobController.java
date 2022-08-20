@@ -29,7 +29,7 @@ public class JobController {
 	@RequestMapping(value = "jobClassReg.go", method = RequestMethod.GET)
 	public String jobClassPopGo(Model model) {		
 		
-		ArrayList<ResumeDTO> list = service.jpList();
+		ArrayList<ResumeDTO> list = jobService.jpAdminList();
 		model.addAttribute("jpList", list);
 		return "jobClassReg";
 	}
@@ -37,8 +37,8 @@ public class JobController {
 	@RequestMapping(value = "jobchList.go", method = RequestMethod.GET)
 	public String recommendGo(Model model, @RequestParam String jp_no) {		
 		logger.info("jp_no = "+jp_no);
-		ArrayList<ResumeDTO> jplist = service.jpList();
-		ArrayList<ResumeDTO> list = service.jcList(jp_no);
+		ArrayList<ResumeDTO> jplist = jobService.jpAdminList();
+		ArrayList<ResumeDTO> list = jobService.jcAdminList(jp_no);
 		model.addAttribute("jp_no", jp_no);
 		model.addAttribute("jcList", list);
 		model.addAttribute("jpList", jplist);
