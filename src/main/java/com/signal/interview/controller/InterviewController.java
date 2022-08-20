@@ -155,25 +155,25 @@ public class InterviewController {
 	}
 	
 	//면접관리리스트(기업)-결과수정 - 수정 
-	@RequestMapping(value = "/comInterviewUpdate.do")
-	public ModelAndView comInterviewUpdateDo(@RequestParam HashMap<String, String>params){	
-		ModelAndView mav =new ModelAndView();
-		String pclose="pclose";
-		String page="comInterviewUpdate";
-		logger.info("params:{}",params);
-		System.out.println(params);
+	//@RequestMapping(value = "/comInterviewUpdate.do")
+	//public ModelAndView comInterviewUpdateDo(@RequestParam HashMap<String, String>params){	
+		//ModelAndView mav =new ModelAndView();
+		//String pclose="pclose";
+		//String page="comInterviewUpdate";
+		//logger.info("params:{}",params);
+		//System.out.println(params);
 	
 		//ArrayList<String> inter_no = (ArrayList<String>) params.get("inter_no");
 		//ArrayList<String> it_no = (ArrayList<String>) values.get("it_no");
 		//ArrayList<String> inter_score = (ArrayList<String>) values.get("inter_score");
 	
 		
-		service.comInterviewUpdateDo(params);
-		mav.setViewName(page);
-		mav.addObject("pclose",pclose);
+		//service.comInterviewUpdateDo(params);
+		//mav.setViewName(page);
+		//mav.addObject("pclose",pclose);
 		
-		return mav;
-	}
+		//return mav;
+	//}
 	
 	//면접관리(기업)-일정변경페이지 이동
 	@RequestMapping(value = "/comInterviewDate.go", method = RequestMethod.GET)

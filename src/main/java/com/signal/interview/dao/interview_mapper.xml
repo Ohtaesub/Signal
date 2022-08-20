@@ -175,7 +175,19 @@
 	
 	
 	
+		<update id="comUp1" parameterType="String">
+		UPDATE interview SET
+		inter_comment =#{param2}
+		,inter_result =#{param3}
+		WHERE inter_no =#{param1}
+	</update>
 		
+			
+	<update id="comUp2" parameterType="hashmap">
+		UPDATE interview_test_result SET
+		inter_score =#{inter_score}
+		WHERE inter_no=#{inter_no} and it_no=#{it_no};
+	</update>
 		
 		
 		
