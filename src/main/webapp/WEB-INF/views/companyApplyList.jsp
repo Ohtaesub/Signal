@@ -81,7 +81,7 @@ a:hover {color:black; text-decoration: underline;}
 				<c:when test="${companyApplyList.size()>0}">
 					<c:forEach items="${companyApplyList}" var="item">
 						<tr>
-						    <td rowspan="2">${item.cl_photo}</td>
+						    <td rowspan="2"><img src="/photo/${filename}" width="100"/>${item.cl_photo}</td>
 						    <td>${item.cl_name}</td>
 						    <td>${item.cl_age}세</td>
 						    <td>${item.cl_gender}</td>
@@ -162,6 +162,7 @@ function jobPostingApplyList(){
 	$("#applyList").submit();	
 }
 
+console.log($("#jobPostingList").val());
 //by태섭, 페이징 작업_2022_08_17
 //form 태그 값 가져와서 moveForm 변수에 담기
 let moveForm = $("#moveForm");
@@ -176,8 +177,12 @@ $(".pageInfo a").on("click", function(e){
 		moveForm.attr("action", "/companyApplyList.go");
 		moveForm.submit();    		
 	}else{
-		$("#jobPostingList").find('input[name="pageNum"]').val($(this).attr("href"));
-    	$("#jobPostingList").submit();
+		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+		moveForm.attr("action", "/jobPostingApplyList.do");
+		moveForm.submit(); 
+		
+		/* $("#jobPostingList").find('input[name="pageNum"]').val($(this).attr("href"));
+    	$("#jobPostingList").submit(); */
 	}
 	
 

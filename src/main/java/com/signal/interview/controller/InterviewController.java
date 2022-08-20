@@ -227,15 +227,16 @@ public class InterviewController {
 	    model.addAttribute("pageMaker", pageMake);
 	    return "companyApplyList";
 	}
-	
+		
 	// by태섭, 선택된 채용공고에 따른 리스트 페이징 처리_2022_02_20
 	@RequestMapping(value = "/jobPostingApplyList.do")
-	public String jobPostingApplyList(Model model, @RequestParam String jpo_no, Criteria cri, HttpSession session) {
+	public String jobPostingApplyList(Model model, Criteria cri, HttpSession session, @RequestParam String jpo_no) {
 		logger.info("채용공고별 리스트 호출");
 		String com_id = (String) session.getAttribute("loginId");
 		int skip = cri.getSkip();
 		int amount = cri.getAmount();
-		
+		//셀렉트 박스에서 값을 선택했을 때 고정하기 위해 
+		model.addAttribute("jpo_no", jpo_no);
 		// 기업 채용 공고명 가져오기 
 		ArrayList<JobPostingDTO> jobPostingList = service.jobPostingList(com_id);
 		model.addAttribute("jobPostingList", jobPostingList);
@@ -246,7 +247,7 @@ public class InterviewController {
 		int total = service.getJobPostingApplyTotal(com_id,jpo_no);
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 		model.addAttribute("pageMaker", pageMake);
-		
+			
 		return "companyApplyList";
 	}
 		
