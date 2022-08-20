@@ -28,23 +28,32 @@ table tr td {
       display: inline-block;
     margin: 50px 0 0 100px;      
   }
-  .pageInfo li{
-      float: left;
+.pageInfo li{
+    float: left;
     font-size: 20px;
     margin-left: 18px;
     padding: 7px;
     font-weight: 500;
-  }
- a:link {color:black; text-decoration: none;}
- a:visited {color:black; text-decoration: none;}
- a:hover {color:black; text-decoration: underline;}
- .active{
-      background-color: #cdd5ec;
-  }
+}
+a:link {color:black; text-decoration: none;}
+a:visited {color:black; text-decoration: none;}
+a:hover {color:black; text-decoration: underline;}
+.active{
+	background-color: #cdd5ec;
+}
+/* 메인 섹션 영역 */
+#section {
+	width : 800px;
+	position: relative;
+	top : -380px;
+	left : 350px;
+}
 </style>
 </head>
 <body>
+	<div id="section">
 	<h5>개인 마이페이지 > 입사제안현황</h5>
+	<br>
 	<form action="deleteOffer.do" method="post">
 	<button>삭제</button>
 	<table>
@@ -63,7 +72,7 @@ table tr td {
 					<c:forEach items="${clientOfferList}" var="item">
 						<tr>
 							<td><input type="checkbox" name="chkArr" class="chkArr" value="${item.offer_no}" /></td>
-							<td><a href="/jobPostingDetail.go?offer_no=${item.offer_no }">${item.jpo_title}</a></td>
+							<td><a href="/jobPostingDetail.go?offer_no=${item.offer_no}&jpo_no=${item.jpo_no}">${item.jpo_title}</a></td>
 							<td>${item.com_name}</td>
 							<td>${item.offer_date}</td>
 							<td>${item.reading_state}</td>
@@ -105,7 +114,7 @@ table tr td {
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
         <input type="hidden" name="amount" value="${pageMaker.cri.amount }">   
 	</form>
-	
+	</div>
 </body>
 <script>
 $("#checkAll").on("click",function(){

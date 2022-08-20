@@ -41,10 +41,19 @@ table tr td {
  .active{
       background-color: #cdd5ec;
   }
+/* 메인 섹션 영역 */  
+#section {
+	width : 800px;
+	position: relative;
+	top : -380px;
+	left : 350px;
+}
 </style>
 </head>
 <body>
+	<div id="section">
 	<h5>마이페이지 > 입사지원현황</h5>
+	<br>
 	<table>
 		<thead>
 			<tr>
@@ -102,7 +111,7 @@ table tr td {
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
         <input type="hidden" name="amount" value="${pageMaker.cri.amount }">   
 	</form>
-	
+	</div>
 </body>
 <script>
 //by태섭, 페이징 작업_2022_08_12

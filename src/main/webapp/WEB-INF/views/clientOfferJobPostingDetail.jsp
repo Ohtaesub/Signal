@@ -153,7 +153,7 @@
 	</tbody>
 	</table>
 <input id="apply_button" type="button" value="지원하기"/>
-<input type="button" value="목록으로" onclick="location.href='/jobPostingMain.go'">
+<input type="button" value="목록으로" onclick="location.href='/clientOfferList.go'">
 </body>
 <script>
 	$(function(){ 
@@ -180,7 +180,7 @@
 	
     $("#apply_button").on("click",function(){
     	if(client != "" && ${dto.jpo_state.equals("진행중")}){
-    		location.href="/applyTwo.do?jpo_no=${dto.jpo_no}&re_no=${dto.re_no}&com_id=${dto.com_id}";
+    		location.href="/applyOne.do?jpo_no=${dto.jpo_no}&re_no=${dto.re_no}&com_id=${dto.com_id}";
     	}else{
     		 location.href = "/jobPostingMain.go";
     	}

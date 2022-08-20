@@ -19,10 +19,10 @@ public interface EnterDAO {
 	ArrayList<JobPostingDTO> jobPostingList(String com_id);
 
 	//by태섭, 해당 이력서에 대한 회원 정보 
-	ArrayList<ResumeDTO> personInfo(int re_no);
+	ArrayList<ResumeDTO> personInfo(String cl_id);
 
 	//by태섭, 입사제안 
-	int offer(int re_no, int jpo_no);
+	int offer(String cl_id, int jpo_no);
 
 	//by태섭, 개인 회원이 받은 입사 제안 리스트
 	ArrayList<EnterDTO> clientOfferList(String cl_id, int skip, int amount);
@@ -41,6 +41,27 @@ public interface EnterDAO {
 
 	//by태섭, 개인 회원 입사지원 현황 리스트 페이징 처리를 위한 지원 총 갯수
 	public int getApplyTotal(String cl_id);
+
+	ArrayList<EnterDTO> companyApplyList(String com_id, int skip, int amount);
+
+	int getCompanyApplyTotal(String com_id);
+
+	// by태섭, 기업이 지원자 면접 상태 변경_2022_08_18
+	boolean interviewSave(int inter_no, String inter_date, String inter_result);
+
+	// by태섭, 면접 결과 리스트_2022_08_18
+	//String interResult(String inter_no);
+
+	EnterDTO interResultList(String inter_no);
+
+	// by태섭, 입사제안 리스트에서 채용공고 상세보기
+	JobPostingDTO clientOfferJobpostingDetail(String jpo_no);
+
+	// by태섭, 개인회원 입사제안에서 지원하기
+	int jobPostingApplyOne(String cl_id, String jpo_no, String re_no, String com_id);
+
+	// by태섭, 채용공고 리스트에서 지원하기
+	int jobPostingApplyTwo(String cl_id, String jpo_no, String re_no, String com_id);
 
 
 	

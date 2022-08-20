@@ -41,18 +41,27 @@ table tr td {
  .active{
       background-color: #cdd5ec;
   }
+/* 메인 section 영역 */
+#section {
+	width : 800px;
+	position: relative;
+	top : -350px;
+	left : 350px;
+}
 </style>
 </head>
 <body>
+	<div id="section">
 	<h5>기업페이지 > 입사제안관리</h5>
+	<br>
 	<table>
 		<thead>
 			<tr>
 				<th>채용공고제목</th>
+				<th>이름</th>
 				<th>성별</th>
 				<th>나이</th>
-				<th>면접평점(수)</th>
-				<th>셀프평점</th>
+				<th>열람여부</th>
 				<th>제안날짜</th>
 			</tr>
 		</thead>
@@ -62,10 +71,10 @@ table tr td {
 					<c:forEach items="${offerList}" var="item">
 						<tr>
 							<td align="center">${item.jpo_title}</td>
+							<td align="center">${item.cl_name}</td>
 							<td align="center">${item.cl_gender}</td>
 							<td align="center">${item.cl_age}</td>
-							<td align="center">${item.inter_grade_avg}(${item.gradeCnt})</td>
-							<td align="center">${item.st_score_avg}</td>
+							<td align="center">${item.reading_state}</td>
 							<td align="center">${item.offer_date}</td>
 						</tr>
 					</c:forEach>
@@ -104,6 +113,7 @@ table tr td {
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
         <input type="hidden" name="amount" value="${pageMaker.cri.amount }">   
 	</form>
+	</div>
 </body>
 <script>
 //by태섭, 페이징 작업_2022_08_13
@@ -114,10 +124,12 @@ let moveForm = $("#moveForm");
 $(".pageInfo a").on("click", function(e){
 	
 	e.preventDefault();
-moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-moveForm.attr("action", "/companyOfferList.do");
-moveForm.submit();    
-
+  moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+  moveForm.attr("action", "/companyOfferList.do");
+  moveForm.submit();    
+  
 });
+
+
 </script>
 </html>

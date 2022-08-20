@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../../resources/inc/header.jsp" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -27,7 +26,7 @@ table tr td {
 <body>
 	<h3>인재현황 제안하기</h3>
 	<form action="offer.do" method="get">
-	<input type="hidden" name="re_no" value="${re_no}"/>
+	<input type="hidden" name="cl_id" value="${cl_id}"/>
 	<table>		
 		<thead>
 			<tr>
@@ -61,10 +60,42 @@ table tr td {
 			</c:forEach>
 		</tbody>
 	</table>
-	<input type="button" onclick="location.href='/personList.go'" value="목록"/>
+	<input type="button" value="닫기" onclick="pclose2()"/>
 	</form>
 </body>
 <script>
 
+//by태섭, 팝업창 닫기
+var popupClose = "${popupClose}";
+if(popupClose){
+// by태섭, 부모창 새로고침, reload 대신 href를 사용하면 내가 가고싶은 주소로 이동
+opener.document.location.reload();
+window.close();
+}
+
+function pclose2(){
+	//팝업창 닫기
+	opener.location.reload();
+    window.close();
+}
+
 </script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

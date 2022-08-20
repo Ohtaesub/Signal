@@ -17,8 +17,8 @@ public class EnterDTO {
 	private String cl_name; //이름
 	
 	private String inter_comment;
-	private int inter_no;
-	private String cl_photo;
+	private int inter_no; //면접 번호
+	private String cl_photo; //사진
 	
 	//by태섭, 입사제안 버튼 눌렀을 때 채용공고 리스트 보여주기_2022_08_09
 	private String jpo_title; //채용공고명
@@ -34,7 +34,25 @@ public class EnterDTO {
 	private Date apply_date; //지원날짜
 	private Date inter_date; //면접날짜
 	private String inter_result; //지원결과
-		
+	
+	//by태섭, 기업 마이페이지 입사지원현황 리스트 관련 파라미터 추가_2022_08_17
+	private String cl_id; //개인회원 아이디
+	
+	//by태섭, 기업 아이디 컬럼 추가_2022_08_20
+	private String com_id;
+	
+	public String getCom_id() {
+		return com_id;
+	}
+	public void setCom_id(String com_id) {
+		this.com_id = com_id;
+	}
+	public String getCl_id() {
+		return cl_id;
+	}
+	public void setCl_id(String cl_id) {
+		this.cl_id = cl_id;
+	}
 	public String getCl_name() {
 		return cl_name;
 	}
