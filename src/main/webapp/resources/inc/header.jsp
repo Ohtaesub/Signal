@@ -63,9 +63,8 @@
 		                <li><a href="/companyInfoManagement.do">기업회원정보관리</a></li>
 		                <li><a href="/companyInfo.go">기업정보관리</a></li>
 		                <li><a href="/jobPostingList.go">채용공고관리</a></li>
-		                <li><a href="">입사지원관리</a></li>
-		                <li><a href="">입사제안관리</a></li>
-		                <li><a href="">면접관리</a></li>
+		                <li><a href="/companyOfferList.do">입사제안관리</a></li>
+		                <li><a href="/companyApplyList.go">지원자면접관리</a></li>
 		                <li><a href="">이의제기현황</a></li>
 		            </ul>
 		        </c:if>

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.signal.all.dto.EnterDTO;
 import com.signal.all.dto.InterviewDTO;
+import com.signal.all.dto.JobPostingDTO;
 import com.signal.all.dto.PageMakerDTO;
 import com.signal.enter.controller.Criteria;
 import com.signal.interview.service.InterviewService;
@@ -204,59 +205,81 @@ public class InterviewController {
 	
 	
 	// by태섭, 기업 마이페이지 입사지원 관리 리스트 호출_2022_08_17
-		@RequestMapping(value = "/companyApplyList.go")
-		public String companyApplyList(Model model, Criteria cri, HttpSession session) {
-			logger.info("기업 입사지원 리스트 호출");
-			
-			// by태섭, 세션에서 회원 아이디 값 가져오기
-			String com_id = (String) session.getAttribute("loginId");
-			
-			// by태섭, 페이징 처리에 skip, amount 변수
-			int skip = cri.getSkip();
-			int amount = cri.getAmount();
-			
-			//  by태섭, 페이징 처리한 리스트 호출
-			ArrayList<EnterDTO> companyApplyList = service.companyApplyList(com_id,skip,amount);
-			model.addAttribute("companyApplyList", companyApplyList);
-			
-			// by태섭, 페이징 인터페이스 처리 부분
-			int total = service.getCompanyApplyTotal(com_id);
-			PageMakerDTO pageMake = new PageMakerDTO(cri, total);
-	        //PageMaker 데이터를 view로 보내기 위함
-	        model.addAttribute("pageMaker", pageMake);
-	        
-			return "companyApplyList";
-		}
+	@RequestMapping(value = "/companyApplyList.go")
+	public String companyApplyList(Model model, Criteria cri, HttpSession session) {
+		logger.info("기업 입사지원 리스트 호출");
 		
-		// by태섭, 기업 마이페이지 입사지원 관리 리스트에서 면접 상태 선택 팝업창_2022_08_17
-		@RequestMapping(value = "/companyApplyPopup.go")
-		public String companyApplyPopup(Model model, @RequestParam String inter_no) {
-			logger.info("팝업창 띄우기");
-	        logger.info("면접 번호 : "+inter_no);
-	        //String interResult = service.interResult(inter_no);
-	        EnterDTO dto = service.interResultList(inter_no);
-	        model.addAttribute("interResult", dto);
-			return "interviewResultPopup";
-		}
+		// by태섭, 세션에서 회원 아이디 값 가져오기
+		String com_id = (String) session.getAttribute("loginId");
+		// 기업 채용 공고명 가져오기 
+		ArrayList<JobPostingDTO> jobPostingList = service.jobPostingList(com_id);
+		model.addAttribute("jobPostingList", jobPostingList);
+		// by태섭, 페이징 처리에 skip, amount 변수
+		int skip = cri.getSkip();
+		int amount = cri.getAmount();
+		//  by태섭, 페이징 처리한 리스트 호출
+		ArrayList<EnterDTO> companyApplyList = service.companyApplyList(com_id,skip,amount);
+		model.addAttribute("companyApplyList", companyApplyList);
+		// by태섭, 페이징 인터페이스 처리 부분
+		int total = service.getCompanyApplyTotal(com_id);
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+	    //PageMaker 데이터를 view로 보내기 위함
+	    model.addAttribute("pageMaker", pageMake);
+	    return "companyApplyList";
+	}
+	
+	// by태섭, 선택된 채용공고에 따른 리스트 페이징 처리_2022_02_20
+	@RequestMapping(value = "/jobPostingApplyList.do")
+	public String jobPostingApplyList(Model model, @RequestParam String jpo_no, Criteria cri, HttpSession session) {
+		logger.info("채용공고별 리스트 호출");
+		String com_id = (String) session.getAttribute("loginId");
+		int skip = cri.getSkip();
+		int amount = cri.getAmount();
 		
-		// by태섭, 기업 마이페이지 입사지원 관리 팝업창에서 면접 상태 저장하기_2022_08_17
-		@RequestMapping(value = "/interviewSave.do", method = RequestMethod.GET)
-		public String interviewSave(Model model, @RequestParam int inter_no, String inter_date, String inter_result) {
-			logger.info("면접 번호 : "+inter_no);
+		// 기업 채용 공고명 가져오기 
+		ArrayList<JobPostingDTO> jobPostingList = service.jobPostingList(com_id);
+		model.addAttribute("jobPostingList", jobPostingList);
+		// 선택된 채용공고에 따른 지원자 리스트 호출
+		ArrayList<EnterDTO> jobPostingApplyList = service.jobPostingApplyList(com_id, jpo_no, skip, amount);
+		model.addAttribute("companyApplyList", jobPostingApplyList);
+		// 선택된 채용공고에 따른 지원자 총 수
+		int total = service.getJobPostingApplyTotal(com_id,jpo_no);
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+		model.addAttribute("pageMaker", pageMake);
+		
+		return "companyApplyList";
+	}
+		
+		
+	// by태섭, 기업 마이페이지 입사지원 관리 리스트에서 면접 상태 선택 팝업창_2022_08_17
+	@RequestMapping(value = "/companyApplyPopup.go")
+	public String companyApplyPopup(Model model, @RequestParam String inter_no) {
+		logger.info("팝업창 띄우기");
+	    logger.info("면접 번호 : "+inter_no);
+	    //String interResult = service.interResult(inter_no);
+	    EnterDTO dto = service.interResultList(inter_no);
+	    model.addAttribute("interResult", dto);
+		return "interviewResultPopup";
+	}
+		
+	// by태섭, 기업 마이페이지 입사지원 관리 팝업창에서 면접 상태 저장하기_2022_08_17
+	@RequestMapping(value = "/interviewSave.do", method = RequestMethod.GET)
+	public String interviewSave(Model model, @RequestParam int inter_no, String inter_date, String inter_result) {
+		logger.info("면접 번호 : "+inter_no);
 			
-			// by태섭, 팝업창 닫기 위해 변수 선언
-			String popupClose = "popupClose";
+		// by태섭, 팝업창 닫기 위해 변수 선언
+		String popupClose = "popupClose";
 
-			//String page = "redirect:/companyApplyList.go";
+		//String page = "redirect:/companyApplyList.go";
 			
-			// by태섭, 수정이 성공했는지 확인하기 위해 
-			boolean success = service.interviewSave(inter_no, inter_date, inter_result);
-			logger.info("상태 변경 성공 여부 : "+success);
+		// by태섭, 수정이 성공했는지 확인하기 위해 
+		boolean success = service.interviewSave(inter_no, inter_date, inter_result);
+		logger.info("상태 변경 성공 여부 : "+success);
+		
+		model.addAttribute("popupClose", popupClose);		
 			
-			model.addAttribute("popupClose", popupClose);		
-			
-			return "interviewResultPopup";
-		}
+		return "interviewResultPopup";
+	}
 	
 	
 	

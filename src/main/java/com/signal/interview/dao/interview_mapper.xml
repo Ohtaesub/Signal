@@ -237,12 +237,48 @@
 	</select>
 		
 		
+	<!-- by태섭, 채용공고 리스트 호출 -->	
+	<select id="jobPostingList" resultType="com.signal.all.dto.JobPostingDTO">
+	SELECT jpo_title, jpo_no, com_id, jpo_state 
+	FROM job_posting 
+	WHERE com_id = #{param1} and jpo_state = "진행중"	
+	</select>
 		
-		
-		
-		
-		
-		
+	<select id="jobPostingApplyList" resultType="com.signal.all.dto.EnterDTO">
+	SELECT 
+		i.apply_date 
+		,jp.jpo_title
+		,r.re_title
+		,i.inter_date
+		,i.inter_result
+		,i.inter_no
+		,i.inter_comment
+		,c.cl_id 
+		,c.cl_name 
+		,c.cl_age 
+		,c.cl_gender 
+		,c.cl_photo 
+		,o.reading_state
+		,i.com_id 
+		,(select avg(inter_grade)/count(inter_comment) from interview i where c.cl_id = i.cl_id group by c.cl_id) as inter_grade_avg
+		,(select count(inter_comment) from interview i where c.cl_id = i.cl_id ) as gradeCnt
+		,(select avg(st_score) from self_test_result str where c.cl_id = str.cl_id group by c.cl_id) as st_score_avg
+	FROM interview i
+	LEFT OUTER JOIN job_posting jp ON i.jpo_no = jp.jpo_no
+	LEFT OUTER JOIN resume r ON r.re_no = i.re_no
+	LEFT OUTER JOIN client c ON c.cl_id = r.cl_id
+	LEFT OUTER JOIN offer o ON o.jpo_no = jp.jpo_no
+	LEFT OUTER JOIN self_test_result str ON str.cl_id = c.cl_id
+	WHERE jp.com_id = #{param1} and jp.jpo_no = #{param2} GROUP BY i.inter_no ORDER BY inter_no desc
+	LIMIT #{param3}, #{param4};
+	</select>
+	
+	<select id="getJobPostingApplyTotal" resultType="int"  >
+	SELECT count(*) FROM interview i
+	LEFT OUTER JOIN resume r ON r.re_no = i.re_no 
+	LEFT OUTER JOIN job_posting jp ON jp.jpo_no = i.jpo_no
+	WHERE i.com_id = #{param1} and jp.jpo_no = #{param2};
+	</select>	
 		
 		
 	

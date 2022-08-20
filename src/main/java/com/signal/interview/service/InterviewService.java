@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.signal.all.dto.EnterDTO;
 import com.signal.all.dto.InterviewDTO;
+import com.signal.all.dto.JobPostingDTO;
 import com.signal.enter.controller.Criteria;
 import com.signal.interview.dao.InterviewDAO;
 
@@ -129,6 +130,22 @@ public class InterviewService {
 		public EnterDTO interResultList(String inter_no) {
 			logger.info("면접 결과 리스트 요청 서비스");
 			return dao.interResultList(inter_no);
+		}
+
+		// by태섭, 채용공고 리스트 불러오기
+		public ArrayList<JobPostingDTO> jobPostingList(String com_id) {
+			logger.info("기업 채용공고 리스트 호출");
+			return dao.jobPostingList(com_id);
+		}
+
+		public ArrayList<EnterDTO> jobPostingApplyList(String com_id, String jpo_no, int skip, int amount) {
+			logger.info("선택된 채용공고 리스트 호출");
+			return dao.jobPostingApplyList(com_id,jpo_no,skip,amount);
+		}
+
+		public int getJobPostingApplyTotal(String com_id, String jpo_no) {
+			logger.info("선택된 공고 수 가져오기 서비스 요청");
+			return dao.getJobPostingApplyTotal(com_id, jpo_no);
 		}
 
 

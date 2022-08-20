@@ -24,33 +24,52 @@ table tr td {
 }
 /* 페이지 이동 CSS 작업 */
 .pageInfo{
-      list-style : none;
-      display: inline-block;
+    list-style : none;
+    display: inline-block;
     margin: 50px 0 0 100px;      
-  }
-  .pageInfo li{
-      float: left;
+}
+.pageInfo li{
+    float: left;
     font-size: 20px;
     margin-left: 18px;
     padding: 7px;
     font-weight: 500;
-  }
- a:link {color:black; text-decoration: none;}
- a:visited {color:black; text-decoration: none;}
- a:hover {color:black; text-decoration: underline;}
- .active{
-      background-color: #cdd5ec;
-  }
+}
+a:link {color:black; text-decoration: none;}
+a:visited {color:black; text-decoration: none;}
+a:hover {color:black; text-decoration: underline;}
+.active{
+     background-color: #cdd5ec;
+}
+/* 메인 섹션 영역 */  
+#section {
+	width : 1200px;
+	position: relative;
+	top : -280px;
+	left : 200px;
+}
 </style>
 </head>
 <body>
-
+	<div id="section">
+	<h5>마이페이지 > 지원자면접관리</h5>
+	<br>
+	<form action="jobPostingApplyList.do" method="get" id="applyList">
+		<select id="jobPostingList" name="jpo_no" onchange="jobPostingApplyList();">
+			<option value="">채용공고명</option>
+			<c:forEach items="${jobPostingList}" var="item">
+					<option value="${item.jpo_no}" ${jpo_no == item.jpo_no ? 'selected="selected"' : ''}>${item.jpo_title}</option>
+				</c:forEach>
+		</select>
+	</form>
+	
 	<table>
 		<thead>
 			<tr>
 			    <th colspan="4">지원자정보</th>
 			    <th>면접평점(수)</th>
 			    <th>셀프평점</th>
+			    <th>채용공고명</th>
 			    <th>열람여부</th>
 			    <th>지원날짜</th>
 			    <th>면접날짜</th>
@@ -64,10 +83,11 @@ table tr td {
 						<tr>
 						    <td rowspan="2">${item.cl_photo}</td>
 						    <td>${item.cl_name}</td>
-						    <td>${item.cl_age}</td>
+						    <td>${item.cl_age}세</td>
 						    <td>${item.cl_gender}</td>
 						    <td rowspan="2">${item.inter_grade_avg}(${item.gradeCnt})</td>
 						    <td rowspan="2">${item.st_score_avg}</td>
+						    <td rowspan="2">${item.jpo_title}</td>
 						    <td rowspan="2">${item.reading_state}</td>
 						    <td rowspan="2">${item.apply_date}</td>
 						    <td rowspan="2">
@@ -102,7 +122,7 @@ table tr td {
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td colspan="10" style="text-align: center">지원자가 없습니다.</td>
+						<td colspan="11" style="text-align: center">지원자가 없습니다.</td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
@@ -135,33 +155,34 @@ table tr td {
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
         <input type="hidden" name="amount" value="${pageMaker.cri.amount }">   
 	</form>
-	
+	</div>
 </body>
 <script>
+function jobPostingApplyList(){
+	$("#applyList").submit();	
+}
+
 //by태섭, 페이징 작업_2022_08_17
 //form 태그 값 가져와서 moveForm 변수에 담기
 let moveForm = $("#moveForm");
+ 
 
 //출력시킨 '페이지 이동 번호'가 동작시키기 위해 JS코드 작업
 $(".pageInfo a").on("click", function(e){
 	
 	e.preventDefault();
-	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-	moveForm.attr("action", "/companyApplyList.go");
-	moveForm.submit();    
+	if($("#jobPostingList").val()==""){
+		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+		moveForm.attr("action", "/companyApplyList.go");
+		moveForm.submit();    		
+	}else{
+		$("#jobPostingList").find('input[name="pageNum"]').val($(this).attr("href"));
+    	$("#jobPostingList").submit();
+	}
+	
 
 });
 
-
-//by태섭, 팝업창_2022_08_17
-/* function interviewPopup(){
-	var child;
-	var url = 'companyApplyPopup.go?cl_id='+$("#cl_id").val()+'&inter_no='+$("#inter_no").val();
-	child = window.open(url, "popup_child", "width=300, height=300, left=300, top=300");	
-}
- */
- 
- 
  
  
  function pop1(inter_no){

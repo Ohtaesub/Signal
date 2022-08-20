@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.signal.all.dto.EnterDTO;
 import com.signal.all.dto.InterviewDTO;
+import com.signal.all.dto.JobPostingDTO;
 import com.signal.enter.controller.Criteria;
 
 public interface InterviewDAO {
@@ -54,6 +55,15 @@ public interface InterviewDAO {
 	//String interResult(String inter_no);
 
 	EnterDTO interResultList(String inter_no);
+
+	// by태섭, 채용공고 리스트 호출
+	ArrayList<JobPostingDTO> jobPostingList(String com_id);
+
+	// by태섭, 선택된 채용공고에 대한 지원자 리스트 호출
+	ArrayList<EnterDTO> jobPostingApplyList(String com_id, String jpo_no, int skip, int amount);
+
+	//  by태섭, 선택된 채용공고 지원자 총 수
+	int getJobPostingApplyTotal(String com_id, String jpo_no);
 
 	
 
