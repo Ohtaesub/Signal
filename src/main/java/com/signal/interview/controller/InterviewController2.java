@@ -20,7 +20,22 @@ public class InterviewController2 {
 	@Autowired InterviewService service;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	
+	@RequestMapping(value="/comReg")
+	@ResponseBody
+	public HashMap<String, Object> comReg(@RequestBody HashMap<String, Object> param) {
 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		boolean success=service.comReg(param);
+		
+		map.put("pclose", success);
+		
+		return map;
+	}
+
+	
+	
 	@RequestMapping(value="/comUp")
 	@ResponseBody
 	public HashMap<String, Object> stReg(@RequestBody HashMap<String, Object> param) {

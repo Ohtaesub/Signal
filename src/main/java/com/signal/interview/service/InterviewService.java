@@ -175,6 +175,47 @@ public class InterviewService {
 			return false;
 
 		}
+		public boolean comReg(HashMap<String, Object> param) {
+			HashMap<String, Object> values = (HashMap<String, Object>) param.get("values");
+			ArrayList<String> inter_no = (ArrayList<String>) values.get("inter_no");
+			ArrayList<String> it_no	= (ArrayList<String>) values.get("it_no");
+			ArrayList<String> inter_score2 = (ArrayList<String>) values.get("inter_score2");
+			System.out.println("inter_no="+inter_no+"it_no="+it_no	+"inter_score2 ="+inter_score2 +inter_no.size());		
+			
+			String inter_comment = (String) values.get("inter_comment");
+			String inter_result = (String) values.get("inter_result");
+			String interno=inter_no.get(0);
+			
+			dao.comReg1(interno,inter_comment,inter_result);
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			for (int i = 0; i < inter_no.size(); i++) {
+				map.put("inter_no", inter_no.get(i));
+				map.put("it_no", it_no.get(i));
+				map.put("inter_score", inter_score2.get(i));
+				dao.comReg2(map);
+			}	
+			
+			return false;
+		}
+		
+		
+		
+		
+		
+		
+		public InterviewDTO comInterviewRegState(String inter_no) {
+			
+			return dao.comInterviewRegState(inter_no);
+		}
+
+		public ArrayList<InterviewDTO> comInterviewRegQue() {
+			
+			return dao.comInterviewRegQue();
+		}
+
+	
 
 
 

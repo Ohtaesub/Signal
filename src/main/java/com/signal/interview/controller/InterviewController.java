@@ -116,7 +116,19 @@ public class InterviewController {
 	
 	//면접관리리스트(기업) 결과등록 페이지 이동
 	//comInterviewReg.go
-	
+	@RequestMapping(value = "/comInterviewReg.go", method = RequestMethod.GET)
+	public String comInterviewReg(Model model,@RequestParam String inter_no) {
+		
+		//면접결과
+		InterviewDTO dto =service.comInterviewRegState(inter_no);
+		model.addAttribute("dto",dto);
+		
+		//질문리스트(노출체크된질문 가져오기)
+		ArrayList<InterviewDTO>comInterviewRegQue =service.comInterviewRegQue();
+		model.addAttribute("que",comInterviewRegQue);
+		
+		return "comInterviewReg";
+	}
 	
 	//면접관리리스트(기업) 결과등록 
 	//comInterviewReg.do

@@ -162,8 +162,10 @@
 			FROM interview_test_result itr 
 				left outer join interview_test it on itr.it_no =it.it_no
 				left outer join interview i on itr.inter_no =i.inter_no
-			WHERE itr.inter_no =#{inter_no}AND it.it_hidden =1;
+			WHERE itr.inter_no =#{inter_no};
 		</select>
+		<!-- 결과수정일때는 모두다 보여주는게맞아서 AND it.it_hidden =1; 부분 삭제-->
+		
 		<update id="comInterviewUpdateState" parameterType="hashmap">
 		UPDATE 
 			interview 
@@ -174,7 +176,18 @@
 		</update>
 	
 	
-	
+		<select id="comInterviewRegState" resultType="com.signal.all.dto.InterviewDTO" parameterType="String">
+			SELECT inter_no,inter_result
+			FROM interview i 
+			WHERE inter_no =#{inter_no}
+		</select>
+		<select id="comInterviewRegQue" resultType="com.signal.all.dto.InterviewDTO">
+			SELECT 
+				it_no ,it_que,it_hidden 
+			FROM interview_test it 
+			where it.it_hidden =1;
+		</select>
+		
 		<update id="comUp1" parameterType="String">
 		UPDATE interview SET
 		inter_comment =#{param2}
@@ -188,6 +201,21 @@
 		inter_score =#{inter_score}
 		WHERE inter_no=#{inter_no} and it_no=#{it_no};
 	</update>
+		
+	<update id="comReg1" parameterType="String">
+		UPDATE interview SET
+		inter_comment =#{param2}
+		,inter_result =#{param3}
+		WHERE inter_no =#{param1}
+	</update>
+		
+	<insert id="comReg2" parameterType="hashmap">
+		INSERT INTO interview_test_result(inter_no,inter_score,it_no)
+		VALUES(#{inter_no},#{inter_score},#{it_no})		
+	</insert>
+		
+		
+		
 		
 		
 		
