@@ -328,16 +328,17 @@ public class JobPostingController {
 	// 채용공고 검색 페이징
 	@RequestMapping(value="/jobPostingMain.do")
 	public String jobPostingMain(Model model,HttpSession session, int pageNum,String search, 
-			@RequestParam String searchOption ) {
-			logger.info("옵션 확인: "+searchOption+search);		
+			@RequestParam String searchOption,@RequestParam String searchOption1) {
+			logger.info("옵션 확인: "+searchOption+" / "+searchOption1+" / "+search);		
 			model.addAttribute("searchOption",searchOption);
-
+			model.addAttribute("searchOption",searchOption1);
+		
 			//옵션 페이징처리
 			int skip=(pageNum-1) * 10;
-			ArrayList<JobPostingDTO> dto = service.jobPostingMainSearch(searchOption, search,skip);
-			model.addAttribute("jobPostingMain",dto);
+			ArrayList<JobPostingDTO> dto = service.jobPostingMainSearch(searchOption,searchOption1, search,skip);
+			model.addAttribute("mainJpoList",dto);
 			
-			int mainPostingPasingTotal=service.jobPostingMainTotal(searchOption, search);
+			int mainPostingPasingTotal=service.jobPostingMainTotal(searchOption,searchOption1, search);
 			model.addAttribute("pageNum",pageNum);
 			
 			PageMakerDTO pageMake= new PageMakerDTO(pageNum, mainPostingPasingTotal);
@@ -346,34 +347,8 @@ public class JobPostingController {
 		return "jobPostingMain";
 	}
 	
-	
-	
-	/* 채용공고 검색 페이징
-	@RequestMapping(value="/jobPostingMain.do")
-	public String jobPostingMain(Model model,HttpSession session, int pageNum,String search, 
-			@RequestParam String searchOption,@RequestParam String searchOption1,@RequestParam String searchOption2 ) {
-			logger.info("옵션 확인: "+searchOption+search);
-			logger.info("옵션 확인: "+searchOption1+search);
-			logger.info("옵션 확인: "+searchOption2+search);
-			
-			model.addAttribute("searchOption",searchOption);
-			model.addAttribute("searchOption1",searchOption1);
-			model.addAttribute("searchOption2",searchOption2);
 
-			//옵션 페이징처리
-			int skip=(pageNum-1) * 10;
-			ArrayList<InterviewDTO> dto = service.jobPostingMainSearch(searchOption,searchOption1,searchOption2, search,skip);
-			model.addAttribute("jobPostingMain",dto);
-			
-			int mainPostingPasingTotal=service.jobPostingMainTotal(searchOption,searchOption1,searchOption2, search);
-			model.addAttribute("pageNum",pageNum);
-			
-			PageMakerDTO pageMake= new PageMakerDTO(pageNum, mainPostingPasingTotal);
-			model.addAttribute("pageMaker", pageMake);
-			
-		return "jobPostingMain";
-	}
-	*/
+	
 	
 	// 메인 채용공고 상세보기
 	@RequestMapping(value = "/PostingDetailMain.go")

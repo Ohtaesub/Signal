@@ -20,13 +20,16 @@
         text-align: center;
     }
     #cal{
-   		width: 40px;
-    	height : 40px;
- 		padding: 0px 10px ;
+    	padding-left: 20px;
+    	padding-right: 10px;
+   		width: 100px;
+    	height : 80px;
     }
     #cal-list{
 		width: 80%;
-
+    }
+    h2{
+    	margin: 0px;
     }
 
 
@@ -34,41 +37,52 @@
 </head>
 	
     <body>
-    	<h2><img src="./resources/images/calendar.png" alt="calendar" id="cal"/>채용달력</h2>
+    	
     	<table id="cal-list">
-    		<tr>
-				<th>월</th>
-				<td></td>
+    	 <thead>
+    	 <tr>
+    	 	<th colspan="2">
+    	 		<h2><img src="./resources/images/calendar.png" alt="calendar" id="cal"/>채용달력</h2>
+    	 	</th>
+    	 </tr>
+    	 	<tr>
+    	 		<td></td>
+    	 		<td></td>   		    	 		
 			</tr>
-    		<tr>
-				<th>화</th>
-				<td></td>
+			<tr>
+    	 		<td></td>
+    	 		<td></td>   	    	 		    	 		
 			</tr>
-   			<tr>
-				<th>수</th>
-				<td></td>
+			<tr>
+    	 		<td></td>
+    	 		<td></td>   		    	 		    	 		
 			</tr>
-    		<tr>
-				<th>목</th>
-				<td></td>
+			<tr>
+    	 		<td></td>
+    	 		<td></td>   		    	 		    	 		
 			</tr>
-   			<tr>
-				<th>금</th>
-				<td></td>
+			<tr>
+    	 		<td></td>
+    	 		<td></td>   	    	 		    	 		
 			</tr>
-    		<tr>
-				<th>토</th>
-				<td></td>
+			<tr>
+    	 		<td></td>
+    	 		<td></td>   		    	 		    	 		
 			</tr>
-    		<tr>
-				<th>일</th>
-				<td></td>
-			</tr>	
+									
+		</thead>
+		<tbody>
+			<tr>
+			</tr>
+		</tbody>
     	</table>
 
     </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
+	var today = new Date();
+	today.setDate(today.getDate() + 7); // 7일 더하여 setting
+	
 	
 </script>
 </html>

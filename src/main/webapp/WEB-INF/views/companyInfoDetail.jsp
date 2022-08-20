@@ -14,7 +14,7 @@
 	   	height: 500px;
    }
    	table,h2,h6{
-   		width: 60%;
+   		width: 70%;
    		margin: 0 auto;
    }
    	table,th,td{
@@ -53,6 +53,9 @@
 	.find-btn2{
 		background-color: #7f7f7fff;
 	}
+	img.comLogo{
+		 width: 100%;
+	}
 
 </style>
 </head>
@@ -89,7 +92,7 @@
 							</tr>
 								<tr>
 									<td>
-										<p><img src="/photo/${dto.ci_photo}" alt="기업로고""></p>
+										<p><img class="comLogo" src="/photo/${dto.ci_photo}" alt="기업로고" ></p>
 									</td>
 							</tr>
 				    		<tr>
@@ -101,7 +104,7 @@
 							</tr>
 							<tr>
 								<td colspan="2">
-									<textarea name="ci_pass_intro" maxlength="1000" required>${dto.ci_pass_intro}</textarea>
+									<textarea name="ci_pass_intro" maxlength="100%" required>${dto.ci_pass_intro}</textarea>
 								</td>
 							</tr>
 			        	</table>

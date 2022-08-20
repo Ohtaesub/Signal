@@ -347,12 +347,12 @@ public class JobPostingService {
 		return dao.mainPostingPasingTotal(params);
 	}
 
-	public ArrayList<JobPostingDTO> jobPostingMainSearch(String searchOption, String search, int skip) {
-		return dao.jobPostingMainSearch(searchOption,search,skip);
+	public ArrayList<JobPostingDTO> jobPostingMainSearch(String searchOption, String search, String searchOption1, int skip) {
+		return dao.jobPostingMainSearch(searchOption,searchOption1, search,skip);
 	}
 
-	public int jobPostingMainTotal(String searchOption,  String search) {
-		return dao.jobPostingMainTotal(searchOption,search);
+	public int jobPostingMainTotal(String searchOption, String search, String searchOption1) {
+		return dao.jobPostingMainTotal(searchOption,searchOption1, search);
 	}
 
 	public void PostingDetailMainPage(Model model, String jpo_no, String com_id) {

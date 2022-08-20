@@ -14,7 +14,7 @@
 	   	height: 500px;
    }
    	table,h2,h6{
-   		width: 60%;
+   		width: 70%;
    		margin: 0 auto;
    }
    	table,th,td{
@@ -263,5 +263,8 @@
 				}     
 			}); 
 	});
+	
+	
+	
 </script>
 </html>

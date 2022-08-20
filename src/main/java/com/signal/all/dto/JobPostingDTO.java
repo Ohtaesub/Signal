@@ -22,6 +22,7 @@ public class JobPostingDTO {
 	private String ci_pass_intro;
 	private String ci_photo;
 	private Float comment_a;
+	private int apply_no;
 	private int comment;
 	private int apply;
 	private String jpo_no;
@@ -47,6 +48,12 @@ public class JobPostingDTO {
 	
 
 
+	public int getApply_no() {
+		return apply_no;
+	}
+	public void setApply_no(int apply_no) {
+		this.apply_no = apply_no;
+	}
 	public String getJc_no() {
 		return jc_no;
 	}

@@ -80,9 +80,9 @@
     padding: 7px;
     font-weight: 500;
   }
- a:link {color:black; text-decoration: none;}
- a:visited {color:black; text-decoration: none;}
- a:hover {color:black; text-decoration: underline;}
+ a:link {color:black;}
+ a:visited {color:black;}
+ a:hover {color:blue; text-decoration: underline;}
  .active{
       background-color: #cdd5ec;
   }
@@ -91,69 +91,64 @@
 <body>
        	<h3>채용공고</h3>
        	<br/>
-	       	<form action="/jobPostingMain.do" method="get" id="form">
-	       		<!--  
-					 	&nbsp; 지역 <select name=searchOption id="searchOption">
-						<option value="">전체</option>
-						<option value="서울" ${searchOption == '서울'? 'selected="selected"' : ''}>서울</option>
-						<option value="경기" ${searchOption == '경기'? 'selected="selected"' : ''}>경기</option>
-						<option value="인천" ${searchOption == '인천'? 'selected="selected"' : ''}>인천</option>
-						<option value="대전" ${searchOption == '대전'? 'selected="selected"' : ''}>대전</option>
-						<option value="강원" ${searchOption == '강원'? 'selected="selected"' : ''}>강원</option>
-						<option value="충남" ${searchOption == '충남'? 'selected="selected"' : ''}>충남</option>
-						<option value="충북" ${searchOption == '충북'? 'selected="selected"' : ''}>충북</option>
-						<option value="경남" ${searchOption == '경남'? 'selected="selected"' : ''}>경남</option>
-						<option value="경북" ${searchOption == '경북'? 'selected="selected"' : ''}>경북</option>
-						<option value="세종" ${searchOption == '세종'? 'selected="selected"' : ''}>세종</option>
-						<option value="전남" ${searchOption == '전남'? 'selected="selected"' : ''}>전남</option>
-						<option value="전북" ${searchOption == '전북'? 'selected="selected"' : ''}>전북</option>
-						<option value="대구" ${searchOption == '대구'? 'selected="selected"' : ''}>대구</option>
-						<option value="부산" ${searchOption == '부산'? 'selected="selected"' : ''}>부산</option>
-						<option value="울산" ${searchOption == '울산'? 'selected="selected"' : ''}>울산</option>
-						<option value="광주" ${searchOption == '광주'? 'selected="selected"' : ''}>광주</option>
-						<option value="제주" ${searchOption == '제주'? 'selected="selected"' : ''}>제주</option>
-					</select>
+	       	<form action="/jobPostingMain.do" method="get" id="form" multiple="multiple">  
+			 	&nbsp; <select name=searchOption id="searchOption">
+				<option value="">근무지역</option>
+				<option value="서울" ${searchOption == '서울'? 'selected="selected"' : ''}>서울</option>
+				<option value="경기" ${searchOption == '경기'? 'selected="selected"' : ''}>경기</option>
+				<option value="인천" ${searchOption == '인천'? 'selected="selected"' : ''}>인천</option>
+				<option value="대전" ${searchOption == '대전'? 'selected="selected"' : ''}>대전</option>
+				<option value="강원" ${searchOption == '강원'? 'selected="selected"' : ''}>강원</option>
+				<option value="충남" ${searchOption == '충남'? 'selected="selected"' : ''}>충남</option>
+				<option value="충북" ${searchOption == '충북'? 'selected="selected"' : ''}>충북</option>
+				<option value="경남" ${searchOption == '경남'? 'selected="selected"' : ''}>경남</option>
+				<option value="경북" ${searchOption == '경북'? 'selected="selected"' : ''}>경북</option>
+				<option value="세종" ${searchOption == '세종'? 'selected="selected"' : ''}>세종</option>
+				<option value="전남" ${searchOption == '전남'? 'selected="selected"' : ''}>전남</option>
+				<option value="전북" ${searchOption == '전북'? 'selected="selected"' : ''}>전북</option>
+				<option value="대구" ${searchOption == '대구'? 'selected="selected"' : ''}>대구</option>
+				<option value="부산" ${searchOption == '부산'? 'selected="selected"' : ''}>부산</option>
+				<option value="울산" ${searchOption == '울산'? 'selected="selected"' : ''}>울산</option>
+				<option value="광주" ${searchOption == '광주'? 'selected="selected"' : ''}>광주</option>
+				<option value="제주" ${searchOption == '제주'? 'selected="selected"' : ''}>제주</option>
+
+			</select>
 		       	&nbsp;
-		       		모집분야 <select name="searchOption1" id="searchOption1" >
-		       		<option value="">전체</option>
-		       		<optgroup label="IT">
-		 				<option value="6" ${searchOption == '6'? 'selected="selected"' : ''}>퍼블리셔</option>
-						<option value="2" ${searchOption == '2'? 'selected="selected"' : ''}>SI개발</option>
-						<option value="3" ${searchOption == '3'? 'selected="selected"' : ''}>데이터분석가</option>
-		       		</optgroup>
-		       		<optgroup label="건축">
-						<option value="4" ${searchOption == '건설관리'? 'selected="selected"' : ''}>건설관리</option>
-						<option value="5" ${searchOption == '토목설계'? 'selected="selected"' : ''}>토목설계</option>
-						<option value="7" ${searchOption == '내진설계'? 'selected="selected"' : ''}>내진설계</option>
-		       		</optgroup>
-		       		<optgroup label="항공">
-						<option value="10">승무원</option>
-						<option value="8">항공운송</option>
-						<option value="9" >항공정비</option>
-		       		</optgroup>
-		       		<optgroup label="전기">
-						<option value="11">전기설계</option>
-						<option value="12">전기기사</option>
-						<option value="13">조경설계</option>
-		       		</optgroup>
-		       		<optgroup label="축산">
-						<option value="14">축산식품가공</option>
-						<option value="15">축산식품유통</option>
-						<option value="16">도축</option>		
-		       		</optgroup>
-					</select>
-					-->
-					&nbsp;
-					     검색 <select name="searchOption" id="searchOption">
-							<option value="">전체</option>
-							<option value="기업명" ${searchOption == '기업명'? 'selected="selected"' : ''}>기업명</option>
-							<option value="공고제목" ${searchOption == '공고제목'? 'selected="selected"' : ''}>공고제목</option>
-					 	</select>
-		 				<input  type="text"  name="search" id="search" value="" required/>
-		        		<input type="submit" value="조건검색">
-		        		<!-- 페이징  -->
-		 				<input type="hidden" name="pageNum" value="1"/>
-			</div>
+       		<select name="searchOption1" id="searchOption" >
+       		<option value="">	모집분야</option>
+       		<optgroup label="IT">
+ 				<option value="퍼블리셔" ${searchOption == '퍼블리셔'? 'selected="selected"' : ''}>퍼블리셔</option>
+				<option value="SI개발" ${searchOption == 'SI개발'? 'selected="selected"' : ''}>SI개발</option>
+				<option value="데이터분석가" ${searchOption == '데이터분석가'? 'selected="selected"' : ''}>데이터분석가</option>
+       		</optgroup>
+       		<optgroup label="건축">
+				<option value="건설관리" ${searchOption == '건설관리'? 'selected="selected"' : ''}>건설관리</option>
+				<option value="토목설계" ${searchOption == '토목설계'? 'selected="selected"' : ''}>토목설계</option>
+				<option value="내진설계" ${searchOption == '내진설계'? 'selected="selected"' : ''}>내진설계</option>
+       		</optgroup>
+       		<optgroup label="항공">
+				<option value="승무원" ${searchOption == '승무원'? 'selected="selected"' : ''}>승무원</option>
+				<option value="항공운송" ${searchOption == '항공운송'? 'selected="selected"' : ''}>항공운송</option>
+				<option value="항공정비" ${searchOption == '항공정비'? 'selected="selected"' : ''}>항공정비</option>
+       		</optgroup>
+       		<optgroup label="전기">
+				<option value="전기설계" ${searchOption == '전기설계'? 'selected="selected"' : ''}>전기설계</option>
+				<option value="전기기사" ${searchOption == '전기기사'? 'selected="selected"' : ''}>전기기사</option>
+				<option value="조경설계" ${searchOption == '조경설계'? 'selected="selected"' : ''}>조경설계</option>
+       		</optgroup>
+       		<optgroup label="축산">
+				<option value="축산식품가공" ${searchOption == '축산식품가공'? 'selected="selected"' : ''}>축산식품가공</option>
+				<option value="축산식품유통" ${searchOption == '축산식품유통'? 'selected="selected"' : ''}>축산식품유통</option>
+				<option value="도축" ${searchOption == '도축'? 'selected="selected"' : ''}>도축</option>		
+       		</optgroup>
+			</select>
+			&nbsp;
+		     기업명&nbsp;
+				<input  type="text"  name="search" id="search" value=""/>
+       		<input type="submit" value="조건검색">
+       		<!-- 페이징  -->
+				<input type="hidden" name="pageNum" value="1"/>
+		
 				</form>
 	
 				<table id="mainPostingList">
@@ -185,6 +180,7 @@
 				</c:forEach>
 		     		</tbody>
 	     		</table>
+	       <!--페이징 -->
 	     		<div class="pageInfo_wrap" >
         	<div class="pageInfo_area">
         		<ul id="pageInfo" class="pageInfo">
@@ -208,21 +204,21 @@
     		</div>	
 	        <form id="moveForm" method="get">
 	  	 <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+	  	 <input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 	  </form>	
 		<br/>   
 </body>
 <script>
 	$(".pageInfo a").on("click", function(e){
     e.preventDefault();
-        if($("#searchOption").val()=="" && $("#search").val()==""){
+        if($("#searchOption").val() =="" && $("#searchOption1").val()=="" && $("#search").val()==""){
     		$("#moveForm").find("input[name='pageNum']").val($(this).attr("href"));
         	$("#moveForm").attr("action", "/jobPostingMain.go");
     		$("#moveForm").submit();
         } else {
         	$("#form").find('input[name="pageNum"]').val($(this).attr("href"));
         	$("#form").submit();
-        }
-        
+        }     
 });
 
 </script>

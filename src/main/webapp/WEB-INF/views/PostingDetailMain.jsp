@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../../resources/inc/header.jsp" %>
+<%@ include file="../../resources/inc/header_jobPosting.jsp" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -14,7 +14,7 @@
 	   	height: 500px;
    }
    	table,h2,h6{
-   		width: 60%;
+   		width: 80%;
    		margin: 0 auto;
    }
    	table,th,td{
@@ -93,14 +93,10 @@
 	<input type="hidden" name="jpo_no" value="${dto.jpo_no}"/>
 	<tbody>
 	  <tr>
-	    <td class="tg-xwu2" colspan="5">${dto.jpo_title}</td>
-	    <td class="tg-zv4m" colspan="4">
-	    	${dto.com_name}<br/>
-	    	<a href="${dto.ci_web}" target="_blank" id="link">${dto.ci_web}</a>
-	    </td>
+	    <td class="tg-xwu2" colspan="9">${dto.jpo_title}<br/>  <br/></td>
 	  </tr>
 	  <tr>
-	    <td class="tg-xcht" rowspan="2">
+	    <td class="tg-xcht" rowspan="2" width="100">
 	    <p>모집기간</p>
 	    <p>근무형태</p>
 	    <p>모집분야</p>
@@ -121,18 +117,21 @@
 	    <p>${dto.jpo_welfare}</p>
 	    </td>
 	    <td class="tg-zv4m" rowspan="3">   </td>
-	    <td class="tg-xcht" colspan="2">
+	    <td class="tg-xcht" width="100">
 	    <p>조회수</p>
+	    <p>지원자수</p>
 	    <p>코멘트 작성률</p>
 	    <p>코멘트 수</p>
-	    <td class="tg-xcht2" colspan="2">
+	    <td class="tg-xcht2" colspan="3">
 	    <p>${dto.jpo_views}</p>
+	    <p>${dto.apply_no}</p>
 	    <p>${dto.comment_a} %</p>
-	    <p>${dto.apply} 중 ${dto.comment}개 작성</p>
+	    <p>${dto.apply}개 중 ${dto.comment}개 작성</p>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td class="tg-zv4m" colspan="4" rowspan="2">
+	    <p><a href="${dto.ci_web}" target="_blank" id="link"> ${dto.com_name}</a></p>
 	    <img src="/photo/${dto.ci_photo}" width="250" alt="로고" class="comLogo">
 	    </td>
 	  </tr>
@@ -153,7 +152,7 @@
 	  </tr>
 	</tbody>
 	</table>
-<input type="button" value="지원하기" onclick="location.href='/apply.do?jpo_no=${dto.jpo_no}'">
+<input id="apply_button" type="button" value="지원하기" onclick="location.href='/apply.do?jpo_no=${dto.jpo_no}'">
 <input type="button" value="목록으로" onclick="location.href='/jobPostingMain.go'">
 </body>
 <script>
@@ -173,5 +172,30 @@
 				}     
 			}); 
 	});
+	
+	var id = "${sessionScope.loginId}";
+	var company = "${sessionScope.isCompany}";
+	var admin = "${sessionScope.isAdmin}";
+	var client = "${sessionScope.isClient}";
+	
+    $("#apply_button").on("click",function(){
+    	if(client != "" && ${dto.jpo_state.equals("진행중")}){
+    		location.href="/apply.do?jpo_no=${dto.jpo_no}";
+    	}else{
+    		 location.href = "/jobPostingMain.go";
+    	}
+			
+    	if(id == "") {
+           alert("로그인이 필요한 서비스입니다.");
+           location.href = "/jobPostingMain.go";
+        } else if(${dto.jpo_state.equals("마감")}){
+            	alert("마감된 공고로 지원이 불가합니다.");
+                location.href = "/jobPostingMain.go";
+            } else if(company != "" || admin != "") { 
+                alert("개인회원만 지원 가능합니다.");
+            }
+    	
+    });
+
 </script>
 </html>
