@@ -18,7 +18,7 @@
 			     <tr>
 					<th>사업자번호</th>
 					<td>
-						<input type="text" name="com_business_no" id="com_business_no" size=50 placeholder="123-456-13456(-를 포함하여 작성하세요.)"/>
+						<input type="text" name="com_business_no" id="com_business_no" size=50 onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="숫자만 입력해 주세요."/>
 					</td>
 				</tr>
 			     <tr>

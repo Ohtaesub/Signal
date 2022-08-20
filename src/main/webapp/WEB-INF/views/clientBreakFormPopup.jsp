@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
+</head>
 <body>
 	<h2>회원탈퇴</h2>
 	    <h3>탈퇴안내</h3>
@@ -36,8 +43,8 @@
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
-
-	// input 라디오 타입 "기타" 체크시 text 박스 활성화
+	
+	//input 라디오 타입 "기타" 체크시 text 박스 활성화
 	$('input[name="mg_content"]').on('click',function(){
 		if($(this).val() == "기타") {
 			$('#contentOther').prop('disabled', false).val('').focus();
@@ -77,7 +84,7 @@
 				console.log(data.pw);
 				if(!data.pw){
 					alert("비밀번호가 일치하지 않습니다.");
-					location.href='clientBreakForm.go';
+					location.href='clientBreakFormPopup.go';
 				}
 			}
 		});
@@ -88,10 +95,11 @@
 		}
 	}
 	
+	
 	//팝업창 닫기
 	var pclose = "${pclose}";
 	if(pclose){
-		opener.document.location.reload();
+		opener.document.location.href="main.do";
 		window.close();
 	}
 </script>

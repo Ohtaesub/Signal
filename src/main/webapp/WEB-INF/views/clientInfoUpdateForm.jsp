@@ -73,7 +73,7 @@
 						<!-- 하지만 div 는 서버에 값을 전송 할 수 없다. -->
 						<!-- 결국엔 div 의 내용을 input 에 담아 서버에 전송할 예정 -->
 		            	<input type="file" multiple ="multiple" name="file" onchange="checkFile(this)" accept=".jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp"/>
-		            	${clientInfo.cl_photo}
+		            	<input type="text"  name="orifile" style="border:none;" value="${clientInfo.cl_photo}"/>
 		            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
 	            </td>
 	        </tr>

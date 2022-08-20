@@ -61,7 +61,7 @@
 	            <td>
 					<!-- 하지만 div 는 서버에 값을 전송 할 수 없다. -->
 					<!-- 결국엔 div 의 내용을 input 에 담아 서버에 전송할 예정 -->
-					${companyInfo.com_photo}
+					<input type="text"  name="orifile" style="border:none;" value="${companyInfo.com_photo}"/>
 					<br>
 					<br>
 	            	<input type="file" multiple ="multiple" name="file" onchange="checkFile(this)" accept=".jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp"/>
@@ -176,7 +176,7 @@
     	//for문으로 파일 갯수만큼 확인
     	for(var i = 0; i<file.length; i++){
     	//경고창 한번으로 수정
-    	if(!/\.(png|jpeg|jfif|exif|gif|bmp)$/i.test(file[i].name)) alert('이미지(.png , .jpeg, .jfif, .exif, .gif, .bmp) 파일만 선택해 주세요.\n\n현재 파일 : ' + file[i].name);
+    	if(!/\.(jpg|png|jpeg|jfif|exif|gif|bmp)$/i.test(file[i].name)) alert('이미지(.png , .jpeg, .jfif, .exif, .gif, .bmp) 파일만 선택해 주세요.\n\n현재 파일 : ' + file[i].name);
     	
     	else return;
     	

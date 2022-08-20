@@ -30,7 +30,7 @@
 		        <tr>
 		            <th>사업자 번호</th>
 		            <td>
-		            	<input type="text" name="com_business_no" id="com_business_no" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="예)13184982743" maxlength="15"/>
+		            	<input type="text" name="com_business_no" id="com_business_no" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="예)숫자만 입력해 주세요." maxlength="15"/>
 		            	<button type="button" id="overChkNum" onclick="overlayNumber()">중복확인</button>
 		            </td>
 		        </tr>

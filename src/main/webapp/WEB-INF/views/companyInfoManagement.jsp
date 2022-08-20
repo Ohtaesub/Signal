@@ -32,17 +32,26 @@
 	        </tr>
 	        <tr>
 	            <th>사업자 등록증 사본</th>
-	            <td><img src="/photo/${companyInfo.com_photo}" width="100" height="100"/></td>
+	            <td>
+	            	<c:if test="${!empty companyInfo.com_photo}">
+	            	<img src="/photo/${companyInfo.com_photo}" width="100" height="100"/>
+	            	</c:if>
+	            </td>
 	        </tr>
 	        <tr>
 	            <th colspan="2">
 	                <input type="button" value="수정하기" onclick="location.href='companyInfoUpdateForm.go'"/>
-		         	<input type="button" value="회원탈퇴" onclick="location.href='companyBreakForm.go'"/>
+		         	<input type="button" value="회원탈퇴" onclick="companyBreakForm()"/>
 	            </th>
 	        </tr>
 	    </table>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
+
+function companyBreakForm(){
+	var com_id = $("#com_id").val();
+	window.open("companyBreakFormPopup.go?com_id="+com_id,"", "width=600, height=400, left=100, top=50");	
+}
 
 </script>

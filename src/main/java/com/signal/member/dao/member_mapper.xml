@@ -37,7 +37,7 @@
 	
 	<!-- 개인회원 로그인 String 으로 받기 -->
 	<select id="clientLogin" resultType="String">
-	SELECT cl_id FROM client WHERE cl_id = #{param1} AND cl_pw = #{param2}
+	SELECT cl_id FROM client WHERE cl_id = #{param1} AND cl_pw = PASSWORD(#{param2})
 	</select>
 	
 	<select id="clientdto" parameterType="String" resultType="com.signal.all.dto.MemberDTO">
@@ -57,7 +57,7 @@
    
    <!-- 기업회원 로그인 String 으로 받기 -->
 	<select id="companyLogin" resultType="String">
-	SELECT com_id FROM company WHERE com_id = #{param1} AND com_pw = #{param2}
+	SELECT com_id FROM company WHERE com_id = #{param1} AND com_pw = PASSWORD(#{param2})
 	</select>
 	
 	<select id="companydto" parameterType="String" resultType="com.signal.all.dto.MemberDTO">
@@ -201,7 +201,12 @@
 		,cl_address = #{cl_address}
 		,cl_call = #{cl_call}
 		,cl_email = #{cl_email}
+		<if test="file==''">
+		,cl_photo = #{orifile}
+		</if>
+		<if test="!file==''">
 		,cl_photo = #{file}
+		</if>
 	WHERE cl_id = #{cl_id} AND cl_pw = PASSWORD(#{cl_pw}) 
 	</update>
 		
@@ -231,7 +236,12 @@
 		,com_address = #{com_address}
 		,com_call = #{com_call}
 		,com_email = #{com_email}
+		<if test="file==''">
+		,com_photo = #{orifile}
+		</if>
+		<if test="!file==''">
 		,com_photo = #{file}
+		</if>
 	WHERE com_id = #{com_id} AND com_pw = PASSWORD(#{com_pw}) 
 	</update>
 	

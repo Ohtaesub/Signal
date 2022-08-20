@@ -40,7 +40,11 @@
 	        </tr>
 	        <tr>
 	            <th>사진</th>
-	            <td><img src="/photo/${clientInfo.cl_photo}" width="100" height="100"/></td>
+	            <td>
+	            	<c:if test="${!empty clientInfo.cl_photo}">
+	            	<img src="/photo/${clientInfo.cl_photo}" width="100" height="100"/>	            	
+	            	</c:if>
+	            </td>
 	        </tr>
 	        <tr>
 	            <th colspan="2">

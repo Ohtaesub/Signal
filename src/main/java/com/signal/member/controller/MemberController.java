@@ -683,9 +683,17 @@ public class MemberController {
 	
 	//개인회원 새 비밀번호 설정 페이지 이동
     @RequestMapping(value="/clientPwChange.go")
-    public String clientPwChangeForm() {
+    public String clientPwChangeForm(HttpSession session,Model model) {
         logger.info("새 비밀번호 설정 페이지 이동");
-        return "clientPwChangeForm";
+        String id = (String) session.getAttribute("findId");
+        String page = "clientPwChangeForm";
+        logger.info("어떤 아이디 비밀번호 재설정? : "+id);
+        if(id==null) {
+        	model.addAttribute("msg","비밀번호 찾기 먼저 진행해 주세요.");
+        	page = "main";
+        }
+        
+        return page;
     }
   
     
@@ -786,15 +794,22 @@ public class MemberController {
  	@RequestMapping(value = "/clientInfoUpdateForm.go")
  	public String clientInfoUpdateForm(HttpSession session, Model model) {
  		logger.info("개인회원 개인정보수정 페이지 이동 및 리스트 보여주기 요청");
-        
+        String page = "clientInfoUpdateForm";
+ 		String isClient = (String) session.getAttribute("isClient");
         //dto에 등록된 값들을 뿌려주기 위해 해당 로그인된 세션을 저장한 값을 dto에 담아준다.
         //loginId는 String 타입이므로 service에 String으로 보내야 한다. 그래서 세션을 형변환 해준다.
         MemberDTO dto = service.clientInfoManagement((String) session.getAttribute("loginId"));
         
+        if(isClient==null) {
+        	model.addAttribute("msg","개인회원 전용 서비스입니다.");
+        	page = "main";
+        }
+        
+        
         //받아온 dto들을 model에 담아 jsp에 뿌려준다.
         model.addAttribute("clientInfo",dto);
         
-        return "clientInfoUpdateForm";
+        return page;
  	}
  	
  	
@@ -862,15 +877,22 @@ public class MemberController {
  	@RequestMapping(value = "/companyInfoUpdateForm.go")
  	public String companyInfoUpdateForm(HttpSession session, Model model) {
  		logger.info("기업회원 기업회원정보수정 페이지 이동 및 리스트 보여주기 요청");
-        
+ 		String page = "companyInfoUpdateForm";
+  		String isCompany = (String) session.getAttribute("isCompany");
+  		
         //dto에 등록된 값들을 뿌려주기 위해 해당 로그인된 세션을 저장한 값을 dto에 담아준다.
         //loginId는 String 타입이므로 service에 String으로 보내야 한다. 그래서 세션을 형변환 해준다.
         MemberDTO dto = service.companyInfoManagement((String) session.getAttribute("loginId"));
         
+        if(isCompany==null) {
+        	model.addAttribute("msg","기업회원 전용서비스 입니다.");
+        	page = "main";
+        }
+        
         //받아온 dto들을 model에 담아 jsp에 뿌려준다.
         model.addAttribute("companyInfo",dto);
         
-        return "companyInfoUpdateForm";
+        return page;
  	}
  	
  	
@@ -897,9 +919,18 @@ public class MemberController {
   	
   	// 개인회원 탈퇴 페이지 이동 요청
   	@RequestMapping(value="/clientBreakFormPopup.go")
-  	public String clientBreakFormPopup(){
+  	public String clientBreakFormPopup(HttpSession session,Model model){
  		logger.info("회원탈퇴 페이지 이동");
- 		return "clientBreakFormPopup";
+ 		String page = "clientBreakFormPopup";
+  		String isClient = (String) session.getAttribute("isClient");
+  		
+  		if(isClient==null) {
+  			model.addAttribute("msg","회원전용 서비스입니다.");
+  			page = "main";
+  		}
+  		
+ 		
+ 		return page;
  	}
   	
   	
@@ -909,7 +940,7 @@ public class MemberController {
   	String cl_id = (String) session.getAttribute("loginId");
   	
   	String pclose = "pclose";
-  	
+  	String page = "main";
   	params.put("cl_id", cl_id);
   	//회원 탈퇴가 완료된 경우 조건을 걸어서 회원관리 테이블에 인서트하는 요청을 보낸다.
   	if(service.clientDelete(cl_id)==true) {
@@ -922,28 +953,41 @@ public class MemberController {
   		String msg = "탈퇴가 완료되었습니다.";
   		model.addAttribute("msg",msg);
   		model.addAttribute("pclose",pclose);
+  		page = "clientBreakFormPopup";
   	}
   	
   	session.removeAttribute("loginId");
   	session.removeAttribute("isClient");
   	
-  	return "clientBreakFormPopup";
+  	return page;
   	}
   	
   	
   	// 기업회원 탈퇴 페이지 이동 요청
-   	@RequestMapping(value="/companyBreakForm.go")
-   	public String companyBreakForm(){
+   	@RequestMapping(value="/companyBreakFormPopup.go")
+   	public String companyBreakForm(HttpSession session,Model model){
   		logger.info("회원탈퇴 페이지 이동");
-  		return "companyBreakForm";
+  		String page = "companyBreakFormPopup";
+  		String isCompany = (String) session.getAttribute("isCompany");
+  		
+  		if(isCompany==null) {
+  			model.addAttribute("msg","회원전용 서비스입니다.");
+  			page = "main";
+  		}
+  		
+  		return page;
   	}
   
    	
   	// 기업회원 탈퇴 요청
    	@RequestMapping(value="/companyDelete.do")
-   	public String companyDelete(RedirectAttributes redirectAttr, HttpSession session, @RequestParam HashMap<String, String> params) {
+   	public String companyDelete(Model model, HttpSession session, @RequestParam HashMap<String, String> params) {
 	String com_id = (String) session.getAttribute("loginId");
-   	
+	
+	String pclose = "pclose";
+  	String page = "main";
+	
+	
    	params.put("com_id", com_id);
    	//회원 탈퇴가 완료된 경우 조건을 걸어서 회원관리 테이블에 인서트하는 요청을 보낸다.
    	if(service.companyDelete(com_id)==true) {
@@ -954,13 +998,15 @@ public class MemberController {
    		
    		service.companyManagement(params);
    		String msg = "탈퇴가 완료되었습니다.";
-   		redirectAttr.addFlashAttribute("msg",msg);
+   		model.addAttribute("msg",msg);
+   		model.addAttribute("pclose",pclose);
+   		page = "companyBreakFormPopup";
    	}
    	
    	session.removeAttribute("loginId");
    	session.removeAttribute("isCompany");
    	
-   	return "redirect:/main.do";
+   	return page;
    	}
   	
   	
@@ -980,9 +1026,17 @@ public class MemberController {
    	
    	// 관리자 회원가입페이지 이동
  	@RequestMapping(value = "/joinFormAdmin.go")
- 	public String joinFormAdmin() {
-
- 		return "joinFormAdmin";
+ 	public String joinFormAdmin(Model model, HttpSession session) {
+ 		String isAdmin = (String) session.getAttribute("isAdmin");
+ 		String page = "joinFormAdmin";
+ 		
+ 		if(isAdmin==null) {
+ 			model.addAttribute("msg","관리자 전용 페이지 입니다.");
+ 			page = "main";
+ 		}
+ 		
+ 		
+ 		return page;
  	}
  	
  	
