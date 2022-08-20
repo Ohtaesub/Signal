@@ -66,4 +66,12 @@ public interface TestDAO {
 
 	ArrayList<TestDTO> interviewTestComment(String cl_id);
 
+	String interviewTestDetail6(String cl_id);
+
+	String interviewTestDetail7(String cl_id);
+
+	ArrayList<TestDTO> selfUpGo(String cl_id);
+
+	void stUp(HashMap<String, Object> map);
+
 }

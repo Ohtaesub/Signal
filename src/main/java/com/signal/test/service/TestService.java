@@ -127,9 +127,38 @@ public class TestService {
 			dao.stReg(map);
 		}	
 		
-		return false;
+		return success;
 	}
 
+	public boolean stUp(HashMap<String, Object> param) {
+		boolean success=false;
+		
+		HashMap<String, Object> values = (HashMap<String, Object>) param.get("values");
+		ArrayList<String> cl_id = (ArrayList<String>) values.get("cl_id");
+		ArrayList<String> st_no = (ArrayList<String>) values.get("st_no");
+		ArrayList<String> st_score = (ArrayList<String>) values.get("st_score");
+		System.out.println("cl_id="+cl_id+"st_no="+st_no+"st_score="+st_score+cl_id.size());		
+		
+		String st_comment = (String) values.get("st_comment");
+		String id=cl_id.get(0);
+		dao.selfContentReg(id,st_comment);
+		
+		logger.info("cl_id="+cl_id.get(0));
+		logger.info("st_no="+st_no.get(0));
+		logger.info("st_score="+st_score.get(0));
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		for (int i = 0; i < cl_id.size(); i++) {
+			map.put("cl_id", cl_id.get(i));			
+			map.put("st_no", st_no.get(i));
+			map.put("st_score", st_score.get(i));
+			dao.stUp(map);
+		}	
+		
+		return success;
+	}
+	
 	public boolean selfQueReg(HashMap<String, Object> params) {
 		
 		boolean success=false;
@@ -172,8 +201,8 @@ public class TestService {
 		return dao.selfTestDetail6(cl_id);
 	}
 
-	public String selfComment(String cl_id) {
-		return dao.selfComment(cl_id);
+	public String selfComment(String id) {
+		return dao.selfComment(id);
 	}
 
 	
@@ -199,6 +228,19 @@ public class TestService {
 
 	public ArrayList<TestDTO> interviewTestComment(String cl_id) {
 		return dao.interviewTestComment(cl_id);
+	}
+
+	public String interviewTestDetail6(String cl_id) {
+		return dao.interviewTestDetail6(cl_id); 
+	}
+
+	public String interviewTestDetail7(String cl_id) {
+		return dao.interviewTestDetail7(cl_id); 
+	}
+
+	public ArrayList<TestDTO> selfUpGo(String cl_id) {
+		
+		return dao.selfUpGo(cl_id);
 	} 
 
 	

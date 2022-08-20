@@ -30,5 +30,18 @@ public class TestBController {
 		return map;
 	}
 	
+	@RequestMapping(value="/stUp")
+	@ResponseBody
+	public HashMap<String, Object> stUp(@RequestBody HashMap<String, Object> param) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		boolean success=service.stUp(param);
+		
+		map.put("success", success);
+		
+		return map;
+	}
+	
 	
 }

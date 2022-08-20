@@ -186,4 +186,16 @@ public class TestController {
 		return "./selfTest/interviewTestReg";
 	}
 	
+	
+	
+	@RequestMapping(value = "selfUp.go", method = RequestMethod.GET)
+	public String selfUpGo(HttpSession session, Model model, String cl_id) {		
+		ArrayList<TestDTO> list = service.selfUpGo(cl_id);		
+		String self_comment = service.selfComment(cl_id);
+		model.addAttribute("self_comment", self_comment);
+		model.addAttribute("list", list);
+		model.addAttribute("cl_id", cl_id);
+		return "./selfTest/selfUp";
+	}
+	
 }

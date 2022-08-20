@@ -209,7 +209,7 @@
 	<br/>	
 	<div id="section">
 		<h3>면접평가</h3>
-		<h4>평점 : ${selfTest6 }점  개수 : 개</h4>
+		<h4>평점 : ${interviewTestDto6 }점    개수 : ${interviewTestDto7 }개</h4>
 	</div>
 	<table id="section">		
 		<tr>
@@ -219,28 +219,20 @@
 			<th>자신감</th>
 			<th>성실함</th>
 			<th>면접 코멘트</th>
-		</tr>
-		<tr>
-			<c:forEach items="${interviewTestDto1}" var="inter1">
+		</tr>		
+			<c:forEach items="${interviewTestDto1}" var="inter1" varStatus="status">
+				<tr>
 				<td>${inter1.inter_score}</td>
-			</c:forEach>
-			<c:forEach items="${interviewTestDto2}" var="inter2">
-				<td>${inter2.inter_score}</td>
-			</c:forEach>
-			<c:forEach items="${interviewTestDto3}" var="inter3">
-				<td>${inter3.inter_score}</td>
-			</c:forEach>
-			<c:forEach items="${interviewTestDto4}" var="inter4">
-				<td>${inter4.inter_score}</td>
-			</c:forEach>
-			<c:forEach items="${interviewTestDto5}" var="inter5">
-				<td>${inter5.inter_score}</td>
-			</c:forEach>
-			<c:forEach items="${interviewComment}" var="comment">
-				<td>${comment.inter_comment}</td>
-			</c:forEach>	
-		</tr>
+				<td>${interviewTestDto2[status.index].inter_score}</td>
+				<td>${interviewTestDto3[status.index].inter_score}</td>
+				<td>${interviewTestDto4[status.index].inter_score}</td>
+				<td>${interviewTestDto5[status.index].inter_score}</td>
+				<td>${interviewComment[status.index].inter_comment}</td>
+				</tr>
+			</c:forEach>			
 	</table>
+	
+
 	<br/>
 	<br/>
 	<div id="section" style="text-align:center;">

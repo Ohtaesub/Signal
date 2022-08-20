@@ -68,6 +68,7 @@ public class ResumeController {
 	@RequestMapping(value = "resumeDetail.do", method = RequestMethod.GET)
 	public String resumeDetail(HttpSession session ,Model model, @RequestParam String re_no) {
 		String cl_id=(String) session.getAttribute("loginId");
+		String id=(String) session.getAttribute("loginId");
 		ResumeDTO dto = service.resumeDetail(re_no);
 		ArrayList<ResumeDTO> careerDto = service.careerDetail(re_no);
 		ArrayList<ResumeDTO> socialDto = service.socialDetail(re_no);
@@ -79,12 +80,14 @@ public class ResumeController {
 		String selfTest4=testService.selfTestDetail4(cl_id);
 		String selfTest5=testService.selfTestDetail5(cl_id);
 		String selfTest6=testService.selfTestDetail6(cl_id);
-		String selfComment=testService.selfComment(cl_id);
+		String selfComment=testService.selfComment(id);
 		ArrayList<TestDTO> interviewTestDto1 = testService.interviewTestDetail1(cl_id);
 		ArrayList<TestDTO> interviewTestDto2 = testService.interviewTestDetail2(cl_id);
 		ArrayList<TestDTO> interviewTestDto3 = testService.interviewTestDetail3(cl_id);
 		ArrayList<TestDTO> interviewTestDto4 = testService.interviewTestDetail4(cl_id);
 		ArrayList<TestDTO> interviewTestDto5 = testService.interviewTestDetail5(cl_id);
+		String interviewTestDto6 = testService.interviewTestDetail6(cl_id);
+		String interviewTestDto7 = testService.interviewTestDetail7(cl_id);
 		ArrayList<TestDTO> interviewComment = testService.interviewTestComment(cl_id);
 		
 		String page = "./resume/resumeDetail";
@@ -107,6 +110,8 @@ public class ResumeController {
 		model.addAttribute("interviewTestDto3", interviewTestDto3);
 		model.addAttribute("interviewTestDto4", interviewTestDto4);
 		model.addAttribute("interviewTestDto5", interviewTestDto5);
+		model.addAttribute("interviewTestDto6", interviewTestDto6);
+		model.addAttribute("interviewTestDto7", interviewTestDto7);
 		model.addAttribute("interviewComment", interviewComment);
 		/* model.addAttribute("interviewTestDto", interviewTestDto); */
 		

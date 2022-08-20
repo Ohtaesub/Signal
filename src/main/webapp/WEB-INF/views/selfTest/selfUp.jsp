@@ -26,16 +26,16 @@
 					</td>
 					<td id="hh">
 						<select name="st_score" id="ss_${selfTest.st_no }">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
+							<option value="1" ${selfTest.st_score==1?'selected="selected"':''}>1</option>
+							<option value="2" ${selfTest.st_score==2?'selected="selected"':''}>2</option>
+							<option value="3" ${selfTest.st_score==3?'selected="selected"':''}>3</option>
+							<option value="4" ${selfTest.st_score==4?'selected="selected"':''}>4</option>
+							<option value="5" ${selfTest.st_score==5?'selected="selected"':''}>5</option>
+							<option value="6" ${selfTest.st_score==6?'selected="selected"':''}>6</option>
+							<option value="7" ${selfTest.st_score==7?'selected="selected"':''}>7</option>
+							<option value="8" ${selfTest.st_score==8?'selected="selected"':''}>8</option>
+							<option value="9" ${selfTest.st_score==9?'selected="selected"':''}>9</option>
+							<option value="10" ${selfTest.st_score==10?'selected="selected"':''}>10</option>
 						</select>
 					</td>
 				</tr>
@@ -44,11 +44,11 @@
 				<th colspan="2">셀프코멘트</th>				
 			</tr>
 			<tr>
-				<td colspan="2"><textarea id="st_comment" name="st_comment"></textarea></td>
+				<td colspan="2"><textarea id="st_comment" name="st_comment">${self_comment }</textarea></td>
 			</tr>
 			<tr>
 				<th colspan="2">
-					<input type="button" onclick="getResult()" value="완료"/>
+					<input type="button" onclick="getResult()" value="수정"/>
 					<input type="button" onclick="window.close()" value="닫기"/>
 				</th>				
 			</tr>
@@ -87,13 +87,13 @@
 		
 		$.ajax({
 			type:'post',
-			url:'rest/stReg',
+			url:'rest/stUp',
 			data:JSON.stringify(param),
 			dataType:'JSON',
 			contentType:'application/json; charset=utf-8',
 			success:function(data){
 				console.log(data);
-				alert("등록이 완료되었습니다");
+				alert("수정이 완료되었습니다");
 				window.opener.location.reload();
 				window.close();
 			},

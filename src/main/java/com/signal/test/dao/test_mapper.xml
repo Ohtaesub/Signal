@@ -19,7 +19,7 @@
 		WHERE st_hidden=1;
 	</select>
 	
-	<insert id="selfReg" parameterType="test">
+	<insert id="selfReg" parameterType="hashmap">
 		INSERT INTO self_test_result(cl_id, st_no, st_score)
 		VALUES(#{cl_id},#{st_no},#{st_score})
 	</insert>
@@ -29,6 +29,12 @@
 		st_comment = #{param2}
 		WHERE cl_id=#{param1}
 	</update>	
+	
+	<update id="stUp" parameterType="hashmap">
+		UPDATE self_test_result SET		
+		st_score = #{st_score}
+		WHERE cl_id=#{cl_id} AND st_no=#{st_no}
+	</update>
 	
 	<select id="selfQueList" resultType="test">
 		SELECT st_no, st_que, st_hidden, st_keyword FROM self_test
@@ -167,7 +173,29 @@
 	
 	<select id="interviewTestComment" parameterType="String" resultType="test">
 		SELECT inter_comment FROM interview
-		WHERE cl_id=#{id}
+		WHERE cl_id=#{cl_id}
 	</select>
+	
+	<select id="interviewTestDetail6" parameterType="String" resultType="String" >
+		select format(sum(inter_score)/count(inter_score),2) as avr from interview_test_result itr
+		right outer join interview i on i.inter_no=itr.inter_no 
+		left outer join interview_test it on it.it_no = itr.it_no
+		left outer join client c on i.cl_id = c.cl_id
+		where i.cl_id=#{cl_id};
+	</select>
+	
+	<select id="interviewTestDetail7" parameterType="String" resultType="String" >
+		select (count(inter_no)) as cnt from interview i	
+		where i.cl_id=#{cl_id} and inter_result != "면접예정" and inter_result != "";
+	</select>
+	
+	<select id="selfUpGo" parameterType="String" resultType="test">
+		SELECT st_que, st_keyword, str.st_no, st_score FROM self_test st 
+		left outer join self_test_result str on str.st_no  = st.st_no 
+		WHERE cl_id=#{cl_id}
+	</select>
+	
+	
+	
 	
 </mapper>

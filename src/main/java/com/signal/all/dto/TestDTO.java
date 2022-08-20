@@ -15,6 +15,13 @@ public class TestDTO {
 	private int it_hidden;
 	private String it_keyword;
 	private int inter_no;
+	private String inter_comment;
+	public String getInter_comment() {
+		return inter_comment;
+	}
+	public void setInter_comment(String inter_comment) {
+		this.inter_comment = inter_comment;
+	}
 	public int getInter_no() {
 		return inter_no;
 	}
