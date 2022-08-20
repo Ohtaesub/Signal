@@ -185,6 +185,7 @@
 		i.apply_date 
 		,jp.jpo_title
 		,r.re_title
+		,r.re_no
 		,i.inter_date
 		,i.inter_result
 		,i.inter_no
@@ -241,7 +242,7 @@
 	<select id="jobPostingList" resultType="com.signal.all.dto.JobPostingDTO">
 	SELECT jpo_title, jpo_no, com_id, jpo_state 
 	FROM job_posting 
-	WHERE com_id = #{param1} and jpo_state = "진행중"	
+	WHERE com_id = #{param1}
 	</select>
 		
 	<select id="jobPostingApplyList" resultType="com.signal.all.dto.EnterDTO">
@@ -249,6 +250,7 @@
 		i.apply_date 
 		,jp.jpo_title
 		,r.re_title
+		,r.re_no
 		,i.inter_date
 		,i.inter_result
 		,i.inter_no
