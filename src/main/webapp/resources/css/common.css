@@ -146,7 +146,8 @@ table {
 table tr th {
    padding:10px;
    border:1px solid #787878;
-   background-color:#efefef;   
+   background-color:#efefef;
+   text-align: center;
 }
 table tr td {
    padding:10px;
@@ -211,8 +212,10 @@ textarea {
 
 /* 페이징2 CSS */
  .pageInfo_wrap{
-     margin-top: 30px;
+    margin-top: 30px;
     text-align: left;
+    position: relative;
+    left: 15%;
  }
   
 .pagination{
@@ -259,6 +262,13 @@ textarea {
 	position: relative;
 	top : -380px;
 	left : 25%;
+}
+
+#adminsection {
+	width : 1400px;
+	position: relative;
+	top : -380px;
+	left : 20%;
 }
 
 /* 비로그인시 섹션 */

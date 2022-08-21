@@ -332,28 +332,7 @@
 		
 		//회원가입 요청 ajax
 		//파일 업로드를 ajax로 하기위해서는 processData : false, contentType : false 넣어야한다.
-		if(overChk&&overChk2!=false){
-			$.ajax({
-				type:'post',
-				url:'joinClient.ajax',
-				data:formData,
-				datatype:"JSON",
-				processData : false ,
-	            contentType : false ,
-				success:function(data){
-					console.log(data);
-					if(data.success){
-						alert("회원가입에 성공하셨습니다.");
-						location.href='/';
-					}else{
-						alert("회원가입에 실패하였습니다.");
-					}
-				},
-				error:function(e){
-					console.log(e);
-				}		
-			});
-		}else if(clId==""){
+		if(clId==""){
 			alert("아이디를 입력해주세요.");
 			$("#cl_id").focus();
 			return false;
@@ -372,7 +351,7 @@
            $("#pw2").val("");
            $("#pw2").focus();
            return false;	
-	    }else if(clPw!==clPw2){
+	    }else if(clPw!=clPw2){
         	alert("비밀번호가 일치하지 않습니다.");
        	 	$("#pw2").val("");
             $("#pw2").focus();
@@ -409,7 +388,28 @@
         	$("#cl_email").val('');
         	$("#cl_email").focus();
         	return false;  	
-        }else{
+        }else if(overChk&&overChk2){
+			$.ajax({
+				type:'post',
+				url:'joinClient.ajax',
+				data:formData,
+				datatype:"JSON",
+				processData : false ,
+	            contentType : false ,
+				success:function(data){
+					console.log(data);
+					if(data.success){
+						alert("회원가입에 성공하셨습니다.");
+						location.href='/';
+					}else{
+						alert("회원가입에 실패하였습니다.");
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}		
+			});
+		}else{
 			alert("아이디 또는 이메일 중복체크를 진행해주세요.");
 		}
 		

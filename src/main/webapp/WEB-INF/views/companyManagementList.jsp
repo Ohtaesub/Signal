@@ -3,12 +3,12 @@
 <%@ include file="../../resources/inc/header.jsp" %>
 <style>
 table {
-	font-size: 75%;
+	font-size: 70%;
 	width : 70%;
 	}
 </style>
 <body>
-	<div id="membersection">
+	<div id="adminsection">
 	<h2>기업회원 리스트</h2>
 	<!-- form 방식으로 select의 선택 값과 검색의 내용을 컨트롤러에 보내준다. -->
 	<form action="companyListSearch.do" method="get" id="form">

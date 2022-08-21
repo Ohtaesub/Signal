@@ -8,7 +8,7 @@ table {
 	}
 </style>
 <body>
-	<div id="membersection">
+	<div id="adminsection">
 	<h2>개인회원 리스트</h2>
 	<!-- form 방식으로 select의 선택 값과 검색의 내용을 컨트롤러에 보내준다. -->
 	<form action="clientListSearch.do" method="get" id="form">
