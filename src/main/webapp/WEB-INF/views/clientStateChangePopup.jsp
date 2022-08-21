@@ -6,6 +6,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
+<link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 </head>
 <body>
 	<form action="clientStateChange.do" method="post" onsubmit="clientStateUpdate()">
@@ -31,17 +32,17 @@
 	        <tr>
 	            <th>수정사유</th>
 	            <td>
-	            	<input type="text"  name="cl_admin_re" id="cl_admin_re" value="${clientState.cl_admin_re}"/>
+	            	<input type="text"  name="cl_admin_re" id="cl_admin_re" value="${clientState.cl_admin_re}" style="width:300px;"/>
 	            </td>
 	        </tr>
 		</table>
+		<br>
 		<input type="submit" value="수정"/>
 	</form>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
 	function clientStateUpdate(){
-		confirm("정말로 수정하시겠습니까?");
 		var msg = "${msg}";
 		if(msg){
 			opener.document.location.href="redirect:/clientManagementList.do";

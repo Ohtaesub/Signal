@@ -2,13 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
 <style>
-	.fclear {clear: both;}
-	#section {
-		width : 800px;
-		position: relative;
-		top : -380px;
-		left : 350px;
-	}
 	
  	#wrap {overflow: hidden;}
  	div > button {
@@ -41,7 +34,7 @@
  	}
 </style>
 <body>
-	<div id="section">
+	<div id="joinsection">
 		<h1>회원가입 - 회원선택</h1><br><br>
 		<div style=" text-align: center;">
 			<button class="buttonclient" onclick="location.href='joinFormClient.go'">개인회원</button>

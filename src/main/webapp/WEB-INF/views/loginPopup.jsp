@@ -5,30 +5,48 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+#popup{
+	position:relative;
+	left: 35%;
+	top: 20%;
+	width:400px;
+	overflow: hidden;
+}
+
+h1 {
+	font-size: 40px;
+}
+</style>
 </head>
 <body>
-	<form action="login.do" method="post" onsubmit="return login()">
-		<h1>Login</h1>
-			<input type='radio' name='memberSelect' value='개인회원' />개인회원
-   			<input type='radio' name='memberSelect' value='기업회원' />기업회원
-		<table>
-			<tr>
-				<th>ID</th>
-				<td><input type="text" name="id" id="id"/></td>
-			</tr>
-			<tr>
-				<th>PW</th>
-				<td><input type="password" name="pw" id="pw"/></td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input type="submit" value="login"/>
-				</th>
-			</tr>
-		</table>
-		<input type="button" value="ID 찾기" onclick="findId()"/>
-		<input type="button" value="PW 찾기" onclick="findPw()"/>
-	</form>
+	<div id="popup">
+		<form action="login.do" method="post" onsubmit="return login()">
+			<h1>Login</h1>
+				<input type='radio' name='memberSelect' value='개인회원'  style="width:20px;height:20px;"/>개인회원
+	   			<input type='radio' name='memberSelect' value='기업회원' style="width:20px;height:20px;"/>기업회원
+			<table>
+				<tr>
+					<th>ID</th>
+					<td><input type="text" name="id" id="id"/></td>
+				</tr>
+				<tr>
+					<th>PW</th>
+					<td><input type="password" name="pw" id="pw"/></td>
+				</tr>
+				<br>
+				<tr>
+					<th colspan="2">
+						<input id="login" type="submit" value="로그인"/>
+					</th>
+				</tr>
+			</table>
+			<br>
+			<br>
+			<input type="button" value="ID 찾기" onclick="findId()"/>
+			<input type="button" value="PW 찾기" onclick="findPw()"/>
+		</form>
+	</div>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
@@ -36,7 +54,7 @@
 	// 팝업창 닫기
 	var pclose = "${pclose}";
 	if(pclose){
-		opener.document.location.reload();
+		opener.document.location.href="main.do";
 		window.close();
 	}
 	

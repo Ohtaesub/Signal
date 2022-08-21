@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
+<style>
+	table {
+		width : 80%;
+	}
+	
+	#section {
+		width : 1000px;
+		position: relative;
+		left : 15%;
+	}
+</style>
 <body>
 	<!-- 폼방식 회원가입 <form action="companyJoin.do" method="post" enctype="multipart/form-data" onsubmit="return joinFormCompany()"> -->
+	<div id="section">
 		<h1>회원가입 - 기업</h1>
 		        <input type="hidden" name="com_state" id="com_state" value="기업회원"/>   
 		    <table>
@@ -76,6 +88,7 @@
 		            </th>
 		        </tr>
 		    </table>
+	</div>
 	<!-- 폼방식 회원가입 </form> -->
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>

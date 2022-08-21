@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
+<style>
+	table {
+		width : 60%;
+	}
+	
+	#button {
+    text-align: center;
+	}
+</style>
 <body>
-	<h3>개인정보관리</h3>
+	<div id="membersection">
+		<h3><strong>개인정보관리</strong></h3>
+		<br>
+		<br>
         <input type="hidden" name="cl_state" id="cl_state" value="개인회원"/>
         <input type="hidden" name="cl_id" id="cl_id" value="${clientInfo.cl_id}"/>
 	    <table>
@@ -47,12 +59,13 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <th colspan="2">
+	            <th id="button" colspan="2">
 	                <input type="button" value="수정하기" onclick="location.href='clientInfoUpdateForm.go'"/>
 		         	<input type="button" value="회원탈퇴" onclick="clientBreakForm()"/>
 	            </th>
 	        </tr>
 	    </table>
+	</div>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
