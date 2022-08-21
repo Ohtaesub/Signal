@@ -58,7 +58,7 @@
 	</select>
 	
 	<select id="resumeDetail" resultType="resume" parameterType="String">
-	SELECT re_title, re_fn_status, re_sch_name, re_sch_period, re_major, re_average, re_total, re_register, re_intro, re_portfolio_ori,r.jp_no,r.jc_no, jp_name, jc_name
+	SELECT re_title, re_fn_status, re_sch_name, re_sch_period, re_major, re_average, re_total, re_register, re_intro, re_portfolio, re_portfolio_ori,r.jp_no,r.jc_no, jp_name, jc_name
 	,cl_name, cl_call, cl_address, cl_birth, cl_email, cl_gender, cl_photo, cl_age, reco_no FROM resume r 
 	LEFT OUTER JOIN job_pa jp ON jp.jp_no = r.jp_no
 	LEFT OUTER JOIN job_ch jc ON jc.jc_no = r.jc_no 

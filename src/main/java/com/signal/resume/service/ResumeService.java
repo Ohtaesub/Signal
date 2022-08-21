@@ -1,11 +1,16 @@
 package com.signal.resume.service;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,7 +118,7 @@ public class ResumeService {
 			}
 		}
 		
-		if(reco!=null) {
+		if(!reco.equals("0")) {
 			int reco_no=Integer.parseInt(reco);
 			dto.setReco_no(reco_no);
 			dao.recoReg(re_no,reco_no);
@@ -336,7 +341,8 @@ ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
 	public void resumeAddUp(String old_re_no, int re_no, String reco_no) {
 		dao.careerAddUp(old_re_no, re_no);
 		dao.socialAddUp(old_re_no, re_no);
-		dao.licenseAddUp(old_re_no, re_no);		
+		dao.licenseAddUp(old_re_no, re_no);
+		
 	}
 
 	public int personListTotal() {
@@ -356,6 +362,35 @@ ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
 		int startAge=Integer.parseInt(searchStartAge);
 		int endAge=Integer.parseInt(searchEndAge);
 		return dao.personSearchTotal(Option,startAge,endAge);
+	}
+
+	public void portfolioDownload(String oriName, String newName, HttpServletResponse resp) {
+		try {
+			//1. 파일 읽어오기
+			Path path = Paths.get("C:/STUDY/SPRING_ADVANCE/Signal/src/main/webapp/resources/images/portfolio/"+newName);
+			byte[] bytes = Files.readAllBytes(path);
+			
+			//2. response 객체 설정하기
+			// content-Disposition > 내려보낼 내용이 문자열(inline)인지 파일(attachment)인지 설정
+			oriName = URLEncoder.encode(oriName, "UTF-8"); // 파일명이 한글일 경우 깨질 수가 있어서
+			resp.setHeader("content-Disposition", "attachment;fileName=\""+oriName+"\"");
+			// octet-stream > 바이너리 스트림을 의미
+			resp.setContentType("application/octet-stream");
+			
+			//3. response 객체에 파일 넣기
+			OutputStream os = resp.getOutputStream();
+			BufferedOutputStream bos = new BufferedOutputStream(os);
+			bos.write(bytes);
+			
+			//4. 자원 반납
+			bos.flush();
+			bos.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	

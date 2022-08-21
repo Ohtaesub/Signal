@@ -24,7 +24,7 @@
 		    <th colspan="7">인적사항</th>
 		  </tr>
 		  <tr>
-		    <td rowspan="3"></td>
+		    <td rowspan="3"><img src="/photo/${dto.cl_photo}"/></td>
 		    <th>이름</th>
 		    <td>${dto.cl_name}</td>
 		    <th>생년월일</th>
@@ -77,7 +77,7 @@
 		  </tr>
 		  <tr>
 		    <th colspan="2">포트폴리오</th>
-		    <td colspan="5">${dto.re_portfolio_ori}</td>
+		    <td colspan="5"><a href="download/${dto.re_portfolio_ori}/${dto.re_portfolio}/">${dto.re_portfolio_ori}</a></td>
 		  </tr>		
 		</table>
 	<br/>
