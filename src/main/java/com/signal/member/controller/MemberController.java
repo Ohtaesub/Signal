@@ -300,6 +300,7 @@ public class MemberController {
 				model.addAttribute("msg",msg);
 				session.setAttribute("loginId", adminLogin);
 				session.setAttribute("isAdmin", "true");
+				session.setAttribute("isSuperAdmin", "true");
 			}else {
 				msg ="아이디 / 비밀번호 또는 회원상태를 확인해주세요.";
 				model.addAttribute("msg",msg);
@@ -782,11 +783,18 @@ public class MemberController {
         //dto에 등록된 값들을 뿌려주기 위해 해당 로그인된 세션을 저장한 값을 dto에 담아준다.
         //loginId는 String 타입이므로 service에 String으로 보내야 한다. 그래서 세션을 형변환 해준다.
         MemberDTO dto = service.clientInfoManagement((String) session.getAttribute("loginId"));
+        String id = (String) session.getAttribute("loginId");
+        String page = "clientInfoManagement";
+        
+        if(id==null) {
+        	model.addAttribute("msg","개인회원 전용 서비스입니다.");
+        	page = "main";
+        }
         
         //받아온 dto들을 model에 담아 jsp에 뿌려준다.
         model.addAttribute("clientInfo",dto);
         
-        return "clientInfoManagement";
+        return page;
     }
     
     
@@ -865,11 +873,19 @@ public class MemberController {
         //dto에 등록된 값들을 뿌려주기 위해 해당 로그인된 세션을 저장한 값을 dto에 담아준다.
         //loginId는 String 타입이므로 service에 String으로 보내야 한다. 그래서 세션을 형변환 해준다.
         MemberDTO dto = service.companyInfoManagement((String) session.getAttribute("loginId"));
+        String id = (String) session.getAttribute("loginId");
+        String page = "companyInfoManagement";
+        
+        if(id==null) {
+        	model.addAttribute("msg","기업회원 전용 서비스입니다.");
+        	page = "main";
+        }
+        
         
         //받아온 dto들을 model에 담아 jsp에 뿌려준다.
         model.addAttribute("companyInfo",dto);
         
-        return "companyInfoManagement";
+        return page;
     }
  	
  	
@@ -1012,15 +1028,22 @@ public class MemberController {
   	
    	// 관리자 관리 페이지 이동 및 리스트 보여주기 요청
    	@RequestMapping(value="/adminManagementList.do")
-   	public String adminInfoManagement(Model model){
+   	public String adminInfoManagement(Model model,HttpSession session){
   		logger.info("관리자 계정관리 페이지 이동");
+  		String page = "adminManagementList";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지 입니다.");
+  			page = "main";
+  		}
   		
   		ArrayList<MemberDTO> adminList = service.adminInfoManagement();
   		logger.info("list 갯수 : "+adminList.size());
   		model.addAttribute("adminList",adminList);
   		
   		
-  		return "adminManagementList";
+  		return page;
   	}
    	
    	
@@ -1072,15 +1095,24 @@ public class MemberController {
    	
    	// 관리자 상태 변경 팝업 페이지 이동 및 항목 보여주기 요청
    	@RequestMapping(value="/adminStateChangePopup.go")
-   	public String adminStateChangePopup(Model model, @RequestParam String ad_id) {
+   	public String adminStateChangePopup(HttpSession session,Model model, @RequestParam String ad_id) {
    		logger.info("어떤 아이디의 상태를 변경할건가? : "+ad_id);
    		MemberDTO dto = service.adminStateChangePopup(ad_id);
 
+   		String page = "adminStateChangePopup";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
+   		
+   		
    		model.addAttribute("adminState",dto);
    		
    		
    		
-   		return "adminStateChangePopup";
+   		return page;
    	}
    	
    	
@@ -1103,20 +1135,29 @@ public class MemberController {
    	
    	// 관리자 상태 상세보기 팝업 요청
    	@RequestMapping(value="/adminStateDetailPopup.do")
-   	public String adminStateDetailPopup(Model model,@RequestParam String ad_id) {
+   	public String adminStateDetailPopup(HttpSession session,Model model,@RequestParam String ad_id) {
    	
    		logger.info("어떤 아이디의 상태를 확인할건가? : "+ad_id);
    		MemberDTO dto = service.adminStateChangePopup(ad_id);
+   		
+   		String page = "adminStateDetailPopup";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
+   		
    		model.addAttribute("adminState",dto);
    	
-   		return "adminStateDetailPopup";
+   		return page;
    			
    	}
    	
    	
    	// 개인회원 관리 페이지 이동 및 리스트 호출 요청 + 페이징 처리 (전체리스트)
    	@RequestMapping(value="/clientManagementList.do")
-   	public String clientManagementList(Model model,Criteria cri) {
+   	public String clientManagementList(HttpSession session,Model model,Criteria cri) {
    		
    		//리스트 페이징 처리하기 위해 리스트를 보여주는 서비스를 보내는데 그안에 cri를 담는다.
    		//service의 최종 목적지 mapper에는 10개씩 보여달라는 쿼리문이 작성되어 있어 10개 이상이어도 10개까지만 보여준다.
@@ -1124,6 +1165,14 @@ public class MemberController {
   		logger.info("list 갯수 : "+clientList.size()); //mapper에 limit 10개로 해놓았으므로 당연히 10개초과는 안나온다.
   		model.addAttribute("clientList",clientList);
   		int pageNum = cri.getPageNum();
+  		
+  		String page = "clientManagementList";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
   		
   		//pageNum 이동을 하기위해 담아서 jsp에 보내준다.
   		model.addAttribute("pageNum",pageNum);
@@ -1137,7 +1186,7 @@ public class MemberController {
 		logger.info("개인회원의 총 인원은?? : "+total);
 
   		
-  		return "clientManagementList";
+  		return page;
    	}
    	
    	
@@ -1149,6 +1198,15 @@ public class MemberController {
    		
    		model.addAttribute("searchOption",searchOption);
    		model.addAttribute("search",search);
+   		
+   		String page = "clientManagementList";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
+   		
    		
    		//검색한 내용 페이징 처리하기
    		int skip=(pageNum-1) * 10;
@@ -1167,21 +1225,29 @@ public class MemberController {
    		model.addAttribute("pageMaker",pageMaker);
    		
    		   		
-   		return "clientManagementList";
+   		return page;
    	}
    	
    	
    	// 개인회원 상태 변경 팝업 페이지 이동 및 항목 보여주기 요청
    	@RequestMapping(value="/clientStateChangePopup.go")
-   	public String clientStateChangePopup(Model model, @RequestParam String cl_id) {
+   	public String clientStateChangePopup(HttpSession session,Model model, @RequestParam String cl_id) {
    		logger.info("어떤 아이디의 상태를 변경할건가? : "+cl_id);
    		MemberDTO dto = service.clientStateChangePopup(cl_id);
 
+   		String page = "clientStateChangePopup";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
+   		
    		model.addAttribute("clientState",dto);
    		
    		
    		
-   		return "clientStateChangePopup";
+   		return page;
    	}
    	
    	
@@ -1203,20 +1269,29 @@ public class MemberController {
    	
    	// 개인회원 상태 상세보기 팝업 요청
    	@RequestMapping(value="/clientStateDetailPopup.do")
-   	public String clientStateDetailPopup(Model model,@RequestParam String cl_id) {
+   	public String clientStateDetailPopup(HttpSession session,Model model,@RequestParam String cl_id) {
    	
    		logger.info("어떤 아이디의 상태를 확인할건가? : "+cl_id);
    		MemberDTO dto = service.clientStateChangePopup(cl_id);
+   		
+   		String page = "clientStateDetailPopup";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
+   		
    		model.addAttribute("clientState",dto);
    	
-   		return "clientStateDetailPopup";
+   		return page;
    			
    	}
    	
    	
    	// 기업회원 관리 페이지 이동 및 리스트 호출 요청 + 페이징 처리 (전체리스트)
    	@RequestMapping(value="/companyManagementList.do")
-   	public String companyManagementList(Model model,Criteria cri) {
+   	public String companyManagementList(HttpSession session,Model model,Criteria cri) {
    		
    		//리스트 페이징 처리하기 위해 리스트를 보여주는 서비스를 보내는데 그안에 cri를 담는다.
    		//service의 최종 목적지 mapper에는 10개씩 보여달라는 쿼리문이 작성되어 있어 10개 이상이어도 10개까지만 보여준다.
@@ -1224,6 +1299,14 @@ public class MemberController {
   		logger.info("list 갯수 : "+companyList.size()); //mapper에 limit 10개로 해놓았으므로 당연히 10개초과는 안나온다.
   		model.addAttribute("companyList",companyList);
   		int pageNum = cri.getPageNum();
+  		
+  		String page = "companyManagementList";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
   		
   		//pageNum 이동을 하기위해 담아서 jsp에 보내준다.
   		model.addAttribute("pageNum",pageNum);
@@ -1237,7 +1320,7 @@ public class MemberController {
 		logger.info("기업회원의 총 갯수는?? : "+total);
 
   		
-  		return "companyManagementList";
+  		return page;
    	}
    	
    	
@@ -1249,6 +1332,14 @@ public class MemberController {
    		
    		model.addAttribute("searchOption",searchOption);
    		model.addAttribute("search",search);
+   		
+   		String page = "companyManagementList";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
    		
    		//검색한 내용 페이징 처리하기
    		int skip=(pageNum-1) * 10;
@@ -1267,21 +1358,29 @@ public class MemberController {
    		model.addAttribute("pageMaker",pageMaker);
    		
    		   		
-   		return "companyManagementList";
+   		return page;
    	}
    	
    	  	
    	// 기업회원 상태 변경 팝업 페이지 이동 및 항목 보여주기 요청
    	@RequestMapping(value="/companyStateChangePopup.go")
-   	public String companyStateChangePopup(Model model, @RequestParam String com_id) {
+   	public String companyStateChangePopup(HttpSession session,Model model, @RequestParam String com_id) {
    		logger.info("어떤 아이디의 상태를 변경할건가? : "+com_id);
    		MemberDTO dto = service.companyStateChangePopup(com_id);
 
+   		String page = "companyStateChangePopup";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
+   		
    		model.addAttribute("companyState",dto);
    		
    		
    		
-   		return "companyStateChangePopup";
+   		return page;
    	}
    	
    	
@@ -1304,13 +1403,22 @@ public class MemberController {
    	
    	// 개인회원 상태 상세보기 팝업 요청
    	@RequestMapping(value="/companyStateDetailPopup.do")
-   	public String companyStateDetailPopup(Model model,@RequestParam String com_id) {
+   	public String companyStateDetailPopup(HttpSession session,Model model,@RequestParam String com_id) {
    	
    		logger.info("어떤 아이디의 상태를 확인할건가? : "+com_id);
    		MemberDTO dto = service.companyStateChangePopup(com_id);
+   		
+   		String page = "companyStateDetailPopup";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
+   		
    		model.addAttribute("companyState",dto);
    	
-   		return "companyStateDetailPopup";
+   		return page;
    			
    	}
    	
