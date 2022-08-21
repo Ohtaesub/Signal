@@ -1,59 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
+<style>
+	table {
+		width : 60%;
+	}
+	
+	#button {
+    text-align: center;
+	}
+</style>
 <body>
-	<!-- 폼방식 회원가입 <form action="clientJoin.do" method="post" enctype="multipart/form-data" onsubmit="return joinFormClient()"> -->
+	<div id="membersection">
 		<h1>관리자 계정생성</h1>
 		        <input type="hidden" name="ad_state" id="ad_state" value="관리자"/>   
-		    <table>
-		        <tr>
-		            <th>아이디</th>
-		            <td>
-		            	<input type="text" id="ad_id" name="ad_id" maxlength="20"/>
-		            	<button type="button" id="overChkId" onclick="overlayId()">중복확인</button>
-		            	※아이디는 영문 또는 영문(소문자)시작+숫자 조합으로 8~20자로 작성해주세요.
-		            </td>
-		        </tr>
-		        <tr>
-		            <th>비밀번호</th>
-		            <td>
-		            	<input type="password" name="ad_pw" id="ad_pw"  maxlength="20"/>
-		            	※비밀번호는 영문 또는 영문(소문자)시작+숫자 조합으로 8~20자로 작성해주세요.
-		            </td>
-		        </tr>
-		             <tr>
-		            <th>비밀번호 확인</th>
-		            <td>
-		            	<input type="password"  id="pw2" maxlength="20"/>
-		            </td>
-		        </tr>
-		        <tr>
-		            <th>이름</th>
-		            <td>
-		            	<input type="text" name="ad_name" id="ad_name"/>
-		            </td>
-		        </tr>
-		        <tr>
-		            <th>연락처</th>
-		            <td>
-		            	<input type="text" name="ad_call" id="ad_call" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="11" placeholder="예)01012345678"/>
-		            </td>
-		        </tr>
-		        <tr>
-		            <th>이메일</th>
-		            <td>
-		            	<input type="text" name="ad_email"  id="ad_email" placeholder="예)admin@naver.com" />
-		            	<button type="button" onclick="overlayEmail()">중복확인</button>
-		            </td>
-		        </tr>
-		        <tr>
-		            <th colspan="2">
-		                <input type="button" value="회원가입" onclick="joinFormAdmin()"/>
-			         	<input type="button" value="취소" onclick="location.href='adminManagementList.do'"/>
-		            </th>
-		        </tr>
-		    </table>
-	<!-- 폼방식 회원가입 </form> -->
+	    <table>
+	        <tr>
+	            <th>아이디</th>
+	            <td>
+	            	<input type="text" id="ad_id" name="ad_id" maxlength="20"/>
+	            	<button type="button" id="overChkId" onclick="overlayId()">중복확인</button>
+	            	<br>
+	            	※아이디는 영문 또는 영문(소문자)시작+숫자 조합으로 8~20자로 작성해주세요.
+	            </td>
+	        </tr>
+	        <tr>
+	            <th>비밀번호</th>
+	            <td>
+	            	<input type="password" name="ad_pw" id="ad_pw"  maxlength="20"/>
+	            	<br>
+	            	※비밀번호는 영문 또는 영문(소문자)시작+숫자 조합으로 8~20자로 작성해주세요.
+	            </td>
+	        </tr>
+	             <tr>
+	            <th>비밀번호 확인</th>
+	            <td>
+	            	<input type="password"  id="pw2" maxlength="20"/>
+	            </td>
+	        </tr>
+	        <tr>
+	            <th>이름</th>
+	            <td>
+	            	<input type="text" name="ad_name" id="ad_name"/>
+	            </td>
+	        </tr>
+	        <tr>
+	            <th>연락처</th>
+	            <td>
+	            	<input type="text" name="ad_call" id="ad_call" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="11" placeholder="예)01012345678"/>
+	            </td>
+	        </tr>
+	        <tr>
+	            <th>이메일</th>
+	            <td>
+	            	<input type="text" name="ad_email"  id="ad_email" placeholder="예)admin@naver.com" />
+	            	<button type="button" onclick="overlayEmail()">중복확인</button>
+	            </td>
+	        </tr>
+	        <tr>
+	            <th id="button" colspan="2">
+	                <input type="button" value="회원가입" onclick="joinFormAdmin()"/>
+		         	<input type="button" value="취소" onclick="location.href='adminManagementList.do'"/>
+	            </th>
+	        </tr>
+	    </table>
+	</div>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>

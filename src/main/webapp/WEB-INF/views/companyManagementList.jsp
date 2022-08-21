@@ -2,9 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
 <style>
-table {font-size: 75%;}
+table {
+	font-size: 75%;
+	width : 70%;
+	}
 </style>
 <body>
+	<div id="membersection">
 	<h2>기업회원 리스트</h2>
 	<!-- form 방식으로 select의 선택 값과 검색의 내용을 컨트롤러에 보내준다. -->
 	<form action="companyListSearch.do" method="get" id="form">
@@ -84,7 +88,8 @@ table {font-size: 75%;}
 	<!-- 페이지 이동 관련 form 태그 -->
 	<form id="moveForm" method="get">
 	  	 <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-  	</form>	
+  	</form>
+  	</div>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>

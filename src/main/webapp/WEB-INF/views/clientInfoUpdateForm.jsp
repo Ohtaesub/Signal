@@ -1,90 +1,101 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
+<style>
+	table {
+		width : 60%;
+	}
+	
+	#button {
+    text-align: center;
+	}
+</style>
 <body>
-	<h3>개인정보수정</h3>
-	<form action="clientInfoUpdate.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
-        <input type="hidden" name="cl_id" value="${clientInfo.cl_id}"/>
-        <input type="hidden" name="cl_state" id="cl_state" value="개인회원"/>   
-	    <table>
-	        <tr>
-	            <th>아이디</th>
-	            <td>${sessionScope.loginId}</td>
-	        </tr>
-	        <tr>
-	            <th>현재 비밀번호</th>
-	            <td>
-	            	<input type="password" name="cl_pw" id="cl_pw" maxlength="20"/>
-	            	<button type="button" onclick="checkPw()">비밀번호 확인</button>	
-	            </td>
-            </tr>
-	        <tr>
-	            <th>새 비밀번호</th>
-	            <td><input type="password" name="pw" id="pw" maxlength="20"/></td>
-            </tr>
-            <tr>
-	            <th>새 비밀번호 확인</th>
-	            <td><input type="password" name="pw2" id="pw2" maxlength="20"/></td>
-            </tr>
-	        <tr>
-	            <th>이름</th>
-	            <td><input type="text" name="cl_name" id="cl_name" value="${clientInfo.cl_name}"/></td>
-	        </tr>
-	        <tr>
-	            <th>생년월일</th>
-	            <td>${clientInfo.cl_birth}</td>
-	        </tr>
-	        <tr>
-	            <th>나이</th>
-	            <td>
-	            <input type="text" name="cl_age" id="cl_age" value="${clientInfo.cl_age}" style="border:none; width:40px;"/>&nbsp;세
-	            </td>
-	        </tr>
-	        <tr>
-	        	<th>성 별</th>
-					<td>
-						<input type='radio' name='gender' value='남' ${clientInfo.cl_gender eq '남'? 'checked= "checked"' : ''}/>남성
-	        			<input type='radio' name='gender' value='여' ${clientInfo.cl_gender eq '여'? 'checked= "checked"' : ''}/>여성
-		        	</td>
+	<div id="membersection">
+		<h3>개인정보수정</h3>
+		<form action="clientInfoUpdate.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
+	        <input type="hidden" name="cl_id" value="${clientInfo.cl_id}"/>
+	        <input type="hidden" name="cl_state" id="cl_state" value="개인회원"/>   
+		    <table>
+		        <tr>
+		            <th>아이디</th>
+		            <td>${sessionScope.loginId}</td>
 		        </tr>
-	        <tr>
-	            <th>주 소</th>
-	            <td>
-		            <input type="text" name="cl_address" id="cl_address" size=50 style="font-size:10px" value="${clientInfo.cl_address }" readonly/>
-		            <input type="button" onclick="sample4_execDaumPostcode()" value="주소찾기"/>
-	            </td>
-	        </tr>
-	        <tr>
-	            <th>핸드폰 번호</th>
-	            <td>
-	            	<input type="text" name="cl_call" id="cl_call" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="11" value="${clientInfo.cl_call}"/>
-	            </td>
-	        </tr>
-	        <tr>
-	            <th>이메일</th>
-	            <td>
-	            	<input type="text" name="cl_email"  id="cl_email" value="${clientInfo.cl_email}" />
-	            	<button type="button" onclick="overlayEmail()">중복확인</button>
-	            </td>
-	        </tr>
-	        <tr>
-	            <th>사진</th>
-	            <td>
-						<!-- 하지만 div 는 서버에 값을 전송 할 수 없다. -->
-						<!-- 결국엔 div 의 내용을 input 에 담아 서버에 전송할 예정 -->
-		            	<input type="file" multiple ="multiple" name="file" onchange="checkFile(this)" accept=".jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp"/>
-		            	<input type="text"  name="orifile" style="border:none;" value="${clientInfo.cl_photo}"/>
-		            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
-	            </td>
-	        </tr>
-	        <tr>
-	            <th colspan="2">
-	                <input type="submit" value="수정완료"/>
-		         	<input type="button" value="취소" onclick="location.href='clientInfoManagement.do'"/>
-	            </th>
-	        </tr>
-	    </table>
-	</form>
+		        <tr>
+		            <th>현재 비밀번호</th>
+		            <td>
+		            	<input type="password" name="cl_pw" id="cl_pw" maxlength="20"/>
+		            	<button type="button" onclick="checkPw()">비밀번호 확인</button>	
+		            </td>
+	            </tr>
+		        <tr>
+		            <th>새 비밀번호</th>
+		            <td><input type="password" name="pw" id="pw" maxlength="20"/></td>
+	            </tr>
+	            <tr>
+		            <th>새 비밀번호 확인</th>
+		            <td><input type="password" name="pw2" id="pw2" maxlength="20"/></td>
+	            </tr>
+		        <tr>
+		            <th>이름</th>
+		            <td><input type="text" name="cl_name" id="cl_name" value="${clientInfo.cl_name}"/></td>
+		        </tr>
+		        <tr>
+		            <th>생년월일</th>
+		            <td>${clientInfo.cl_birth}</td>
+		        </tr>
+		        <tr>
+		            <th>나이</th>
+		            <td>
+		            <input type="text" name="cl_age" id="cl_age" value="${clientInfo.cl_age}" style="border:none; width:40px;"/>&nbsp;세
+		            </td>
+		        </tr>
+		        <tr>
+		        	<th>성 별</th>
+						<td>
+							<input type='radio' name='gender' value='남' ${clientInfo.cl_gender eq '남'? 'checked= "checked"' : ''}/>남성
+		        			<input type='radio' name='gender' value='여' ${clientInfo.cl_gender eq '여'? 'checked= "checked"' : ''}/>여성
+			        	</td>
+			        </tr>
+		        <tr>
+		            <th>주 소</th>
+		            <td>
+			            <input type="text" name="cl_address" id="cl_address" size=50 style="font-size:10px" value="${clientInfo.cl_address }" readonly/>
+			            <input type="button" onclick="sample4_execDaumPostcode()" value="주소찾기"/>
+		            </td>
+		        </tr>
+		        <tr>
+		            <th>핸드폰 번호</th>
+		            <td>
+		            	<input type="text" name="cl_call" id="cl_call" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="11" value="${clientInfo.cl_call}"/>
+		            </td>
+		        </tr>
+		        <tr>
+		            <th>이메일</th>
+		            <td>
+		            	<input type="text" name="cl_email"  id="cl_email" value="${clientInfo.cl_email}" />
+		            	<button type="button" onclick="overlayEmail()">중복확인</button>
+		            </td>
+		        </tr>
+		        <tr>
+		            <th>사진</th>
+		            <td>
+							<!-- 하지만 div 는 서버에 값을 전송 할 수 없다. -->
+							<!-- 결국엔 div 의 내용을 input 에 담아 서버에 전송할 예정 -->
+			            	<input type="file" multiple ="multiple" name="file" onchange="checkFile(this)" accept=".jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp"/>
+			            	<input type="text"  name="orifile" style="border:none;" value="${clientInfo.cl_photo}"/>
+			            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
+		            </td>
+		        </tr>
+		        <tr>
+		            <th id="button" colspan="2">
+		                <input type="submit" value="수정완료"/>
+			         	<input type="button" value="취소" onclick="location.href='clientInfoManagement.do'"/>
+		            </th>
+		        </tr>
+		    </table>
+		</form>
+	</div>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <!-- 통합 로딩 방식 카카오 API -->

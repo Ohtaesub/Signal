@@ -1,8 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
+<style>
+	table {
+		width : 60%;
+	}
+	
+	#button {
+    text-align: center;
+	}
+</style>
 <body>
-		<h1>ID 찾기 - 개인</h1>
+	<div id="nomembersection">
+		<h1><strong>ID 찾기 - 개인</strong></h1>
+		<br>
 		<form action="findClientId.do" method="post" onsubmit="return findId()">
 			<table>
 			   <tr>
@@ -18,14 +29,15 @@
 					</td>
 				</tr>
 			     <tr>
-					<th colspan="2">
+					<th id="button" colspan="2">
 						<input type="submit" value="아이디 찾기"/>
 			         	<input type="button" value="취소" onclick="location.href='/'"/>
 					</th>
 				</tr>
 			</table>
 		</form>
-	</body>
+	</div>
+</body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
 	function findId(){

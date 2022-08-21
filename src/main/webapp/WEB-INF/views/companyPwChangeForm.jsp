@@ -1,9 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
+<style>
+	table {
+		width : 60%;
+	}
+	
+	#button {
+    text-align: center;
+	}
+</style>
 <body>
-		<h1>새 비밀번호 설정</h1>
+	<div id="nomembersection">
+		<h1><strong>새 비밀번호 설정</strong></h1>
+		<br>
 			<h4>비밀번호는 DB에 암호화 되어 저장되므로 새로운 비밀번호를 설정해야 합니다.</h4>
+			<br>
 			<form action="companyPwChange.do" method="post" onsubmit="return companyPwChange()">
 				<table>
 			        <tr>
@@ -19,14 +31,15 @@
 						<td><input type="password" name="pw2" id="pw2"/></td>
 					</tr>
 			        <tr>
-						<th colspan="2">
+						<th id="button" colspan="2">
 							<input type="submit" value="비밀번호 설정"/>
 				            <input type="button" value="취소" onclick="location.href='main'"/>
 						</th>
 					</tr>
 				</table>
 			</form>
-	</body>
+	</div>
+</body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
 	function companyPwChange(){

@@ -1,81 +1,96 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
+<style>
+	table {
+		width : 60%;
+	}
+	
+	#button {
+    text-align: center;
+	}
+</style>
 <body>
-	<form action="companyMemberInfoUpdate.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
-	<h3>기업회원 정보수정</h3>
-        <input type="hidden" name="com_state" id="com_state" value="기업회원"/>
-        <input type="hidden" name="com_id" value="${companyInfo.com_id}"/>   
-	    <table>
-	        <tr>
-	            <th>아이디</th>
-	            <td>${sessionScope.loginId}</td>
-	        </tr>
-	        <tr>
-	            <th>현재 비밀번호</th>
-	            <td>
-	            	<input type="password" name="com_pw" id="com_pw" maxlength="20"/>
-	            	<button type="button" onclick="checkPw()">비밀번호 확인</button>	
-	            </td>
-            </tr>
-	        <tr>
-	            <th>새 비밀번호</th>
-	            <td><input type="password" name="pw" id="pw" maxlength="20"/></td>
-            </tr>
-            <tr>
-	            <th>새 비밀번호 확인</th>
-	            <td><input type="password" name="pw2" id="pw2" maxlength="20"/></td>
-            </tr>
-	        <tr>
-	            <th>사업자 번호</th>
-	            <td>${companyInfo.com_business_no}</td>
-	        </tr>
-	        <tr>
-	            <th>기업명</th>
+	<div id="membersection">
+		<br>
+		<br>
+		<br>
+		<form action="companyMemberInfoUpdate.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
+		<h3><strong>기업회원 회원정보수정</strong></h3>
+		<br>
+	        <input type="hidden" name="com_state" id="com_state" value="기업회원"/>
+	        <input type="hidden" name="com_id" value="${companyInfo.com_id}"/>   
+		    <table>
+		        <tr>
+		            <th>아이디</th>
+		            <td>${sessionScope.loginId}</td>
+		        </tr>
+		        <tr>
+		            <th>현재 비밀번호</th>
 		            <td>
-		            	<input type="text" name="com_name" id="com_name" value="${companyInfo.com_name}"/>
+		            	<input type="password" name="com_pw" id="com_pw" maxlength="20"/>
+		            	<button type="button" onclick="checkPw()">비밀번호 확인</button>	
 		            </td>
-	        </tr>
-	        <tr>
-	            <th>기업주소</th>
-	            <td>
-	            	<input type="text" name="com_address" id="com_address" size=50 style="font-size:10px" value="${companyInfo.com_address}" readonly/>
-	            	<input type="button" onclick="sample4_execDaumPostcode()" value="주소찾기"/>
-	            </td>
-	        </tr>
-	        <tr>
-	        	<th>연락처</th>
-					<td>
-	            		<input type="text" name="com_call" id="com_call" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="11" value="${companyInfo.com_call}"/>
-            		</td>
-	        </tr>
-	        <tr>
-	            <th>이메일</th>
+	            </tr>
+		        <tr>
+		            <th>새 비밀번호</th>
+		            <td><input type="password" name="pw" id="pw" maxlength="20"/></td>
+	            </tr>
+	            <tr>
+		            <th>새 비밀번호 확인</th>
+		            <td><input type="password" name="pw2" id="pw2" maxlength="20"/></td>
+	            </tr>
+		        <tr>
+		            <th>사업자 번호</th>
+		            <td>${companyInfo.com_business_no}</td>
+		        </tr>
+		        <tr>
+		            <th>기업명</th>
+			            <td>
+			            	<input type="text" name="com_name" id="com_name" value="${companyInfo.com_name}"/>
+			            </td>
+		        </tr>
+		        <tr>
+		            <th>기업주소</th>
 		            <td>
-		            	<input type="text" name="com_email"  id="com_email" value="${companyInfo.com_email}"/>
-		            	<button type="button" onclick="overlayEmail()">중복확인</button>
+		            	<input type="text" name="com_address" id="com_address" size=50 style="font-size:10px" value="${companyInfo.com_address}" readonly/>
+		            	<input type="button" onclick="sample4_execDaumPostcode()" value="주소찾기"/>
 		            </td>
 		        </tr>
-	        <tr>
-	            <th>사업자 등록증 사본</th>
-	            <td>
-					<!-- 하지만 div 는 서버에 값을 전송 할 수 없다. -->
-					<!-- 결국엔 div 의 내용을 input 에 담아 서버에 전송할 예정 -->
-					<input type="text"  name="orifile" style="border:none;" value="${companyInfo.com_photo}"/>
-					<br>
-					<br>
-	            	<input type="file" multiple ="multiple" name="file" onchange="checkFile(this)" accept=".jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp"/>
-	            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
-	            </td>
-	        </tr>
-	        <tr>
-	            <th colspan="2">
-	                <input type="submit" value="수정완료"/>
-		         	<input type="button" value="취소" onclick="location.href='companyInfoManagement.do'"/>
-	            </th>
-	        </tr>
-	    </table>
-    </form>
+		        <tr>
+		        	<th>연락처</th>
+						<td>
+		            		<input type="text" name="com_call" id="com_call" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" pattern="\d*" maxlength="11" value="${companyInfo.com_call}"/>
+	            		</td>
+		        </tr>
+		        <tr>
+		            <th>이메일</th>
+			            <td>
+			            	<input type="text" name="com_email"  id="com_email" value="${companyInfo.com_email}"/>
+			            	<button type="button" onclick="overlayEmail()">중복확인</button>
+			            </td>
+			        </tr>
+		        <tr>
+		            <th>사업자 등록증 사본</th>
+		            <td>
+						<!-- 하지만 div 는 서버에 값을 전송 할 수 없다. -->
+						<!-- 결국엔 div 의 내용을 input 에 담아 서버에 전송할 예정 -->
+						<input type="text"  name="orifile" style="border:none;" value="${companyInfo.com_photo}"/>
+						<br>
+						<br>
+		            	<input type="file" multiple ="multiple" name="file" onchange="checkFile(this)" accept=".jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp"/>
+		            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
+		            </td>
+		        </tr>
+		        <tr>
+		            <th id="button" colspan="2">
+		                <input type="submit" value="수정완료"/>
+			         	<input type="button" value="취소" onclick="location.href='companyInfoManagement.do'"/>
+		            </th>
+		        </tr>
+		    </table>
+	    </form>
+    </div>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <!-- 통합 로딩 방식 카카오 API -->

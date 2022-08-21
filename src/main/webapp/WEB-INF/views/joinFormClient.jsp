@@ -1,8 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
+<style>
+	table {
+		width : 80%;
+	}
+	
+	#section {
+		width : 1400px;
+		position: relative;
+		left : 15%;
+	}
+	
+	#button {
+    text-align: center;
+	}
+</style>
 <body>
 	<!-- 폼방식 회원가입 <form action="clientJoin.do" method="post" enctype="multipart/form-data" onsubmit="return joinFormClient()"> -->
+	<div id="section">
 		<h1>회원가입 - 개인</h1>
 		        <input type="hidden" name="cl_state" id="cl_state" value="개인회원"/>   
 		    <table>
@@ -88,6 +104,7 @@
 		            </th>
 		        </tr>
 		    </table>
+	</div>
 	<!-- 폼방식 회원가입 </form> -->
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>

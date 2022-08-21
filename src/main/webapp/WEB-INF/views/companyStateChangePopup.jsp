@@ -6,6 +6,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
+<link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 </head>
 <body>
 	<form action="companyStateChange.do" method="post" onsubmit="companyStateUpdate()">
@@ -31,10 +32,11 @@
 	        <tr>
 	            <th>수정사유</th>
 	            <td>
-	            	<input type="text"  name="com_admin_re" id="com_admin_re" value="${companyState.com_admin_re}"/>
+	            	<input type="text"  name="com_admin_re" id="com_admin_re" value="${companyState.com_admin_re}" style="width:300px;"/>
 	            </td>
 	        </tr>
 		</table>
+		<br>
 		<input type="submit" value="수정"/>
 	</form>
 </body>

@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+* {
+    font-family:'Noto Sans KR',sans-serif;
+}
+
+/* 안의 내용 구성 by상인 */
+/* 테이블 부분 css */
+#popup{
+	position:relative;
+	left: 35%;
+	top: 20%;
+	width:400px;
+	overflow: hidden;
+}
+
+h1 {
+	font-size: 40px;
+}
+
+#membersection {
+	width : 1400px;
+	position: relative;
+	top : -380px;
+	left : 25%;
+}
+
+table {
+	text-align: center;
+}
+
+input[type="submit"] {
+    position: relative;
+    left: 50%;
+}
+
+
+
+
