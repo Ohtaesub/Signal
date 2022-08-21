@@ -25,6 +25,36 @@
 		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id
 		left outer join resume r on r.cl_id = c.cl_id 
 		GROUP BY c.cl_id 
+		LIMIT #{skip},10
+	</select>
+	
+	<select id="personListTotal" resultType="int">
+	SELECT count(cl_id)
+	FROM client
+	</select>
+	
+	<select id="personListSearch" resultType="resume">
+		SELECT cl_age, cl_gender, (SUM(inter_grade)/COUNT(inter_comment)) AS avr_inter_grade,  r.re_title , c.cl_id,
+		COUNT(DISTINCT inter_comment) as cnt_inter, (SUM(st_score)/COUNT(st_comment)) AS avr_st_score FROM client c 
+		LEFT OUTER JOIN self_test_result str ON c.cl_id = str.cl_id 
+		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id
+		left outer join resume r on r.cl_id = c.cl_id 		
+		WHERE
+		<if test="param1=0">
+			cl_age between #{param2} and #{param3}
+			GROUP BY c.cl_id
+		</if>
+		<if test="param1=1">
+			cl_age between #{param2} and #{param3}
+			GROUP BY c.cl_id
+			ORDER BY avr_inter_grade DESC
+		</if>		
+		LIMIT #{param4},10
+	</select>
+	
+	<select id="personSearchTotal" resultType="int">
+		SELECT count(c.cl_id) FROM client c		
+		WHERE cl_age between #{param2} and #{param3}			
 	</select>
 	
 	<select id="resumeDetail" resultType="resume" parameterType="String">

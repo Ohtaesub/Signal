@@ -18,8 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.signal.all.dto.MemberDTO;
+import com.signal.all.dto.PageMakerDTO;
 import com.signal.all.dto.ResumeDTO;
 import com.signal.all.dto.TestDTO;
+import com.signal.enter.controller.Criteria;
 import com.signal.resume.service.ResumeService;
 import com.signal.test.service.TestService;
 
@@ -52,17 +55,61 @@ public class ResumeController {
 	// 인재현황 리스트 불러오기
 	
 	@RequestMapping(value = "personList.go", method = RequestMethod.GET)
-	public String personList(Model model) {		
+	public String personList(Model model, Criteria cri) {		
 		
 		logger.info("인재현황 리스트 요청");
-
 		
-		  ArrayList<ResumeDTO> list = service.personList();
-		  logger.info("결과 확인 : 리스트 개수=" +list.size());
-		  model.addAttribute("list",list);		 
+		//리스트 페이징 처리하기 위해 리스트를 보여주는 서비스를 보내는데 그안에 cri를 담는다.
+   		//service의 최종 목적지 mapper에는 10개씩 보여달라는 쿼리문이 작성되어 있어 10개 이상이어도 10개까지만 보여준다.
+	  ArrayList<ResumeDTO> list = service.personList(cri);
+	  logger.info("결과 확인 : 리스트 개수=" +list.size()); //mapper에 limit 10개로 해놓았으므로 당연히 10개초과는 안나온다.
+	  model.addAttribute("list",list);
+  		int pageNum = cri.getPageNum();
+	  		
+  		//pageNum 이동을 하기위해 담아서 jsp에 보내준다.
+  		model.addAttribute("pageNum",pageNum);
+  		
+  		//페이징 처리를 위한 게시글의 총 개수를 구해온다.
+  		int total = service.personListTotal();
+  		// PageMakerDTO 라는 것에 총개수와 몇개씩 보여줄 것인지에 대한 내용을 담는다.
+  		// 단순히 총인원 리스트를 pageMaker에 맞게 잘라서 표현한 것일 뿐 이동에 대한 내용은 없다.
+  		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
+  		model.addAttribute("pageMaker",pageMaker);
+		logger.info("총 인재는?? : "+total);
 		
 		return "./resume/personList";
 	}
+	
+	//개인회원 리스트 검색기능 + 페이징 처리
+   	@RequestMapping(value="/personListSearch.do")
+   	public String personListSearch(Model model,HttpSession session,
+   			@RequestParam String searchOption, String searchEndAge, String searchStartAge, int pageNum) {
+   	
+   		logger.info("옵션 확인: "+searchOption+" / "+searchStartAge+" / "+searchEndAge+" / "+pageNum);
+   		
+   		model.addAttribute("searchOption",searchOption);
+   		model.addAttribute("searchStartAge",searchStartAge);
+   		model.addAttribute("searchEndAge",searchEndAge);
+   		
+   		//검색한 내용 페이징 처리하기
+   		int skip=(pageNum-1) * 10;
+   		
+   		ArrayList<MemberDTO> dto = service.personListSearch(searchOption,searchStartAge,searchEndAge,skip);
+   		// 전체 리스트에서 넣었던 것을 검색을 통해 가져온 값을 바꿔넣어준다.
+   		model.addAttribute("list",dto);
+   		
+   		// 검색해서 나온 결과의 갯수를 세어본다.
+   		int personSearchTotal = service.personSearchTotal(searchOption,searchStartAge,searchEndAge);
+   		model.addAttribute("pageNum",pageNum);
+   		
+   		// 검색 결과를 어떻게 나눌것인지 페이지 메이커 변수에 담아준다.
+   		PageMakerDTO pageMaker = new PageMakerDTO(pageNum, personSearchTotal);
+   		// 검색 결과숫자와 페이지 갯수를 처리한 변수를 담아서 jsp에 보내준다.
+   		model.addAttribute("pageMaker",pageMaker);
+   		
+   		   		
+   		return "./resume/personList";
+   	}
 	
 	// 이력서 상세보기
 	@RequestMapping(value = "resumeDetail.do", method = RequestMethod.GET)

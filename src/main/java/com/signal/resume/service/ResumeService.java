@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.signal.all.dto.MemberDTO;
 import com.signal.all.dto.ResumeDTO;
+import com.signal.enter.controller.Criteria;
 import com.signal.resume.dao.ResumeDAO;
 
 @Service
@@ -28,9 +30,9 @@ public class ResumeService {
 		return dao.list(id);
 	}
 
-	public ArrayList<ResumeDTO> personList() {
+	public ArrayList<ResumeDTO> personList(Criteria cri) {
 		logger.info("인재현황 리스트 서비스 요청");
-		return dao.personList();
+		return dao.personList(cri);
 	}
 
 	// 이력서 상세보기 서비스 요청 시작	
@@ -335,6 +337,25 @@ ModelAndView mav = new ModelAndView("./resume/licenseRegPop");
 		dao.careerAddUp(old_re_no, re_no);
 		dao.socialAddUp(old_re_no, re_no);
 		dao.licenseAddUp(old_re_no, re_no);		
+	}
+
+	public int personListTotal() {
+		return dao.personListTotal();
+	}
+
+	public ArrayList<MemberDTO> personListSearch(
+			String searchOption, String searchStartAge, String searchEndAge, int skip) {
+		int Option=Integer.parseInt(searchOption);
+		int startAge=Integer.parseInt(searchStartAge);
+		int endAge=Integer.parseInt(searchEndAge);
+		return dao.personListSearch(Option,startAge,endAge,skip);
+	}
+
+	public int personSearchTotal(String searchOption, String searchStartAge, String searchEndAge) {
+		int Option=Integer.parseInt(searchOption);
+		int startAge=Integer.parseInt(searchStartAge);
+		int endAge=Integer.parseInt(searchEndAge);
+		return dao.personSearchTotal(Option,startAge,endAge);
 	}
 
 	
