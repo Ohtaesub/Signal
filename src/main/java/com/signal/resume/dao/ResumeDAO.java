@@ -3,13 +3,15 @@ package com.signal.resume.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.signal.all.dto.MemberDTO;
 import com.signal.all.dto.ResumeDTO;
+import com.signal.enter.controller.Criteria;
 
 public interface ResumeDAO {
 
 	ArrayList<ResumeDTO> list(String id);
 
-	ArrayList<ResumeDTO> personList();
+	ArrayList<ResumeDTO> personList(Criteria cri);
 
 	ResumeDTO resumeDetail(String re_no);
 
@@ -78,6 +80,14 @@ public interface ResumeDAO {
 	void recommendSelect(String reco_no, int re_no);
 
 	void recoReg(int re_no, int reco_no);
+
+	int personListTotal();
+
+	ArrayList<MemberDTO> personListSearch(String searchOption, int startAge, int endAge, int skip);
+
+	int personSearchTotal(int option, int startAge, int endAge);
+
+	ArrayList<MemberDTO> personListSearch(int option, int startAge, int endAge, int skip);
 
 	
 
