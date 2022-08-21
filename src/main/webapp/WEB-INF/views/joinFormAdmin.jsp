@@ -169,33 +169,7 @@
 		
 
 		//회원가입 요청 ajax
-		if(overChk&&overChk2!=false){
-			$.ajax({
-				type:'post',
-				url:'joinAdmin.ajax',
-				data:{
-					ad_id:adminId,
-					ad_pw:adminPw,
-					ad_name:name,
-					ad_call:adminCall,
-					ad_email:email,
-					ad_state:state
-				},
-				datatype:"JSON",
-				success:function(data){
-					console.log(data);
-					if(data.success){
-						alert("관리자 계정등록에 성공하였습니다.");
-						location.href='/adminManagementList.do';
-					}else{
-						alert("관리자 계정등록에 실패하였습니다.");
-					}
-				},
-				error:function(e){
-					console.log(e);
-				}		
-			});
-		}else if(adminId==""){
+		if(adminId==""){
 			alert("아이디를 입력해주세요.");
 			$("#ad_id").focus();
 			return false;
@@ -236,7 +210,33 @@
         	$("#ad_email").val('');
         	$("#ad_email").focus();
         	return false;  	
-        }else{
+        }else if(overChk&&overChk2!=false){
+			$.ajax({
+				type:'post',
+				url:'joinAdmin.ajax',
+				data:{
+					ad_id:adminId,
+					ad_pw:adminPw,
+					ad_name:name,
+					ad_call:adminCall,
+					ad_email:email,
+					ad_state:state
+				},
+				datatype:"JSON",
+				success:function(data){
+					console.log(data);
+					if(data.success){
+						alert("관리자 계정등록에 성공하였습니다.");
+						location.href='/adminManagementList.do';
+					}else{
+						alert("관리자 계정등록에 실패하였습니다.");
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}		
+			});
+		}else{
 			alert("아이디 또는 이메일 중복체크를 진행해주세요.");
 		}
 		

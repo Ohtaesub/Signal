@@ -33,7 +33,7 @@
 			        <tr>
 						<th id="button" colspan="2">
 							<input type="submit" value="비밀번호 설정"/>
-				            <input type="button" value="취소" onclick="location.href='main'"/>
+				            <input type="button" value="취소" onclick="location.href='main.do'"/>
 						</th>
 					</tr>
 				</table>

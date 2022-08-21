@@ -3,11 +3,11 @@
 <%@ include file="../../resources/inc/header.jsp" %>
 <style>
 	table {
-		width : 60%;
+		width : 75%;
 	}
 </style>
 <body>
-	<div id="membersection">
+	<div id="adminsection">
 		<h3><strong>관리자 리스트</strong></h3>
 		<br>
 		<table>

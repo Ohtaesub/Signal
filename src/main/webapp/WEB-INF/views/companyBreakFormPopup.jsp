@@ -35,7 +35,7 @@
 	            <input type="text" name="mg_content_other" id="contentOther" disabled/>
 	            <br>
 	            <br>
-	            비밀번호 확인 <input type="password" name="cl_pw" id="cl_pw"/>
+	            비밀번호 확인 <input type="password" name="com_pw" id="com_pw"/>
 	        </div>
 	        <br>
 		    <input type="submit" value="탈퇴"/>
@@ -84,7 +84,7 @@
 				console.log(data.pw);
 				if(!data.pw){
 					alert("비밀번호가 일치하지 않습니다.");
-					location.href='companyBreakForm.go';
+					location.href='companyBreakFormPopup.go';
 				}
 			}
 		});

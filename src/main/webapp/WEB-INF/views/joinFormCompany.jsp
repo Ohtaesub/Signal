@@ -335,28 +335,7 @@
 		
 		
 		//기업 회원가입 요청 ajax
-		if(overChk&&overChk2&&overChk3!=false){
-			$.ajax({
-				type:'post',
-				url:'joinCompany.ajax',
-				data:formData,
-				datatype:"JSON",
-				processData : false ,
-	            contentType : false ,
-				success:function(data){
-					console.log(data);
-					if(data.joinCompany){
-						alert("회원가입에 성공하셨습니다.");
-						location.href='/';
-					}else{
-						alert("회원가입에 실패하였습니다.");
-					}
-				},
-				error:function(e){
-					console.log(e);
-				}	
-			});	
-		}else if(comId==""){
+		if(comId==""){
 			alert("아이디를 입력해주세요.");
 			$("#com_id").focus();
 			return false;
@@ -404,7 +383,28 @@
         	$("#com_email").val('');
         	$("#com_email").focus();
         	return false;  	
-        }else{
+        }else if(overChk&&overChk2&&overChk3!=false){
+			$.ajax({
+				type:'post',
+				url:'joinCompany.ajax',
+				data:formData,
+				datatype:"JSON",
+				processData : false ,
+	            contentType : false ,
+				success:function(data){
+					console.log(data);
+					if(data.joinCompany){
+						alert("회원가입에 성공하셨습니다.");
+						location.href='/';
+					}else{
+						alert("회원가입에 실패하였습니다.");
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}	
+			});	
+		}else{
 			alert("아이디 / 이메일 또는 사업자 번호 중복체크를 진행해주세요.");
 		}
 		

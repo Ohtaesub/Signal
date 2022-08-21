@@ -43,7 +43,6 @@
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
 	function companyStateUpdate(){
-		confirm("정말로 수정하시겠습니까?");
 		var msg = "${msg}";
 		if(msg){
 			opener.document.location.href="redirect:/companyManagementList.do";
