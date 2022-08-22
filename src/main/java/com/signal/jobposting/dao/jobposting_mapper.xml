@@ -551,30 +551,32 @@
             jp.jpo_start,
             jp.jpo_deadline,
             jp.jpo_state,
-	         jp.jpo_education,
-	         jp.jpo_salary,
-	         jp.jpo_contact,
-	         jp.jpo_name,
-	         jp.jpo_welfare,
-	         jp.jpo_photo,
-	         jp.jpo_views,
-	         co.com_id,
+	        jp.jpo_education,
+	        jp.jpo_salary,
+	        jp.jpo_contact,
+	        jp.jpo_name,
+	        jp.jpo_welfare,
+	        jp.jpo_photo,
+	        jp.jpo_views,
+	        co.com_id,
             co.com_name,
-	         p.jp_name,
-	         c.jc_name,
-	         jp.jpo_no,
-	         ci.ci_web,
-	         ci.ci_photo,
-	         count(i.inter_no) as apply_no,
-	         count(i.inter_no) AS apply,
-	         count(i.inter_comment) AS comment,
-	         ROUND(count(i.inter_comment)*100/(count(i.inter_no)),0) AS comment_a 
+            r.re_no,
+	        p.jp_name,
+	        c.jc_name,
+	        jp.jpo_no,
+	        ci.ci_web,
+	        ci.ci_photo,
+	        count(i.inter_no) as apply_no,
+	        count(i.inter_no) AS apply,
+	        count(i.inter_comment) AS comment,
+	        ROUND(count(i.inter_comment)*100/(count(i.inter_no)),0) AS comment_a 
 	      FROM job_posting jp 
 	      LEFT OUTER JOIN company co ON co.com_id = jp.com_id 
-	      left outer join interview i on i.com_id = jp.com_id 
+	      LEFT OUTER JOIN interview i ON i.com_id = jp.com_id 
 	      LEFT OUTER JOIN com_info ci ON ci.com_id = co.com_id 
 	      LEFT OUTER JOIN job_pa p ON p.jp_no = jp.jp_no 
-	      LEFT OUTER JOIN job_ch c ON c.jc_no = jp.jc_no 
+	      LEFT OUTER JOIN job_ch c ON c.jc_no = jp.jc_no
+	      LEFT OUTER JOIN resume r on r.re_no = i.re_no 
       WHERE jp.jpo_no = #{param1} AND jp.com_id = #{param2};
  	</select>
 	
