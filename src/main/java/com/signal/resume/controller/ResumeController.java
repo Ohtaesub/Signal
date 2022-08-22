@@ -191,6 +191,7 @@ public class ResumeController {
 	public HashMap<String, Object> resumeReg(
 			@RequestParam(value = "re_title") String re_title,
 			@RequestParam(value = "cl_id") String cl_id,
+			@RequestParam(value = "reco_no") String reco_no,
 			@RequestParam(value = "re_fn_status") String re_fn_status,
 			@RequestParam(value = "jp_no", required=false) String jp_no,
 			@RequestParam(value = "jc_no", required=false) String jc_no,
@@ -214,6 +215,7 @@ public class ResumeController {
 			
 			params.put("re_title",re_title);
 			params.put("cl_id",cl_id);
+			params.put("reco_no",reco_no);
 			params.put("re_fn_status",re_fn_status);
 			params.put("jp_no",jp_no);
 			params.put("jc_no",jc_no);

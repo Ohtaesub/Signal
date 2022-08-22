@@ -166,6 +166,7 @@ function resumeReg(){
 	
 	var $re_title=$('#re_title').val();
 	var $cl_id=$('#cl_id').val();
+	var reco_no=0;
 	var $re_fn_status=$('#re_fn_status').val();
 	var $jp_no=$('#jp_no').val();
 	var $jc_no=$('#jc_no').val();
@@ -189,6 +190,7 @@ function resumeReg(){
 	formData.append("re_portfolio",$('#re_portfolio')[0].files[0]);	
 	formData.append("re_title", $re_title);
 	formData.append("cl_id", $cl_id);
+	formData.append("reco_no", reco_no);
 	formData.append("re_fn_status", $re_fn_status);
 	formData.append("jp_no", $jp_no);
 	formData.append("jc_no", $jc_no);
