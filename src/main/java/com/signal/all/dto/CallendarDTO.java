@@ -14,7 +14,14 @@ public class CallendarDTO {
 		this.rankCom = rankCom;
 	}
 	private int jpo_no;
-	private String com_id;	
+	private String com_id;
+	private String jpo_title;
+	public String getJpo_title() {
+		return jpo_title;
+	}
+	public void setJpo_title(String jpo_title) {
+		this.jpo_title = jpo_title;
+	}
 	private Date jpo_start;
 	private Date jpo_deadline;
 	private String jpo_state;

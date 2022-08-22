@@ -71,7 +71,83 @@ public class MainService {
 	public ArrayList<CallendarDTO> endPost7(String day7) {
 		return dao.endPost7(day7);
 	}
+
+	public ArrayList<CallendarDTO> postPop(String chkDay, String chkState) {
+		
+		ArrayList<CallendarDTO> result = new ArrayList<CallendarDTO>();
+		
+		if(chkState.equals("start")) {
+		result = dao.postPopStart(chkDay);
+		} else if(chkState.equals("end")) {
+			result = dao.postPopEnd(chkDay);
+		}
+		return result;
+	}
+
+	public int startPostCnt1(String day1) {
+		int result = dao.cnt1(day1);
+		return result;
+	}
 	
+	public int startPostCnt2(String day2) {
+		int result = dao.cnt2(day2);
+		return result;
+	}
+	
+	public int startPostCnt3(String day3) {
+		int result = dao.cnt3(day3);
+		return result;
+	}
+	
+	public int startPostCnt4(String day4) {
+		int result = dao.cnt4(day4);
+		return result;
+	}
+	
+	public int startPostCnt5(String day5) {
+		int result = dao.cnt5(day5);
+		return result;
+	}
+	
+	public int startPostCnt6(String day6) {
+		int result = dao.cnt6(day6);
+		return result;
+	}
+	
+	public int startPostCnt7(String day7) {
+		int result = dao.cnt7(day7);
+		return result;
+	}
+
+	public int endPostCnt1(String day1) {
+		int result = dao.cnt8(day1);
+		return result;
+	}
+	
+	public int endPostCnt2(String day2) {
+		int result = dao.cnt9(day2);
+		return result;
+	}
+	public int endPostCnt3(String day3) {
+		int result = dao.cnt10(day3);
+		return result;
+	}
+	public int endPostCnt4(String day4) {
+		int result = dao.cnt11(day4);
+		return result;
+	}
+	public int endPostCnt5(String day5) {
+		int result = dao.cnt12(day5);
+		return result;
+	}
+	public int endPostCnt6(String day6) {
+		int result = dao.cnt13(day6);
+		return result;
+	}
+	public int endPostCnt7(String day7) {
+		int result = dao.cnt14(day7);
+		return result;
+	}
 	
 	
 	

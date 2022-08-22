@@ -28,7 +28,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-		    <th colspan="28">인적사항</th>
+		    <th colspan="28" style="text-align:start;">인적사항 <button style="float:right;" onclick="location.href='/clientInfoUpdateForm.go'">개인정보 수정</button></th>
 		  </tr>
 		  <tr class="hidden">
 		    <th colspan="28"><input type="text" id="cl_id" value="${cl_id}"></th>
@@ -53,7 +53,7 @@
 		    <td colspan="8">${dto.cl_email}</td>
 		  </tr>
 		  <tr>
-		    <th colspan="28">희망직무 <input type="button" onclick="jobClassPopGo()" value="등록"></th>
+		    <th colspan="28" style="text-align:start;">희망직무 <input type="button" style="float:right;" onclick="jobClassPopGo()" value="등록"></th>
 		  </tr>
 		  <tr>
 		    <th colspan="4">대분류</th>

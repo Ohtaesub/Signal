@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,13 +31,6 @@ public class HomeController {
 		return "main";
 	}
 	
-	@RequestMapping(value = "/mainEx.go")
-	public String mainEx() {
-		logger.info("채용달력 페이지 이동");
-		
-		return "mainEx";
-	}
-	
 	@RequestMapping(value="callendar.ajax")
 	@ResponseBody
 	public HashMap<String, Object> callendar(@RequestBody HashMap<String,Object> params){
@@ -58,7 +52,7 @@ public class HomeController {
 		String day7 = callendar.get(6);
 		
 		
-		ArrayList<CallendarDTO> startPost1 = service.startPost1(day1);
+		ArrayList<CallendarDTO> startPost1 = service.startPost1(day1);		
 		ArrayList<CallendarDTO> endPost1 = service.endPost1(day1);
 		ArrayList<CallendarDTO> startPost2 = service.startPost2(day2);
 		ArrayList<CallendarDTO> endPost2 = service.endPost2(day2);
@@ -73,7 +67,22 @@ public class HomeController {
 		ArrayList<CallendarDTO> startPost7 = service.startPost7(day7);
 		ArrayList<CallendarDTO> endPost7 = service.endPost7(day7);
 		
-		params.put("startPost1", startPost1);
+		int size1 = service.startPostCnt1(day1);	
+		int size2 = service.startPostCnt2(day2);
+		int size3 = service.startPostCnt3(day3);
+		int size4 = service.startPostCnt4(day4);
+		int size5 = service.startPostCnt5(day5);
+		int size6 = service.startPostCnt6(day6);
+		int size7 = service.startPostCnt7(day7);		
+		int size8 = service.endPostCnt1(day1);		
+		int size9 = service.endPostCnt2(day2);		
+		int size10 = service.endPostCnt3(day3);		
+		int size11 = service.endPostCnt4(day4);		
+		int size12 = service.endPostCnt5(day5);		
+		int size13 = service.endPostCnt6(day6);		
+		int size14 = service.endPostCnt7(day7);
+		
+		params.put("startPost1", startPost1);		
 		params.put("startPost2", startPost2);
 		params.put("startPost3", startPost3);
 		params.put("startPost4", startPost4);
@@ -87,7 +96,20 @@ public class HomeController {
 		params.put("endPost5", endPost5);
 		params.put("endPost6", endPost6);
 		params.put("endPost7", endPost7);
-		
+		params.put("size1", size1);
+		params.put("size2", size2);
+		params.put("size3", size3);
+		params.put("size4", size4);
+		params.put("size5", size5);
+		params.put("size6", size6);
+		params.put("size7", size7);
+		params.put("size8", size8);
+		params.put("size9", size9);
+		params.put("size10", size10);
+		params.put("size11", size11);
+		params.put("size12", size12);
+		params.put("size13", size13);
+		params.put("size14", size14);		
 		
 		String msg="하하";
 		params.put("msg", msg);
@@ -97,9 +119,11 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/mainPop.go")
-	public String mainPop(@RequestParam String chkDay, @RequestParam String chkState ) {
+	public String mainPop(@RequestParam String chkDay, @RequestParam String chkState,
+			Model model) {
 		logger.info("채용달력 자세히 보기 이동" + chkDay + '/' + chkState);
-		
+		ArrayList<CallendarDTO> list =service.postPop(chkDay,chkState);
+		model.addAttribute("list", list);
 		return "mainPop";
 	}
 	

@@ -21,7 +21,7 @@
 		    <td colspan="6">${dto.re_title}</td>
 		  </tr>
 		  <tr>
-		    <th colspan="7">인적사항</th>
+		    <th colspan="7" style="text-align:start;">인적사항 <button style="float:right;" onclick="location.href='/clientInfoUpdateForm.go'">개인정보 수정</button></th>
 		  </tr>
 		  <tr>
 		    <td rowspan="3"><img src="/photo/${dto.cl_photo}"/></td>
@@ -43,7 +43,7 @@
 		    <td colspan="2">${dto.cl_email}</td>
 		  </tr>
 		  <tr>
-		    <th colspan="7">희망직무</th>
+		    <th colspan="7" style="text-align:start;">희망직무</th>
 		  </tr>
 		  <tr>
 		    <th>대분류</th>
