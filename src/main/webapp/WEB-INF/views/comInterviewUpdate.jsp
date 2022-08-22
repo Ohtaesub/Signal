@@ -30,14 +30,13 @@
                 	<table>
 	                	<c:forEach items="${que}" var="que" >
 		                    <tr>
-		                        <td align="center">${que.it_no}
+		                        <td align="center">
 		                        <input type="hidden" name="inter_no" value="${dto.inter_no}">
 		                        <input type="hidden" name="it_no" value="${que.it_no}">
 		                        </td>
 		                        <td align="center">${que.it_que}</td>
 		                        <td id="hh" align="center">
 			                        <select name="inter_score2" id="ss_${que.it_no}">
-				                        <option value=""${que.inter_score == '' ? 'selected="selected"' : ''}>점수선택</option>
 										<option value="1"${que.inter_score == '1' ? 'selected="selected"' : ''}>1</option>
 										<option value="2"${que.inter_score == '2' ? 'selected="selected"' : ''}>2</option>
 										<option value="3"${que.inter_score == '3' ? 'selected="selected"' : ''}>3</option>

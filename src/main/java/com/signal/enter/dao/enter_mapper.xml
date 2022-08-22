@@ -146,6 +146,8 @@
 		,apply_date
 		,inter_date
 		,inter_result
+		,jp.jpo_no
+		,jp.com_id
 	FROM interview i
 	LEFT OUTER JOIN job_posting jp ON i.jpo_no = jp.jpo_no 
 	LEFT OUTER JOIN company c ON jp.com_id = c.com_id 

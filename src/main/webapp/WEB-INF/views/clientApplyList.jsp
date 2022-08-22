@@ -45,7 +45,7 @@ button {
 				<c:when test="${clientApplyList.size() >0}">
 					<c:forEach items="${clientApplyList}" var="item">
 						<tr>
-							<td><a href="#">${item.jpo_title}</a></td>
+							<td><a href="/PostingDetailMain.go?jpo_no=${item.jpo_no}&com_id=${item.com_id}">${item.jpo_title}</a></td>
 							<td>${item.com_name}</td>
 							<td>${item.apply_date}</td>
 							<td>${item.inter_result}</td>
