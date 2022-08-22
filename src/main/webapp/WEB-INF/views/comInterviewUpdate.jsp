@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
+<link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <style></style>
 </head>
 <body>
@@ -15,7 +17,7 @@
     <table class="dto" id="list">
            <tr>
 				<th>면접결과선택</th>
-				<td>
+				<td align="left">
 					<select name="inter_result" id="inter_result">
 					<option value=""${dto.inter_result == '' ? 'selected="selected"' : ''}>결과선택</option>
 	                <option value="불합격"${dto.inter_result == '불합격' ? 'selected="selected"' : ''}>불합격</option>
@@ -30,11 +32,11 @@
                 	<table>
 	                	<c:forEach items="${que}" var="que" >
 		                    <tr>
+		                        
 		                        <td align="center">
 		                        <input type="hidden" name="inter_no" value="${dto.inter_no}">
 		                        <input type="hidden" name="it_no" value="${que.it_no}">
-		                        </td>
-		                        <td align="center">${que.it_que}</td>
+		                        ${que.it_que}</td>
 		                        <td id="hh" align="center">
 			                        <select name="inter_score2" id="ss_${que.it_no}">
 										<option value="1"${que.inter_score == '1' ? 'selected="selected"' : ''}>1</option>

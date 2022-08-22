@@ -37,7 +37,7 @@
 							<td align="center">${item.jpo_title}</td>
 							<td align="center">${item.cl_gender}</td>
 							<td align="center">${item.cl_age}</td>
-							<td align="center">${item.inter_grade_avg}(${item.gradeCnt})</td>
+							<td align="center"><div style="color:#4f81bd;">${item.inter_grade_avg}(${item.gradeCnt})</div></td>
 							<td align="center">${item.st_score_avg}</td>
 							<td align="center">${item.offer_date}</td>
 						</tr>

@@ -184,6 +184,7 @@
 								<th>채용 내용</th>
 								<td>       					
 									<input type="file" name="jpo_photo" multiple="multiple" required="required"/>
+									<div style="color:#da0000;">※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.</div>
                   				</td>
 							</tr>														
 			        	</table>

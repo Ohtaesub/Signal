@@ -7,10 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <style></style>
 </head>
 <body>
-<p>이의제기처리 <p>
+<div style ="font-size:20pt" >이의제기처리 </div>
+<hr>
 <form action="comObjectionUpdate.do" method="get" onsubmit="return comObjectionUpdate()">
     <table class="dto">
         
@@ -19,13 +22,13 @@
 			</tr>
 			<tr>
 				<td>
-					<textarea rows="10" cols="40" name="obj_content" id="obj_content"></textarea>
+					<textarea rows="10" cols="100" name="obj_content" id="obj_content"></textarea>
 				</td>
 			<tr>
             <tr>
                 <th>
                 	 <input type="hidden" name="obj_state" value="1">
-   				     <input type="submit" value="저장하기" />
+   				     <input type="submit" value="처리하기" />
    				    <input type="button" value="닫기" onclick="pclose2()"/>
    					<input type="hidden" name="obj_no" value="${dto.obj_no}">
 				</th>

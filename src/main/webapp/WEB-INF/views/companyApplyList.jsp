@@ -69,7 +69,16 @@ table tr td {
 						    <td rowspan="2">${item.inter_grade_avg}(${item.gradeCnt})</td>
 						    <td rowspan="2">${item.st_score_avg}</td>
 						    <td rowspan="2">${item.jpo_title}</td>
-						    <td rowspan="2">${item.reading_state}</td>
+						    <td rowspan="2">
+						    <c:choose>
+									<c:when test="${item.reading_state == '미열람'}">
+										<div style="color:#da0000;">미열람</div>
+									</c:when>					
+									<c:when test="${item.reading_state =='열람'}">
+										<div style="color:#4f81bd;">열람</div>
+									</c:when>					
+							</c:choose>
+						    </td>
 						    <td rowspan="2">${item.apply_date}</td>
 						    <td rowspan="2">
 						    		<c:choose>
@@ -179,7 +188,7 @@ $(".pageInfo a").on("click", function(e){
 }
  function pop2(inter_no){
 		
-	 window.open("comInterviewDate.go?inter_no="+inter_no, '', 'width=550, height=300, left=100, top=50'); 
+	 window.open("comInterviewDate.go?inter_no="+inter_no, '', 'width=450, height=250, left=100, top=50'); 
 	 
 	 return false;
 
@@ -187,7 +196,7 @@ $(".pageInfo a").on("click", function(e){
  
  function pop3(inter_no){
 		
-	 window.open("comInterviewReg.go?inter_no="+inter_no, '', 'width=800, height=450, left=100, top=50'); 
+	 window.open("comInterviewReg.go?inter_no="+inter_no, '', 'width=900, height=620, left=100, top=50'); 
 	 
 	 return false;
 
@@ -195,7 +204,7 @@ $(".pageInfo a").on("click", function(e){
  
  function pop4(inter_no){
 		
-	 window.open("comInterviewUpdate.go?inter_no="+inter_no, '', 'width=800, height=450, left=100, top=50'); 
+	 window.open("comInterviewUpdate.go?inter_no="+inter_no, '', 'width=900, height=620, left=100, top=50'); 
 	 
 	 return false;
 

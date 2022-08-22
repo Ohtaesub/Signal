@@ -33,6 +33,7 @@ table tr td {
 }
 
 
+
 </style>
 </head>
 <body>
@@ -79,15 +80,15 @@ table tr td {
                         <td align="center"><a href="adminInterviewDetail.go?inter_no=${adminObjectionList.inter_no}">${adminObjectionList.inter_no}</a></td>
                         <td align="center">
                         	<c:choose>
-                        		<c:when test="${adminObjectionList.obj_state eq 0}">미처리</c:when>
-                        		<c:when test="${adminObjectionList.obj_state eq 1}">처리완료</c:when>
+                        		<c:when test="${adminObjectionList.obj_state eq 0}"><div style="color:#da0000;">미처리</div></c:when>
+                        		<c:when test="${adminObjectionList.obj_state eq 1}"><div style="color:#4f81bd;">처리완료</div></c:when>
                         	</c:choose>
                         </td>
                         <td align="center">
                         	<c:choose>
 									<c:when test="${adminObjectionList.inter_blind eq 0}"></c:when>					
 									<c:when test="${adminObjectionList.inter_blind eq 1}">
-										<button type="button" onclick="blind(${adminObjectionList.inter_no})">블라인드</button>
+										<button  type="button" onclick="blind(${adminObjectionList.inter_no})">블라인드</button>
 									</c:when>					
 							</c:choose>
                           	</td>

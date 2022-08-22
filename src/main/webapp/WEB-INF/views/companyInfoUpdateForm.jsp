@@ -79,7 +79,7 @@
 						<br>
 						<br>
 		            	<input type="file" multiple ="multiple" name="file" onchange="checkFile(this)" accept=".jpg , .png , .jpeg, .jfif, .exif, .gif, .bmp"/>
-		            	<br>※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.
+		            	<br><div style="color:#da0000;">※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.</div>
 		            </td>
 		        </tr>
 		        <tr>

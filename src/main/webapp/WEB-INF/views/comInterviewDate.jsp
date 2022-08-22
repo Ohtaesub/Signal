@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
+<link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <style></style>
 </head>
 <body>
@@ -28,10 +30,14 @@
                     min="2022-01-01" max="2023-12-31">
 			</td>
 		</tr>
+		<tr>
+			<th colspan="2">
+				 <input type="submit" value="변경"/>
+		        <input type="button" value="닫기" onclick="pclose2()"/>
+			</th>
+		</tr>
     </table>
     
-		 <input type="submit" value="변경"/>
-        <input type="button" value="닫기" onclick="pclose2()"/>
 		
 	</form>
 </body>

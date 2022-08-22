@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
+<link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <style>
 table {
 	width:100%;
@@ -50,9 +52,13 @@ table tr td {
 		    </td>
 		  </tr>
 		</tbody>
+		<tr>
+			<th colspan="2">
+				<input type="submit" value="등록하기"/>
+				<input type="button" value="닫기" onclick="pclose2()"/>
+			</th>
+		</tr>
 	</table>
-	<input type="submit" value="등록하기"/>
-	<input type="button" value="닫기" onclick="pclose2()"/>
 	</form>
 </body>
 <script> 

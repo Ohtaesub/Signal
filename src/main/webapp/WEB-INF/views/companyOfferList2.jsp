@@ -40,7 +40,16 @@
 							<td align="center">${item.cl_name}</td>
 							<td align="center">${item.cl_gender}</td>
 							<td align="center">${item.cl_age}</td>
-							<td align="center">${item.reading_state}</td>
+							<td align="center">
+							  <c:choose>
+									<c:when test="${item.reading_state == '미열람'}">
+										<div style="color:#da0000;">미열람</div>
+									</c:when>					
+									<c:when test="${item.reading_state =='열람'}">
+										<div style="color:#4f81bd;">열람</div>
+									</c:when>					
+							</c:choose>
+							</td>
 							<td align="center">${item.offer_date}</td>
 						</tr>
 					</c:forEach>

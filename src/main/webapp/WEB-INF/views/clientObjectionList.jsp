@@ -44,8 +44,8 @@
                         <td align="center">${clientObjectionList.obj_content}</td>
                         <td align="center">
                         	<c:choose>
-									<c:when test="${clientObjectionList.obj_state eq 0}">미처리</c:when>					
-									<c:when test="${clientObjectionList.obj_state eq 1}">${clientObjectionList.obj_date}처리완료</c:when>					
+									<c:when test="${clientObjectionList.obj_state eq 0}"><div style="color:#da0000;">미처리</div></c:when>					
+									<c:when test="${clientObjectionList.obj_state eq 1}">${clientObjectionList.obj_date}<div style="color:#4f81bd;">처리완료</div></c:when>					
 									
 							</c:choose>
                         </td>

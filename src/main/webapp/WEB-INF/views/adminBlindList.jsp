@@ -95,8 +95,8 @@ table tr td {
                          <td align="center"><a href="adminInterviewDetail.go?inter_no=${adminBlindList.inter_no}">${adminBlindList.inter_no}</a></td>
                         <td align="center">
                         	<c:choose>
-                        		<c:when test="${adminBlindList.obj_state eq 0}">미처리</c:when>
-                        		<c:when test="${adminBlindList.obj_state eq 1}">처리완료</c:when>
+                        		<c:when test="${adminBlindList.obj_state eq 0}"><div style="color:#da0000;">미처리</div></c:when>
+                        		<c:when test="${adminBlindList.obj_state eq 1}"><div style="color:#4f81bd;">처리완료</div></c:when>
                         	</c:choose>
                         </td>
                         <td align="center">

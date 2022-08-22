@@ -102,7 +102,7 @@ table tr td {
 <script>
 function pop(obj_no){
 	
-	 window.open("comObjectionUpdate.go?obj_no="+obj_no, '', 'width=800, height=600, left=100, top=50'); 
+	 window.open("comObjectionUpdate.go?obj_no="+obj_no, '', 'width=750, height=400, left=100, top=50'); 
 	 
 	 return false;
 
