@@ -9,6 +9,15 @@
 		left : 350px;
 	}
 	
+	button {
+	  	padding:5px 10px;
+	  	font-size:12px;
+	  	outline:none;
+	  	border:none;
+	  	color:#fff;
+	  	background-color:#333;
+	}
+	
 	.hidden {
 		display : none;
 	}
@@ -18,6 +27,7 @@
 		<input type="radio" name="recommend" value="recommendMe" checked/> 나를 추천
 		<input type="radio" name="recommend" value="recommendYou"/> 내가 추천
 	</div>
+	<br>
 	<table class="section" id="recommendMe">
 		<thead>
 			<tr>

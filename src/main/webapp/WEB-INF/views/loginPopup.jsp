@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 #popup{
@@ -11,19 +12,26 @@
 	left: 200px;
 	top: 70px;
 	width:400px;
-	overflow: hidden;
 }
 
 input[type="submit"] {
-
+	position: absolute;
+	top: 200px;
+	left: 80px;
 }
 
-input[type="button"] {
-	position: relative;
-	top: -20px;
+
+#idFind{
+	position: absolute;
+	top: 250px;
 	left: 40px;
 }
 
+#pwFind{
+	position: absolute;
+	top: 250px;
+	left: 120px;
+}
 
 h1 {
 	font-size: 40px;
@@ -53,8 +61,8 @@ h1 {
 			</table>
 			<br>
 			<br>
-			<input type="button" value="ID 찾기" onclick="findId()"/>
-			<input type="button" value="PW 찾기" onclick="findPw()"/>
+			<input type="button" id="idFind" value="ID 찾기" onclick="findId()"/>
+			<input type="button" id="pwFind" value="PW 찾기" onclick="findPw()"/>
 		</form>
 	</div>
 </body>

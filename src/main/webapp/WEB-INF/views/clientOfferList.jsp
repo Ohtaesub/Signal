@@ -14,6 +14,15 @@
 	top : -380px;
 	left : 350px;
 }
+button {
+	  	padding:5px 10px;
+	  	font-size:12px;
+	  	outline:none;
+	  	border:none;
+	  	color:#fff;
+	  	background-color:#333;
+}
+
 </style>
 </head>
 <body>
@@ -22,6 +31,8 @@
 	<br>
 	<form action="deleteOffer.do" method="post">
 	<button>삭제</button>
+	<br>
+	<br>
 	<table>
 		<thead>
 			<tr>

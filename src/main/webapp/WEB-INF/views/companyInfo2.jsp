@@ -7,17 +7,24 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-		#create{
-		width: 250px;
-		height: 100px;
-		border: 1px solid lightgray; 
-		border-radius: 10px;
-		text-align: center;
-		color: white;
-		font-size:22px;
-		font-weight: bold;
-		background-color: gray;
+	#create{
+	width: 250px;
+	height: 100px;
+	border: 1px solid lightgray; 
+	border-radius: 10px;
+	text-align: center;
+	color: white;
+	font-size:22px;
+	font-weight: bold;
+	background-color: gray;
 	}
+	
+	#comInfoReg {
+		position: absolute;
+		top: 120px;
+		left: 400px;
+	}
+	
 	textarea {
 	   	width:100%;
 	   	resize: none;
@@ -41,10 +48,17 @@
 	h2{
 		margin-bottom: 10px;
 		text-align: center;
+		position: absolute;
+		top : 300px;
+		left : -35px;
 	}
-		.find-btn{
+	
+	.find-btn{
 		text-align: center;
 		margin-top: 10px;
+		position: absolute;
+		top:1400px;
+		left:700px;
 	}
 	.find-btn1,.find-btn2{
 		display :inline-block;
@@ -60,16 +74,21 @@
 	.find-btn2{
 		background-color: #7f7f7fff;
 	}
+	
 </style>
 </head>
 <body>
 <section>
     <div id="jp-list">
-        	<h6>기업페이지 > 기업정보관리</h6>
-        	</br>
-				<c:if test="${dto.ci_ceo == null}">
-        			<button id="create" onclick="location.href='/companyInfoWrite.go'">기업정보 등록하기</button>
-				</c:if>
+				<div id="comTitle">
+		        	<h6>기업페이지 > 기업정보관리</h6>
+		        	</br>
+		        	<div id="comInfoReg">
+						<c:if test="${dto.ci_ceo == null}">
+		        			<button id="create" onclick="location.href='/companyInfoWrite.go'">기업정보 등록하기</button>
+						</c:if>
+		        	</div>
+				</div>
 				<c:if test="${dto.ci_ceo != null}">
 	        		<h2>기업정보</h2>
 		        	<table id="ComInfoDetail">
