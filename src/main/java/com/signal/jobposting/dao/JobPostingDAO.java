@@ -57,22 +57,28 @@ public interface JobPostingDAO {
 
 	int jobPostingListTotal2(String searchOption, String id);
 
-	ArrayList<JobPostingDTO> mainPostingList(HashMap<String, Object> params);
+	ArrayList<JobPostingDTO> mainPostingList(Criteria cri);
 
-	int mainPostingPasingTotal(HashMap<String, Object> params);
+	int mainPostingPasingTotal();
 
 	//ArrayList<InterviewDTO> jobPostingMainSearch(String searchOption,String searchOption1,String searchOption2,String search, int skip);
 
 	//int jobPostingMainTotal(String searchOption,String searchOption1,String searchOption2, String search);
 
 	
-	ArrayList<JobPostingDTO> jobPostingMainSearch(String searchOption,String search, String searchOption1, int skip);
+	ArrayList<JobPostingDTO> jobPostingMainSearch(String jpo_region,String jp_no, String jc_no, String search, int skip);
 
-	int jobPostingMainTotal(String searchOption,String search, String searchOption1);
+	int jobPostingMainTotal(String jpo_region,String jp_no, String jc_no, String search);
 
 	JobPostingDTO PostingDetailMainPage(String jpo_no, String com_id);
 
 	ArrayList<JobPostingDTO> main(HashMap<String, String> params);
+
+	ArrayList<JobPostingDTO> jobBigList();
+
+	ArrayList<JobPostingDTO> jobMidList();
+
+	ArrayList<JobPostingDTO> jobMidList2(String jp_no);
 	
 
 	

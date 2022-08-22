@@ -328,12 +328,31 @@
 		ORDER BY jpo_no DESC limit 10 OFFSET #{skip}
 	</select>
 	
-		<!-- 메인 채용공고 총 페이지 수-->
-		<select id="mainPostingPasingTotal" resultType="int">
-			SELECT 
-				COUNT(jpo_no) 
-			FROM job_posting
-		</select>
+	<!-- 메인 채용공고 총 페이지 수-->
+	<select id="mainPostingPasingTotal" resultType="int">
+		SELECT 
+			COUNT(jpo_no) 
+		FROM job_posting
+	</select>
+	
+	<!-- 메인 페이지 채용공고에서 직무 대분류 리스트 호출 by태섭, 2022_08_21 -->
+	<select id="jobBigList" resultType="com.signal.all.dto.JobPostingDTO">
+	SELECT jp.jp_no, jp.jp_name, jp.jp_hidden 
+	FROM job_pa jp 
+	WHERE jp.jp_hidden = "1";
+	</select>
+	
+	<select id="jobMidList" resultType="com.signal.all.dto.JobPostingDTO">
+	SELECT jc.jc_no, jc.jc_name, jc.jc_hidden, jc.jp_no 
+	FROM job_ch jc 
+	WHERE jc.jc_hidden = "1";
+	</select>
+	
+	<select id="jobMidList2" resultType="com.signal.all.dto.JobPostingDTO">
+	SELECT jc.jc_no, jc.jc_name, jc.jc_hidden, jc.jp_no 
+	FROM job_ch jc 
+	WHERE jc.jc_hidden = "1" AND jc.jp_no = #{param1};
+	</select>	
 	
 	<select id="jobPostingMainSearch"  resultType="com.signal.all.dto.JobPostingDTO">
 				SELECT 
@@ -348,38 +367,74 @@
 					jp.jc_no,
 					jc.jc_name,
 					p.jp_name,
+					p.jp_no,
 					jp.com_id 
 				FROM job_posting jp 
 				LEFT OUTER JOIN company com ON com.com_id = jp.com_id 
 				LEFT OUTER JOIN job_pa p ON p.jp_no = jp.jp_no 
 				LEFT OUTER JOIN job_ch jc ON jc.jc_no = jp.jc_no 
-				<if test = "param1.equals('') and !param2.equals('') and param3.equals('')"> 
-					WHERE com.com_name LIKE CONCAT ('%',#{param2},'%') 
+				<if test = "!param1.equals('') and param2.equals('') and param3.equals('') and param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
 				</if>
-				<if test = "!param1.equals('') and param2.equals('') and param3.equals('')"> 
-					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%') 
+				<if test = "param1.equals('') and !param2.equals('') and param3.equals('') and param4.equals('')"> 
+					WHERE p.jp_no = #{param2}
 				</if>
-				<if test = "param1.equals('') and param2.equals('') and !param3.equals('')"> 
-					WHERE jc.jc_name LIKE CONCAT ('%',#{param3},'%')
+				<if test = "param1.equals('') and param2.equals('') and !param3.equals('') and param4.equals('')"> 
+					WHERE jc.jc_no = #{param3}
 				</if>
-				<if test = "!param1.equals('') and param2.equals('') and !param3.equals('')"> 
-					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%') 
-					AND jc.jc_name LIKE CONCAT ('%',#{param3},'%')
+				<if test = "param1.equals('') and param2.equals('') and param3.equals('') and !param4.equals('')"> 
+					WHERE com.com_name LIKE CONCAT ('%',#{param4},'%')
 				</if>
-				<if test = "!param1.equals('') and !param2.equals('') and param3.equals('')"> 
-					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%') 
-					AND com.com_name LIKE CONCAT ('%',#{param2},'%')
+				<if test = "!param1.equals('') and !param2.equals('') and param3.equals('') and param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND p.jp_no = #{param2}
 				</if>
-				<if test = "param1.equals('') and !param2.equals('') and !param3.equals('')"> 
-					WHERE jc.jc_name LIKE CONCAT ('%',#{param3},'%') 
-					AND com.com_name LIKE CONCAT ('%',#{param2},'%')
+				<if test = "!param1.equals('') and param2.equals('') and !param3.equals('') and param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND jc.jc_no = #{param3}
 				</if>
-				<if test = "!param1.equals('') and !param2.equals('') and !param3.equals('')"> 
-					WHERE jc.jc_name LIKE CONCAT ('%',#{param3},'%') 
-					AND com.com_name LIKE CONCAT ('%',#{param2},'%') 
-					AND jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+				<if test = "!param1.equals('') and param2.equals('') and param3.equals('') and !param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
 				</if>
-			ORDER BY jp.jpo_no DESC limit #{param4},10
+				<if test = "param1.equals('') and !param2.equals('') and !param3.equals('') and param4.equals('')"> 
+					WHERE p.jp_no = #{param2}
+					AND jc.jc_no = #{param3}
+				</if>
+				<if test = "param1.equals('') and !param2.equals('') and !param3.equals('') and param4.equals('')"> 
+					WHERE p.jp_no = #{param2}
+					AND jc.jc_no = #{param3}
+				</if>
+				<if test = "param1.equals('') and !param2.equals('') and param3.equals('') and !param4.equals('')"> 
+					WHERE p.jp_no = #{param2}
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
+				</if>
+				<if test = "param1.equals('') and param2.equals('') and !param3.equals('') and !param4.equals('')"> 
+					WHERE jc.jc_no = #{param3}
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
+				</if>
+				<if test = "!param1.equals('') and !param2.equals('') and !param3.equals('') and param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND p.jp_no = #{param2}
+					AND jc.jc_no = #{param3}
+				</if>
+				<if test = "!param1.equals('') and !param2.equals('') and param3.equals('') and !param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND p.jp_no = #{param2}
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
+				</if>
+				<if test = "param1.equals('') and !param2.equals('') and !param3.equals('') and !param4.equals('')"> 
+					WHERE p.jp_no = #{param2}
+					AND jc.jc_no = #{param3}
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
+				</if>
+				<if test = "!param1.equals('') and !param2.equals('') and !param3.equals('') and !param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND p.jp_no = #{param2}
+					AND jc.jc_no = #{param3}
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
+				</if>
+			ORDER BY jp.jpo_no DESC limit #{param5},10
 		</select>
 	
 	
@@ -419,32 +474,68 @@
 				count(jpo_no) 
 			FROM job_posting jp 
 			LEFT OUTER JOIN company com ON com.com_id = jp.com_id 
-			LEFT OUTER JOIN job_ch jc ON jc.jc_no = jp.jc_no
-			<if test = "param1.equals('') and !param2.equals('') and param3.equals('')"> 
-					WHERE com.com_name LIKE CONCAT ('%',#{param2},'%') 
+			LEFT OUTER JOIN job_pa p ON p.jp_no = jp.jp_no 
+			LEFT OUTER JOIN job_ch jc ON jc.jc_no = jp.jc_no 
+			<if test = "!param1.equals('') and param2.equals('') and param3.equals('') and param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
 				</if>
-				<if test = "!param1.equals('') and param2.equals('') and param3.equals('')"> 
-					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%') 
+				<if test = "param1.equals('') and !param2.equals('') and param3.equals('') and param4.equals('')"> 
+					WHERE p.jp_no = #{param2}
 				</if>
-				<if test = "param1.equals('') and param2.equals('') and !param3.equals('')"> 
-					WHERE jc.jc_name LIKE CONCAT ('%',#{param3},'%')
+				<if test = "param1.equals('') and param2.equals('') and !param3.equals('') and param4.equals('')"> 
+					WHERE jc.jc_no = #{param3}
 				</if>
-				<if test = "!param1.equals('') and param2.equals('') and !param3.equals('')"> 
-					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%') 
-					AND jc.jc_name LIKE CONCAT ('%',#{param3},'%')
+				<if test = "param1.equals('') and param2.equals('') and param3.equals('') and !param4.equals('')"> 
+					WHERE com.com_name LIKE CONCAT ('%',#{param4},'%')
 				</if>
-				<if test = "!param1.equals('') and !param2.equals('') and param3.equals('')"> 
-					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%') 
-					AND com.com_name LIKE CONCAT ('%',#{param2},'%')
+				<if test = "!param1.equals('') and !param2.equals('') and param3.equals('') and param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND p.jp_no = #{param2}
 				</if>
-				<if test = "param1.equals('') and !param2.equals('') and !param3.equals('')"> 
-					WHERE jc.jc_name LIKE CONCAT ('%',#{param3},'%') 
-					AND com.com_name LIKE CONCAT ('%',#{param2},'%')
+				<if test = "!param1.equals('') and param2.equals('') and !param3.equals('') and param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND jc.jc_no = #{param3}
 				</if>
-				<if test = "!param1.equals('') and !param2.equals('') and !param3.equals('')"> 
-					WHERE jc.jc_name LIKE CONCAT ('%',#{param3},'%') 
-					AND com.com_name LIKE CONCAT ('%',#{param2},'%') 
-					AND jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+				<if test = "!param1.equals('') and param2.equals('') and param3.equals('') and !param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
+				</if>
+				<if test = "param1.equals('') and !param2.equals('') and !param3.equals('') and param4.equals('')"> 
+					WHERE p.jp_no = #{param2}
+					AND jc.jc_no = #{param3}
+				</if>
+				<if test = "param1.equals('') and !param2.equals('') and !param3.equals('') and param4.equals('')"> 
+					WHERE p.jp_no = #{param2}
+					AND jc.jc_no = #{param3}
+				</if>
+				<if test = "param1.equals('') and !param2.equals('') and param3.equals('') and !param4.equals('')"> 
+					WHERE p.jp_no = #{param2}
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
+				</if>
+				<if test = "param1.equals('') and param2.equals('') and !param3.equals('') and !param4.equals('')"> 
+					WHERE jc.jc_no = #{param3}
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
+				</if>
+				<if test = "!param1.equals('') and !param2.equals('') and !param3.equals('') and param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND p.jp_no = #{param2}
+					AND jc.jc_no = #{param3}
+				</if>
+				<if test = "!param1.equals('') and !param2.equals('') and param3.equals('') and !param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND p.jp_no = #{param2}
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
+				</if>
+				<if test = "param1.equals('') and !param2.equals('') and !param3.equals('') and !param4.equals('')"> 
+					WHERE p.jp_no = #{param2}
+					AND jc.jc_no = #{param3}
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
+				</if>
+				<if test = "!param1.equals('') and !param2.equals('') and !param3.equals('') and !param4.equals('')"> 
+					WHERE jp.jpo_region LIKE CONCAT ('%',#{param1},'%')
+					AND p.jp_no = #{param2}
+					AND jc.jc_no = #{param3}
+					AND com.com_name LIKE CONCAT ('%',#{param4},'%')
 				</if>
 		</select>	
 
