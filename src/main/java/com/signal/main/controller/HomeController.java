@@ -128,6 +128,11 @@ public class HomeController {
 	}
 	
 	
-	
+	@RequestMapping(value = "/main2.go")
+	public String mainCss() {
+		logger.info("css페이지 이동");
+		
+		return "main2";
+	}
 	
 }

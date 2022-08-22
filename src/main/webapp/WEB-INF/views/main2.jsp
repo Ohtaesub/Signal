@@ -1,79 +1,212 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../../resources/inc/header_jobPosting.jsp" %>
-<!DOCTYPE html>
-<html  lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="resources/css/common.css" type="text/css"/> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
+body{
+	width:1600px;
+	margin:0 auto;
+	font-family:'Noto Sans KR',sans-serif;
+}
 
-    header {
-        height : 150px;
-    }
-	#logo{
-        padding-left: 10px;
+.titleA{
+	position:relative;
+	font-size:80px;
+	font-weight:bold;
+	color:#B8860B;
+	margin-bottom:20px;
+}
+
+.titleB{
+	position:relative;
+	font-size:50px;
+	color:#191970;
+	margin-bottom:20px;
+}
+
+.titleC{
+	position:relative;
+	font-size:30px;
+	margin-bottom:20px;
+}
+
+#container{
+	margin:10px 200px 0 0 ;
+	width:200px;
+    height:140px;
+    text-align: center;
+    background-color: #1f3864;
+    border-radius: 20px;
+    position: relative; 
+    float:right;
+    display:table-cell;
+    vertical-align:middle;
+}
+
+#container > aside > a {
+	font-weight: bold;
+}    
+   
+#container > aside > span {
+    font-size:11px;
+    color:#c8c8c8;
+}
+
+div aside {
+    color: white;
+}
+
+div aside a {
+    color: white;
+}
+
+li a{
+    text-align: center;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+   background-color:#fafafa;
+}
+input[type="submit"], button[type="submit"] {
+   padding:5px 10px;
+   font-size:12px;
+   outline:none;
+   border:none;
+   color:#fff;
+   background-color:#333;
+}
+input[type="button"], button[type="button"] {
+   padding:10px 20px;
+   font-size:12px;
+   outline:none;
+   border:none;
+   color:#fff;
+   background-color:#333;
+}
+
+#section {
+		width : 800px;
+		position: relative;
+		top : -380px;
+		left : 0px;
 	}
-    li a{
-        text-align: center;
-    }
-    #cal{
-    	padding-left: 20px;
-    	padding-right: 10px;
-   		width: 100px;
-    	height : 80px;
-    }
-    #cal-list{
-		width: 80%;
-    }
-	   	table{
-			width: 80%;
-	   		margin: 0 auto;
-	   }
-	   th{
-	   		background-color: #e8ecf4ff;
-	   }
-	   td{
-	   height: 100px;
-	   }
-	   	table,th,td{
-		   	border: 1px solid gray;
-		   	border-collapse: collapse;
-	  		padding: 3px;
-	   }
-		h2{
-			margin: 0px 0px 0px 0px;
-		}
-   		h3{
-	    	margin: 0px;
-			font-weight: bold;
-  	 	}
-    	h4{
-	    	width: 20px;
-	    	text-align: center;
-    	}
-    	
-    	li{
-    		list-style: none;
-    	}
 
-		.allShow{
-			float:right;			
-		}
+ul.nav li a {
+    text-decoration: none;
+    color: black;
+    padding: 20px 120px 8px 15px;
+    font-weight: bold;
+}
+
+ul.nav{
+    text-decoration: none;
+    font-weight:bold;
+    padding: 8px 15px 8px 15px;    
+    list-style:none;
+    width: 300px;
+    position: relative;    
+    font-size: 25px;    
+}	
+
+ul.nav li{
+	float:left;
+	position:relative;
+	}
+
+
+
 
 </style>
-</head>
-	
+</head>	
     <body>
-    	
-    	<table id="cal-list" style="width:1200px; float:left; margin-left:100px;">
+    	<div id="header">
+		<p id="logo">
+		    <a href="/"><img src="resources/images/logo2.gif" alt="Signal" style="margin:20px 10px 0 10px;"width="200" height="130"/></a>
+		    <span class="titleA">그</span><span class="titleB">날의</span><span class="titleA">분</span><span class="titleB">위기</span>
+		    <span class="titleC">(ft.See그날)</span>
+		    <c:if test="${sessionScope.isClient.equals('true') || sessionScope.isCompany.equals('true') || sessionScope.isAdmin.equals('true')}">
+			<div id="container" style="color:white">  
+		        <aside>
+		        	<strong>${sessionScope.loginId}</strong>님 반갑습니다 
+		        	<br>
+		        	<c:if test="${sessionScope.isClient.equals('true')}">
+		        		<a href="/clientInfoManagement.do">마이페이지</a> 
+		        	</c:if>
+		        	<c:if test="${sessionScope.isCompany.equals('true')}">
+		        		<a href="/companyInfoManagement.do">마이페이지</a> 
+		        	</c:if>
+		        	<c:if test="${sessionScope.isAdmin.equals('true')}">
+		        		<a href="/adminManagementList.do">마이페이지</a> 
+		        	</c:if>
+		        	<span>|</span> <a href="logout.do">로그아웃</a>
+		        </aside>
+			</div>
+		</c:if>
+		<c:if test="${!sessionScope.isClient.equals('true') && !sessionScope.isCompany.equals('true') && !sessionScope.isAdmin.equals('true')}">
+		    <input type="button" class="join" style="float:right; margin:120px 200px 0 0;" value="회원가입" onclick="location.href='joinSelect.go'"/>
+		    <input type="button" class="login" style="float:right; margin:120px 20px 0 0;" value="로그인" onclick="showPopup()"/>		    
+		</c:if>
+		</p>
+		<ul class="nav">
+		    <li><a href="/jobPostingMain.go">채용공고</a></li>
+		    <li><a href="/personList.go">인재채용</a></li>
+		</ul>		
+		</div>
+		<div style="width:250px; height:600px;" id="wrap">
+    	<div id="aside">
+        	<nav>
+				<c:if test="${sessionScope.isClient.equals('true')}">
+				<ul class="sidemenu">
+					<li><a href="/clientInfoManagement.do">개인정보관리</a></li>
+	                <li><a href="/resumeList.go">이력서</a></li>
+	                <li><a href="/recommendMe.go">회원추천</a></li>
+	                <li><a href="/clientApplyList.go">입사지원현황</a></li>
+	                <li><a href="/clientOfferList.go">입사제안현황</a></li>
+	                <li><a href="/interviewList.go">면접현황</a></li>
+	                <li><a href="/clientObjectionList.go">이의제기현황</a></li>
+	                <li><a href="/selfInsert.go">셀프평가</a></li>
+				</ul>
+				</c:if>
+		        <c:if test="${sessionScope.isCompany.equals('true')}">
+		            <ul style="height:366px;" class="sidemenu">
+		                <li><a href="/companyInfoManagement.do">기업회원정보관리</a></li>
+		                <li><a href="/companyInfo.go">기업정보관리</a></li>
+		                <li><a href="/jobPostingList.go">채용공고관리</a></li>
+		                <li><a href="/companyOfferList.do">입사제안관리</a></li>
+		                <li><a href="/companyApplyList.go">지원자면접관리</a></li>
+		                <li><a href="/comObjectionList.go">이의제기현황</a></li>
+		            </ul>
+		        </c:if>
+		        <c:if test="${sessionScope.isAdmin.equals('true')}">
+		            <ul class="sidemenu">
+		                <li><a href="/adminManagementList.do">관리자계정관리</a></li>
+		                <li><a href="/jobClassReg.go">직무분류관리</a></li>
+		                <li><a href="/selfTestQue.go">셀프평가관리</a></li>
+		                <li><a href="/interviewTestQue.go">면접평가관리</a></li>
+		                <li><a href="/adminObjectionList.go">이의제기관리</a></li>
+		                <li><a href="/adminBlindList.go">블라인드관리</a></li>
+		                <li><a href="/clientManagementList.do">개인회원관리</a></li>
+		                <li><a href="/companyManagementList.do">기업회원관리</a></li>
+		            </ul>
+		        </c:if>
+			</nav>
+    	</div>
+     </div>
+		
+		<div style="width:1300px;">
+    	<table id="section" style="width:1200px; float:left; margin-left:100px;">
     	 <thead>
     	 <tr>
-    	 	<th colspan="3">
-    	 		<h2><img src="./resources/images/calendar.png" alt="calendar" id="cal"/>채용달력</h2>
-    	 	</th>
+    	 	<td colspan="3" style="height:300px;">
+    	 		<img src="./resources/images/calendar.png" alt="calendar" id="cal" width="300" height="300"/>
+    	 		<span style="line-height:305px; font-size:100px;">채용달력</span>
+    	 	</td>
     	 </tr>
     	 <tr>
     	 	<th style="width:10%;">날짜</th>
@@ -147,11 +280,7 @@
 			</tr>
 		</tbody>
     	</table>
-    	
-    	<br/>
-    	<br/>
-    	<a href="main2.go">css 테스트 가기</a>
-    	
+    	</div>
     </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
 <script>
@@ -596,6 +725,11 @@
 		window.open("mainPop.go?chkDay="+chkDay+"&&chkState="+chkState, "new","width=1200, height=500, resizable=no, scrollbars=no, status=no, location=no, directories=no");
 	}
 	
+	
+	function showPopup() {
+		window.open("loginPopup.go","", "width=600, height=400, left=100, top=50");
+	
+	}
 	</script>
 
 </html>

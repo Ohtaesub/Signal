@@ -12,9 +12,9 @@
 </head>
 <body>
 	<div id="header">
-		<p id="logo">
-		    <a href="/"><img src="resources/images/Logo.jpg" alt="Signal" width="150" height="130"/></a>
-		</p>
+		<a href="/"><img src="resources/images/logo2.gif" alt="Signal" style="margin:20px 10px 0 10px;"width="200" height="130"/></a>
+		    <span class="titleA">그</span><span class="titleB">날의</span><span class="titleA">분</span><span class="titleB">위기</span>
+		    <span class="titleC">(ft.See그날)</span>
 		<ul class="nav">
 		    <li><a href="/jobPostingMain.go">채용공고</a></li>
 		    <li><a href="/personList.go">인재채용</a></li>
