@@ -305,7 +305,20 @@ public class InterviewController {
 	
 	
 	
-	
+	//면접현황상세 (관리자) 
+		@RequestMapping(value = "/adminInterviewDetail.go", method = RequestMethod.GET)
+		public String adminInterviewDetail(Model model,@RequestParam String inter_no) {
+			
+			//면접현황상세
+			InterviewDTO dto =service.adminInterviewDetail(inter_no);
+			model.addAttribute("dto",dto);
+			
+			//면접현황상세-평점상세내역리스트
+			ArrayList<InterviewDTO>interviewDetailResultList =service.adminInterviewListDetail(inter_no);
+			model.addAttribute("interviewDetailResultList",interviewDetailResultList);
+			
+			return "adminInterviewDetail";
+		}
 	
 	
 	

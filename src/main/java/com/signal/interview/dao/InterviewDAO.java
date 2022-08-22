@@ -77,6 +77,10 @@ public interface InterviewDAO {
 
 	void comReg2(HashMap<String, Object> map);
 
+	InterviewDTO adminInterviewDetail(String inter_no);
+
+	ArrayList<InterviewDTO> adminInterviewListDetail(String inter_no);
+
 	
 
 }

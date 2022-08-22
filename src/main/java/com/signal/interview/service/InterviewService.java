@@ -215,6 +215,18 @@ public class InterviewService {
 			return dao.comInterviewRegQue();
 		}
 
+		public InterviewDTO adminInterviewDetail(String inter_no) {
+			
+			return dao.adminInterviewDetail(inter_no);
+		}
+
+		public ArrayList<InterviewDTO> adminInterviewListDetail(String inter_no) {
+			
+			return dao.adminInterviewListDetail(inter_no);
+		}
+
+
+
 	
 
 

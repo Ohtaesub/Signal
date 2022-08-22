@@ -95,7 +95,7 @@ table tr td {
                         <td align="center">${adminObjectionList.cl_id}</td>
                         <td align="center">${adminObjectionList.com_id}</td>
                         <td align="center">${adminObjectionList.com_name}</td>
-                        <td align="center"><a href="interviewDetail.go?inter_no=${adminObjectionList.inter_no}">${adminObjectionList.inter_no}</a></td>
+                        <td align="center"><a href="adminInterviewDetail.go?inter_no=${adminObjectionList.inter_no}">${adminObjectionList.inter_no}</a></td>
                         <td align="center">
                         	<c:choose>
                         		<c:when test="${adminObjectionList.obj_state eq 0}">미처리</c:when>
