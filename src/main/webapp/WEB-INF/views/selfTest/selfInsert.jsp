@@ -5,8 +5,8 @@
 	#section {
 		width : 800px;
 		position: relative;
-		top : -380px;
-		left : 350px;
+		top : -300px;
+		left : 430px;
 	}
 	
 	.hidden {
@@ -16,6 +16,7 @@
 <body>
 	<div id="section">
 		<h1>나를 판단하는 힘</h1>
+		<br>
 		<h4>'그날의 분위기' 셀프평가</h4>
 	</div>
 	

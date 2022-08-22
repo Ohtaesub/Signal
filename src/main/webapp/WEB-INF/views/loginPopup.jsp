@@ -8,11 +8,22 @@
 <style>
 #popup{
 	position:relative;
-	left: 35%;
-	top: 20%;
+	left: 200px;
+	top: 70px;
 	width:400px;
 	overflow: hidden;
 }
+
+input[type="submit"] {
+
+}
+
+input[type="button"] {
+	position: relative;
+	top: -20px;
+	left: 40px;
+}
+
 
 h1 {
 	font-size: 40px;
@@ -34,7 +45,6 @@ h1 {
 					<th>PW</th>
 					<td><input type="password" name="pw" id="pw"/></td>
 				</tr>
-				<br>
 				<tr>
 					<th colspan="2">
 						<input id="login" type="submit" value="로그인"/>

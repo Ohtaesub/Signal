@@ -53,7 +53,7 @@
 <script>
 	//로그인 팝업창 by 상인
 	function showPopup() {
-		window.open("loginPopup.go","", "width=400, height=300, left=100, top=50");
+		window.open("loginPopup.go","", "width=600, height=400, left=100, top=50");
 	
 	}
 
