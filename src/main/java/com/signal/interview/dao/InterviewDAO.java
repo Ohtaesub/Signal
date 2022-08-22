@@ -22,7 +22,7 @@ public interface InterviewDAO {
 
 	ArrayList<InterviewDTO> interviewDetailResultList(String inter_no);
 
-	float avgGrade(String cl_id);
+	int avgGrade(String cl_id);
 
 	int countComment(String cl_id);
 
@@ -76,6 +76,10 @@ public interface InterviewDAO {
 	void comReg1(String interno, String inter_comment, String inter_result);
 
 	void comReg2(HashMap<String, Object> map);
+
+	InterviewDTO adminInterviewDetail(String inter_no);
+
+	ArrayList<InterviewDTO> adminInterviewListDetail(String inter_no);
 
 	
 

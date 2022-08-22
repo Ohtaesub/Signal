@@ -7,9 +7,16 @@
 <title>입사제안관리</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
+#section {
+	width: 1000px;
+    position: relative;
+    top: -350px;
+    left: 310px;
+}
 </style>
 </head>
 <body>
+	<div id="section">
 	<h5>기업페이지 > 입사제안관리</h5>
 	<table>
 		<thead>
@@ -70,6 +77,7 @@
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
         <input type="hidden" name="amount" value="${pageMaker.cri.amount }">   
 	</form>
+	</div>
 </body>
 <script>
 //by태섭, 페이징 작업_2022_08_13

@@ -44,6 +44,9 @@
 			width: 100px;
 			height: 30px;
 			background-color: #1f3864ff;
+			position: absolute;
+    		top: 310px;
+    		left: 1065px;
 		}
 
 		table#comList < td{
@@ -61,35 +64,23 @@
 			width: 200px;
 			height: 160px;
 		}
-		/* 페이지 이동 CSS 작업 */
-		.pageInfo{
-		      list-style : none;
-		      display: inline-block;
-		    margin: 50px 0 0 100px;      
-		  }
-		  .pageInfo li{
-		      float: left;
-		    font-size: 20px;
-		    margin-left: 18px;
-		    padding: 7px;
-		    font-weight: 500;
-		  }
-		 a:link {color:black; text-decoration: none;}
-		 a:visited {color:black; text-decoration: none;}
-		 a:hover {color:black; text-decoration: underline;}
-		 .active{
-		      background-color: #cdd5ec;
-		  }
+		
+		#form {
+			position: absolute;
+			top : 600px;
+			left : 305px;
+		}
 				
 	</style>
 </head>
 <body>
    <section>
-    	<div id="jp_list">
+    	<div id="jp-list">
+    		<div id="comTitle">
        		<h6>기업페이지 > 채용공고관리</h6>
        		<br/>
        		<h3>기업정보</h3>
-       		<div>
+    		</div>
        			<table id="infoList">
        				<tr>
        					<th rowspan="4">
@@ -116,7 +107,6 @@
        			<div class="find-btn">
        				<input class="find-btn1" type="button" value="신규 공고 등록" onclick="location.href='/jobPostingWrite.go'">
 				</div>
-       		</div>
    		</div>
 	</section>
        	<br/>

@@ -59,11 +59,12 @@
 <body>
 <section>
     <div id="jp-list">
-        	<h6>기업페이지 > 기업정보관리 > 등록</h6>
+    		<div id="comTitle">
+        	<h4>기업페이지 > 기업정보관리 > 등록</h4>
         	</br>
-	        		<h2>기업정보 등록하기</h2>	
-	        	<form action="/companyInfoWrite.do" method="post" enctype="multipart/form-data">
-		        	<div>
+       		<h2>기업정보 등록하기</h2>
+	        </div>	
+	        	<form action="/companyInfoWrite.do" method="post" enctype="multipart/form-data" id="write">
 			        	<table id="infoWrite">
 							<input type="hidden" name="com_id" value="${dto.com_id}"/></td>
 				    		<tr>
@@ -105,7 +106,6 @@
 		        			<input class="find-btn1" type="submit" value="등록하기"/>
 		        			<input class="find-btn2" type="button" value="돌아가기" onclick="location.href='/companyInfo.go'"/>
 						</div>
-	        		</div>
 	        	</form>
         </div>
    </section>

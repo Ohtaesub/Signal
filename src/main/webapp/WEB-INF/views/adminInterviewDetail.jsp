@@ -80,6 +80,7 @@ table tr td {
                 	<table>
 	                	<c:forEach items="${interviewDetailResultList}" var="interviewDetailResultList" >
 		                    <tr>
+		                      
 		                        <td align="center">${interviewDetailResultList.it_que}</td>
 		                        <td align="center">${interviewDetailResultList.inter_score} 점</td> 
 		                    </tr>
@@ -92,7 +93,7 @@ table tr td {
                 <td>${dto.inter_comment}</td>
            </tr>
         </table>
-        <input type="button" value="목록" onclick="location.href='/interviewList.go'"/>
+        <input type="button" value="목록" onclick="location.href='/adminObjectionList.go'"/>
     </form>		
     </div>
 </body>

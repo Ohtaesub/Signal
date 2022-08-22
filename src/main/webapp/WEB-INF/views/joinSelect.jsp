@@ -30,12 +30,11 @@
  	
  	h {
  		positon: relative;
- 		top: 
  	}
 </style>
 <body>
 	<div id="joinsection">
-		<h1>회원가입 - 회원선택</h1><br><br>
+		<h1><strong>회원가입 - 회원선택</strong></h1><br><br>
 		<div style=" text-align: center;">
 			<button class="buttonclient" onclick="location.href='joinFormClient.go'">개인회원</button>
 			<button class="buttoncompany" onclick="location.href='joinFormCompany.go'">기업회원</button>

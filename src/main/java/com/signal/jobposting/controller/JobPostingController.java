@@ -300,28 +300,30 @@ public class JobPostingController {
 
 	// 메인 채용공고 페이지로 이동
 	@RequestMapping(value = "/jobPostingMain.go")
-	public String jobPostingListMain(Model model, HttpSession session,Criteria cri,
-			@RequestParam HashMap<String, Object> params) {
+	public String jobPostingListMain(Model model, HttpSession session,Criteria cri) {
 		
 		logger.info("메인 채용공고 페이지 이동");
 		String page= "";
 
-		int pageNum = 1;
-		if(params.get("pageNum") != null) {
-			pageNum = (int) Integer.parseInt(String.valueOf(params.get("pageNum")));
-		}
-		int skip = (pageNum -1) * 10;
+		int pageNum = cri.getPageNum();
+		
+		//직무 대분류 리스트 호출
+		ArrayList<JobPostingDTO> jobBigList = service.jobBigList();
+		model.addAttribute("jobBigList", jobBigList);
+				
+		//직무 중분류 리스트 호출
+		ArrayList<JobPostingDTO> jobMidList = service.jobMidList();
+		model.addAttribute("jobMidList", jobMidList);
 
-		params.put("skip", skip);
 		// 페이징 리스트
-		ArrayList<JobPostingDTO> mainJpoList = service.mainPostingList(params);
+		ArrayList<JobPostingDTO> mainJpoList = service.mainPostingList(cri);
 		logger.info("리스트 갯수: "+mainJpoList.size());
-		logger.info("리스트: {}"+params);
+		
 		model.addAttribute("mainJpoList",mainJpoList);
 		model.addAttribute("pageNum",pageNum);
 		
 		//페이징 위한 게시글 토탈수
-		int total=service.mainPostingPasingTotal(params);
+		int total=service.mainPostingPasingTotal();
 		PageMakerDTO pageMaker =new PageMakerDTO(cri, total);
 		model.addAttribute("pageMaker",pageMaker);
 
@@ -332,24 +334,33 @@ public class JobPostingController {
 	
 	// 채용공고 검색 페이징
 	@RequestMapping(value="/jobPostingMain.do")
-	public String jobPostingMain(Model model,HttpSession session, int pageNum,String search, 
-			@RequestParam String searchOption,@RequestParam String searchOption1) {
-			logger.info("옵션 확인: "+searchOption+" / "+searchOption1+" / "+search);		
-			model.addAttribute("searchOption",searchOption);
-			model.addAttribute("searchOption1",searchOption1);
-			model.addAttribute("search",search);
+	public String jobPostingMain(Model model,HttpSession session, int pageNum, 
+		@RequestParam String jpo_region, String jp_no, String jc_no, String search) {
+		logger.info("옵션 확인: "+jpo_region+" / "+jp_no+" / "+jc_no+" / "+search);		
+		model.addAttribute("jpo_region",jpo_region);
+		model.addAttribute("jp_no",jp_no);
+		model.addAttribute("jc_no",jc_no);
+		model.addAttribute("search",search);
 		
-			//옵션 페이징처리
-			int skip=(pageNum-1) * 10;
-			ArrayList<JobPostingDTO> dto = service.jobPostingMainSearch(searchOption,searchOption1, search,skip);
-			model.addAttribute("mainJpoList",dto);
-			
-			int mainPostingPasingTotal=service.jobPostingMainTotal(searchOption,searchOption1, search);
-			model.addAttribute("pageNum",pageNum);
-			
-			PageMakerDTO pageMake= new PageMakerDTO(pageNum, mainPostingPasingTotal);
-			model.addAttribute("pageMaker", pageMake);
-			
+		//직무 대분류 리스트 호출
+		ArrayList<JobPostingDTO> jobBigList = service.jobBigList();
+		model.addAttribute("jobBigList", jobBigList);
+	
+		//직무 중분류 리스트 호출
+		ArrayList<JobPostingDTO> jobMidList2 = service.jobMidList2(jp_no);
+		model.addAttribute("jobMidList", jobMidList2);
+		
+		//옵션 페이징처리
+		int skip=(pageNum-1) * 10;
+		ArrayList<JobPostingDTO> dto = service.jobPostingMainSearch(jpo_region,jp_no, jc_no, search,skip);
+		model.addAttribute("mainJpoList",dto);
+		
+		int mainPostingPasingTotal=service.jobPostingMainTotal(jpo_region,jp_no, jc_no, search);
+		model.addAttribute("pageNum",pageNum);
+		
+		PageMakerDTO pageMake= new PageMakerDTO(pageNum, mainPostingPasingTotal);
+		model.addAttribute("pageMaker", pageMake);
+		
 		return "jobPostingMain";
 	}
 	

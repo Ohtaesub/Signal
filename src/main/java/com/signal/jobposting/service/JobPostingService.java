@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.signal.all.dto.InterviewDTO;
 import com.signal.all.dto.JobPostingDTO;
+import com.signal.enter.controller.Criteria;
 import com.signal.jobposting.dao.JobPostingDAO;
 
 @Service
@@ -341,21 +342,21 @@ public class JobPostingService {
 		return dao.jobPostingListTotal2(searchOption,id);
 	}
 
-	public ArrayList<JobPostingDTO> mainPostingList(HashMap<String, Object> params) {
-		return dao.mainPostingList(params);
+	public ArrayList<JobPostingDTO> mainPostingList(Criteria cri) {
+		return dao.mainPostingList(cri);
 	}
 
-	public int mainPostingPasingTotal(HashMap<String, Object> params) {
+	public int mainPostingPasingTotal() {
 		logger.info("채용공고 갯수 가져오기 서비스 요청");
-		return dao.mainPostingPasingTotal(params);
+		return dao.mainPostingPasingTotal();
 	}
 
-	public ArrayList<JobPostingDTO> jobPostingMainSearch(String searchOption, String search, String searchOption1, int skip) {
-		return dao.jobPostingMainSearch(searchOption,searchOption1, search,skip);
+	public ArrayList<JobPostingDTO> jobPostingMainSearch(String jpo_region, String jp_no, String jc_no, String search, int skip) {
+		return dao.jobPostingMainSearch(jpo_region, jp_no, jc_no, search, skip);
 	}
 
-	public int jobPostingMainTotal(String searchOption, String search, String searchOption1) {
-		return dao.jobPostingMainTotal(searchOption,searchOption1, search);
+	public int jobPostingMainTotal(String jpo_region, String jp_no, String jc_no, String search) {
+		return dao.jobPostingMainTotal(jpo_region, jp_no, jc_no, search);
 	}
 
 	public void PostingDetailMainPage(Model model, String jpo_no, String com_id) {
@@ -374,6 +375,22 @@ public class JobPostingService {
 		map.put("main", main);
 				
 		return map;
+	}
+
+	//메인 공고 리스트에서 직무 대분류 리스트 호출
+	public ArrayList<JobPostingDTO> jobBigList() {
+		logger.info("직무 대분류 리스트 호출 서비스");
+		return dao.jobBigList();
+	}
+
+	public ArrayList<JobPostingDTO> jobMidList() {
+		logger.info("직무 중분류 리스트 호출 서비스");
+		return dao.jobMidList();
+	}
+
+	public ArrayList<JobPostingDTO> jobMidList2(String jp_no) {
+		logger.info("직무 중분류 리스트 호출 서비스");
+		return dao.jobMidList2(jp_no);
 	}
 	
 	

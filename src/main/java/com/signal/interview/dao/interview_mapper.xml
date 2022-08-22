@@ -16,9 +16,9 @@
 		</select>
 		<!-- 마무리작업시 추가  WHERE cl_id =#{cl_id} -->
 		
-		<select id="avgGrade" resultType="float">
+		<select id="avgGrade" resultType="int">
 			SELECT 
-				AVG(inter_grade) 
+			ifnull(AVG(i.inter_grade),0) 
 			FROM interview i 
 				left outer join job_posting jp on i.jpo_no = jp.jpo_no 
 				left outer join company c on jp.com_id = c.com_id
@@ -28,7 +28,7 @@
 		
 		<select id="countComment" resultType="int" >
 			SELECT 
-				count(inter_comment) 
+				ifnull(count(inter_comment),0) 
 			FROM interview i 
 				left outer join job_posting jp on i.jpo_no = jp.jpo_no 
 				left outer join company c on jp.com_id = c.com_id
@@ -53,6 +53,31 @@
 			left outer join interview i on i.inter_no =itr.inter_no 
 		WHERE i.inter_no =#{inter_no}
 		</select>
+	<select id="adminInterviewDetail" resultType="com.signal.all.dto.InterviewDTO" parameterType="String">
+			SELECT 
+				jpo_title,com_name,inter_date,inter_grade,inter_result,inter_no,inter_comment
+			FROM interview i  
+				left outer join job_posting jp on i.jpo_no = jp.jpo_no 
+				left outer join company c on jp.com_id = c.com_id
+			WHERE inter_no =#{inter_no}
+		</select>
+	
+		<select id="adminInterviewListDetail" resultType="com.signal.all.dto.InterviewDTO">
+		SELECT
+			 it.it_no,it.it_que,itr.inter_score 
+		FROM interview_test_result itr  
+			left outer join interview_test it on it.it_no =itr.it_no 
+			left outer join interview i on i.inter_no =itr.inter_no 
+		WHERE i.inter_no =#{inter_no}
+		</select>
+
+
+
+
+
+
+
+
 
 		<select id="clientObjectionReg" resultType="com.signal.all.dto.InterviewDTO" parameterType="String">
 			SELECT 
@@ -65,7 +90,7 @@
 		
 		<select id="comInterviewList" resultType="com.signal.all.dto.InterviewDTO">
 		SELECT 
-			inter_no,cl_photo ,cl_name ,cl_age ,cl_gender ,re_title,inter_date ,inter_result 
+			inter_no,cl_photo ,cl_name ,cl_age ,cl_gender ,re_title,inter_date ,inter_result ,inter_grade
 		FROM interview i
 			left outer join job_posting jp on i.jpo_no = jp.jpo_no 
 			left outer join resume r on r.re_no = i.re_no 

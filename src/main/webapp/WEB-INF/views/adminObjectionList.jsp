@@ -24,25 +24,6 @@ table tr td {
 	padding:10px;
 	border:1px solid #787878;
 }
-/* 페이지 이동 CSS 작업 */
-.pageInfo{
-      list-style : none;
-      display: inline-block;
-    margin: 50px 0 0 100px;      
-  }
-  .pageInfo li{
-      float: left;
-    font-size: 20px;
-    margin-left: 18px;
-    padding: 7px;
-    font-weight: 500;
-  }
- a:link {color:black; text-decoration: none;}
- a:visited {color:black; text-decoration: none;}
- a:hover {color:black; text-decoration: underline;}
- .active{
-      background-color: #cdd5ec;
-  }
 /* 메인 섹션 영역 */  
 #section {
 	width : 800px;
@@ -95,7 +76,7 @@ table tr td {
                         <td align="center">${adminObjectionList.cl_id}</td>
                         <td align="center">${adminObjectionList.com_id}</td>
                         <td align="center">${adminObjectionList.com_name}</td>
-                        <td align="center"><a href="interviewDetail.go?inter_no=${adminObjectionList.inter_no}">${adminObjectionList.inter_no}</a></td>
+                        <td align="center"><a href="adminInterviewDetail.go?inter_no=${adminObjectionList.inter_no}">${adminObjectionList.inter_no}</a></td>
                         <td align="center">
                         	<c:choose>
                         		<c:when test="${adminObjectionList.obj_state eq 0}">미처리</c:when>

@@ -92,7 +92,7 @@ table tr td {
                         <td align="center">${adminBlindList.cl_id}</td>
                         <td align="center">${adminBlindList.com_id}</td>
                         <td align="center">${adminBlindList.com_name}</td>
-                         <td align="center"><a href="interviewDetail.go?inter_no=${adminBlindList.inter_no}">${adminBlindList.inter_no}</a></td>
+                         <td align="center"><a href="adminInterviewDetail.go?inter_no=${adminBlindList.inter_no}">${adminBlindList.inter_no}</a></td>
                         <td align="center">
                         	<c:choose>
                         		<c:when test="${adminBlindList.obj_state eq 0}">미처리</c:when>

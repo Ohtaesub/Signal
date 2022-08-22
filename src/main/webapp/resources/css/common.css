@@ -177,6 +177,7 @@ input[type="button"], button[type="button"] {
    color:#fff;
    background-color:#333;
 }
+
 select {
    padding:5px;
    outline:none;
@@ -260,7 +261,7 @@ textarea {
 	width : 1400px;
 	position: relative;
 	top : -380px;
-	left : 25%;
+	left : 400px;
 }
 
 #adminsection {
@@ -276,6 +277,44 @@ textarea {
 	position: relative;
 	left : 25%;
 }
+
+/* 기업정보 관련 */
+
+#jp-list > #infoList{
+	position: absolute;
+    top: 370px;
+    left: 360px;
+    width: 800px;
+}
+
+#jp-list > #PostingWrite{
+	position: absolute;
+    top: 370px;
+    left: 360px;
+    width: 800px;
+}
+
+#jp-list > #ComInfoDetail{
+	position: absolute;
+    top: 370px;
+    left: 360px;
+    width: 800px;
+}
+
+#jp-list > #comTitle{
+	position: absolute;
+    top: 230px;
+    left: 230px;
+    width: 500px;
+}
+
+#jp-list > #write {
+    position: absolute;
+    top: 370px;
+    left: 200px;
+    width: 1200px;
+}
+
 
 
 
