@@ -51,7 +51,7 @@ table tr td {
 		  </tr>
 		</tbody>
 	</table>
-	<input type="submit" value="저장하기"/>
+	<input type="submit" value="등록하기"/>
 	<input type="button" value="닫기" onclick="pclose2()"/>
 	</form>
 </body>
@@ -60,7 +60,7 @@ table tr td {
 			if($('#inter_date').val()==""){
 				alert("변경 면접일이 선택되지 않았습니다.");
 				return false;
-			}else if(confirm("정말로 수정하시겠습니까?")==false){
+			}else if(confirm("정말로 등록하시겠습니까?")==false){
 				
 				return false;
 			}

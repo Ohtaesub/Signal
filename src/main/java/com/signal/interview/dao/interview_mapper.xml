@@ -6,7 +6,7 @@
 	
 		<select id="interviewList" resultType="com.signal.all.dto.InterviewDTO">
 			SELECT 
-				jpo_title,com_name,inter_date,inter_grade,inter_result,i.inter_no,obj_cl_content,obj_state
+				jpo_title,com_name,inter_date,inter_grade,inter_result,i.inter_no,obj_cl_content,obj_state,i.com_id,i.jpo_no
 			FROM interview i  
 				left outer join objection o on i.inter_no =o.inter_no
 				left outer join job_posting jp on i.jpo_no = jp.jpo_no 

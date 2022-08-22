@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public class InterviewDTO {
 	private String jpo_title;
+	private int jpo_no;
+	private String com_id;
 	private String com_name;
 	private String it_que;
 	private int it_no;
@@ -117,6 +119,18 @@ public class InterviewDTO {
 	}
 	public void setObj_cl_content(String obj_cl_content) {
 		this.obj_cl_content = obj_cl_content;
+	}
+	public int getJpo_no() {
+		return jpo_no;
+	}
+	public void setJpo_no(int jpo_no) {
+		this.jpo_no = jpo_no;
+	}
+	public String getCom_id() {
+		return com_id;
+	}
+	public void setCom_id(String com_id) {
+		this.com_id = com_id;
 	}
 	
 	

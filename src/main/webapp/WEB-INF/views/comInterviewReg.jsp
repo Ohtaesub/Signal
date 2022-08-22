@@ -18,6 +18,7 @@
 				<td>
 					<select name="inter_result" id="inter_result">
 					<option value=""${dto.inter_result == '' ? 'selected="selected"' : ''}>결과선택</option>
+					<option value="서류탈락"${dto.inter_result == '서류탈락' ? 'selected="selected"' : ''}>서류탈락</option>
 	                <option value="불합격"${dto.inter_result == '불합격' ? 'selected="selected"' : ''}>불합격</option>
 	                <option value="면접합격"${dto.inter_result == '면접합격' ? 'selected="selected"' : ''}>면접합격</option>
 	                <option value="최종합격"${dto.inter_result == '최종합격' ? 'selected="selected"' : ''}>최종합격</option>   	
@@ -30,24 +31,23 @@
                 	<table>
 	                	<c:forEach items="${que}" var="que" >
 		                    <tr>
-		                        <td align="center">${que.it_no}
+		                        <td align="center">
 		                        <input type="hidden" name="inter_no" value="${dto.inter_no}">
 		                        <input type="hidden" name="it_no" value="${que.it_no}">
 		                        </td>
 		                        <td align="center">${que.it_que}</td>
 		                        <td id="hh" align="center">
 			                        <select name="inter_score2" id="ss_${que.it_no}">
-				                        <option value="">점수선택</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
 										<option value="10">10</option>
+										<option value="9">9</option>
+										<option value="8">8</option>
+										<option value="7">7</option>
+										<option value="6">6</option>
+										<option value="5">5</option>
+										<option value="4">4</option>
+										<option value="3">3</option>
+										<option value="2">2</option>
+										<option value="1">1</option>
 					                </select>
 		                        </td> 
 		                    </tr>
