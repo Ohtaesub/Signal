@@ -55,10 +55,10 @@ ul.nav{
     float:right;
     list-style:none;
     width: 500px;
-    position: relative;
-    left: -45%;
+    position: absolute;
+    left: 300px;
     font-size: 25px;
-    top: -75px;
+    top: 80px;
 }	
      
 ul.nav li{float:left;}
@@ -66,10 +66,9 @@ ul.nav li{float:left;}
 /* 상단 선 스타일 */
 hr{
     color: black;
-    width: 80%;
-    position: relative;
-    top: -68px;
-    left: 25px;
+    width: 1200px;
+    position: absolute;
+    left: 180px;
     background: #1f3864;
 }
     
@@ -81,8 +80,8 @@ hr{
     background-color: #1f3864;
     border-radius: 20px;
     position: relative; 
-    top: -235px;
-    left: 1150px;
+    top: -130px;
+    left: 1170px;
     display:table-cell;
     vertical-align:middle;
 }

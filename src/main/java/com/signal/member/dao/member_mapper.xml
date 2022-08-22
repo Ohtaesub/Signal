@@ -37,7 +37,7 @@
 	
 	<!-- 개인회원 로그인 String 으로 받기 -->
 	<select id="clientLogin" resultType="String">
-	SELECT cl_id FROM client WHERE cl_id = #{param1} AND cl_pw = #{param2}
+	SELECT cl_id FROM client WHERE cl_id = #{param1} AND cl_pw = PASSWORD(#{param2})
 	</select>
 	
 	<select id="clientdto" parameterType="String" resultType="com.signal.all.dto.MemberDTO">
@@ -57,7 +57,7 @@
    
    <!-- 기업회원 로그인 String 으로 받기 -->
 	<select id="companyLogin" resultType="String">
-	SELECT com_id FROM company WHERE com_id = #{param1} AND com_pw = #{param2}
+	SELECT com_id FROM company WHERE com_id = #{param1} AND com_pw = PASSWORD(#{param2})
 	</select>
 	
 	<select id="companydto" parameterType="String" resultType="com.signal.all.dto.MemberDTO">

@@ -48,7 +48,7 @@
 		            <th>사업자 등록증 사본</th>
 		            <td>
 		            	<c:if test="${!empty companyInfo.com_photo}">
-		            	<img src="/photo/${companyInfo.com_photo}" width="100" height="100"/>
+		            	<img src="/photo/member/${companyInfo.com_photo}" width="100" height="100"/>
 		            	</c:if>
 		            </td>
 		        </tr>
