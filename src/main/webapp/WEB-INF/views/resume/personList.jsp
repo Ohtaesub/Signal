@@ -8,12 +8,18 @@
 		top : 250px;
 		left : 350px;
 	}
+		#section1 {
+		
+		position: absolute;
+		top : 200px;
+		left : 350px;
+	}
 </style>
 
 <body>
 
 	<form action="personListSearch.do" method="get" id="form">
-		<div id="section">
+		<div id="section1">
 		<!-- select option 넣기 -->
 			<select name="searchOption" id="searchOption">
 				<option value="0" ${searchOption == 0? 'selected="selected"' : ''}>전체</option>
