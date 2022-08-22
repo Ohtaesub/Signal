@@ -133,8 +133,8 @@ table tr td {
 	<!-- value값은 현재 페이지의 정보가 저장되도록 하였습니다. 
 	이는 현 페이지에서 '조회, 수정 페이지'로 이동하였다가 다시 현 페이지로 이동하기 위해 작성한 것인데 이에 대해 선 다음 포스팅에서 알아봅니다. -->
 	<form id="moveForm" method="get">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-        <input type="hidden" name="amount" value="${pageMaker.cri.amount }">   
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"> 
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount }"> 
 	</form>
 	</div>
 </body>
@@ -158,9 +158,8 @@ $(".pageInfo a").on("click", function(e){
 		moveForm.attr("action", "/companyApplyList.go");
 		moveForm.submit();    		
 	}else{
-		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-		moveForm.attr("action", "/jobPostingApplyList.do");
-		moveForm.submit(); 
+		$("#applyList").find("input[name='pageNum']").val($(this).attr("href"));
+		$("#applyList").submit(); 
 		
 		/* $("#jobPostingList").find('input[name="pageNum"]').val($(this).attr("href"));
     	$("#jobPostingList").submit(); */

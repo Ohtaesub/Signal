@@ -276,7 +276,7 @@
 	LEFT OUTER JOIN client c ON c.cl_id = r.cl_id
 	LEFT OUTER JOIN offer o ON o.jpo_no = jp.jpo_no
 	LEFT OUTER JOIN self_test_result str ON str.cl_id = c.cl_id
-	WHERE jp.com_id = #{param1} GROUP BY i.inter_no ORDER BY inter_no desc
+	WHERE jp.com_id = #{param1} GROUP BY i.inter_no ORDER BY inter_no DESC
 	LIMIT #{param2}, #{param3};
 	</select>
 	
@@ -341,15 +341,25 @@
 	LEFT OUTER JOIN client c ON c.cl_id = r.cl_id
 	LEFT OUTER JOIN offer o ON o.jpo_no = jp.jpo_no
 	LEFT OUTER JOIN self_test_result str ON str.cl_id = c.cl_id
-	WHERE jp.com_id = #{param1} and jp.jpo_no = #{param2} GROUP BY i.inter_no ORDER BY inter_no desc
-	LIMIT #{param3}, #{param4};
+	<if test = "param2.equals('')"> 
+		WHERE jp.com_id = #{param1}
+	</if>
+	<if test = "!param2.equals('')"> 
+		WHERE jp.com_id = #{param1} and jp.jpo_no = #{param2}
+	</if>
+	GROUP BY i.inter_no ORDER BY inter_no desc LIMIT #{param3}, #{param4};
 	</select>
 	
 	<select id="getJobPostingApplyTotal" resultType="int"  >
 	SELECT count(*) FROM interview i
 	LEFT OUTER JOIN resume r ON r.re_no = i.re_no 
 	LEFT OUTER JOIN job_posting jp ON jp.jpo_no = i.jpo_no
-	WHERE i.com_id = #{param1} and jp.jpo_no = #{param2};
+	<if test = "param2.equals('')"> 
+		WHERE jp.com_id = #{param1}
+	</if>
+	<if test = "!param2.equals('')"> 
+		WHERE jp.com_id = #{param1} and jp.jpo_no = #{param2}
+	</if>
 	</select>	
 		
 		

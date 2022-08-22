@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -226,7 +225,7 @@ public class InterviewController {
 	
 	// by태섭, 기업 마이페이지 입사지원 관리 리스트 호출_2022_08_17
 	@RequestMapping(value = "/companyApplyList.go")
-	public String companyApplyList(Model model, Criteria cri, HttpSession session) {
+	public String companyApplyList(Model model, HttpSession session, Criteria cri) {
 		logger.info("기업 입사지원 리스트 호출");
 		
 		// by태섭, 세션에서 회원 아이디 값 가져오기
@@ -234,11 +233,11 @@ public class InterviewController {
 		// 기업 채용 공고명 가져오기 
 		ArrayList<JobPostingDTO> jobPostingList = service.jobPostingList(com_id);
 		model.addAttribute("jobPostingList", jobPostingList);
-		// by태섭, 페이징 처리에 skip, amount 변수
+		// by태섭, 페이징 처리를 Criteria 클래스에서 skip, amount 변수 가져오기
 		int skip = cri.getSkip();
 		int amount = cri.getAmount();
 		//  by태섭, 페이징 처리한 리스트 호출
-		ArrayList<EnterDTO> companyApplyList = service.companyApplyList(com_id,skip,amount);
+		ArrayList<EnterDTO> companyApplyList = service.companyApplyList(com_id, skip, amount);
 		model.addAttribute("companyApplyList", companyApplyList);
 		// by태섭, 페이징 인터페이스 처리 부분
 		int total = service.getCompanyApplyTotal(com_id);

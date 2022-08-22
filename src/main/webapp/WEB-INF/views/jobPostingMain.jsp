@@ -115,14 +115,14 @@
 				</select>
 			       	&nbsp;
 	       		<select name="jp_no" id="searchOption1" onchange="jobBigListShow();">
-	       		<option value="">직무대분류</option>
+	       		<option value="">직군</option>
 	       			<c:forEach items="${jobBigList}" var="jobBigList">
 						<option value="${jobBigList.jp_no}" ${jp_no == jobBigList.jp_no ? 'selected="selected"' : ''}>${jobBigList.jp_name}</option>
 					</c:forEach>
 				</select>
 				&nbsp;
 				<select name="jc_no" id="searchOption2" onchange="jobMidListShow();">
-	       		<option value="">직무중분류</option>
+	       		<option value="">직업</option>
 	       			<c:forEach items="${jobMidList}" var="jobMidList">
 						<option value="${jobMidList.jc_no}" ${jc_no == jobMidList.jc_no ? 'selected="selected"' : ''}>${jobMidList.jc_name}</option>
 					</c:forEach>
