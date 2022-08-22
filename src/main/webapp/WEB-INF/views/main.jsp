@@ -135,6 +135,7 @@
     	<div>
     	<p>?????</p>
     	</div>
+    	<a href="/mainEx.go">채용달력 만드는 중</a>
 
     </body>
 <%@ include file="../../resources/inc/footer.jsp" %>
