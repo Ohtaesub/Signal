@@ -28,13 +28,16 @@ public class ObjectionController {
 	
 	//이의제기관리(사용자)리스트
 	@RequestMapping(value = "/clientObjectionList.go", method = RequestMethod.GET)
-	public String clientObjectionList(Model model,Criteria cri,@RequestParam HashMap<String, Object> params) {	
+	public String clientObjectionList(Model model,Criteria cri,@RequestParam HashMap<String, Object> params,HttpSession session) {	
 		
-		
-		
-				//String com_id = (String) session.getAttribute("loginId");
+			
+				String page ="clientObjectionList";
+				String cl_id = (String) session.getAttribute("loginId");
 				//params.put("com_id", com_id);
-				
+				 if(cl_id==null) {
+			        	model.addAttribute("msg","개인회원 서비스입니다.");
+			        	page = "main";
+			        }
 				int pageNum = 1;
 				if(params.get("pageNum") != null) {
 					pageNum = (int) Integer.parseInt(String.valueOf(params.get("pageNum")));
@@ -43,7 +46,7 @@ public class ObjectionController {
 				int skip = (pageNum -1) * 10;
 				
 				
-				//params.put("com_id", loginId);
+				params.put("cl_id", cl_id);
 				params.put("skip", skip);
 				
 				//페이지 리스트 수
@@ -57,7 +60,7 @@ public class ObjectionController {
 				model.addAttribute("pageMaker", pageMaker);
 
 		
-		return "clientObjectionList";
+		return page;
 	}
 	//이의제기등록(사용자)
 	@RequestMapping(value = "/clientDbjectionReg.do")
@@ -76,9 +79,15 @@ public class ObjectionController {
 	
 	//이의제기관리(기업)리스트
 	@RequestMapping(value = "/comObjectionList.go", method = RequestMethod.GET)
-	public String comObjectionList(Model model,Criteria cri,@RequestParam HashMap<String, Object> params) {
-		//String com_id = (String) session.getAttribute("loginId");
-		//params.put("com_id", com_id);
+	public String comObjectionList(Model model,Criteria cri,@RequestParam HashMap<String, Object> params,HttpSession session) {
+		
+		
+		String com_id = (String) session.getAttribute("loginId");
+		String page ="comObjectionList";
+		 if(com_id==null) {
+	        	model.addAttribute("msg","기업회원 서비스입니다.");
+	        	page = "main";
+	        }
 		
 		int pageNum = 1;
 		if(params.get("pageNum") != null) {
@@ -88,7 +97,7 @@ public class ObjectionController {
 		int skip = (pageNum -1) * 10;
 		
 		
-		//params.put("com_id", com_id);
+		params.put("com_id", com_id);
 		params.put("skip", skip);
 		
 		//페이지 리스트 수
@@ -101,7 +110,7 @@ public class ObjectionController {
 		PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "comObjectionList";
+		return page;
 	}
 	
 	//이의제기 처리페이지(기업)
@@ -130,8 +139,14 @@ public class ObjectionController {
 	
 	//이의제기관리(관리자)리스트 페이징
 	@RequestMapping(value = "/adminObjectionList.go", method = RequestMethod.GET)
-	public String adminObjectionList(Model model,Criteria cri) {
-		
+	public String adminObjectionList(Model model,Criteria cri,HttpSession session) {
+		String page = "adminObjectionList";
+  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		
+  		if(isAdmin==null) {
+  			model.addAttribute("msg","관리자 전용 페이지입니다.");
+  			page = "main";
+  		}
 		//페이징 리스트
 		ArrayList<ObjectionDTO>adminObjectionList =service.adminObjectionList(cri);
 		model.addAttribute("adminObjectionList",adminObjectionList);
@@ -145,15 +160,23 @@ public class ObjectionController {
 		
 		
 		
-		return "adminObjectionList";
+		return page;
 	}
 	//이의제기관리(관리자)검색 페이징
 	@RequestMapping(value="/adminObjectionList.do")
 	public String adminObjectionSearch(Model model,HttpSession session,@RequestParam String searchOption, String search, int pageNum ) {
+			String page = "adminObjectionList";
+	  		String isAdmin = (String) session.getAttribute("isAdmin");
+	  		
+	  		if(isAdmin==null) {
+	  			model.addAttribute("msg","관리자 페이지입니다.");
+	  			page = "main";
+	  		}
+		
 			logger.info("옵션 확인: "+searchOption+search);
 		
 			model.addAttribute("searchOption",searchOption);
-			
+			model.addAttribute("search",search);
 			//옵션 페이징처리
 			int skip=(pageNum-1) * 10;
 			ArrayList<InterviewDTO>dto = service.adminObjectionSearch(searchOption, search,skip);
@@ -165,7 +188,7 @@ public class ObjectionController {
 			PageMakerDTO pageMake2= new PageMakerDTO(pageNum, adminObjectionTotal);
 			model.addAttribute("pageMaker", pageMake2);
 			
-		return "adminObjectionList";
+		return page;
 	}
 	//이의제기관리(관리자)-블라인드기능
 	@RequestMapping(value = "/adminBlind")
@@ -180,7 +203,15 @@ public class ObjectionController {
 
 		//블라인드관리(관리자)리스트 -페이징
 		@RequestMapping(value = "/adminBlindList.go", method = RequestMethod.GET)
-		public String adminBlindList(Model model,Criteria cri) {
+		public String adminBlindList(Model model,Criteria cri,HttpSession session) {
+			String page = "adminBlindList";
+	  		String isAdmin = (String) session.getAttribute("isAdmin");
+	  		
+	  		if(isAdmin==null) {
+	  			model.addAttribute("msg","관리자 페이지입니다.");
+	  			page = "main";
+	  		}
+			
 			
 			//페이징 리스트
 			ArrayList<ObjectionDTO>adminBlindList =service.adminBlindList(cri);
@@ -196,15 +227,23 @@ public class ObjectionController {
 			model.addAttribute("pageMaker",pageMaker);
 			
 
-			return "adminBlindList";
+			return page;
 		}
 		//블라인드관리(관리자)검색 -페이징
 		@RequestMapping(value="/adminBlindList.do")
 		public String adminBlindSearch(Model model,HttpSession session,@RequestParam String searchOption, String search, int pageNum ) {
+				String page = "adminBlindList";
+		  		String isAdmin = (String) session.getAttribute("isAdmin");
+		  		
+		  		if(isAdmin==null) {
+		  			model.addAttribute("msg","관리자 페이지입니다.");
+		  			page = "main";
+		  		}
+			
 				logger.info("옵션 확인: "+searchOption+search);
 			
 				model.addAttribute("searchOption",searchOption);
-				
+				model.addAttribute("search",search);
 				//옵션 페이징처리
 				int skip=(pageNum-1) * 10;
 				ArrayList<InterviewDTO>dto = service.adminBlindSearch(searchOption, search,skip);
@@ -216,7 +255,7 @@ public class ObjectionController {
 				PageMakerDTO pageMake2= new PageMakerDTO(pageNum, adminBlindTotal);
 				model.addAttribute("pageMaker", pageMake2);
 				
-			return "adminBlindList";
+			return page;
 		}
 		
 		

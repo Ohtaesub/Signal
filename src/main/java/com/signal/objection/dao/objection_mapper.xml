@@ -10,7 +10,8 @@
 		FROM objection o 
 			left outer join interview i on o.inter_no = i.inter_no 
 			left outer join job_posting jp on i.jpo_no = jp.jpo_no 
-			left outer join company c on jp.com_id = c.com_id
+			left outer join company c on jp.com_id = c.com_id 
+		WHERE cl_id =#{cl_id}
 		ORDER BY 
 			obj_no  desc 
 			limit 10 OFFSET #{skip};
@@ -24,6 +25,7 @@
 			left outer join interview i on o.inter_no = i.inter_no 
 			left outer join job_posting jp on i.jpo_no = jp.jpo_no 
 			left outer join company c on jp.com_id = c.com_id
+		WHERE cl_id =#{cl_id}
 		</select>
 		<!-- where i.cl_id =#{cl_id} 추가 -->
 	
@@ -36,6 +38,7 @@
 				left outer join company com on jp.com_id = com.com_id 
 				left outer join resume re on i.re_no = re.re_no 
 				left outer join client cl on re.cl_id = cl.cl_id
+			where i.com_id =#{com_id}
 				ORDER BY 
 				obj_no  desc 
 				limit 10 OFFSET #{skip};
@@ -49,7 +52,8 @@
 				left outer join job_posting jp on i.jpo_no = jp.jpo_no 
 				left outer join company com on jp.com_id = com.com_id 
 				left outer join resume re on i.re_no = re.re_no 
-				left outer join client cl on re.cl_id = cl.cl_id;
+				left outer join client cl on re.cl_id = cl.cl_id
+			where i.com_id =#{com_id};
 			</select>
 
 		

@@ -10,21 +10,21 @@ import com.signal.enter.controller.Criteria;
 
 public interface InterviewDAO {
 
-	ArrayList<InterviewDTO> interviewList();
+	ArrayList<InterviewDTO> interviewList(String cl_id);
 
 	InterviewDTO clientObjectionReg(String inter_no);
 
 	InterviewDTO interviewDetail(String inter_no);
 
-	ArrayList<InterviewDTO> comInterviewList(Criteria cri);
+	ArrayList<InterviewDTO> comInterviewList(Criteria cri, String com_id);
 
 	int comInterviewDateDo(HashMap<String, String> params);
 
 	ArrayList<InterviewDTO> interviewDetailResultList(String inter_no);
 
-	float avgGrade();
+	float avgGrade(String cl_id);
 
-	int countComment();
+	int countComment(String cl_id);
 
 	InterviewDTO comInterviewUpdate(String inter_no);
 
@@ -36,7 +36,7 @@ public interface InterviewDAO {
 
 	int comInterviewUpdateState(HashMap<String, String> params);
 
-	int getTotal();
+	int getTotal(String com_id);
 
 	int comSearchTotal(String searchOption, String search);
 

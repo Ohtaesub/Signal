@@ -29,22 +29,27 @@ public class InterviewController {
 	
 	//면접현황리스트 (개인)
 	@RequestMapping(value = "/interviewList.go", method = RequestMethod.GET)
-	public String interviewList(Model model) {
+	public String interviewList(Model model,HttpSession session) {
 		
-		//String cl_id = (String) session.getAttribute("loginId");
-		//params.put("com_id", com_id);
+		String page ="interviewList";
+		String cl_id = (String) session.getAttribute("loginId");
+		 if(cl_id==null) {
+	        	model.addAttribute("msg","개인회원 서비스입니다.");
+	        	page = "main";
+	        }
+
 		
 		//면접현황리스트부분
-		ArrayList<InterviewDTO>interviewList =service.interviewList();
+		ArrayList<InterviewDTO>interviewList =service.interviewList(cl_id);
 		model.addAttribute("interviewList",interviewList);
 		//평균평점
-		float avgGrade =service.avgGrade();
+		float avgGrade =service.avgGrade(cl_id);
 		model.addAttribute("avgGrade",avgGrade);
 		//총코멘트수
-		int countComment =service.countComment();
+		int countComment =service.countComment(cl_id);
 		model.addAttribute("countComment",countComment);
 		
-		return "interviewList";
+		return page;
 	}
 	
 	//이의제기등록페이지
@@ -73,17 +78,25 @@ public class InterviewController {
 	}
 	//면접관리리스트(기업)
 	@RequestMapping(value = "/comInterviewList.go", method = RequestMethod.GET)
-	public String comInterviewList(Model model,Criteria cri) {
+	public String comInterviewList(Model model,Criteria cri,HttpSession session) {
 	
-		ArrayList<InterviewDTO>comInterviewList =service.comInterviewList(cri);
+		String com_id = (String) session.getAttribute("loginId");
+		String page ="comInterviewList";
+		 if(com_id==null) {
+	        	model.addAttribute("msg","개인회원 서비스입니다.");
+	        	page = "main";
+	        }
+		
+		
+		ArrayList<InterviewDTO>comInterviewList =service.comInterviewList(cri,com_id);
 		model.addAttribute("comInterviewList",comInterviewList);
 		int pageNum=cri.getPageNum();
 		model.addAttribute("pageNum",pageNum);
-		int total=service.getTotal();
+		int total=service.getTotal(com_id);
 		
 		PageMakerDTO pageMaker =new PageMakerDTO(cri, total);
 		model.addAttribute("pageMaker",pageMaker);
-		return "comInterviewList";
+		return page;
 	}
 	//면접관리리스트(기업)검색
 	@RequestMapping(value="/comInterviewList.do")
@@ -130,12 +143,7 @@ public class InterviewController {
 		return "comInterviewReg";
 	}
 	
-	//면접관리리스트(기업) 결과등록 
-	//comInterviewReg.do
-	
-	
-	
-	
+
 	
 	
 	

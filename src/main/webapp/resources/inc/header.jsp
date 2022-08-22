@@ -53,8 +53,8 @@
 	                <li><a href="/recommendMe.go">회원추천</a></li>
 	                <li><a href="/clientApplyList.go">입사지원현황</a></li>
 	                <li><a href="/clientOfferList.go">입사제안현황</a></li>
-	                <li><a href="">면접현황</a></li>
-	                <li><a href="">이의제기현황</a></li>
+	                <li><a href="/interviewList.go">면접현황</a></li>
+	                <li><a href="/clientObjectionList.go">이의제기현황</a></li>
 	                <li><a href="/selfInsert.go">셀프평가</a></li>
 				</ul>
 				</c:if>
@@ -65,7 +65,7 @@
 		                <li><a href="/jobPostingList.go">채용공고관리</a></li>
 		                <li><a href="/companyOfferList.do">입사제안관리</a></li>
 		                <li><a href="/companyApplyList.go">지원자면접관리</a></li>
-		                <li><a href="">이의제기현황</a></li>
+		                <li><a href="/comObjectionList.go">이의제기현황</a></li>
 		            </ul>
 		        </c:if>
 		        <c:if test="${sessionScope.isAdmin.equals('true')}">
@@ -74,8 +74,8 @@
 		                <li><a href="/jobClassReg.go">직무분류관리</a></li>
 		                <li><a href="/selfTestQue.go">셀프평가관리</a></li>
 		                <li><a href="/interviewTestQue.go">면접평가관리</a></li>
-		                <li><a href="">이의제기관리</a></li>
-		                <li><a href="">블라인드관리</a></li>
+		                <li><a href="/adminObjectionList.go">이의제기관리</a></li>
+		                <li><a href="/adminBlindList.go">블라인드관리</a></li>
 		                <li><a href="/clientManagementList.do">개인회원관리</a></li>
 		                <li><a href="/companyManagementList.do">기업회원관리</a></li>
 		            </ul>

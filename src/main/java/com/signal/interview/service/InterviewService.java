@@ -21,9 +21,9 @@ public class InterviewService {
 	private Logger logger = org.slf4j.LoggerFactory.getLogger(this.getClass());
 	@Autowired InterviewDAO dao;
 
-	public ArrayList<InterviewDTO> interviewList() {
+	public ArrayList<InterviewDTO> interviewList(String cl_id) {
 	
-		return dao.interviewList();
+		return dao.interviewList(cl_id);
 	}
 
 	public InterviewDTO clientObjectionReg(String inter_no) {
@@ -36,9 +36,9 @@ public class InterviewService {
 		return dao.interviewDetail(inter_no);
 	}
 
-	public ArrayList<InterviewDTO> comInterviewList(Criteria cri) {
+	public ArrayList<InterviewDTO> comInterviewList(Criteria cri, String com_id) {
 		
-		return dao.comInterviewList(cri);
+		return dao.comInterviewList(cri,com_id);
 	}
 
 	public void comInterviewDateDo(HashMap<String, String> params) {
@@ -51,14 +51,14 @@ public class InterviewService {
 		return dao.interviewDetailResultList(inter_no);
 	}
 
-	public float avgGrade() {
+	public float avgGrade(String cl_id) {
 		
-		return dao.avgGrade();
+		return dao.avgGrade(cl_id);
 	}
 
-	public int countComment() {
+	public int countComment(String cl_id) {
 	
-		return dao.countComment();
+		return dao.countComment(cl_id);
 
 	}
 
@@ -89,9 +89,9 @@ public class InterviewService {
 		
 	}
 
-	public int getTotal() {
+	public int getTotal(String com_id) {
 		logger.info("면접자수  서비스 요청");
-		return dao.getTotal();
+		return dao.getTotal(com_id);
 	}
 
 	public ArrayList<InterviewDTO> comSearchList(String searchOption, String search, int skip) {

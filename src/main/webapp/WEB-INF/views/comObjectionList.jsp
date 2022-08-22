@@ -1,15 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="../../resources/inc/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style></style>
+<style>
+table {
+	width:100%;
+	border:1px solid #787878;
+	border-collapse:collapse;
+}
+
+table tr th {
+	padding:10px;
+	border:1px solid #787878;
+	background-color:#efefef;
+}
+table tr td {
+	padding:10px;
+	border:1px solid #787878;
+}
+/* 페이지 이동 CSS 작업 */
+.pageInfo{
+      list-style : none;
+      display: inline-block;
+    margin: 50px 0 0 100px;      
+  }
+  .pageInfo li{
+      float: left;
+    font-size: 20px;
+    margin-left: 18px;
+    padding: 7px;
+    font-weight: 500;
+  }
+ a:link {color:black; text-decoration: none;}
+ a:visited {color:black; text-decoration: none;}
+ a:hover {color:black; text-decoration: underline;}
+ .active{
+      background-color: #cdd5ec;
+  }
+/* 메인 섹션 영역 */  
+#section {
+	width : 800px;
+	position: relative;
+	top : -250px;
+	left : 210px;
+}
+
+</style>
 </head>
 <body>
+<div id="section">
 <p>기업페이지 > 이의제기현황 <p>
 <table>
     <colgroup>
@@ -29,7 +74,8 @@
                 <c:forEach items="${comObjectionList}" var="comObjectionList" >
                     <tr>
                         <td align="center">
-                        	${comObjectionList.cl_photo} ${comObjectionList.cl_name} ${comObjectionList.cl_age}${comObjectionList.cl_gender}<br>
+                         <img src="/photo/${comObjectionList.cl_photo}" width="100"/>
+                         ${comObjectionList.cl_name} ${comObjectionList.cl_age}${comObjectionList.cl_gender}<br>
                         <a href="comInterviewUpdate.go?inter_no=${comObjectionList.inter_no}">${comObjectionList.re_title}</a><br>
                         	${comObjectionList.inter_date} ${comObjectionList.inter_result}  평점 ${comObjectionList.inter_grade}
                         		
@@ -69,7 +115,8 @@
                 </c:if>
        		</ul>
         </div>
-    </div>		
+    </div>
+    </div>
 </body>
 <script>
 function pop(obj_no){

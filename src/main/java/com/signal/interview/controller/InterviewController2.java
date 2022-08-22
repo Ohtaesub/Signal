@@ -29,7 +29,7 @@ public class InterviewController2 {
 		
 		boolean success=service.comReg(param);
 		
-		map.put("pclose", success);
+		map.put("success", success);
 		
 		return map;
 	}
@@ -44,7 +44,7 @@ public class InterviewController2 {
 		
 		boolean success=service.comUp(param);
 		
-		map.put("pclose", success);
+		map.put("success", success);
 		
 		return map;
 	}

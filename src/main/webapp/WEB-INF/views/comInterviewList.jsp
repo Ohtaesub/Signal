@@ -1,15 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="../../resources/inc/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style></style>
+<style>
+table {
+	width:100%;
+	border:1px solid #787878;
+	border-collapse:collapse;
+}
+
+table tr th {
+	padding:10px;
+	border:1px solid #787878;
+	background-color:#efefef;
+}
+table tr td {
+	padding:10px;
+	border:1px solid #787878;
+}
+/* 페이지 이동 CSS 작업 */
+.pageInfo{
+      list-style : none;
+      display: inline-block;
+    margin: 50px 0 0 100px;      
+  }
+  .pageInfo li{
+      float: left;
+    font-size: 20px;
+    margin-left: 18px;
+    padding: 7px;
+    font-weight: 500;
+  }
+ a:link {color:black; text-decoration: none;}
+ a:visited {color:black; text-decoration: none;}
+ a:hover {color:black; text-decoration: underline;}
+ .active{
+      background-color: #cdd5ec;
+  }
+/* 메인 섹션 영역 */  
+#section {
+	width : 800px;
+	position: relative;
+	top : -380px;
+	left : 350px;
+}
+</style>
 </head>
 <body>
+<div id="section">
 <p>기업페이지 > 면접관리 리스트 <p>
 <form action="comInterviewList.do" method="get" id="form">
      	<select name="searchOption" id="searchOption">
@@ -91,6 +135,7 @@
 	  <form id="moveForm" method="get">
 	  	 <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 	  </form>		
+	  </div>
 </body>
 <script>
 

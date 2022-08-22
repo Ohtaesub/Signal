@@ -112,6 +112,9 @@ function getResult(){
 		contentType:'application/json; charset=utf-8',
 		success:function(data){
 			console.log(data);
+			alert("등록되었습니다");
+			window.opener.location.reload();
+			window.close();
 		},
 		error:function(e){
 			console.log(e);
