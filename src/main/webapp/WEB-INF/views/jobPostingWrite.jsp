@@ -92,32 +92,32 @@
 				   			<tr>
 								<th>직무분류</th>
 								<td>	
-									<select name="jp_no" required="required">
-										<option value="">대분류</option>
-										<option value="2">IT</option>
-										<option value="3">건축</option>
-										<option value="4">항공</option>																				
-										<option value="5">전기</option>
-										<option value="6">축산</option>
+									<select name="jp_no" id="jp_no" required="required">
+										<option value="0" selected="selected">대분류</option>
+										<option value="1">IT</option>
+										<option value="2">건축</option>
+										<option value="3">항공</option>																				
+										<option value="4">전기</option>
+										<option value="5">축산</option>
 									</select>
 									 > 
-									<select name="jc_no" required="required">
-										<option value="">중분류</option>									
-										<option value="6">퍼블리셔</option>
-										<option value="2">SI개발</option>
-										<option value="3">데이터분석가</option>
-										<option value="4">건설관리</option>
-										<option value="5">토목설계</option>
-										<option value="7">내진설계</option>
-										<option value="10">승무원</option>
-										<option value="8">항공운송</option>
-										<option value="9" >항공정비</option>
-										<option value="11">전기설계</option>
-										<option value="12">전기기사</option>
-										<option value="13">조경설계</option>
-										<option value="14">축산식품가공</option>
-										<option value="15">축산식품유통</option>
-										<option value="16">도축</option>																																						
+									<select name="jc_no" id="jc_no" required="required">
+										<option value="0">중분류</option>									
+										<option value="6" class="mall1">퍼블리셔</option>
+										<option value="2" class="mall1">SI개발</option>
+										<option value="3" class="mall1">데이터분석가</option>
+										<option value="4" class="mall2">건설관리</option>
+										<option value="5" class="mall2">토목설계</option>
+										<option value="7" class="mall2">내진설계</option>
+										<option value="10" class="mall3">승무원</option>
+										<option value="8" class="mall3">항공운송</option>
+										<option value="9" class="mall3">항공정비</option>
+										<option value="11" class="mall4">전기설계</option>
+										<option value="12" class="mall4">전기기사</option>
+										<option value="13" class="mall4">조경설계</option>
+										<option value="14" class="mall5">축산식품가공</option>
+										<option value="15" class="mall5">축산식품유통</option>
+										<option value="16" class="mall5">도축</option>																																						
 									</select>
 								</td>
 							</tr>
@@ -213,6 +213,23 @@
 				}     
 			}); 
 		});
+	
+	var malls = false;
+
+	function update_selected() {
+	  $("#jc_no").val(0);
+	  $("#jc_no").find("option[value!=0]").detach();
+
+	  $("#jc_no").append(malls.filter(".mall" + $(this).val()));
+	}
+
+	$(function() {
+		malls= $("#jc_no").find("option[value!=0]");
+		malls.detach();
+
+	  $("#jp_no").change(update_selected);
+	  $("#jp_no").trigger("change");
+	});
 
 
 </script>

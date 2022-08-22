@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,6 +50,7 @@ public class JobPostingService {
 	}
 	
 	// 기업정보 상세보기
+	@Transactional(isolation = Isolation.DEFAULT)
 	public JobPostingDTO ComInfoDetail(Model model,String id, String ceo,String no) {
 		logger.info("기업정보 상세보기 요청");
 		JobPostingDTO dto =null;
@@ -71,6 +74,7 @@ public class JobPostingService {
 	  
 	 * */
 	
+	@Transactional(isolation = Isolation.DEFAULT)
 	public int infoWrite(MultipartFile[] ci_photo, HashMap<String, String> params) {
 		JobPostingDTO dto = new JobPostingDTO();
 		logger.info("사진: "+ci_photo);
@@ -85,7 +89,7 @@ public class JobPostingService {
                logger.info(photo_original + photo_copy );   
                try {
                   byte[] arr =photo.getBytes();
-                  Path path = Paths.get("C:\\upload/" + photo_copy);
+                  Path path = Paths.get("/photo/jobPosting/" + photo_copy);
                   Files.write(path, arr);
                   logger.info(photo_copy + " 저장 완료");
                } catch (IOException e) {
@@ -129,6 +133,7 @@ public class JobPostingService {
 		return dto;
 	}
 
+	@Transactional(isolation = Isolation.DEFAULT)
 	public int update(MultipartFile[] ci_photo, HashMap<String, String> params, String id) {
 		
 		params.put("com_id", id);
@@ -146,7 +151,7 @@ public class JobPostingService {
                logger.info(photo_original + photo_copy );   
                try {
                   byte[] arr =photo.getBytes();
-                  Path path = Paths.get("C:\\upload/" + photo_copy);
+                  Path path = Paths.get("/photo/jobPosting/" + photo_copy);
                   Files.write(path, arr);
                   logger.info(photo_copy + " 저장 완료");
                } catch (IOException e) {
@@ -192,7 +197,7 @@ public class JobPostingService {
 	}
 	
 	
-	
+	@Transactional(isolation = Isolation.DEFAULT)
 	public int postingWrite(MultipartFile[] jpo_photo, HashMap<String, String> params) {
 		JobPostingDTO dto = new JobPostingDTO();
 		logger.info("공고 사진: "+jpo_photo);
@@ -207,7 +212,7 @@ public class JobPostingService {
                logger.info(photo_original + photo_copy );   
                try {
                   byte[] arr =photo.getBytes();
-                  Path path = Paths.get("C:\\upload/" + photo_copy);
+                  Path path = Paths.get("/photo/jobPosting/" + photo_copy);
                   Files.write(path, arr);
                   logger.info(photo_copy + " 저장 완료");
                } catch (IOException e) {
@@ -241,9 +246,6 @@ public class JobPostingService {
 		logger.info(jpo_no + " 번 채용공고 조회수 +1");
 		dao.upHit(jpo_no);
 	}
-	
-
-
 
 	public void jobPostingDetail(Model model, String jpo_no) {
 	      logger.info("상세보기 서비스 요청");
@@ -264,6 +266,7 @@ public class JobPostingService {
 		return dto;
 	}
 
+	@Transactional(isolation = Isolation.DEFAULT)
 	public int postingUpdate(MultipartFile[] jpo_photo, String id, String jpo_no, HashMap<String, String> params) {
 
 	params.put("com_id", id);
@@ -282,7 +285,7 @@ public class JobPostingService {
            logger.info(photo_original + photo_copy );   
            try {
               byte[] arr =photo.getBytes();
-              Path path = Paths.get("C:\\upload/" + photo_copy);
+              Path path = Paths.get("/photo/jobPosting/" + photo_copy);
               Files.write(path, arr);
               logger.info(photo_copy + " 저장 완료");
            } catch (IOException e) {
@@ -363,6 +366,15 @@ public class JobPostingService {
 	      model.addAttribute("dto", dto);
 	   
 	   }
+
+
+	public HashMap<String, Object> main(HashMap<String, String> params) {
+		 HashMap<String, Object> map = new HashMap<String, Object>();
+		ArrayList<JobPostingDTO> main = dao.main(params);
+		map.put("main", main);
+				
+		return map;
+	}
 	
 	
 	

@@ -13,26 +13,26 @@ public class Criteria {
     
     // 한 페이지 당 보여질 게시물 갯수
     private int amount;
-    
-    // by 태섭, 검색 타입 
+
+    // 검색 타입 
     private String type;
     
-    // by 태섭, 검색 타입 배열
+    // 검색 타입 배열
     private String[] typeArr;
     
-    // by 태섭, 스킵 할 게시물 수( (pageNum-1) * amount )
+    // 스킵 할 게시물 수( (pageNum-1) * amount )
     private int skip;
     
-    // by 태섭, 로그인 아이디*/
+    // 로그인 아이디*/
     private String loginId;
 
-    // by 태섭, 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10
+    // 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10
     public Criteria() {
         this(1,10);
         this.skip = 0;
     }
     
-    // by 태섭, 생성자 => 원하는 pageNum, 원하는 amount
+    // 생성자 => 원하는 pageNum, 원하는 amount
     public Criteria(int pageNum, int amount) {
         this.pageNum = pageNum;
         this.amount = amount;
@@ -89,5 +89,9 @@ public class Criteria {
 	public void setLoginId(String loginId) {
 		this.loginId = loginId;
 	}
+
+	
+	
+	
 	
 }

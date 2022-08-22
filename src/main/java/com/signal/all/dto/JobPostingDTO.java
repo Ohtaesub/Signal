@@ -2,6 +2,8 @@ package com.signal.all.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class JobPostingDTO {
 	
 	private String com_id;
@@ -44,16 +46,11 @@ public class JobPostingDTO {
 	private String jc_name;
 	private String jp_no;
 	private String jc_no;
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	
-	//by태섭, 이력서 번호 추가
-	private String re_no;
+	
 
-	public String getRe_no() {
-		return re_no;
-	}
-	public void setRe_no(String re_no) {
-		this.re_no = re_no;
-	}
+
 	public int getApply_no() {
 		return apply_no;
 	}

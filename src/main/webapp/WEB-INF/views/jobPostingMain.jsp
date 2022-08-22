@@ -114,37 +114,37 @@
 
 			</select>
 		       	&nbsp;
-       		<select name="searchOption1" id="searchOption" >
+       		<select name="searchOption1" id="searchOption1" >
        		<option value="">	모집분야</option>
        		<optgroup label="IT">
- 				<option value="퍼블리셔" ${searchOption == '퍼블리셔'? 'selected="selected"' : ''}>퍼블리셔</option>
-				<option value="SI개발" ${searchOption == 'SI개발'? 'selected="selected"' : ''}>SI개발</option>
-				<option value="데이터분석가" ${searchOption == '데이터분석가'? 'selected="selected"' : ''}>데이터분석가</option>
+ 				<option value="퍼블리셔" ${searchOption1 == '퍼블리셔'? 'selected="selected"' : ''}>퍼블리셔</option>
+				<option value="SI개발" ${searchOption1 == 'SI개발'? 'selected="selected"' : ''}>SI개발</option>
+				<option value="데이터분석가" ${searchOption1 == '데이터분석가'? 'selected="selected"' : ''}>데이터분석가</option>
        		</optgroup>
        		<optgroup label="건축">
-				<option value="건설관리" ${searchOption == '건설관리'? 'selected="selected"' : ''}>건설관리</option>
-				<option value="토목설계" ${searchOption == '토목설계'? 'selected="selected"' : ''}>토목설계</option>
-				<option value="내진설계" ${searchOption == '내진설계'? 'selected="selected"' : ''}>내진설계</option>
+				<option value="건설관리" ${searchOption1== '건설관리'? 'selected="selected"' : ''}>건설관리</option>
+				<option value="토목설계" ${searchOption1 == '토목설계'? 'selected="selected"' : ''}>토목설계</option>
+				<option value="내진설계" ${searchOption1 == '내진설계'? 'selected="selected"' : ''}>내진설계</option>
        		</optgroup>
        		<optgroup label="항공">
-				<option value="승무원" ${searchOption == '승무원'? 'selected="selected"' : ''}>승무원</option>
-				<option value="항공운송" ${searchOption == '항공운송'? 'selected="selected"' : ''}>항공운송</option>
-				<option value="항공정비" ${searchOption == '항공정비'? 'selected="selected"' : ''}>항공정비</option>
+				<option value="승무원" ${searchOption1 == '승무원'? 'selected="selected"' : ''}>승무원</option>
+				<option value="항공운송" ${searchOption1 == '항공운송'? 'selected="selected"' : ''}>항공운송</option>
+				<option value="항공정비" ${searchOption1 == '항공정비'? 'selected="selected"' : ''}>항공정비</option>
        		</optgroup>
        		<optgroup label="전기">
-				<option value="전기설계" ${searchOption == '전기설계'? 'selected="selected"' : ''}>전기설계</option>
-				<option value="전기기사" ${searchOption == '전기기사'? 'selected="selected"' : ''}>전기기사</option>
-				<option value="조경설계" ${searchOption == '조경설계'? 'selected="selected"' : ''}>조경설계</option>
+				<option value="전기설계" ${searchOption1 == '전기설계'? 'selected="selected"' : ''}>전기설계</option>
+				<option value="전기기사" ${searchOption1 == '전기기사'? 'selected="selected"' : ''}>전기기사</option>
+				<option value="조경설계" ${searchOption1 == '조경설계'? 'selected="selected"' : ''}>조경설계</option>
        		</optgroup>
        		<optgroup label="축산">
-				<option value="축산식품가공" ${searchOption == '축산식품가공'? 'selected="selected"' : ''}>축산식품가공</option>
-				<option value="축산식품유통" ${searchOption == '축산식품유통'? 'selected="selected"' : ''}>축산식품유통</option>
-				<option value="도축" ${searchOption == '도축'? 'selected="selected"' : ''}>도축</option>		
+				<option value="축산식품가공" ${searchOption1 == '축산식품가공'? 'selected="selected"' : ''}>축산식품가공</option>
+				<option value="축산식품유통" ${searchOption1 == '축산식품유통'? 'selected="selected"' : ''}>축산식품유통</option>
+				<option value="도축" ${searchOption1 == '도축'? 'selected="selected"' : ''}>도축</option>		
        		</optgroup>
 			</select>
 			&nbsp;
 		     기업명&nbsp;
-				<input  type="text"  name="search" id="search" value=""/>
+				<input  type="text"  name="search" id="search" value="${search}"/>
        		<input type="submit" value="조건검색">
        		<!-- 페이징  -->
 				<input type="hidden" name="pageNum" value="1"/>
@@ -204,7 +204,6 @@
     		</div>	
 	        <form id="moveForm" method="get">
 	  	 <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-	  	 <input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 	  </form>	
 		<br/>   
 </body>

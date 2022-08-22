@@ -1,6 +1,9 @@
 package com.signal.jobposting.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.signal.all.dto.InterviewDTO;
@@ -312,6 +316,7 @@ public class JobPostingController {
 		// 페이징 리스트
 		ArrayList<JobPostingDTO> mainJpoList = service.mainPostingList(params);
 		logger.info("리스트 갯수: "+mainJpoList.size());
+		logger.info("리스트: {}"+params);
 		model.addAttribute("mainJpoList",mainJpoList);
 		model.addAttribute("pageNum",pageNum);
 		
@@ -331,7 +336,8 @@ public class JobPostingController {
 			@RequestParam String searchOption,@RequestParam String searchOption1) {
 			logger.info("옵션 확인: "+searchOption+" / "+searchOption1+" / "+search);		
 			model.addAttribute("searchOption",searchOption);
-			model.addAttribute("searchOption",searchOption1);
+			model.addAttribute("searchOption1",searchOption1);
+			model.addAttribute("search",search);
 		
 			//옵션 페이징처리
 			int skip=(pageNum-1) * 10;
@@ -367,7 +373,21 @@ public class JobPostingController {
 		  	
 		return "PostingDetailMain";
 	}	
-
+	
+	// 채용달력
+	@RequestMapping(value = "/main.go")
+	@ResponseBody
+	public HashMap<String, Object> Main(@RequestParam HashMap<String, String> params,Model model, HttpSession session) {		
+		
+		String start = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		String end = LocalDate.now().plusDays(6).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		
+		params.put("start", start);
+		params.put("end", end);
+      	logger.info("리스트 요청 : {}",params);
+			
+		return service.main(params);	
+	}	
 	
 	
 	

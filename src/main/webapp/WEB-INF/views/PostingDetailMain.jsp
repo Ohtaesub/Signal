@@ -132,7 +132,7 @@
 	  <tr>
 	    <td class="tg-zv4m" colspan="4" rowspan="2">
 	    <p><a href="${dto.ci_web}" target="_blank" id="link"> ${dto.com_name}</a></p>
-	    <img src="/photo/${dto.ci_photo}" width="250" alt="로고" class="comLogo">
+	    <img src="/photo/jobPosting/${dto.ci_photo}" width="250" alt="로고" class="comLogo">
 	    </td>
 	  </tr>
 	  <tr>
@@ -147,12 +147,12 @@
 	  </tr>
 	  <tr>
 	    <td class="tg-zv3m" colspan="9" > <h4>[ 모집내용 ]</h4>
-	    <img src="/photo/${dto.jpo_photo}" alt="채용공고" class="comPosting">
+	    <img src="/photo/jobPosting/${dto.jpo_photo}" alt="채용공고" class="comPosting">
 	    </td>
 	  </tr>
 	</tbody>
 	</table>
-<input id="apply_button" type="button" value="지원하기"/>
+<input id="apply_button" type="button" value="지원하기" onclick="location.href='/apply.do?jpo_no=${dto.jpo_no}'">
 <input type="button" value="목록으로" onclick="location.href='/jobPostingMain.go'">
 </body>
 <script>
@@ -180,7 +180,7 @@
 	
     $("#apply_button").on("click",function(){
     	if(client != "" && ${dto.jpo_state.equals("진행중")}){
-    		location.href="/applyTwo.do?jpo_no=${dto.jpo_no}&re_no=${dto.re_no}&com_id=${dto.com_id}";
+    		location.href="/apply.do?jpo_no=${dto.jpo_no}";
     	}else{
     		 location.href = "/jobPostingMain.go";
     	}

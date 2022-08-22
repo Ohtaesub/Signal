@@ -450,7 +450,7 @@
 
 
 
-	<!-- by 태섭, 이력서 번호를 가져오기 위해 resume 테이블 조인 추가 및 re_no select -->
+
 	<select id="PostingDetailMainPage" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
 		SELECT 
          	jp.jpo_title,
@@ -469,7 +469,6 @@
 	         jp.jpo_views,
 	         co.com_id,
             co.com_name,
-            r.re_no,
 	         p.jp_name,
 	         c.jc_name,
 	         jp.jpo_no,
@@ -484,14 +483,19 @@
 	      left outer join interview i on i.com_id = jp.com_id 
 	      LEFT OUTER JOIN com_info ci ON ci.com_id = co.com_id 
 	      LEFT OUTER JOIN job_pa p ON p.jp_no = jp.jp_no 
-	      LEFT OUTER JOIN job_ch c ON c.jc_no = jp.jc_no
-	      LEFT OUTER JOIN resume r on r.re_no = i.re_no 
+	      LEFT OUTER JOIN job_ch c ON c.jc_no = jp.jc_no 
       WHERE jp.jpo_no = #{param1} AND jp.com_id = #{param2};
  	</select>
 	
-	
-	
-	
+	<select id="main"  parameterType="String" resultType="hashmap">
+		SELECT 
+			jpo_no,
+			jpo_title,
+           	jpo_start,
+           	jpo_deadline 
+		FROM job_posting 
+		WHERE (jpo_start BETWEEN #{start} AND #{end}) OR (jpo_deadline BETWEEN #{start} AND #{end})
+	</select>
 	
 	
 <!-- 	<select id="infoList" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">

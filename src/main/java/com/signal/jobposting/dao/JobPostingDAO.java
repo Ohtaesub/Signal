@@ -1,5 +1,6 @@
 package com.signal.jobposting.dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -70,6 +71,8 @@ public interface JobPostingDAO {
 	int jobPostingMainTotal(String searchOption,String search, String searchOption1);
 
 	JobPostingDTO PostingDetailMainPage(String jpo_no, String com_id);
+
+	ArrayList<JobPostingDTO> main(HashMap<String, String> params);
 	
 
 	
