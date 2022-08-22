@@ -16,9 +16,9 @@
 		</select>
 		<!-- 마무리작업시 추가  WHERE cl_id =#{cl_id} -->
 		
-		<select id="avgGrade" resultType="float">
+		<select id="avgGrade" resultType="int">
 			SELECT 
-				AVG(inter_grade) 
+			ifnull(AVG(i.inter_grade),0) 
 			FROM interview i 
 				left outer join job_posting jp on i.jpo_no = jp.jpo_no 
 				left outer join company c on jp.com_id = c.com_id
@@ -28,7 +28,7 @@
 		
 		<select id="countComment" resultType="int" >
 			SELECT 
-				count(inter_comment) 
+				ifnull(count(inter_comment),0) 
 			FROM interview i 
 				left outer join job_posting jp on i.jpo_no = jp.jpo_no 
 				left outer join company c on jp.com_id = c.com_id
@@ -65,7 +65,7 @@
 		
 		<select id="comInterviewList" resultType="com.signal.all.dto.InterviewDTO">
 		SELECT 
-			inter_no,cl_photo ,cl_name ,cl_age ,cl_gender ,re_title,inter_date ,inter_result 
+			inter_no,cl_photo ,cl_name ,cl_age ,cl_gender ,re_title,inter_date ,inter_result ,inter_grade
 		FROM interview i
 			left outer join job_posting jp on i.jpo_no = jp.jpo_no 
 			left outer join resume r on r.re_no = i.re_no 

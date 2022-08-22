@@ -22,7 +22,7 @@ public interface InterviewDAO {
 
 	ArrayList<InterviewDTO> interviewDetailResultList(String inter_no);
 
-	float avgGrade(String cl_id);
+	int avgGrade(String cl_id);
 
 	int countComment(String cl_id);
 
