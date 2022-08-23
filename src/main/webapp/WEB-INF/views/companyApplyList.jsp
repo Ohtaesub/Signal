@@ -7,33 +7,25 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-table {
-	width:100%;
-	border:1px solid #787878;
-	border-collapse:collapse;
-}
-
-table tr th {
-	padding:10px;
-	border:1px solid #787878;
-	background-color:#efefef;
-}
-table tr td {
-	padding:10px;
-	border:1px solid #787878;
-}
 /* 메인 섹션 영역 */  
 #section {
-	width: 1000px;
-    position: absolute;
-    top: 230px;
-    left: 290px
+    width: 1000px;
+    position: relative;
+    top: -350px;
+    left: 290px;
+}
+
+body {
+   width:1500px;
+   margin: 0 auto;
+   padding: 0;
+   font-size: 15px;
 }
 </style>
 </head>
 <body>
 	<div id="section">
-	<h5>마이페이지 > 지원자면접관리</h5>
+	<h3>지원자면접관리</h3>
 	<br>
 	<form action="jobPostingApplyList.do" method="get" id="applyList">
 		<select id="jobPostingList" name="jpo_no" onchange="jobPostingApplyList();">

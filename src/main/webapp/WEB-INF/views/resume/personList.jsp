@@ -3,28 +3,70 @@
 <%@ include file="../../../resources/inc/header_jobPosting.jsp" %>
 <style>
    #section {
-      width : 800px;
-      position: absolute;
-      top : 250px;
-      left : 350px;
-   }
-      #section1 {
-      
-      position: absolute;
-      top : 200px;
-      left : 350px;
+       	width: 800px;
+	    position: relative;
+	    top: 30px;
+	    left: 350px;
    }
    
-   #gosearch{
-		position: relative;
-		left:240px;
-	}
 	
 	body {
 	   width:1500px;
 	   margin: 0 auto;
 	   padding: 0;
 	   font-size: 15px;
+	}
+	
+	#searchOption {
+    position: relative;
+    top: 23px;
+    left: 350px;
+	}
+	
+	#gosearch {
+    position: relative;
+    top: 20px;
+    left: 600px;
+	}
+	
+	#searchStartAge {
+    position: relative;
+    top: 23px;
+    left: -800px;
+	}
+	
+	#searchEndAge {
+    position: relative;
+    top: 23px;
+    left: -770px;
+	}
+	
+	#between {
+    position: relative;
+    top: 20px;
+    left: -785px;
+    font-size: 30px;
+	}
+	
+	#age {
+    position: relative;
+    top: 23px;
+    left: 307px;
+	}
+	
+	h3 {
+	position: relative;
+    top: 5px;
+    left: 200px;
+	}
+	
+	input[type="button"], button[type="button"], button {
+    padding: 5px 10px;
+    font-size: 12px;
+    outline: none;
+    border: none;
+    color: #fff;
+    background-color: #333;
 	}
    
    
@@ -33,7 +75,6 @@
 <body>
 	<h3>인재채용 - 인재풀(Pull)</h3>
    <form action="personListSearch.do" method="get" id="form">
-      <div id="section1">
       <!-- select option 넣기 -->
          <select name="searchOption" id="searchOption">
             <option value="0" ${searchOption == 0? 'selected="selected"' : ''}>전체</option>
@@ -42,13 +83,12 @@
          &nbsp;<button id="gosearch" type="submit">검색</button>
          <select name="searchEndAge" id="searchEndAge" style="float:right;">
             <option value="1000" ${searchOption == 1000? 'selected="selected"' : ''}>---</option>
-         </select><span  style="float:right;">~</span>
+         </select><span  id="between" style="float:right;">~</span>
          <select name="searchStartAge" id="searchStartAge" style="float:right;">
             <option value="0" ${searchOption == 0? 'selected="selected"' : ''}>---</option>
          </select>         
-         <span>나이검색</span>
+         <span id="age">나이검색</span>
          <input type="hidden" name="pageNum" value="1"/>      
-      </div>
    </form>   
    <table id="section">
       <thead>         

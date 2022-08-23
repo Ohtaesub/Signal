@@ -24,6 +24,13 @@ button {
 	  	background-color:#333;
 }
 
+body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+
 </style>
 </head>
 <body>

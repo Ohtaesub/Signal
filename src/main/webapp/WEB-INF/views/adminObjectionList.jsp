@@ -9,21 +9,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-table {
-	width:100%;
-	border:1px solid #787878;
-	border-collapse:collapse;
-}
-
-table tr th {
-	padding:10px;
-	border:1px solid #787878;
-	background-color:#efefef;
-}
-table tr td {
-	padding:10px;
-	border:1px solid #787878;
-}
 /* 메인 섹션 영역 */  
 #section {
 	width : 800px;
@@ -32,13 +17,21 @@ table tr td {
 	left : 350px;
 }
 
+body {
+   width:1500px;
+   margin: 0 auto;
+   padding: 0;
+   font-size: 15px;
+}
+
 
 
 </style>
 </head>
 <body>
 <div id="section">
-<p>관리자페이지 > 이의제기관리 <p>
+<h3>이의제기관리</h3>
+<br>
 <form action="adminObjectionList.do" method="get" id="form">
      	<select name="searchOption" id="searchOption">
 			<option value="">전체</option>
@@ -63,7 +56,7 @@ table tr td {
     </colgroup>
         <thead>
             <tr>
-                <th>일반회원 <br>블라인드</th>
+                <th>개인회원</th>
                 <th>기업회원</th>
                 <th>기업명</th>
                 <th>면접번호</th>

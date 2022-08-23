@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../../resources/inc/header.jsp" %>
+<%@ include file="../../resources/inc/header_jobPosting.jsp" %>
 <style>
 	table {
 		width : 80%;
@@ -10,6 +10,12 @@
 		width : 1000px;
 		position: relative;
 		left : 15%;
+	}
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
 	}
 </style>
 <body>

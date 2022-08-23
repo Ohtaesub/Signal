@@ -17,12 +17,15 @@
 	font-size:22px;
 	font-weight: bold;
 	background-color: gray;
+	position: relative;
+    top: -250px;
+    left: 600px;
 	}
 	
-	#comInfoReg {
-		position: absolute;
-		top: 120px;
-		left: 400px;
+	#comTitle {
+    position: relative;
+    top: -300px;
+    left: 50;
 	}
 	
 	textarea {
@@ -75,20 +78,34 @@
 		background-color: #7f7f7fff;
 	}
 	
+	#comTitle {
+    position: relative;
+    top: -330px;
+    left: 350px;
+	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	
 </style>
 </head>
 <body>
 <section>
     <div id="jp-list">
-				<div id="comTitle">
-		        	<h6>기업페이지 > 기업정보관리</h6>
+					<div id="comTitle">
+			        	<h3><strong>기업정보관리</strong></h3>
+					</div>
 		        	</br>
 		        	<div id="comInfoReg">
 						<c:if test="${dto.ci_ceo == null}">
 		        			<button id="create" onclick="location.href='/companyInfoWrite.go'">기업정보 등록하기</button>
 						</c:if>
 		        	</div>
-				</div>
 				<c:if test="${dto.ci_ceo != null}">
 	        		<h2>기업정보</h2>
 		        	<table id="ComInfoDetail">

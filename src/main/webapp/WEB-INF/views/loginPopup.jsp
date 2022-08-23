@@ -7,11 +7,11 @@
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-#popup{
-	position:relative;
-	left: 200px;
-	top: 70px;
-	width:400px;
+#popup {
+    position: relative;
+    left: 280px;
+    top: 120px;
+    width: 400px;
 }
 
 input[type="submit"] {

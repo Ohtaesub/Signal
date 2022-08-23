@@ -5,16 +5,28 @@
 	#section {
 		width : 800px;
 		position: relative;
-		top : -380px;
+		top : -350px;
 		left : 350px;
 	}
 	
 	#hidden {
 		display : none;
 	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	
 </style>
 <body>
-	<table id="section">
+	<div id="section">
+	<h3>면접평가관리</h3>
+	<br>
+	<table>
 		<thead>
 			<tr>	
 				<th colspan="3">
@@ -50,7 +62,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
+	</div>
 </body>
 <script>
 var state;

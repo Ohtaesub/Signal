@@ -9,40 +9,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-table {
-	width:100%;
-	border:1px solid #787878;
-	border-collapse:collapse;
-}
-
-table tr th {
-	padding:10px;
-	border:1px solid #787878;
-	background-color:#efefef;
-}
-table tr td {
-	padding:10px;
-	border:1px solid #787878;
-}
-/* 페이지 이동 CSS 작업 */
-.pageInfo{
-      list-style : none;
-      display: inline-block;
-    margin: 50px 0 0 100px;      
-  }
-  .pageInfo li{
-      float: left;
-    font-size: 20px;
-    margin-left: 18px;
-    padding: 7px;
-    font-weight: 500;
-  }
- a:link {color:black; text-decoration: none;}
- a:visited {color:black; text-decoration: none;}
- a:hover {color:black; text-decoration: underline;}
- .active{
-      background-color: #cdd5ec;
-  }
 /* 메인 섹션 영역 */  
 #section {
 	width : 800px;
@@ -50,12 +16,18 @@ table tr td {
 	top : -380px;
 	left : 350px;
 }
+body {
+   width:1500px;
+   margin: 0 auto;
+   padding: 0;
+   font-size: 15px;
+}
 
 </style>
 </head>
 <body>
 <div id="section">
-<p>관리자페이지 > 블라인드관리 <p>
+<h3>블라인드관리</h3>
 <form action="adminBlindList.do" method="get" id="form">
      	<select name="searchOption" id="searchOption">
 			<option value="">전체</option>
@@ -79,7 +51,7 @@ table tr td {
     </colgroup>
         <thead>
             <tr>
-                <th>일반회원 </br>블라인드</th>
+                <th>개인회원</th>
                 <th>기업회원</th>
                 <th>기업명</th>
                 <th>면접번호</th>

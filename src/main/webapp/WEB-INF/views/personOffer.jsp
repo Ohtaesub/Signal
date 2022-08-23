@@ -4,23 +4,19 @@
 <head>
 <meta charset="UTF-8">
 <title>입사 제안</title>
+<link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 table {
-	width:100%;
-	border:1px solid #787878;
-	border-collapse:collapse;
+	width : 55%;
 }
 
-table tr th {
-	padding:10px;
-	border:1px solid #787878;
-	background-color:#efefef;
+#cancle {
+    position: relative;
+    top: 50px;
+    left: 400px;
 }
-table tr td {
-	padding:10px;
-	border:1px solid #787878;
-}
+
 </style>
 </head>
 <body>
@@ -60,7 +56,7 @@ table tr td {
 			</c:forEach>
 		</tbody>
 	</table>
-	<input type="button" value="닫기" onclick="pclose2()"/>
+	<input type="button" id="cancle" value="닫기" onclick="pclose2()"/>
 	</form>
 </body>
 <script>

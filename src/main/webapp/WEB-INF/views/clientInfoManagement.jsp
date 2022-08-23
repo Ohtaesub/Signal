@@ -9,6 +9,13 @@
 	#button {
     text-align: center;
 	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
 </style>
 <body>
 	<div id="membersection">

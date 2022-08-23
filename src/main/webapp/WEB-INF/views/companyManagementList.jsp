@@ -2,9 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../../resources/inc/header.jsp" %>
 <style>
-table {
-	font-size: 70%;
-	width : 70%;
+	table {
+		font-size: 70%;
+		width : 70%;
+		}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
 	}
 </style>
 <body>

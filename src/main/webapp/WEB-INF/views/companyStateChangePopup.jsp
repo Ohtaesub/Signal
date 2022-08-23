@@ -7,6 +7,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
+<style>
+	table{
+		width:40%;
+	}
+</style>
 </head>
 <body>
 	<form action="companyStateChange.do" method="post" onsubmit="companyStateUpdate()">

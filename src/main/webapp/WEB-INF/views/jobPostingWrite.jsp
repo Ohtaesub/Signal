@@ -57,15 +57,27 @@
 	.find-btn2{
 		background-color: #7f7f7fff;
 	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	#jp-list {
+	    width: 80%;
+	    position: relative;
+	    top: -350px;
+	    left: 150px;
+		}
 
 </style>
 </head>
 <body>
 <section>
     <div id="jp-list">
-        	<h6>기업페이지 > 채용공고관리 > 등록</h6>
-        	</br>
-	        		<h2>채용공고 등록하기</h2></br>
+	        	<h2>채용공고 등록하기</h2></br>
 	        	<form action="/jobPostingWrite.do" method="post" enctype="multipart/form-data" id="form">
 		        	<div>
 			        	<table id="PostingWrite">

@@ -37,16 +37,16 @@
 			text-align: right;
 			margin-top: 10px;
 		}
-		.find-btn1{
-			display :inline-block;
-			color: #fff;
-			border-radius: 5px;
-			width: 100px;
-			height: 30px;
-			background-color: #1f3864ff;
-			position: absolute;
-    		top: 310px;
-    		left: 1065px;
+		.find-btn1 {
+		    display: inline-block;
+		    color: #fff;
+		    border-radius: 5px;
+		    width: 100px;
+		    height: 30px;
+		    background-color: #1f3864ff;
+		    position: relative;
+		    top: -480px;
+		    left: -350px;
 		}
 
 		table#comList < td{
@@ -66,9 +66,34 @@
 		}
 		
 		#form {
-			position: absolute;
-			top : 600px;
-			left : 305px;
+	    position: relative;
+	    top: -200px;
+	    left: 305px;
+		}
+		
+		#jp-list > #infoList{
+		   	position: relative;
+		    top: -250px;
+		    width: 800px;
+		}
+		
+		body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+		}
+		
+		#comTitle {
+	    position: relative;
+	    top: -330px;
+	    left: 50px;
+		}
+		
+		#postingList {
+	    position: relative;
+	    top: -200px;
+	    left: 0px;
 		}
 				
 	</style>
@@ -77,8 +102,6 @@
    <section>
     	<div id="jp-list">
     		<div id="comTitle">
-       		<h6>기업페이지 > 채용공고관리</h6>
-       		<br/>
        		<h3>기업정보</h3>
     		</div>
        			<table id="infoList">

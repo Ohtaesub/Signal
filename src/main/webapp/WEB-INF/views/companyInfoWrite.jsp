@@ -53,6 +53,34 @@
 	.find-btn2{
 		background-color: #7f7f7fff;
 	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	#comTitle {
+    position: relative;
+    top: -330px;
+    left: 200px;
+    width: 500px;
+	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	#write {
+    position: relative;
+    top: -280px;
+    left: 180px;
+    width: 1200px;
+	}
 
 </style>
 </head>
@@ -60,8 +88,6 @@
 <section>
     <div id="jp-list">
     		<div id="comTitle">
-        	<h4>기업페이지 > 기업정보관리 > 등록</h4>
-        	</br>
        		<h2>기업정보 등록하기</h2>
 	        </div>	
 	        	<form action="/companyInfoWrite.do" method="post" enctype="multipart/form-data" id="write">

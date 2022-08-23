@@ -12,6 +12,22 @@
 	.hidden {
 		display : none;
 	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	button {
+	   padding:5px 10px;
+	   font-size:15px;
+	   outline:none;
+	   border:none;
+	   color:#fff;
+	   background-color:#333;
+	}
 </style>
 <body>
 <div id="section">

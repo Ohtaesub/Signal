@@ -59,7 +59,7 @@ ul.nav{
     position: relative;
     left: -600px;
     font-size: 25px;
-    top: -80px;
+    top: 100px;
 }   
      
 ul.nav li{float:left;}
@@ -69,8 +69,6 @@ hr{
     color: black;
     width: 1250px;
     background: #1f3864;
-    position: relative;
-    top: -70px;
 }
     
 /* 우측 상단 로그인 회원가입 관련 (밑에 코드 모두)*/
@@ -81,7 +79,7 @@ hr{
     background-color: #1f3864;
     border-radius: 20px;
     position: relative; 
-    top: -250px;
+    top: -170px;
     left: 1170px;
     display:table-cell;
     vertical-align:middle;
@@ -283,13 +281,6 @@ textarea {
 
 /* 기업정보 관련 */
 
-#jp-list > #infoList{
-   position: absolute;
-    top: 370px;
-    left: 360px;
-    width: 800px;
-}
-
 #jp-list > #PostingWrite{
    position: absolute;
     top: 370px;
@@ -302,13 +293,6 @@ textarea {
     top: 370px;
     left: 360px;
     width: 800px;
-}
-
-#jp-list > #comTitle{
-   position: absolute;
-    top: 230px;
-    left: 230px;
-    width: 500px;
 }
 
 /* 왼쪽 버튼 */
@@ -328,14 +312,14 @@ textarea {
 /* 왼쪽 버튼 */
 .button3 {
 	position: absolute;
-	top: 720px;
+	top: 800px;
 	left: 350px;
 }
 
 /* 오른쪽 버튼 */
 .button4 {
 	position: absolute;
-	top: 720px;
+	top: 800px;
 	left: 440px;
 }
 

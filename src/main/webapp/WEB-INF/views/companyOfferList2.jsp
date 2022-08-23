@@ -14,11 +14,17 @@
 	top : -350px;
 	left : 350px;
 }
+body {
+   width:1500px;
+   margin: 0 auto;
+   padding: 0;
+   font-size: 15px;
+}
 </style>
 </head>
 <body>
 	<div id="section">
-	<h5>기업페이지 > 입사제안관리</h5>
+	<h3>입사제안관리</h3>
 	<br>
 	<table>
 		<thead>
