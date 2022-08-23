@@ -32,7 +32,7 @@
 	#searchStartAge {
     position: relative;
     top: 23px;
-    left: -800px;
+    left: -790px;
 	}
 	
 	#searchEndAge {
@@ -44,7 +44,7 @@
 	#between {
     position: relative;
     top: 20px;
-    left: -785px;
+    left: -780px;
     font-size: 30px;
 	}
 	
