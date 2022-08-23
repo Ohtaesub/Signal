@@ -27,7 +27,7 @@ body {
 </head>
 <body>
 <div id="section">
-<h3>블라인드관리</h3>
+<h2>블라인드관리</h2>
 <form action="adminBlindList.do" method="get" id="form">
      	<select name="searchOption" id="searchOption">
 			<option value="">전체</option>

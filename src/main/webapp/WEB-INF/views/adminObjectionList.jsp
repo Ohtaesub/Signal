@@ -30,8 +30,7 @@ body {
 </head>
 <body>
 <div id="section">
-<h3>이의제기관리</h3>
-<br>
+<h2>이의제기관리</h2>
 <form action="adminObjectionList.do" method="get" id="form">
      	<select name="searchOption" id="searchOption">
 			<option value="">전체</option>

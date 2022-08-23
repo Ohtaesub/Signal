@@ -45,8 +45,8 @@
 		    height: 30px;
 		    background-color: #1f3864ff;
 		    position: relative;
-		    top: -480px;
-		    left: -350px;
+		    top: -150px;
+		    left: -300px;
 		}
 
 		table#comList < td{
@@ -69,6 +69,7 @@
 	    position: relative;
 	    top: -200px;
 	    left: 305px;
+	    width: 350px;
 		}
 		
 		#jp-list > #infoList{
@@ -95,6 +96,14 @@
 	    top: -200px;
 	    left: 0px;
 		}
+		
+		table tr comphoto {
+	    padding: 10px;
+	    border: 1px solid #787878;
+	    background-color: white;
+	    text-align: center;
+	    color: white;
+		}
 				
 	</style>
 </head>
@@ -106,7 +115,7 @@
     		</div>
        			<table id="infoList">
        				<tr>
-       					<th rowspan="4">
+       					<th rowspan="4" id="comphoto">
        						<c:forEach items="${list}" var="path">
                   				<p><img src="/photo/${dto.ci_photo}" alt="로고" class="comLogo"></p>
                   			</c:forEach>

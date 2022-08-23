@@ -9,9 +9,10 @@
 <style>
 #popup {
     position: relative;
-    left: 280px;
-    top: 120px;
-    width: 400px;
+    left: 200px;
+    top: 70px;
+    width: 600px;
+    height: 400px;
 }
 
 input[type="submit"] {

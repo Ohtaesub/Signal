@@ -72,6 +72,13 @@
 		position: relative;
 		left: 140px;
 	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
 
 	</style>
 </head>

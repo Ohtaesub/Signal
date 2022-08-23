@@ -24,8 +24,7 @@
 </style>
 <body>
 	<div id="section">
-	<h3>면접평가관리</h3>
-	<br>
+	<h2>면접평가관리</h2>
 	<table>
 		<thead>
 			<tr>	
