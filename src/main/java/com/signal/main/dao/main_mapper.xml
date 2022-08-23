@@ -10,7 +10,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no 
 		left outer join job_ch jc on jc.jc_no = jp.jc_no  
 		where jpo_state="진행중" and jpo_start =#{day1}
-		group by jp.jpo_no 
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -22,7 +22,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no   
 		where jpo_state="진행중" and jpo_deadline =#{day1}
-		group by jp.jpo_no 
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -34,7 +34,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no   
 		where jpo_state="진행중" and jpo_start =#{day2}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -46,7 +46,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no 
 		where jpo_state="진행중" and jpo_deadline =#{day2}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -58,7 +58,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no 
 		where jpo_state="진행중" and jpo_start =#{day3}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -70,7 +70,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
 		where jpo_state="진행중" and jpo_deadline =#{day3}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -82,7 +82,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
 		where jpo_state="진행중" and jpo_start =#{day4}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -94,7 +94,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
 		where jpo_state="진행중" and jpo_deadline =#{day4}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -106,7 +106,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
 		where jpo_state="진행중" and jpo_start =#{day5}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -118,7 +118,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
 		where jpo_state="진행중" and jpo_deadline =#{day5}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -130,7 +130,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
 		where jpo_state="진행중" and jpo_start =#{day6}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -142,7 +142,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
 		where jpo_state="진행중" and jpo_deadline =#{day6}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -154,7 +154,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
 		where jpo_state="진행중" and jpo_start =#{day7}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -166,7 +166,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
 		where jpo_state="진행중" and jpo_deadline =#{day7}
-		group by jp.jpo_no
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
 	</select>
@@ -178,7 +178,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no 
 		left outer join job_ch jc on jc.jc_no = jp.jc_no  
 		where jpo_state="진행중" and jpo_start =#{chkDay}
-		group by jp.jpo_no 
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC;	
 	</select>
 	
@@ -189,7 +189,7 @@
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no 
 		left outer join job_ch jc on jc.jc_no = jp.jc_no  
 		where jpo_state="진행중" and jpo_deadline =#{chkDay}
-		group by jp.jpo_no 
+		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC;	
 	</select>
 	
