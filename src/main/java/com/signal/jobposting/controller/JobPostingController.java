@@ -364,10 +364,10 @@ public class JobPostingController {
 		
 		//옵션 페이징처리
 		int skip=(pageNum-1) * 10;
-		ArrayList<JobPostingDTO> dto = service.jobPostingMainSearch(jpo_region,jp_no, jc_no, search,skip);
+		ArrayList<JobPostingDTO> dto = service.jobPostingMainSearch(jpo_region,jp_no, search,skip);
 		model.addAttribute("mainJpoList",dto);
 		
-		int mainPostingPasingTotal=service.jobPostingMainTotal(jpo_region,jp_no, jc_no, search);
+		int mainPostingPasingTotal=service.jobPostingMainTotal(jpo_region,jp_no, search);
 		model.addAttribute("pageNum",pageNum);
 		
 		PageMakerDTO pageMake= new PageMakerDTO(pageNum, mainPostingPasingTotal);
