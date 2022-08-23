@@ -34,7 +34,7 @@ body {
 </head>
 <body>
 	<div id="section">
-	<h5>입사제안현황</h5>
+	<h2>입사제안현황</h2>
 	<br>
 	<form action="deleteOffer.do" method="post">
 	<button>삭제</button>

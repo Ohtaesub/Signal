@@ -15,10 +15,19 @@
 		display : none;
 	}
 	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
 	input[type="text"]{width:100%;}
 </style>
 <body>	
-	<table id="section">
+	<div id="section">
+	<h2>개인회원 이력서 작성</h2>
+	<table>
 		 <tr>
 		    <th colspan="4">제목</th>
 		    <td colspan="24"><input type="text" id="re_title"/></td>
@@ -127,7 +136,8 @@
 				<input type="button" value="취소" onclick="location.href='resumeList.go'">				
 		  	</td>
 		  </tr>		 	
-		</table>	
+		</table>
+	</div>	
 </body>
 <script>
 schList();	

@@ -11,22 +11,18 @@
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <style>
 	body {
-		width: 1000px;
+		width: 800px;
 	}
 	/* 왼쪽 버튼 */
-	.button3 {
-		position: absolute;
-		top: 500px;
-		left: 550px;
-		font-size: 15px;
+	#button3 {
+		position: relative;
+		left: 330px;
 	}
 	
 	/* 오른쪽 버튼 */
-	.button4 {
-		position: absolute;
-		top: 500px;
-		left: 640px;
-		font-size: 15px;
+	#button4 {
+		position: relative;
+		left: 350px;
 }
 </style>
 </head>
@@ -83,8 +79,8 @@
            </tr>
         </table>
         <br>
-        <input type= "button" class="button3" value="등록/수정" onclick="getResult()">
-        <input type="button" class="button4" value="닫기" onclick="pclose2()"/>
+        <input type= "button" id="button3" value="등록/수정" onclick="getResult()">
+        <input type="button" id="button4" value="닫기" onclick="pclose2()"/>
     </form>		
 </body>
 <script>

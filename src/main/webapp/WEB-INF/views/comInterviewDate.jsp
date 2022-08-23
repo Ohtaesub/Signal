@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <style>
 	body {
-		width: 600px;
+		width: 400px;
 	}
 </style>
 </head>

@@ -27,7 +27,7 @@ body {
 </head>
 <body>
 	<div id="section">
-<p>마이페이지 > 이의제기현황 <p>
+<h2>이의제기현황</h2>
 <table>
     <colgroup>
        <col width="400"></col>

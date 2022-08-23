@@ -12,6 +12,25 @@
 	.hidden {
 		display : none;
 	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	#listgo {
+	    padding: 5px 10px;
+	    font-size: 15px;
+	    outline: none;
+	    border: none;
+	    color: #fff;
+	    background-color: #333;
+	    position: relative;
+	    top: -350px;
+	    left: 700px;
+	}
 </style>
 <body>
 	
@@ -235,9 +254,7 @@
 
 	<br/>
 	<br/>
-	<div id="section" style="text-align:center;">
-		<button onclick="location.href='companyApplyList.go'">목록</button>
-	</div>
+		<button id="listgo" onclick="location.href='companyApplyList.go'">목록</button>
 	
 
 </body>

@@ -31,7 +31,7 @@
 	   background-color:#333;
 	   position:relative;
        top: 30px;
-   	   left: 750px;
+   	   left: 380px;
 	}
 </style>
 </head>

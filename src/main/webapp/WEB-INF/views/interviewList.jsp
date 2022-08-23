@@ -27,9 +27,10 @@ body {
 </head>
 <body>
 <div id="section">
-<p>마이페이지 > 면접현황 <p>
-<p>평균 평점 ${avgGrade}<p>
-<p>총코멘트수 ${countComment}<p>
+<h2>면접현황</h2>
+<br>
+<p><strong>평균 평점 ${avgGrade}</strong><p>
+<p><strong>총코멘트수 ${countComment}</strong><p>
 <table>
 
     <colgroup>

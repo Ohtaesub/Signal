@@ -9,10 +9,30 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
-<style></style>
+<style>
+body {
+	width: 800px;
+}
+
+/* 왼쪽 버튼 */
+#regbutton {
+	position: relative;
+	top: 30px;
+	left: 350px;
+	font-size: 15px;
+}
+
+/* 오른쪽 버튼 */
+#closebutton {
+	position: relative;
+	top: 30px;
+	left: 360px;
+	font-size: 15px;
+}
+
+</style>
 </head>
 <body>
-<p>마이페이지 > 면접현황 <p>
 <form action="comInterviewReg.do" method="post" >
     <table class="dto" id="list">
            <tr>
@@ -66,8 +86,8 @@
            </tr>
         </table>
         	
-        <input type= "button" value="등록" onclick="getResult()">
-        <input type="button" value="닫기" onclick="pclose2()"/>
+        <input type= "button" id="regbutton" value="등록" onclick="getResult()">
+        <input type="button" id="closebutton" value="닫기" onclick="pclose2()"/>
     </form>		
 </body>
 <script>

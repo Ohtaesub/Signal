@@ -3,11 +3,33 @@
 <%@ include file="../../resources/inc/header.jsp" %>
 <style>
 	table {
-		width : 60%;
+		width : 1000px;
 	}
 	
 	#button {
     text-align: center;
+	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	.button4 {
+		position: absolute;
+		top: 800px;
+		left: 440px;
+		font-size: 15px;
+	}
+	
+	#membersection {
+    width: 1400px;
+    position: relative;
+    top: -380px;
+    left: 300px;
+    height: 1000px;
 	}
 </style>
 <body>

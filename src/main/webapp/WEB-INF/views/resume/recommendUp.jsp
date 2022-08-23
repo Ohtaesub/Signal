@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <style>
 .hidden{display:none;}
+body {
+	width:800px;
+}
 </style>
 </head>
 <body>

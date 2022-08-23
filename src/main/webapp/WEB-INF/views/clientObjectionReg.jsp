@@ -12,20 +12,20 @@
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <style>
 	body {
-		width: 900px;
+		width: 700px;
 	}
 	
 	#button1 {
 	    position: relative;
 	    top: 20px;
-	    left: 400px;
+	    left: 300px;
 	    font-size: 15px;
 	}
 
 	#button2 {
 	    position: relative;
 	    top: 20px;
-	    left: 420px;
+	    left: 310px;
 	    font-size: 15px;
 	}
 </style>
