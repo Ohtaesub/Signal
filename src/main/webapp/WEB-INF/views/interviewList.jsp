@@ -59,12 +59,15 @@ body {
                         <td align="center">${interviewList.com_name}</td>
                         <td align="center">${interviewList.inter_date}</td>
                         <td>${interviewList.inter_result}</td>
-                        <td align="center">${interviewList.inter_grade}</td>
+                        <td align="center">${interviewList.inter_avg}</td>
                         <td align="center">
                         	<c:choose>
 									<c:when test="${empty interviewList.obj_cl_content}">
 										<button type="button" onclick="pop(${interviewList.inter_no});">이의제기</button>
-									</c:when>					
+									</c:when>
+									<c:when test="${interviewList.obj_state == '1'}">
+										처리완료
+									</c:when>							
 									<c:otherwise>처리중</c:otherwise>
 							</c:choose>
 							<br>

@@ -512,7 +512,7 @@
 	      LEFT OUTER JOIN job_pa p ON p.jp_no = jp.jp_no 
 	      LEFT OUTER JOIN job_ch c ON c.jc_no = jp.jc_no
 	      LEFT OUTER JOIN resume r on r.re_no = i.re_no 
-      WHERE jp.jpo_no = #{param1} AND jp.com_id = #{param2};
+      WHERE jp.jpo_no = #{param1} AND jp.com_id = #{param2} AND inter_result IS NOT NULL;
  	</select>
 	
 	<select id="mainList"  parameterType="String" resultType="hashmap">
