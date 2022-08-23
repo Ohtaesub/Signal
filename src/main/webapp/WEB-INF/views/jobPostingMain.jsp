@@ -108,12 +108,6 @@
 					</c:forEach>
 				</select>
 				&nbsp;
-				<select name="jc_no" id="searchOption2" onchange="jobMidListShow();">
-	       		<option value="">직업</option>
-	       			<c:forEach items="${jobMidList}" var="jobMidList">
-						<option value="${jobMidList.jc_no}" ${jc_no == jobMidList.jc_no ? 'selected="selected"' : ''}>${jobMidList.jc_name}</option>
-					</c:forEach>
-				</select>
 				&nbsp;
 			     기업명&nbsp;
 				<input  type="text"  name="search" id="search" value="${search}"/>
@@ -183,10 +177,6 @@ function jpoRegionShow(){
 }
 
 function jobBigListShow(){
-	$("#form").submit();
-}
-
-function jobMidListShow(){
 	$("#form").submit();
 }
 
