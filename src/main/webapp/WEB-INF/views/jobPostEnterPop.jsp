@@ -32,7 +32,7 @@ body{
 			<c:forEach items="${list}" var="resume">
 				<tr>
 					<td><input type="radio" name="re_no" value="${resume.re_no}"/></td>
-					<td><a href="resumeDetail.do?re_no=${resume.re_no}">${resume.re_title}</a></td>
+					<td><a href="#" onclick="moveRe('${resume.re_no}')">${resume.re_title}</a></td>
 					<td>${resume.jp_name}</td>
 					<td>${resume.jc_name}</td>
 					<td>${resume.re_regDate}</td>
@@ -57,6 +57,11 @@ function jobPostEnter(){
 	}else{
 		alert("지원할 이력서를 선택하세요!");   
 	}	
+}
+
+function moveRe(re_no){
+	window.opener.location.href="resumeDetail.do?re_no="+re_no;
+	window.close();
 }
 
 

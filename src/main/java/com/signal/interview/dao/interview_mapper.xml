@@ -6,23 +6,24 @@
 	
 		<select id="interviewList" resultType="com.signal.all.dto.InterviewDTO">
 			SELECT 
-				jpo_title,com_name,inter_date,inter_grade,inter_result,i.inter_no,obj_cl_content,obj_state,i.com_id,i.jpo_no
-			FROM interview i  
+				jpo_title,com_name,inter_date,inter_grade,inter_result,i.inter_no,obj_cl_content,obj_state,i.com_id,i.jpo_no,
+				(select avg(inter_score)
+				from interview_test_result itr 
+				where inter_no =i.inter_no)as inter_avg
+				FROM interview i  
 				left outer join objection o on i.inter_no =o.inter_no
 				left outer join job_posting jp on i.jpo_no = jp.jpo_no 
 				left outer join company c on jp.com_id = c.com_id
-				where cl_id =#{param1}
+				where cl_id =#{param1} and inter_result is not null
 			ORDER by i.inter_no desc;
 		</select>
 		<!-- 마무리작업시 추가  WHERE cl_id =#{cl_id} -->
 		
 		<select id="avgGrade" resultType="int">
-			SELECT 
-			ifnull(AVG(i.inter_grade),0) 
-			FROM interview i 
-				left outer join job_posting jp on i.jpo_no = jp.jpo_no 
-				left outer join company c on jp.com_id = c.com_id
-			where cl_id =#{param1};
+		select ifnull(avg(inter_score),0)
+		from interview_test_result itr 
+		left outer join interview i  on i.inter_no =itr.inter_no 
+		where i.cl_id =#{param1};
 		</select>
 		<!-- 마무리작업시 추가  WHERE cl_id =#{cl_id} -->
 		

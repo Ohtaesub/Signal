@@ -53,7 +53,7 @@
 			<c:forEach items="${list}" var="self">
 				<tr>					
 					<td>${self.st_keyword}</td>
-					<td>${self.st_score}</td>
+					<td>${self.cntStScore}</td>
 				</tr>
 			</c:forEach>
 			<tr>

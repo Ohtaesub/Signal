@@ -7,6 +7,13 @@ public class TestDTO {
 	private String cl_id;
 	private int st_no;
 	private int st_score;
+	private int cntStScore;
+	public int getCntStScore() {
+		return cntStScore;
+	}
+	public void setCntStScore(int cntStScore) {
+		this.cntStScore = cntStScore;
+	}
 	private String st_que;
 	private int st_hidden;
 	private String st_keyword;

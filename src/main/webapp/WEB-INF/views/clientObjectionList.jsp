@@ -46,7 +46,7 @@ body {
                 <c:forEach items="${clientObjectionList}" var="clientObjectionList" >
                     <tr>
                         <td align="center"><a href="interviewDetail2.go?inter_no=${clientObjectionList.inter_no}">${clientObjectionList.jpo_title}</a>
-                        		${clientObjectionList.com_name}<br/> ${clientObjectionList.inter_date} ${clientObjectionList.inter_result}  평점  ${clientObjectionList.inter_grade}
+                        		${clientObjectionList.com_name}<br/> ${clientObjectionList.inter_date} ${clientObjectionList.inter_result}  평점  ${clientObjectionList.inter_avg}
                         </td>
                         <td align="center">${clientObjectionList.obj_content}</td>
                         <td align="center">
