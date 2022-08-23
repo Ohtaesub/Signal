@@ -68,7 +68,7 @@
 	
     <body>
     	
-    	<table id="cal-list" style="width:1200px; float:left; margin-left:100px;">
+    	<table id="cal-list" style="width:1200px; float:left; margin-left:150px;">
     	 <thead>
     	 <tr>
     	 	<th colspan="3">

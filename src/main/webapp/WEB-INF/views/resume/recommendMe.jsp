@@ -31,7 +31,7 @@
 	<table class="section" id="recommendMe">
 		<thead>
 			<tr>
-				<th colspan="4"><button onclick="recommendReg()">추천요청</button></th>
+				<th colspan="4" id="regbutton"><button onclick="recommendReg()">추천요청</button></th>
 			</tr>
 			<tr>
 				<th class="hidden">ID</th>

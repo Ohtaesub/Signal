@@ -52,13 +52,9 @@
 		            	</c:if>
 		            </td>
 		        </tr>
-		        <tr>
-		            <th id="button" colspan="2">
-		                <input type="button" value="수정하기" onclick="location.href='companyInfoUpdateForm.go'"/>
-			         	<input type="button" value="회원탈퇴" onclick="companyBreakForm()"/>
-		            </th>
-		        </tr>
 		    </table>
+            <input type="button" class="button1" value="수정하기" onclick="location.href='companyInfoUpdateForm.go'"/>
+         	<input type="button" class="button2" value="회원탈퇴" onclick="companyBreakForm()"/>
 	</div>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>

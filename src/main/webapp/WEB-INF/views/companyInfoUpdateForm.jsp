@@ -82,13 +82,9 @@
 		            	<br><div style="color:#da0000;">※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.</div>
 		            </td>
 		        </tr>
-		        <tr>
-		            <th id="button" colspan="2">
-		                <input type="submit" value="수정완료"/>
-			         	<input type="button" value="취소" onclick="location.href='companyInfoManagement.do'"/>
-		            </th>
-		        </tr>
 		    </table>
+            <input type="submit" class="button3" value="수정완료"/>
+        	<input type="button" class="button4" value="취소" onclick="location.href='companyInfoManagement.do'"/>
 	    </form>
     </div>
 </body>
