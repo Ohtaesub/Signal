@@ -215,7 +215,8 @@ public class JobPostingController {
 				
 			return "jobPostingCom";
 		}
-	
+		
+		
 	// 기업 페이지 - 채용공고 상세보기
 	@RequestMapping(value = "/jobPostingDetail.do")
 	public String jobPostingDetail(Model model, @RequestParam String jpo_no, HttpSession session) {
@@ -225,7 +226,7 @@ public class JobPostingController {
 		      
 		    String id = (String) session.getAttribute("loginId"); 
 			// 모집마감일이 오늘날짜보다 전이라면 jpo_state를 '마감'으로 업데이트 하는 기능
-			service.close();
+		    	service.close();
 			logger.info("모집여부 마감 요청");
 			
 		    //상세정보 가져오기 기능
@@ -241,12 +242,12 @@ public class JobPostingController {
 	// 채용공고 수정하기
 	@RequestMapping(value = "/jobPostingUpdate.do")
 	   public String PostingUpdate(MultipartFile[] jpo_photo,Model model,HttpSession session,
-			   @RequestParam String jpo_no,@RequestParam HashMap<String, String> params) {
+			   @RequestParam String jpo_no,@RequestParam String jpo_state,@RequestParam HashMap<String, String> params) {
 			
 			String id = (String) session.getAttribute("loginId");
 			logger.info(jpo_no+" 번 채용공고 수정하기 서비스 요청");
 			logger.info("param : {}",params);
-			String url = "/jobPostingDetail.do?jpo_no="+jpo_no;
+			String url = "/jobPostingDetail.do?jpo_no="+jpo_no+"&&jpo_state="+jpo_state;
 			int num = service.postingUpdate(jpo_photo,id,jpo_no,params);
 			
 		    if(num>0) {
@@ -267,6 +268,14 @@ public class JobPostingController {
 			if(session.getAttribute("loginId")!=null && session.getAttribute("isCompany")!= null) {
 				String id = (String) session.getAttribute("loginId");
 				logger.info(id+"의 기업 채용공고 등록하기");
+				
+				//직무 대분류 리스트 호출
+				ArrayList<JobPostingDTO> jobBigList = service.jobBigList();
+				model.addAttribute("jobBigList", jobBigList);
+						
+				//직무 중분류 리스트 호출
+				ArrayList<JobPostingDTO> jobMidList = service.jobMidList();
+				model.addAttribute("jobMidList", jobMidList);
 				
 				JobPostingDTO dto = service.posting(id);
 				logger.info("채용공고 등록 아이디: "+id);	
@@ -387,17 +396,19 @@ public class JobPostingController {
 	
 	// 채용달력
 	@RequestMapping(value = "/main.go")
-	@ResponseBody
-	public HashMap<String, Object> Main(@RequestParam HashMap<String, String> params,Model model, HttpSession session) {		
+	public String Main(Model model, HttpSession session) {		
 		
 		String start = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		String end = LocalDate.now().plusDays(6).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		logger.info(start+" | "+end);
+		ArrayList<JobPostingDTO> mainList = service.mainList(start,end);
+		logger.info("리스트 갯수: "+mainList.size());
+		String page = "main";
+		model.addAttribute("mainList",mainList);
+		model.addAttribute("start",start);
+		model.addAttribute("end",end);
 		
-		params.put("start", start);
-		params.put("end", end);
-      	logger.info("리스트 요청 : {}",params);
-			
-		return service.main(params);	
+		return page;	
 	}	
 	
 	

@@ -90,7 +90,7 @@ public class JobPostingService {
                logger.info(photo_original + photo_copy );   
                try {
                   byte[] arr =photo.getBytes();
-                  Path path = Paths.get("/photo/jobPosting/" + photo_copy);
+                  Path path = Paths.get("C:\\upload/" + photo_copy);
                   Files.write(path, arr);
                   logger.info(photo_copy + " 저장 완료");
                } catch (IOException e) {
@@ -152,7 +152,7 @@ public class JobPostingService {
                logger.info(photo_original + photo_copy );   
                try {
                   byte[] arr =photo.getBytes();
-                  Path path = Paths.get("/photo/jobPosting/" + photo_copy);
+                  Path path = Paths.get("C:\\upload/" + photo_copy);
                   Files.write(path, arr);
                   logger.info(photo_copy + " 저장 완료");
                } catch (IOException e) {
@@ -213,7 +213,7 @@ public class JobPostingService {
                logger.info(photo_original + photo_copy );   
                try {
                   byte[] arr =photo.getBytes();
-                  Path path = Paths.get("/photo/jobPosting/" + photo_copy);
+                  Path path = Paths.get("C:\\upload/" + photo_copy);
                   Files.write(path, arr);
                   logger.info(photo_copy + " 저장 완료");
                } catch (IOException e) {
@@ -286,7 +286,7 @@ public class JobPostingService {
            logger.info(photo_original + photo_copy );   
            try {
               byte[] arr =photo.getBytes();
-              Path path = Paths.get("/photo/jobPosting/" + photo_copy);
+              Path path = Paths.get("C:\\upload/" + photo_copy);
               Files.write(path, arr);
               logger.info(photo_copy + " 저장 완료");
            } catch (IOException e) {
@@ -369,12 +369,9 @@ public class JobPostingService {
 	   }
 
 
-	public HashMap<String, Object> main(HashMap<String, String> params) {
-		 HashMap<String, Object> map = new HashMap<String, Object>();
-		ArrayList<JobPostingDTO> main = dao.main(params);
-		map.put("main", main);
-				
-		return map;
+	public ArrayList<JobPostingDTO> mainList(String start, String end) {
+		logger.info("리스트 요청 서비스");
+		return dao.mainList(start,end);
 	}
 
 	//메인 공고 리스트에서 직무 대분류 리스트 호출

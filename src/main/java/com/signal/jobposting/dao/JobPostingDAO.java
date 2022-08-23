@@ -72,7 +72,7 @@ public interface JobPostingDAO {
 
 	JobPostingDTO PostingDetailMainPage(String jpo_no, String com_id);
 
-	ArrayList<JobPostingDTO> main(HashMap<String, String> params);
+	ArrayList<JobPostingDTO> mainList(String start, String end);
 
 	ArrayList<JobPostingDTO> jobBigList();
 

@@ -66,7 +66,7 @@
         	<h6>기업페이지 > 채용공고관리 > 등록</h6>
         	</br>
 	        		<h2>채용공고 등록하기</h2></br>
-	        	<form action="/jobPostingWrite.do" method="post" enctype="multipart/form-data" id="checkDate">
+	        	<form action="/jobPostingWrite.do" method="get" enctype="multipart/form-data" id="form">
 		        	<div>
 			        	<table id="PostingWrite">
 							<input type="hidden" name="com_id" value="${dto.com_id}"/></td>
@@ -92,33 +92,19 @@
 				   			<tr>
 								<th>직무분류</th>
 								<td>	
-									<select name="jp_no" id="jp_no" required="required">
-										<option value="0" selected="selected">대분류</option>
-										<option value="1">IT</option>
-										<option value="2">건축</option>
-										<option value="3">항공</option>																				
-										<option value="4">전기</option>
-										<option value="5">축산</option>
-									</select>
-									 > 
-									<select name="jc_no" id="jc_no" required="required">
-										<option value="0">중분류</option>									
-										<option value="6" class="mall1">퍼블리셔</option>
-										<option value="2" class="mall1">SI개발</option>
-										<option value="3" class="mall1">데이터분석가</option>
-										<option value="4" class="mall2">건설관리</option>
-										<option value="5" class="mall2">토목설계</option>
-										<option value="7" class="mall2">내진설계</option>
-										<option value="10" class="mall3">승무원</option>
-										<option value="8" class="mall3">항공운송</option>
-										<option value="9" class="mall3">항공정비</option>
-										<option value="11" class="mall4">전기설계</option>
-										<option value="12" class="mall4">전기기사</option>
-										<option value="13" class="mall4">조경설계</option>
-										<option value="14" class="mall5">축산식품가공</option>
-										<option value="15" class="mall5">축산식품유통</option>
-										<option value="16" class="mall5">도축</option>																																						
-									</select>
+							     <select name="jp_no" id="searchOption1" onchange="jobBigListShow();">
+							                <option value="">직군</option>
+							                   <c:forEach items="${jobBigList}" var="jobBigList">
+							                  <option value="${jobBigList.jp_no}" ${jp_no == jobBigList.jp_no ? 'selected="selected"' : ''}>${jobBigList.jp_name}</option>
+							               </c:forEach>
+							            </select>
+							            &nbsp;
+							            <select name="jc_no" id="searchOption2" onchange="jobMidListShow();">
+							                <option value="">직업</option>
+							                   <c:forEach items="${jobMidList}" var="jobMidList">
+							                  <option value="${jobMidList.jc_no}" ${jc_no == jobMidList.jc_no ? 'selected="selected"' : ''}>${jobMidList.jc_name}</option>
+							               </c:forEach>
+							            </select>
 								</td>
 							</tr>
 				   			<tr>
@@ -184,7 +170,6 @@
 								<th>채용 내용</th>
 								<td>       					
 									<input type="file" name="jpo_photo" multiple="multiple" required="required"/>
-									<div style="color:#da0000;">※ 파일은 PNG,JPEG/JFIF,Exif,GIF,BMP 형식만 가능합니다.</div>
                   				</td>
 							</tr>														
 			        	</table>
@@ -215,13 +200,29 @@
 			}); 
 		});
 	
+/* 	
+	function jobBigListShow(){
+		   $("#form").click();
+		}
+
+		function jobMidListShow(){
+		   $("#form").append();
+		}
+
+	
+	 */
+	
+	
+	
+/* 	
 	var malls = false;
 
 	function update_selected() {
+		$("#jp_no").click(function(){
 	  $("#jc_no").val(0);
 	  $("#jc_no").find("option[value!=0]").detach();
 
-	  $("#jc_no").append(malls.filter(".mall" + $(this).val()));
+	  $("#jc_no").append(malls.filter("#jp_no.val()" =  $(this).val()));
 	}
 
 	$(function() {
@@ -230,8 +231,8 @@
 
 	  $("#jp_no").change(update_selected);
 	  $("#jp_no").trigger("change");
-	});
-
+		}
+	});  */
 
 </script>
 </html>

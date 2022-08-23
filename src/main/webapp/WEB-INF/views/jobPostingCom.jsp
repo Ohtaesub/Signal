@@ -85,7 +85,7 @@
        				<tr>
        					<th rowspan="4">
        						<c:forEach items="${list}" var="path">
-                  				<p><img src="/photo/jobPosting/${dto.ci_photo}" alt="로고" class="comLogo"></p>
+                  				<p><img src="/photo/${dto.ci_photo}" alt="로고" class="comLogo"></p>
                   			</c:forEach>
                			</th>
        				</tr>

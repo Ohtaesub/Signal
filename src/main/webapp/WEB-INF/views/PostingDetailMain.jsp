@@ -132,7 +132,7 @@
 	  <tr>
 	    <td class="tg-zv4m" colspan="4" rowspan="2">
 	    <p><a href="${dto.ci_web}" target="_blank" id="link"> ${dto.com_name}</a></p>
-	    <img src="/photo/jobPosting/${dto.ci_photo}" width="250" alt="로고" class="comLogo">
+	    <img src="/photo/${dto.ci_photo}" width="250" alt="로고" class="comLogo">
 	    </td>
 	  </tr>
 	  <tr>
@@ -147,7 +147,7 @@
 	  </tr>
 	  <tr>
 	    <td class="tg-zv3m" colspan="9" > <h4>[ 모집내용 ]</h4>
-	    <img src="/photo/jobPosting/${dto.jpo_photo}" alt="채용공고" class="comPosting">
+	    <img src="/photo/${dto.jpo_photo}" alt="채용공고" class="comPosting">
 	    </td>
 	  </tr>
 	</tbody>

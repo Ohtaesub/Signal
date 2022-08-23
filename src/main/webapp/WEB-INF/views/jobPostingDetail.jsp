@@ -69,7 +69,7 @@
         	<h6>기업페이지 > 채용공고관리 > 수정 및 상세보기</h6>
         	<br/>
 	        		<h2>채용공고 수정 및 상세보기</h2><br/>
-	        	<form action="/jobPostingUpdate.do?jpo_no='${dto1.jpo_no}'" method="post" enctype="multipart/form-data" id="checkDate">
+	        	<form action="/jobPostingUpdate.do?jpo_no=${dto1.jpo_no}" method="post" enctype="multipart/form-data" id="checkDate">
 		        <div>
 					<input type="hidden" name="jpo_no" value="${dto1.jpo_no}"/>
 			        	<table id="jobPostingDetail">
@@ -231,7 +231,7 @@
 					        </tr>
 					        <tr>
 					            <td>	
-					            	<p><img src="/photo/jobPosting/${dto1.jpo_photo}" alt="채용공고" class="comPosting"></p>
+					            	<p><img src="/photo/${dto1.jpo_photo}" alt="채용공고" class="comPosting"></p>
 					            </td>
 							</tr>
 							

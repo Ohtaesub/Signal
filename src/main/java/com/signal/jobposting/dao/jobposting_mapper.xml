@@ -147,9 +147,12 @@
  		</update>
    		
    		<update id="close">
-   			UPDATE job_posting SET jpo_state = if(jpo_deadline &lt; CURDATE(), '마감', '진행중')
-   			<!-- UPDATE 문에 if를 넣는 구문 > 모집마감일이 오늘날짜보다 전이라면 recruit_close는 0이 된다. 아니면 1. -->
+   			UPDATE job_posting SET 
+			jpo_state = if(jpo_deadline &lt; CURDATE() AND jpo_state != '마감', '마감', jpo_state)
+
+   			<!-- UPDATE 문에 if를 넣는 구문 > 모집마감일이 오늘날짜보다 전이고 진행중이라면 jpo_state는 마감이 된다. 조기마감을 한 경우 상태 유지. -->
    			<!-- &lt; = <, &gt; = > -->   
+   			
    		</update>
 	
 	 	<select id="jobPostingDetail" parameterType="String" resultType="com.signal.all.dto.JobPostingDTO">
@@ -580,14 +583,16 @@
       WHERE jp.jpo_no = #{param1} AND jp.com_id = #{param2};
  	</select>
 	
-	<select id="main"  parameterType="String" resultType="hashmap">
+	<select id="mainList"  parameterType="String" resultType="hashmap">
 		SELECT 
-			jpo_no,
-			jpo_title,
-           	jpo_start,
-           	jpo_deadline 
-		FROM job_posting 
-		WHERE (jpo_start BETWEEN #{start} AND #{end}) OR (jpo_deadline BETWEEN #{start} AND #{end})
+			jp.jpo_no,
+			jp.jpo_title,
+           	jp.jpo_start,
+           	jp.jpo_deadline,
+           com.com_name
+		FROM job_posting jp 
+		LEFT OUTER JOIN company com ON com.com_id = jp.com_id 
+		WHERE (jpo_start BETWEEN #{param1} AND #{param2}) OR (jpo_deadline BETWEEN #{param1} AND #{param2})
 	</select>
 	
 	
