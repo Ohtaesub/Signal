@@ -10,15 +10,34 @@
 <script type="text/javascript" src="../../../resources/js/jquery.twbsPagination.js"></script>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <style>
-	hr{
-	 width: 100%;	
-	}
+	.titleA{
+	position:relative;
+	font-size:80px;
+	font-weight:bold;
+	color:#B8860B;
+	margin-bottom:20px;
+}
+
+.titleB{
+	position:relative;
+	font-size:50px;
+	color:#191970;
+	margin-bottom:20px;
+}
+
+.titleC{
+	position:relative;
+	font-size:30px;
+	margin-bottom:20px;
+}
 </style>
 </head>
 <body>
 	<div id="header">
 		<p id="logo">
-		    <a href="/"><img src="resources/images/Logo.jpg" alt="Signal" width="150" height="130"/></a>
+		    <a href="/"><img src="resources/images/logo2.gif" alt="Signal" style="margin:20px 10px 0 10px;"width="200" height="130"/></a>
+		    <span class="titleA">그</span><span class="titleB">날의</span><span class="titleA">분</span><span class="titleB">위기</span>
+		    <span class="titleC">(ft.See그날)</span>
 		</p>
 		<ul class="nav">
 		    <li><a href="/jobPostingMain.go">채용공고</a></li>

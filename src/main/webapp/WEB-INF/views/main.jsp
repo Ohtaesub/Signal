@@ -148,9 +148,6 @@
 		</tbody>
     	</table>
     	
-    	<br/>
-    	<br/>
-    	<a href="main2.go">css 테스트 가기</a>
     	
     </body>
 <%@ include file="../../resources/inc/footer.jsp" %>

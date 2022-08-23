@@ -66,7 +66,7 @@
         	<h6>기업페이지 > 채용공고관리 > 등록</h6>
         	</br>
 	        		<h2>채용공고 등록하기</h2></br>
-	        	<form action="/jobPostingWrite.do" method="get" enctype="multipart/form-data" id="form">
+	        	<form action="/jobPostingWrite.do" method="post" enctype="multipart/form-data" id="form">
 		        	<div>
 			        	<table id="PostingWrite">
 							<input type="hidden" name="com_id" value="${dto.com_id}"/></td>
@@ -89,22 +89,37 @@
 									<lable><input type="radio" name="jpo_field" value="경력" required="required"/> 경력</lable>&nbsp;&nbsp;
 									<lable><input type="radio" name="jpo_field" value="무관" required="required"/> 무관</lable>
 							</tr>
-				   			<tr>
+					    		<tr>
 								<th>직무분류</th>
 								<td>	
-							     <select name="jp_no" id="searchOption1" onchange="jobBigListShow();">
-							                <option value="">직군</option>
-							                   <c:forEach items="${jobBigList}" var="jobBigList">
-							                  <option value="${jobBigList.jp_no}" ${jp_no == jobBigList.jp_no ? 'selected="selected"' : ''}>${jobBigList.jp_name}</option>
-							               </c:forEach>
-							            </select>
-							            &nbsp;
-							            <select name="jc_no" id="searchOption2" onchange="jobMidListShow();">
-							                <option value="">직업</option>
-							                   <c:forEach items="${jobMidList}" var="jobMidList">
-							                  <option value="${jobMidList.jc_no}" ${jc_no == jobMidList.jc_no ? 'selected="selected"' : ''}>${jobMidList.jc_name}</option>
-							               </c:forEach>
-							            </select>
+									<select name="jp_no" id="jp_no" required="required" value="${dto1.jp_no}" >
+										<option value="0" >직군</option>
+										<option value="1" <c:if test="${(dto1.jp_no).equals('1')}">selected</c:if>>IT</option>
+										<option value="2" <c:if test="${(dto1.jp_no).equals('2')}">selected</c:if>>건축</option>
+										<option value="3" <c:if test="${(dto1.jp_no).equals('3')}">selected</c:if>>항공</option>																				
+										<option value="4" <c:if test="${(dto1.jp_no).equals('4')}">selected</c:if>>전기</option>
+										<option value="5" <c:if test="${(dto1.jp_no).equals('5')}">selected</c:if>>축산</option>
+									</select> 
+									 > 
+									<select name="jc_no" id="jc_no" required="required" value="${dto1.jc_no}" >
+										<option value="0">직업</option>				
+										<option value="1" class="mall1"<c:if test="${(dto1.jc_no).equals('1')}">selected</c:if>>웹개발</option>						
+										<option value="6" class="mall1"<c:if test="${(dto1.jc_no).equals('6')}">selected</c:if>>퍼블리셔</option>
+										<option value="2" class="mall1"<c:if test="${(dto1.jc_no).equals('2')}">selected</c:if>>SI개발</option>
+										<option value="3" class="mall1"<c:if test="${(dto1.jc_no).equals('3')}">selected</c:if>>데이터분석가</option>
+										<option value="4" class="mall2"<c:if test="${(dto1.jc_no).equals('4')}">selected</c:if>>건설관리</option>
+										<option value="5" class="mall2"<c:if test="${(dto1.jc_no).equals('5')}">selected</c:if>>토목설계</option>
+										<option value="7" class="mall2"<c:if test="${(dto1.jc_no).equals('7')}">selected</c:if>>내진설계</option>
+										<option value="10" class="mall3"<c:if test="${(dto1.jc_no).equals('10')}">selected</c:if>>승무원</option>
+										<option value="8" class="mall3"<c:if test="${(dto1.jc_no).equals('8')}">selected</c:if>>항공운송</option>
+										<option value="9" class="mall3"<c:if test="${(dto1.jc_no).equals('9')}">selected</c:if>>항공정비</option>
+										<option value="11" class="mall4"<c:if test="${(dto1.jc_no).equals('11')}">selected</c:if>>전기설계</option>
+										<option value="12" class="mall4"<c:if test="${(dto1.jc_no).equals('12')}">selected</c:if>>전기기사</option>
+										<option value="13" class="mall4"<c:if test="${(dto1.jc_no).equals('13')}">selected</c:if>>조경설계</option>
+										<option value="14" class="mall5"<c:if test="${(dto1.jc_no).equals('14')}">selected</c:if>>축산식품가공</option>
+										<option value="15" class="mall5"<c:if test="${(dto1.jc_no).equals('15')}">selected</c:if>>축산식품유통</option>
+										<option value="16" class="mall5"<c:if test="${(dto1.jc_no).equals('16')}">selected</c:if>>도축</option>																																						
+									</select>
 								</td>
 							</tr>
 				   			<tr>
@@ -199,6 +214,26 @@
 				}     
 			}); 
 		});
+	
+	
+	var malls = false;
+
+	function update_selected() {
+	  $("#jc_no").val(0);
+	  $("#jc_no").find("option[value!=0]").detach();
+
+	  $("#jc_no").append(malls.filter(".mall" + $(this).val()));
+	}
+
+	$(function() {
+		malls= $("#jc_no").find("option[value!=0]");
+		malls.detach();
+
+	  $("#jp_no").change(update_selected);
+	  $("#jp_no").trigger("change");
+	});
+
+	
 	
 /* 	
 	function jobBigListShow(){

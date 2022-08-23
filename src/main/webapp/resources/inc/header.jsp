@@ -9,6 +9,28 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../resources/js/jquery.twbsPagination.js"></script>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<style>
+.titleA{
+	position:relative;
+	font-size:80px;
+	font-weight:bold;
+	color:#B8860B;
+	margin-bottom:20px;
+}
+
+.titleB{
+	position:relative;
+	font-size:50px;
+	color:#191970;
+	margin-bottom:20px;
+}
+
+.titleC{
+	position:relative;
+	font-size:30px;
+	margin-bottom:20px;
+}
+</style>
 </head>
 <body>
 	<div id="header">
