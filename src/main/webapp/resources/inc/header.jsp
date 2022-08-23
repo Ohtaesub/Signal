@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="../resources/favicon.png" rel="icon">
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../resources/js/jquery.twbsPagination.js"></script>
@@ -30,6 +31,8 @@
 	font-size:30px;
 	margin-bottom:20px;
 }
+
+
 </style>
 </head>
 <body>

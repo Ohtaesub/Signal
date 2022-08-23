@@ -6,10 +6,14 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
-<style></style>
+<style>
+	body{
+	width:800px;
+	}
+</style>
 </head>
 <body>	
-	<table>
+	<table style="width:790px;">
 		<tr>
 			<th>요청할 ID</th>
 			<td>

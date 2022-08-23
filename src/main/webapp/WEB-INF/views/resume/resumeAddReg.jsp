@@ -112,7 +112,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
+	<br/>
+	<br/>
+	<div id="section" style="text-align:center;"><button onclick="location.href='resumeList.go'">완료</button></div>
 </body>
 <script>
 function careerAdd(){
