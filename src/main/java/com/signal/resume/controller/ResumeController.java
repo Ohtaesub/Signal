@@ -57,7 +57,7 @@ public class ResumeController {
 	// 인재현황 리스트 불러오기
 	
 	@RequestMapping(value = "personList.go", method = RequestMethod.GET)
-	public String personList(Model model, Criteria cri) {		
+	public String personList(Model model, HttpSession session, Criteria cri) {		
 		
 		logger.info("인재현황 리스트 요청");
 		
@@ -79,6 +79,8 @@ public class ResumeController {
   		model.addAttribute("pageMaker",pageMaker);
 		logger.info("총 인재는?? : "+total);
 		
+		String chk=(String) session.getAttribute("isCompany");
+		model.addAttribute("comChk", chk);
 		return "./resume/personList";
 	}
 	

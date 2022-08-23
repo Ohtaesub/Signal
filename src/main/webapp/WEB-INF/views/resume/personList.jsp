@@ -111,7 +111,7 @@
                   <td>${person.avr_inter_grade }</td>
                   <td>${person.cnt_inter }</td>
                   <td>${person.avr_st_score }</td>
-                  <td><button onclick="popOpen('${person.cl_id }')">입사제안</button></td>
+                  <td><button class="jobOffer" onclick="popOpen('${person.cl_id }')">입사제안</button></td>
                </tr>
             </c:forEach>
          </c:when>
@@ -205,6 +205,14 @@ $(".pageInfo a").on("click", function(e){
 
 function popOpen(id){
    window.open("offer.go?cl_id="+id,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+}
+
+btnShow();
+function btnShow(){
+	if("${comChk}"==""){
+		console.log(${comChk});
+		$('.jobOffer').hide();
+	}
 }
 
 </script>
