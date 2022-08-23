@@ -765,7 +765,8 @@ public class MemberService {
 
 
 	public boolean superLogin(String superPw) {
-		boolean success = false;		
+		boolean success = false;
+		logger.info(superPw+"=?"+adminPw);
 		if(superPw.equals(adminPw)) {
 			success = true;
 		}

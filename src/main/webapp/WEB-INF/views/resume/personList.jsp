@@ -209,8 +209,7 @@ function popOpen(id){
 
 btnShow();
 function btnShow(){
-	if("${comChk}"==""){
-		console.log(${comChk});
+	if("${comChk}"==""){		
 		$('.jobOffer').hide();
 	}
 }

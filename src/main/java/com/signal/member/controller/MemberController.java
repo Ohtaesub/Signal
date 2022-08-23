@@ -1038,10 +1038,13 @@ public class MemberController {
    	public String adminInfoManagement(Model model,HttpSession session,@RequestParam String superPw){
    		
    		boolean success=false;
-   		if(service.superLogin(superPw)) {
+   		boolean result=service.superLogin(superPw);
+   		logger.info("결과는?"+result);
+   		if(result) {
    			session.setAttribute("superPw", superPw);
    			success=true;
    		}   		
+   		logger.info("보낼값은?"+success);
    		model.addAttribute("success", success);
    		return "superPw";   		
    	}
@@ -1054,7 +1057,7 @@ public class MemberController {
   		String superPw = (String) session.getAttribute("superPw");
   		
   		if(superPw==null) {
-  			model.addAttribute("msg","관리자 전용 페이지 입니다.");
+  			model.addAttribute("msg","관리자 전용 패스워드를 확인해주세요.");
   			page = "main";
   		}
   		
