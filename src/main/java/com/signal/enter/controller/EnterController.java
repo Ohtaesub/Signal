@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.signal.all.dto.EnterDTO;
 import com.signal.all.dto.JobPostingDTO;
 import com.signal.all.dto.PageMakerDTO;
 import com.signal.all.dto.ResumeDTO;
 import com.signal.enter.service.EnterService;
+import com.signal.resume.service.ResumeService;
 
 //by태섭, 관리자 마이페이지 입사제안관리 기능 2022년 8월 8일
 
@@ -29,6 +31,7 @@ public class EnterController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	// by태섭, service 객체를 한 번만 선언하고 계속 사용한다.
 	@Autowired EnterService service;
+	@Autowired ResumeService reService;
 	
 	// by태섭, 입사제안현황 페이지로 이동 시 리스트 호출_2022_08_13
 	@RequestMapping(value = "/companyOfferList.do", method = RequestMethod.GET)
@@ -139,15 +142,13 @@ public class EnterController {
 	
 	//by태섭, 입사제안현황에서 공고제목 눌렀을 때 채용공고 보여주고 열람여부 변경_2022_08_12
 	@RequestMapping(value = "/jobPostingDetail.go")
-	public String jobPostingDetail(Model model, @RequestParam int offer_no, String jpo_no) {
+	public String jobPostingDetail(Model model, @RequestParam int offer_no, String jpo_no, String com_id, int curState) {
 		logger.info("채용공고 상세보기 요청");
 		// by태섭, 채용공고 상세보기
-		JobPostingDTO dto = service.clientOfferJobpostingDetail(jpo_no);
-		model.addAttribute("dto", dto);
 		
 		service.jobPostingState(offer_no);
 		// by태섭, 임시로 personOffer로 보내준다. 채용공고 완성 시 채용공고로 변경
-		return "clientOfferJobPostingDetail";
+		return "redirect:/PostingDetailMain.go?jpo_no="+jpo_no+"&com_id="+com_id+"&curState="+curState;
 	}
 	
 	//by태섭, 개인 마이페이지 입사지원 현황 리스트 호출_2022_08_11
@@ -248,16 +249,40 @@ public class EnterController {
 		return "redirect:/clientOfferList.go";
 	}
 	
-	@RequestMapping(value = "/applyTwo.do")
-	public String applyTwo(Model model, HttpSession session, @RequestParam String jpo_no, String re_no, String com_id) {
+	@RequestMapping(value = "/applyTwo.go")
+	public String applyGoo(Model model, HttpSession session, @RequestParam String jpo_no, String com_id) {
 		
+		// by태섭, 세션에서 회원 아이디 값 가져오기
+		String cl_id = (String) session.getAttribute("loginId");
+		
+		ArrayList<ResumeDTO> list = reService.list(cl_id);
+		logger.info("결과 확인 : 리스트 개수=" +list.size());
+		model.addAttribute("list", list);		
+		
+		model.addAttribute("cl_id", cl_id);
+		model.addAttribute("jpo_no", jpo_no);
+		model.addAttribute("com_id", com_id);
+		
+		return "jobPostEnterPop";
+	}
+	
+	
+	@RequestMapping(value = "/applyTwo.do")
+	public String applyTwo(Model model, HttpSession session, 
+			@RequestParam String jpo_no, String re_no, String com_id,
+			RedirectAttributes rattr) {
+		
+		boolean result = false;
 		// by태섭, 세션에서 회원 아이디 값 가져오기
 		String cl_id = (String) session.getAttribute("loginId");
 		int success = service.jobPostingApplyTwo(cl_id, jpo_no, re_no, com_id);
 		if(success > 0) {
 			logger.info("지원 성공");
+			result = true;
 		}
-		return "redirect:/jobPostingMain.go";
+		
+		rattr.addFlashAttribute("success", result);
+		return "redirect:/applyTwo.go?jpo_no="+jpo_no+"&com_id="+com_id;
 	}
 	
 	

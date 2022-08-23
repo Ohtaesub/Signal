@@ -378,7 +378,8 @@ public class JobPostingController {
 	
 	// 메인 채용공고 상세보기
 	@RequestMapping(value = "/PostingDetailMain.go")
-	public String PostingDetailMainPage(Model model, @RequestParam String jpo_no,@RequestParam String com_id, HttpSession session) {
+	public String PostingDetailMainPage(Model model, @RequestParam String jpo_no,
+			@RequestParam String com_id, @RequestParam int curState, HttpSession session) {
 		
 			logger.info( jpo_no+"상세보기 요청: " + com_id);
 		      
@@ -390,7 +391,7 @@ public class JobPostingController {
 				service.upHit(jpo_no);
 			};
 		    service.PostingDetailMainPage(model,jpo_no,com_id); 
-		  	
+		  	model.addAttribute("curState", curState);
 		return "PostingDetailMain";
 	}	
 	

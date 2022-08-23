@@ -165,7 +165,7 @@
 	</tbody>
 	</table>
 <input id="apply_button" type="button" value="지원하기">
-<input type="button" id="cancle_button" value="목록으로" onclick="location.href='/jobPostingMain.go'">
+<input type="button" id="cancle_button" value="목록으로" onclick="returnGo()">
 </body>
 <script>
 	$(function(){ 
@@ -191,8 +191,8 @@
 	var client = "${sessionScope.isClient}";
 	
     $("#apply_button").on("click",function(){
-    	if(client != "" && ${dto.jpo_state.equals("진행중")}){
-    		location.href="/applyTwo.do?jpo_no=${dto.jpo_no}&re_no=${dto.re_no}&com_id=${dto.com_id}";
+    	if(client != "" && ${dto.jpo_state.equals("진행중")}){    		
+    		window.open("applyTwo.go?jpo_no=${dto.jpo_no}&com_id=${dto.com_id}","new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
     	}else{
     		 location.href = "/jobPostingMain.go";
     	}
@@ -208,6 +208,17 @@
             }
     	
     });
+    
+    function returnGo(){
+    	
+    	if(${curState}<1){
+    		location.href='/clientOfferList.go'
+    	}else{
+    		location.href='/jobPostingMain.go'
+    	}
+    	
+    	
+    }
 
 </script>
 </html>
