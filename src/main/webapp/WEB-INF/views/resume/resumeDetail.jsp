@@ -236,8 +236,8 @@
 	<br/>
 	<br/>
 	<div id="section" style="text-align:center;">
-		<button onclick="location.href='resumeUpdate.go?re_no='+${re_no}">수정보완</button>
-		<button onclick="location.href='resumeList.go'">목록</button>
+		<button style="color:white;" onclick="location.href='resumeUpdate.go?re_no='+${re_no}">수정보완</button>
+		<button style="color:white;" onclick="location.href='resumeList.go'">목록</button>
 	</div>
 	
 
