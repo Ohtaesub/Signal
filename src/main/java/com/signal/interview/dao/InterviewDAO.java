@@ -81,6 +81,16 @@ public interface InterviewDAO {
 
 	ArrayList<InterviewDTO> adminInterviewListDetail(String inter_no);
 
+	int close2();
+
+	void upHit2(String jpo_no);
+
+	JobPostingDTO PostingDetailMainPage2(String jpo_no, String com_id);
+
+	ArrayList<InterviewDTO> interviewDetailResultList2(String inter_no);
+
+	InterviewDTO interviewDetail2(String inter_no);
+
 	
 
 }

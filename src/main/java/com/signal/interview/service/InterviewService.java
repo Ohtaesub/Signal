@@ -8,6 +8,7 @@ import org.mariadb.jdbc.internal.logging.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.signal.all.dto.EnterDTO;
 import com.signal.all.dto.InterviewDTO;
@@ -225,9 +226,37 @@ public class InterviewService {
 			return dao.adminInterviewListDetail(inter_no);
 		}
 
+		public void close2() {
+			logger.info("모집여부 마감 서비스 요청");
+			int result = dao.close2();
+			logger.info("모집여부 수정 데이터 수 : " + result);
+			
+		}
 
+		public void upHit2(String jpo_no) {
+			logger.info(jpo_no + " 번 채용공고 조회수 +1");
+			dao.upHit2(jpo_no);
+			
+		}
 
-	
+		public void PostingDetailMainPage2(Model model, String jpo_no, String com_id) {
+			JobPostingDTO dto = dao.PostingDetailMainPage2(jpo_no,com_id);
+		      logger.info("상세보기 번호?" + jpo_no +" / "+ com_id);
+		      
+		      model.addAttribute("dto", dto);
+		   
+			
+		}
+
+		public InterviewDTO interviewDetail2(String inter_no) {
+			
+			return dao.interviewDetail2(inter_no);
+		}
+
+		public ArrayList<InterviewDTO> interviewDetailResultList2(String inter_no) {
+			
+			return dao.interviewDetailResultList2(inter_no);
+		}
 
 
 

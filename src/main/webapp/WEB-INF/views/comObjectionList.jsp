@@ -57,7 +57,7 @@ table tr td {
                         <td align="center">
                          <img src="/photo/${comObjectionList.cl_photo}" width="100"/>
                          ${comObjectionList.cl_name} ${comObjectionList.cl_age}${comObjectionList.cl_gender}<br>
-                        <a href="comInterviewUpdate.go?inter_no=${comObjectionList.inter_no}">${comObjectionList.re_title}</a><br>
+                       		 ${comObjectionList.re_title}<br>
                         	${comObjectionList.inter_date} ${comObjectionList.inter_result}  평점 ${comObjectionList.inter_grade}
                         		
                         </td>
