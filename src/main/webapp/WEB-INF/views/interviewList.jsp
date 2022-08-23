@@ -47,7 +47,7 @@
         <tbody>
                 <c:forEach items="${interviewList}" var="interviewList" >
                     <tr>
-                        <td align="center"><a href="PostingDetailMain.go?jpo_no=${interviewList.jpo_no}&&com_id=${interviewList.com_id}" >${interviewList.jpo_title}</a></td>
+                        <td align="center"><a href="PostingDetailMain2.go?jpo_no=${interviewList.jpo_no}&&com_id=${interviewList.com_id}" >${interviewList.jpo_title}</a></td>
                         <td align="center">${interviewList.com_name}</td>
                         <td align="center">${interviewList.inter_date}</td>
                         <td>${interviewList.inter_result}</td>

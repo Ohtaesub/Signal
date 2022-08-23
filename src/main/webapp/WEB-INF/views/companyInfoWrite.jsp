@@ -64,7 +64,7 @@
         	</br>
        		<h2>기업정보 등록하기</h2>
 	        </div>	
-	        	<form action="/companyInfoWrite.do" method="get" enctype="multipart/form-data" id="write">
+	        	<form action="/companyInfoWrite.do" method="post" enctype="multipart/form-data" id="write">
 			        	<table id="infoWrite">
 							<input type="hidden" name="com_id" value="${dto.com_id}"/></td>
 				    		<tr>

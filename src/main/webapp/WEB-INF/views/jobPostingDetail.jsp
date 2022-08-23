@@ -136,7 +136,7 @@
 								<th>직무분류</th>
 								<td>	
 									<select name="jp_no" id="jp_no" required="required" value="${dto1.jp_no}" >
-										<option value="0" >대분류</option>
+										<option value="0" >직군</option>
 										<option value="1" <c:if test="${(dto1.jp_no).equals('1')}">selected</c:if>>IT</option>
 										<option value="2" <c:if test="${(dto1.jp_no).equals('2')}">selected</c:if>>건축</option>
 										<option value="3" <c:if test="${(dto1.jp_no).equals('3')}">selected</c:if>>항공</option>																				
@@ -145,7 +145,8 @@
 									</select> 
 									 > 
 									<select name="jc_no" id="jc_no" required="required" value="${dto1.jc_no}" >
-										<option value="0">중분류</option>									
+										<option value="0">직업</option>				
+										<option value="1" class="mall1"<c:if test="${(dto1.jc_no).equals('1')}">selected</c:if>>웹개발</option>					
 										<option value="6" class="mall1"<c:if test="${(dto1.jc_no).equals('6')}">selected</c:if>>퍼블리셔</option>
 										<option value="2" class="mall1"<c:if test="${(dto1.jc_no).equals('2')}">selected</c:if>>SI개발</option>
 										<option value="3" class="mall1"<c:if test="${(dto1.jc_no).equals('3')}">selected</c:if>>데이터분석가</option>

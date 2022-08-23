@@ -47,11 +47,25 @@ public class JobPostingDTO {
 	private String jp_no;
 	private String jc_no;
 	private String re_no;	
+	private boolean jp_hidden;
+	private boolean jc_hidden;
 	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	
 
 	public int getApply_no() {
 		return apply_no;
+	}
+	public boolean isJp_hidden() {
+		return jp_hidden;
+	}
+	public void setJp_hidden(boolean jp_hidden) {
+		this.jp_hidden = jp_hidden;
+	}
+	public boolean isJc_hidden() {
+		return jc_hidden;
+	}
+	public void setJc_hidden(boolean jc_hidden) {
+		this.jc_hidden = jc_hidden;
 	}
 	public String getRe_no() {
 		return re_no;
