@@ -35,9 +35,9 @@
 	</form>
 </body>
 <script>
-	var msg = "${success}";
-	if(msg){
-		alert("관리자님 반갑습니다");
+	var success = "${success}";
+	console.log(success);
+	if(success){		
 		window.opener.location.href="/adminManagementListReal.Go"
 		window.close(); 
 	} 

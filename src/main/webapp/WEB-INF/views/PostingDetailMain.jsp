@@ -217,11 +217,13 @@
     });
     
     function returnGo(){
-    	
+    	console.log(${curState});
     	if(${curState}<1){
-    		location.href='/clientOfferList.go'
+    		location.href='/clientOfferList.go';
+    	}else if(1<=${curState}<2){
+    		location.href='/jobPostingMain.go';
     	}else{
-    		location.href='/jobPostingMain.go'
+    		location.href='/';
     	}
     	
     	
