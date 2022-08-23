@@ -261,6 +261,22 @@ public class ResumeController {
 		return "./resume/jobClassPop";
 	}
 	
+	@RequestMapping(value ="jcGet.ajax", method =RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> jcGet(@RequestParam HashMap<String, Object> param){
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String jp_no= (String) param.get("jp_no");
+		logger.info("jp_no="+jp_no);		
+		ArrayList<ResumeDTO> jcList = service.jcList(jp_no);
+		map.put("success", true);
+		map.put("jcList", jcList);
+		
+		return map;
+	}
+	
+	
+	
 	@RequestMapping(value = "jcCheck.go", method = RequestMethod.GET)
 	public String jcCheck(Model model, @RequestParam String jc_no) {		
 		
