@@ -38,20 +38,20 @@ public interface MainDAO {
 
 	ArrayList<CallendarDTO> postPopEnd(String chkDay);
 
-	int cnt1(String day1);
-	int cnt2(String day2);
-	int cnt3(String day3);
-	int cnt4(String day4);
-	int cnt5(String day5);
-	int cnt6(String day6);
-	int cnt7(String day7);
-	int cnt8(String day1);
-	int cnt9(String day2);
-	int cnt10(String day3);
-	int cnt11(String day4);
-	int cnt12(String day5);
-	int cnt13(String day6);
-	int cnt14(String day7);
+	ArrayList<CallendarDTO> cnt1(String day1);
+	ArrayList<CallendarDTO> cnt2(String day2);
+	ArrayList<CallendarDTO> cnt3(String day3);
+	ArrayList<CallendarDTO> cnt4(String day4);
+	ArrayList<CallendarDTO> cnt5(String day5);
+	ArrayList<CallendarDTO> cnt6(String day6);
+	ArrayList<CallendarDTO> cnt7(String day7);
+	ArrayList<CallendarDTO> cnt8(String day1);
+	ArrayList<CallendarDTO> cnt9(String day2);
+	ArrayList<CallendarDTO> cnt10(String day3);
+	ArrayList<CallendarDTO> cnt11(String day4);
+	ArrayList<CallendarDTO> cnt12(String day5);
+	ArrayList<CallendarDTO> cnt13(String day6);
+	ArrayList<CallendarDTO> cnt14(String day7);
 	
 
 }

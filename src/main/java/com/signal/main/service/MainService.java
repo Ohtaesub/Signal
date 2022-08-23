@@ -84,69 +84,68 @@ public class MainService {
 		return result;
 	}
 
-	public int startPostCnt1(String day1) {
-		int result = dao.cnt1(day1);
-		return result;
+	public ArrayList<CallendarDTO> startPostCnt1(String day1) {
+		return dao.cnt1(day1);
+		
 	}
 	
-	public int startPostCnt2(String day2) {
-		int result = dao.cnt2(day2);
-		return result;
+	public ArrayList<CallendarDTO> startPostCnt2(String day2) {
+		return dao.cnt2(day2);
+		
 	}
 	
-	public int startPostCnt3(String day3) {
-		int result = dao.cnt3(day3);
-		return result;
+	public ArrayList<CallendarDTO> startPostCnt3(String day3) {
+		return dao.cnt3(day3);
+		
 	}
 	
-	public int startPostCnt4(String day4) {
-		int result = dao.cnt4(day4);
-		return result;
+	public ArrayList<CallendarDTO> startPostCnt4(String day4) {
+		return dao.cnt4(day4);
+		
 	}
 	
-	public int startPostCnt5(String day5) {
-		int result = dao.cnt5(day5);
-		return result;
+	public ArrayList<CallendarDTO> startPostCnt5(String day5) {
+		return dao.cnt5(day5);
+		
 	}
 	
-	public int startPostCnt6(String day6) {
-		int result = dao.cnt6(day6);
-		return result;
+	public ArrayList<CallendarDTO> startPostCnt6(String day6) {
+		return dao.cnt6(day6);
+	
 	}
 	
-	public int startPostCnt7(String day7) {
-		int result = dao.cnt7(day7);
-		return result;
+	public ArrayList<CallendarDTO> startPostCnt7(String day7) {
+		return dao.cnt7(day7);
+		
 	}
 
-	public int endPostCnt1(String day1) {
-		int result = dao.cnt8(day1);
-		return result;
+	public ArrayList<CallendarDTO> endPostCnt1(String day1) {
+		return dao.cnt8(day1);
+
 	}
 	
-	public int endPostCnt2(String day2) {
-		int result = dao.cnt9(day2);
-		return result;
+	public ArrayList<CallendarDTO> endPostCnt2(String day2) {
+		return dao.cnt9(day2);
+	
 	}
-	public int endPostCnt3(String day3) {
-		int result = dao.cnt10(day3);
-		return result;
+	public ArrayList<CallendarDTO> endPostCnt3(String day3) {
+		return dao.cnt10(day3);
+		}
+	public ArrayList<CallendarDTO> endPostCnt4(String day4) {
+		return  dao.cnt11(day4);
+		
 	}
-	public int endPostCnt4(String day4) {
-		int result = dao.cnt11(day4);
-		return result;
+	public ArrayList<CallendarDTO> endPostCnt5(String day5) {
+		return dao.cnt12(day5);
+		
 	}
-	public int endPostCnt5(String day5) {
-		int result = dao.cnt12(day5);
-		return result;
+	public ArrayList<CallendarDTO> endPostCnt6(String day6) {
+		return dao.cnt13(day6);
+		
 	}
-	public int endPostCnt6(String day6) {
-		int result = dao.cnt13(day6);
-		return result;
-	}
-	public int endPostCnt7(String day7) {
-		int result = dao.cnt14(day7);
-		return result;
+	public ArrayList<CallendarDTO> endPostCnt7(String day7) {
+		return dao.cnt14(day7);
+ 
 	}
 	
 	
