@@ -4,9 +4,10 @@
 <mapper namespace="com.signal.test.dao.TestDAO">
 	
 	<select id="selfInsert" parameterType="String" resultType="test">
-		SELECT st_que, st_hidden, st_keyword, cl_id, str.st_no, st_score  FROM self_test_result str 
+		SELECT st_que, st_hidden, st_keyword, cl_id, str.st_no, (sum(st_score)/count(st_keyword)) as cntStScore  FROM self_test_result str 
 		LEFT OUTER JOIN self_test st ON st.st_no = str.st_no 
 		WHERE cl_id=#{id}
+		group by st_keyword
 	</select>
 	
 	<select id="selfComment" parameterType="String" resultType="String">
