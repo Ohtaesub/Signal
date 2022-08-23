@@ -22,7 +22,7 @@ public class InterviewDTO {
 	private String re_title;
 	private String obj_cl_content;
 	private double inter_avg;
-	
+	private int obj_state;
 	
 	public String getCl_name() {
 		return cl_name;
@@ -137,6 +137,12 @@ public class InterviewDTO {
 	}
 	public void setInter_avg(double inter_avg) {
 		this.inter_avg = inter_avg;
+	}
+	public int getObj_state() {
+		return obj_state;
+	}
+	public void setObj_state(int obj_state) {
+		this.obj_state = obj_state;
 	}
 	
 	
