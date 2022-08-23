@@ -1,12 +1,10 @@
 package com.signal.jobposting.dao;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.signal.all.dto.InterviewDTO;
 import com.signal.all.dto.JobPostingDTO;
-import com.signal.all.dto.ObjectionDTO;
 import com.signal.enter.controller.Criteria;
 
 public interface JobPostingDAO {
