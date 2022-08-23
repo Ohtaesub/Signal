@@ -7,6 +7,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
+<style>
+	table{
+		width: 700px;
+	}
+</style>
 </head>
 <body>
 		<input type="hidden" name="ad_id" value="${adminState.ad_id}"/>

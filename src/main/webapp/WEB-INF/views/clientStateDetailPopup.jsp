@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <style>
 	table {
-		width:70%;
+		width:700px;
 	}
 </style>
 </head>

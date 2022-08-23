@@ -56,15 +56,26 @@
 	img.comLogo{
 		 width: 100%;
 	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	#jp-list {
+	    position: relative;
+	    top: -350px;
+	    left: 20px;
+	}
 
 </style>
 </head>
 <body>
 <section>
     <div id="jp-list">
-        	<h6>기업페이지 > 기업정보관리 > 수정</h6>
-        	</br>
-	        		<h2>기업정보 수정하기</h2>	
+	        	<h2>기업정보 수정하기</h2>	
 	        	<form action="/companyInfoUpdate.do" method="post" enctype="multipart/form-data">
 		        	<div>
 			        	<table id="comUpdate">

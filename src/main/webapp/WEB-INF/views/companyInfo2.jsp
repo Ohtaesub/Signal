@@ -48,34 +48,19 @@
    		height: 30px;
    		width: 20%;
    	}
-	h2{
-		margin-bottom: 10px;
-		text-align: center;
-		position: absolute;
-		top : 300px;
-		left : -35px;
+		h2 {
+	    margin-bottom: 10px;
+	    text-align: center;
+	    position: relative;
+	    top: -350px;
+	    left: -35px;
 	}
 	
 	.find-btn{
 		text-align: center;
 		margin-top: 10px;
-		position: absolute;
-		top:1400px;
-		left:700px;
-	}
-	.find-btn1,.find-btn2{
-		display :inline-block;
-		color: #fff;
-		border-radius: 5px;
-		width: 100px;
-		height: 30px;
-		
-	}
-	.find-btn1{
-		background-color: #1f3864ff;
-	}
-	.find-btn2{
-		background-color: #7f7f7fff;
+    	position: relative;
+    	top: -280px;
 	}
 	
 	#comTitle {
@@ -91,21 +76,22 @@
 	   font-size: 15px;
 	}
 	
+	#ComInfoDetail{
+		position: relative;
+		top:-300px;
+	}
+	
 	
 </style>
 </head>
 <body>
 <section>
     <div id="jp-list">
-					<div id="comTitle">
-			        	<h3><strong>기업정보관리</strong></h3>
-					</div>
-		        	</br>
-		        	<div id="comInfoReg">
-						<c:if test="${dto.ci_ceo == null}">
-		        			<button id="create" onclick="location.href='/companyInfoWrite.go'">기업정보 등록하기</button>
-						</c:if>
-		        	</div>
+	        	<div id="comInfoReg">
+					<c:if test="${dto.ci_ceo == null}">
+	        			<button id="create" onclick="location.href='/companyInfoWrite.go'">기업정보 등록하기</button>
+					</c:if>
+	        	</div>
 				<c:if test="${dto.ci_ceo != null}">
 	        		<h2>기업정보</h2>
 		        	<table id="ComInfoDetail">

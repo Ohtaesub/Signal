@@ -21,7 +21,9 @@
 	}
 </style>
 <body>
-	<table id="section">
+	<div id="section">
+		<h2>셀프평가관리</h2>
+		<table>
 		<thead>
 			<tr>	
 				<th colspan="3">
@@ -57,7 +59,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
+	</div>	
 </body>
 <script>
 var state;

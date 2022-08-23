@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <style>
-	table {
-		width: 40%;
+	table{
+		width:500px;
 	}
 </style>
 </head>

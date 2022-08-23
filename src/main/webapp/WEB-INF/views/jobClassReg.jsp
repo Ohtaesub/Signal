@@ -31,6 +31,7 @@
 </style>
 <body>
 <div id="section">
+	<h2>직무분류관리</h2>
 	<table style="width:49.5%; float:left;">
 		<thead>
 			<tr>
@@ -82,11 +83,11 @@ function jpClick(no){
 }
 
 function jpReg(){
-	window.open("jpReg.go","new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+	window.open("jpReg.go","new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
 }
 
 function jcReg(no){	
-	window.open("jcReg.go?jp_no="+no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+	window.open("jcReg.go?jp_no="+no,"new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
 }
 
 $('select[name="jp_hidden"]').change(function(){

@@ -98,7 +98,7 @@ body {
 						    </td>
 						</tr>
 						<tr>
-					    	<td colspan="3"><a href="/resumeDetail.do?re_no=${item.re_no}">${item.re_title}</a></td>
+					    	<td colspan="3"><a href="/resumeDetail2.do?re_no=${item.re_no}">${item.re_title}</a></td>
 						</tr>
 					</c:forEach>
 				</c:when>

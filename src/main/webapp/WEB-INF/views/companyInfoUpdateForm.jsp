@@ -9,7 +9,6 @@
 	#button {
     text-align: center;
 	}
-	
 	body {
 	   width:1500px;
 	   margin: 0 auto;
