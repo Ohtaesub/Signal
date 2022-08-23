@@ -12,10 +12,30 @@
 	.hidden {
 		display : none;
 	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	#compbutton {
+	   padding:5px 10px;
+	   font-size:15px;
+	   outline:none;
+	   border:none;
+	   color:#fff;
+	   background-color:#333;
+       position: relative;
+ 	   left: 360px;
+	}
 </style>
 <body>
+	<div id="section">
+	<h2>이력서 추가 작성</h2>
 	<span id="re_no" class="hidden">${re_no}</span>
-	<table id="section">
+	<table>
 		<thead>
 			<tr>
 				<th colspan="4">경력사항 <button onclick="careerAdd()">추가</button> <button onclick="careerUp()">수정/삭제</button></th>
@@ -40,7 +60,7 @@
 	</table>
 	<br/>
 	<br/>
-	<table id="section">
+	<table>
 		<thead>
 			<tr>
 				<th colspan="4">그 외 활동 <button onclick="socialAdd()">추가</button> <button onclick="socialUp()">수정/삭제</button></th>
@@ -65,7 +85,7 @@
 	</table>
 	<br/>
 	<br/>
-	<table id="section">
+	<table>
 		<thead>
 			<tr>
 				<th colspan="4">자격증/수상내역 <button onclick="licenseAdd()">추가</button> <button onclick="licenseUp()">수정/삭제</button></th>
@@ -90,7 +110,7 @@
 	</table>
 	<br/>
 	<br/>
-	<table id="section">
+	<table>
 		<thead>
 			<tr>
 				<th colspan="3">내가받은 추천 <button onclick="recommendUp()">수정</button></th>
@@ -114,7 +134,8 @@
 	</table>
 	<br/>
 	<br/>
-	<div id="section" style="text-align:center;"><button onclick="location.href='resumeList.go'">완료</button></div>
+	<button id="compbutton" onclick="location.href='resumeList.go'">완료</button>
+	</div>
 </body>
 <script>
 function careerAdd(){

@@ -7,7 +7,16 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<style>
-
+		.pageInfo li {
+	    float: left;
+	    font-size: 20px;
+	    margin-left: 18px;
+	    padding: 7px;
+	    font-weight: 500;
+	    position: relative;
+	    top: -200px;
+	    left: 300px;
+	}
 
 	   	table,h2,h6{
 	   		width: 60%;
@@ -111,7 +120,7 @@
    <section>
     	<div id="jp-list">
     		<div id="comTitle">
-       		<h3>기업정보</h3>
+       		<h3>채용관리</h3>
     		</div>
        			<table id="infoList">
        				<tr>

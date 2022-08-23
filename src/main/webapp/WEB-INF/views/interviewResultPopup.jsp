@@ -8,20 +8,14 @@
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
 <style>
-table {
-	width:100%;
-	border:1px solid #787878;
-	border-collapse:collapse;
-}
-
-table tr th {
-	padding:10px;
-	border:1px solid #787878;
-	background-color:#efefef;
-}
-table tr td {
-	padding:10px;
-	border:1px solid #787878;
+body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+body {
+	width: 500px;
 }
 </style>
 </head>

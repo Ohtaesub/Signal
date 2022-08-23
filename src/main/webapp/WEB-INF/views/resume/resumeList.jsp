@@ -29,9 +29,9 @@
 	   font-size: 15px;
 	}
 </style>
-<body>
-	
+<body>	
 	<div id="section">
+	<h2>이력서 리스트</h2>
 		<div>
 			<button onclick="location.href='resumeReg.go'">신규등록</button>
 			<button onclick="resumeUpdate()">수정보완</button>

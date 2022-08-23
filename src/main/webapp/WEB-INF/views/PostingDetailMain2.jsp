@@ -60,6 +60,25 @@
 	img.comPosting{
 		width: 100%;
 	}
+	
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	#listgo {
+	    padding: 5px 10px;
+	    font-size: 15px;
+	    outline: none;
+	    border: none;
+	    color: #fff;
+	    background-color: #333;
+	    position: relative;
+	    top: 50px;
+	    left: 700px;
+	}
 
 </style>
 	<style type="text/css">
@@ -153,7 +172,7 @@
 	</tbody>
 	</table>
 
-<input type="button" value="목록으로" onclick="location.href='/interviewList.go'">
+<input type="button" id="listgo" value="목록으로" onclick="location.href='/interviewList.go'">
 </body>
 <script>
 	$(function(){ 

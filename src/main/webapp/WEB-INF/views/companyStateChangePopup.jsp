@@ -11,6 +11,17 @@
 	table{
 		width:500px;
 	}
+	
+	#updatebutton{
+	   padding:5px 10px;
+	   font-size:15px;
+	   outline:none;
+	   border:none;
+	   color:#fff;
+	   background-color:#333;
+	   position: relative;
+	   left:230px;
+	}
 </style>
 </head>
 <body>
@@ -42,7 +53,7 @@
 	        </tr>
 		</table>
 		<br>
-		<input type="submit" value="수정"/>
+		<input type="submit" id="updatebutton" value="수정"/>
 	</form>
 </body>
 <%@ include file="../../resources/inc/footer.jsp" %>

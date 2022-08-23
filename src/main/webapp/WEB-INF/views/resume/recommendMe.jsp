@@ -31,6 +31,8 @@
 </style>
 <body>
 	<div class="section">
+	<h2>회원 추천</h2>
+	<br>
 		<input type="radio" name="recommend" value="recommendMe" checked/> 나를 추천
 		<input type="radio" name="recommend" value="recommendYou"/> 내가 추천
 	</div>

@@ -60,13 +60,24 @@
 	img.comPosting{
 		width: 100%;
 	}
+	body {
+	   width:1500px;
+	   margin: 0 auto;
+	   padding: 0;
+	   font-size: 15px;
+	}
+	
+	#jp-list{
+		position: relative;
+		top:-330px;
+		left:80px;
+	}
 
 </style>
 </head>
 <body>
  	<section>
 		<div id="jp-list">
-        	<h6>기업페이지 > 채용공고관리 > 수정 및 상세보기</h6>
         	<br/>
 	        		<h2>채용공고 수정 및 상세보기</h2><br/>
 	        	<form action="/jobPostingUpdate.do?jpo_no=${dto1.jpo_no}" method="post" enctype="multipart/form-data" id="checkDate">
