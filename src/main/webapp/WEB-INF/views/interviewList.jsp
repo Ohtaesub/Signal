@@ -59,7 +59,7 @@ body {
                         <td align="center">${interviewList.com_name}</td>
                         <td align="center">${interviewList.inter_date}</td>
                         <td>${interviewList.inter_result}</td>
-                        <td align="center">${interviewList.inter_grade}</td>
+                        <td align="center">${interviewList.inter_avg}</td>
                         <td align="center">
                         	<c:choose>
 									<c:when test="${empty interviewList.obj_cl_content}">
