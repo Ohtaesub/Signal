@@ -60,6 +60,18 @@
 	img.comPosting{
 		width: 100%;
 	}
+	
+	#apply_button {
+	    position: relative;
+	    top: 50px;
+	    left: 650px;
+	}
+	
+	#cancle_button {
+	    position: relative;
+	    top: 50px;
+	    left: 670px;
+	}
 
 </style>
 	<style type="text/css">
@@ -153,7 +165,7 @@
 	</tbody>
 	</table>
 <input id="apply_button" type="button" value="지원하기">
-<input type="button" value="목록으로" onclick="location.href='/jobPostingMain.go'">
+<input type="button" id="cancle_button" value="목록으로" onclick="location.href='/jobPostingMain.go'">
 </body>
 <script>
 	$(function(){ 

@@ -67,25 +67,12 @@
 	#searchBox{
 		display :inline-block;
 	}
-	/* 페이지 이동 CSS 작업 */
-.pageInfo{
-      list-style : none;
-      display: inline-block;
-    margin: 50px 0 0 100px;      
-  }
-  .pageInfo li{
-      float: left;
-    font-size: 20px;
-    margin-left: 18px;
-    padding: 7px;
-    font-weight: 500;
-  }
- a:link {color:black;}
- a:visited {color:black;}
- a:hover {color:blue; text-decoration: underline;}
- .active{
-      background-color: #cdd5ec;
-  }
+
+	#form {
+		position: relative;
+		left: 140px;
+	}
+
 	</style>
 </head>
 <body>
