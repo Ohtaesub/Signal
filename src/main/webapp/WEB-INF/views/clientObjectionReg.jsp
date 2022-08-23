@@ -10,7 +10,25 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
-<style></style>
+<style>
+	body {
+		width: 900px;
+	}
+	
+	#button1 {
+	    position: relative;
+	    top: 20px;
+	    left: 400px;
+	    font-size: 15px;
+	}
+
+	#button2 {
+	    position: relative;
+	    top: 20px;
+	    left: 420px;
+	    font-size: 15px;
+	}
+</style>
 </head>
 <body>
 <form action="clientDbjectionReg.do" method="get"  onsubmit="return clientDbjectionReg()" >
@@ -46,8 +64,8 @@
            </tr>
         </table>
         <div style =align:center;>
-        <input type="submit" value="등록" id="btn"/>
-        <input type="button" value="닫기" onclick="pclose2()"/>
+        <input type="submit" id="button1" value="등록" id="btn"/>
+        <input type="button" id="button2" value="닫기" onclick="pclose2()"/>
         </div>
     </form>		
 </body>

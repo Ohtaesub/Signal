@@ -9,7 +9,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <link rel="stylesheet" href="resources/css/popup.css" type="text/css"/>
-<style></style>
+<style>
+	body {
+		width: 600px;
+	}
+</style>
 </head>
 <body>
 <form action="comInterviewDate.do" method="get"  onsubmit="return comInterviewDate()">

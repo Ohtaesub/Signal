@@ -66,6 +66,8 @@ body {
 									</c:when>					
 									<c:otherwise>처리중</c:otherwise>
 							</c:choose>
+							<br>
+							<br>
 	                            <button type="button" onclick="location.href='interviewDetail.go?inter_no=${interviewList.inter_no}'">상세보기</button>
                          </td>
                          

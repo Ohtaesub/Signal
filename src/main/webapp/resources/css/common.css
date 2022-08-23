@@ -316,6 +316,7 @@ textarea {
 	position: absolute;
 	top: 570px;
 	left: 350px;
+	font-size: 15px;
 }
 
 /* 오른쪽 버튼 */
@@ -323,6 +324,7 @@ textarea {
 	position: absolute;
 	top: 570px;
 	left: 440px;
+	font-size: 15px;
 }
 
 /* 왼쪽 버튼 */
@@ -330,6 +332,7 @@ textarea {
 	position: absolute;
 	top: 720px;
 	left: 350px;
+	font-size: 15px;
 }
 
 /* 오른쪽 버튼 */
@@ -337,6 +340,7 @@ textarea {
 	position: absolute;
 	top: 720px;
 	left: 440px;
+	font-size: 15px;
 }
 
 table tr #regbutton {

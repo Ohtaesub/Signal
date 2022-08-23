@@ -34,6 +34,7 @@
 	h2{
 		margin-bottom: 10px;
 		text-align: center;
+		width: 500px;
 	}
 	.find-btn{
 		text-align: center;
@@ -67,7 +68,12 @@
 	#jp-list {
 	    position: relative;
 	    top: -350px;
-	    left: 20px;
+	    left: 155px;
+	    width: 1200px;
+	}
+	
+	table {
+		width: 900px;
 	}
 
 </style>
