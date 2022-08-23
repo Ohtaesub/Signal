@@ -1064,7 +1064,7 @@ public class MemberController {
   		ArrayList<MemberDTO> adminList = service.adminInfoManagement();
   		logger.info("list 갯수 : "+adminList.size());
   		model.addAttribute("adminList",adminList);  		
-  		
+  		session.removeAttribute("superPw");
   		return page;
   	}
    	

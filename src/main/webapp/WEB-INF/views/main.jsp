@@ -248,7 +248,7 @@
 			console.log(day);			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>마감일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -275,7 +275,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>마감일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -301,7 +301,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>마감일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -327,7 +327,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>마감일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -351,7 +351,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>마감일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -376,7 +376,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>마감일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -400,7 +400,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>마감일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -425,7 +425,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>시작일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -449,7 +449,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>시작일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -473,7 +473,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>시작일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -497,7 +497,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>시작일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -521,7 +521,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>시작일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -545,7 +545,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>시작일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
@@ -569,7 +569,7 @@
 			
 			console.log(item);
 			content += '<ul>';
-			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'">'
+			content += '<li><a href="PostingDetailMain.go?jpo_no='+item.jpo_no+'&&com_id='+item.com_id+'&&curState=2">'
 					+item.com_name+'[('+item.jp_name+')/('+item.jc_name+')]</a>&nbsp;&nbsp;<span>시작일 : '+day+'</span></li>';
 			content += '</ul>';
 		});
