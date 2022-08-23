@@ -30,7 +30,7 @@
 		    <th colspan="28"><input type="text" id="cl_id" value="${cl_id}"></th>
 		  </tr>
 		  <tr>
-		    <td colspan="4" rowspan="3"></td>
+		    <td colspan="4" rowspan="3"><img src="/photo/${dto.cl_photo}" width="100px" height="100px"/></td>
 		    <th colspan="4">이름</th>
 		    <td colspan="4">${dto.cl_name}</td>
 		    <th colspan="4">생년월일</th>
@@ -52,12 +52,12 @@
 		    <th colspan="28">희망직무 <input type="button" onclick="jobClassPopGo()" value="등록"></th>
 		  </tr>
 		  <tr>
-		    <th colspan="4">대분류</th>
+		    <th colspan="4">직군</th>
 			    <td colspan="10">
 				    <input type="hidden" id="jp_no" name="jp_no">
 				    <input type="text" id="jp_name" name="jp_name" placeholder="등록버튼을 눌러주세요" readonly/>
 			    </td>
-		    <th colspan="4">중분류</th>
+		    <th colspan="4">직업</th>
 			    <td colspan="10">
 				    <input type="hidden" id="jc_no" name="jc_no">
 				    <input type="text" id="jc_name" name="jc_name" placeholder="등록버튼을 눌러주세요" readonly/>
@@ -159,7 +159,7 @@ function schList(){
 }
 
 function jobClassPopGo(){
-	 window.open("jobClassPop.go","new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+	 window.open("jobClassPop.go","new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 }
 
 function resumeReg(){

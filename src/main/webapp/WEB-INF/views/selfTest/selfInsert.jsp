@@ -79,13 +79,13 @@ if(result=="true"){
 function selfTestReg(){
 	var cl_id=$('#cl_id').val();
 	console.log(cl_id);
-	 window.open("selfReg.go?cl_id="+cl_id,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+	 window.open("selfReg.go?cl_id="+cl_id,"new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
 }
 
 function selfTestUp(){
 	var cl_id=$('#cl_id').val();
 	console.log(cl_id);
-	 window.open("selfUp.go?cl_id="+cl_id,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+	 window.open("selfUp.go?cl_id="+cl_id,"new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
 }
 
 </script>

@@ -56,7 +56,7 @@ body {
 					<c:forEach items="${clientOfferList}" var="item">
 						<tr>
 							<td><input type="checkbox" name="chkArr" class="chkArr" value="${item.offer_no}" /></td>
-							<td><a href="/jobPostingDetail.go?offer_no=${item.offer_no}&jpo_no=${item.jpo_no}">${item.jpo_title}</a></td>
+							<td><a href="/jobPostingDetail.go?offer_no=${item.offer_no}&jpo_no=${item.jpo_no}&com_id=${item.com_id}&curState=0">${item.jpo_title}</a></td>
 							<td>${item.com_name}</td>
 							<td>${item.offer_date}</td>
 							<td>${item.reading_state}</td>

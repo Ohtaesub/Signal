@@ -10,9 +10,9 @@
 	input[type="submit"] {
 		margin : 5px;
 	}
-	
-	table {
-		width:70%;
+
+	body{
+		width:800px;
 	}
 </style>
 </head>

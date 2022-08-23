@@ -7,12 +7,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <style>
-	table{
-		width:70%;
-	}
 	input[type="submit"] {
 		margin : 5px;
 	}
+body{
+	width:800px;
+}
 </style>
 </head>
 <body>

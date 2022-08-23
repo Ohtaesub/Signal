@@ -22,9 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.signal.all.dto.InterviewDTO;
 import com.signal.all.dto.JobPostingDTO;
 import com.signal.all.dto.PageMakerDTO;
+import com.signal.all.dto.ResumeDTO;
 import com.signal.enter.controller.Criteria;
 import com.signal.jobposting.dao.JobPostingDAO;
 import com.signal.jobposting.service.JobPostingService;
+import com.signal.resume.service.ResumeService;
 
 
 @Controller
@@ -32,6 +34,7 @@ public class JobPostingController {
 
 	// By 진희, 채용공고 및 기업정보와 관련
 	@Autowired JobPostingService service;
+	@Autowired ResumeService reService;
 	@Autowired JobPostingDAO dao;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -270,8 +273,8 @@ public class JobPostingController {
 				logger.info(id+"의 기업 채용공고 등록하기");
 				
 				//직무 대분류 리스트 호출
-				ArrayList<JobPostingDTO> jobBigList = service.jobBigList();
-				model.addAttribute("jobBigList", jobBigList);
+				ArrayList<ResumeDTO> jpList = reService.jpList();
+				model.addAttribute("jpList", jpList);
 						
 				//직무 중분류 리스트 호출
 				ArrayList<JobPostingDTO> jobMidList = service.jobMidList();
@@ -378,7 +381,8 @@ public class JobPostingController {
 	
 	// 메인 채용공고 상세보기
 	@RequestMapping(value = "/PostingDetailMain.go")
-	public String PostingDetailMainPage(Model model, @RequestParam String jpo_no,@RequestParam String com_id, HttpSession session) {
+	public String PostingDetailMainPage(Model model, @RequestParam String jpo_no,
+			@RequestParam String com_id, @RequestParam int curState, HttpSession session) {
 		
 			logger.info( jpo_no+"상세보기 요청: " + com_id);
 		      
@@ -390,7 +394,7 @@ public class JobPostingController {
 				service.upHit(jpo_no);
 			};
 		    service.PostingDetailMainPage(model,jpo_no,com_id); 
-		  	
+		  	model.addAttribute("curState", curState);
 		return "PostingDetailMain";
 	}	
 	

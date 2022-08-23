@@ -24,7 +24,7 @@
 		    <th colspan="7" style="text-align:start;">인적사항 <button style="float:right;" onclick="location.href='/clientInfoUpdateForm.go'">개인정보 수정</button></th>
 		  </tr>
 		  <tr>
-		    <td rowspan="3"><img src="/photo/${dto.cl_photo}"/></td>
+		    <td rowspan="3"><img src="/photo/${dto.cl_photo}" width="100px" height="100px"/></td>
 		    <th>이름</th>
 		    <td>${dto.cl_name}</td>
 		    <th>생년월일</th>
