@@ -9,7 +9,7 @@
 		left outer join interview i on jp.com_id = i.com_id 
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no 
 		left outer join job_ch jc on jc.jc_no = jp.jc_no  
-		where jpo_state="진행중" and jpo_start =#{day1}
+		where jpo_state="진행중" and jpo_start =#{day1} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -21,7 +21,7 @@
 		left outer join interview i on jp.com_id = i.com_id
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no   
-		where jpo_state="진행중" and jpo_deadline =#{day1}
+		where jpo_state="진행중" and jpo_deadline =#{day1} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -33,7 +33,7 @@
 		left outer join interview i on jp.com_id = i.com_id
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no   
-		where jpo_state="진행중" and jpo_start =#{day2}
+		where jpo_state="진행중" and jpo_start =#{day2} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -45,7 +45,7 @@
 		left outer join interview i on jp.com_id = i.com_id 
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no 
-		where jpo_state="진행중" and jpo_deadline =#{day2}
+		where jpo_state="진행중" and jpo_deadline =#{day2} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -57,7 +57,7 @@
 		left outer join interview i on jp.com_id = i.com_id 
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no 
-		where jpo_state="진행중" and jpo_start =#{day3}
+		where jpo_state="진행중" and jpo_start =#{day3} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -69,7 +69,7 @@
 		left outer join interview i on jp.com_id = i.com_id  
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
-		where jpo_state="진행중" and jpo_deadline =#{day3}
+		where jpo_state="진행중" and jpo_deadline =#{day3} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -81,7 +81,7 @@
 		left outer join interview i on jp.com_id = i.com_id  
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
-		where jpo_state="진행중" and jpo_start =#{day4}
+		where jpo_state="진행중" and jpo_start =#{day4} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -93,7 +93,7 @@
 		left outer join interview i on jp.com_id = i.com_id  
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
-		where jpo_state="진행중" and jpo_deadline =#{day4}
+		where jpo_state="진행중" and jpo_deadline =#{day4} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -105,7 +105,7 @@
 		left outer join interview i on jp.com_id = i.com_id  
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
-		where jpo_state="진행중" and jpo_start =#{day5}
+		where jpo_state="진행중" and jpo_start =#{day5} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -117,7 +117,7 @@
 		left outer join interview i on jp.com_id = i.com_id  
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
-		where jpo_state="진행중" and jpo_deadline =#{day5}
+		where jpo_state="진행중" and jpo_deadline =#{day5} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -129,7 +129,7 @@
 		left outer join interview i on jp.com_id = i.com_id  
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
-		where jpo_state="진행중" and jpo_start =#{day6}
+		where jpo_state="진행중" and jpo_start =#{day6} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -141,7 +141,7 @@
 		left outer join interview i on jp.com_id = i.com_id  
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
-		where jpo_state="진행중" and jpo_deadline =#{day6}
+		where jpo_state="진행중" and jpo_deadline =#{day6} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -153,7 +153,7 @@
 		left outer join interview i on jp.com_id = i.com_id  
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
-		where jpo_state="진행중" and jpo_start =#{day7}
+		where jpo_state="진행중" and jpo_start =#{day7} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
@@ -165,7 +165,7 @@
 		left outer join interview i on jp.com_id = i.com_id  
 		left outer join job_pa jp2 on jp.jp_no = jp2.jp_no
 		left outer join job_ch jc on jc.jc_no = jp.jc_no
-		where jpo_state="진행중" and jpo_deadline =#{day7}
+		where jpo_state="진행중" and jpo_deadline =#{day7} and inter_result is not null
 		group by jp.jpo_no having rankCom > 50
 		order by rankCom DESC
 		limit 5
