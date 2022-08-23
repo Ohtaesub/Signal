@@ -35,7 +35,7 @@ body {
 </head>
 <body>
 	<div id="section">
-	<h5>마이페이지 > 입사지원현황</h5>
+	<h5>입사지원현황</h5>
 	<br>
 	<table>
 		<thead>
@@ -52,7 +52,7 @@ body {
 				<c:when test="${clientApplyList.size() >0}">
 					<c:forEach items="${clientApplyList}" var="item">
 						<tr>
-							<td><a href="/PostingDetailMain.go?jpo_no=${item.jpo_no}&com_id=${item.com_id}">${item.jpo_title}</a></td>
+							<td><a href="/PostingDetailMain3.go?jpo_no=${item.jpo_no}&&com_id=${item.com_id}">${item.jpo_title}</a></td>
 							<td>${item.com_name}</td>
 							<td>${item.apply_date}</td>
 							<td>${item.inter_result}</td>

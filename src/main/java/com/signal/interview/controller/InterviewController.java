@@ -338,7 +338,23 @@ public class InterviewController {
 			    service.PostingDetailMainPage2(model,jpo_no,com_id); 
 			  	
 			return "PostingDetailMain2";
-		}	
+		}
+		
+		@RequestMapping(value = "/PostingDetailMain3.go")
+		public String PostingDetailMainPageThree(Model model, @RequestParam String jpo_no,@RequestParam String com_id, HttpSession session) {
+			
+				logger.info( jpo_no+"상세보기 요청: " + com_id);
+			      
+			    String id = (String) session.getAttribute("loginId"); 
+				service.close2();
+				logger.info("모집여부 마감 요청");
+				if(session.getAttribute("isClient")!= null || session.getAttribute("loginId") == null) {
+					service.upHit2(jpo_no);
+				};
+			    service.PostingDetailMainPage2(model,jpo_no,com_id); 
+			  	
+			return "PostingDetailMain3";
+		}
 	
 	
 		//면접현황상세 (개인) 

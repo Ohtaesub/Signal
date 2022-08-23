@@ -323,10 +323,12 @@ public class JobPostingController {
 		ArrayList<JobPostingDTO> jobBigList = service.jobBigList();
 		model.addAttribute("jobBigList", jobBigList);
 				
+		/*
 		//직무 중분류 리스트 호출
 		ArrayList<JobPostingDTO> jobMidList = service.jobMidList();
 		model.addAttribute("jobMidList", jobMidList);
-
+		*/
+		
 		// 페이징 리스트
 		ArrayList<JobPostingDTO> mainJpoList = service.mainPostingList(cri);
 		logger.info("리스트 갯수: "+mainJpoList.size());
@@ -347,11 +349,10 @@ public class JobPostingController {
 	// 채용공고 검색 페이징
 	@RequestMapping(value="/jobPostingMain.do")
 	public String jobPostingMain(Model model,HttpSession session, int pageNum, 
-		@RequestParam String jpo_region, String jp_no, String jc_no, String search) {
-		logger.info("옵션 확인: "+jpo_region+" / "+jp_no+" / "+jc_no+" / "+search);		
+		@RequestParam String jpo_region, String jp_no, String search) {
+		logger.info("옵션 확인: "+jpo_region+" / "+jp_no+" / "+search);		
 		model.addAttribute("jpo_region",jpo_region);
 		model.addAttribute("jp_no",jp_no);
-		model.addAttribute("jc_no",jc_no);
 		model.addAttribute("search",search);
 		
 		//직무 대분류 리스트 호출
@@ -359,15 +360,15 @@ public class JobPostingController {
 		model.addAttribute("jobBigList", jobBigList);
 	
 		//직무 중분류 리스트 호출
-		ArrayList<JobPostingDTO> jobMidList2 = service.jobMidList2(jp_no);
-		model.addAttribute("jobMidList", jobMidList2);
+		//ArrayList<JobPostingDTO> jobMidList2 = service.jobMidList2(jp_no);
+		//model.addAttribute("jobMidList", jobMidList2);
 		
 		//옵션 페이징처리
 		int skip=(pageNum-1) * 10;
-		ArrayList<JobPostingDTO> dto = service.jobPostingMainSearch(jpo_region,jp_no, jc_no, search,skip);
+		ArrayList<JobPostingDTO> dto = service.jobPostingMainSearch(jpo_region,jp_no, search,skip);
 		model.addAttribute("mainJpoList",dto);
 		
-		int mainPostingPasingTotal=service.jobPostingMainTotal(jpo_region,jp_no, jc_no, search);
+		int mainPostingPasingTotal=service.jobPostingMainTotal(jpo_region,jp_no, search);
 		model.addAttribute("pageNum",pageNum);
 		
 		PageMakerDTO pageMake= new PageMakerDTO(pageNum, mainPostingPasingTotal);

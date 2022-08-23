@@ -351,12 +351,12 @@ public class JobPostingService {
 		return dao.mainPostingPasingTotal();
 	}
 
-	public ArrayList<JobPostingDTO> jobPostingMainSearch(String jpo_region, String jp_no, String jc_no, String search, int skip) {
-		return dao.jobPostingMainSearch(jpo_region, jp_no, jc_no, search, skip);
+	public ArrayList<JobPostingDTO> jobPostingMainSearch(String jpo_region, String jp_no, String search, int skip) {
+		return dao.jobPostingMainSearch(jpo_region, jp_no, search, skip);
 	}
 
-	public int jobPostingMainTotal(String jpo_region, String jp_no, String jc_no, String search) {
-		return dao.jobPostingMainTotal(jpo_region, jp_no, jc_no, search);
+	public int jobPostingMainTotal(String jpo_region, String jp_no, String search) {
+		return dao.jobPostingMainTotal(jpo_region, jp_no, search);
 	}
 
 	public void PostingDetailMainPage(Model model, String jpo_no, String com_id) {
@@ -380,6 +380,7 @@ public class JobPostingService {
 		return dao.jobBigList();
 	}
 
+	
 	public ArrayList<JobPostingDTO> jobMidList() {
 		logger.info("직무 중분류 리스트 호출 서비스");
 		return dao.jobMidList();
