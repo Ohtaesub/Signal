@@ -50,7 +50,7 @@ body {
                          <img src="/photo/${comObjectionList.cl_photo}" width="100"/>
                          ${comObjectionList.cl_name} ${comObjectionList.cl_age}${comObjectionList.cl_gender}<br>
                        		 ${comObjectionList.re_title}<br>
-                        	${comObjectionList.inter_date} ${comObjectionList.inter_result}  평점 ${comObjectionList.inter_grade}
+                        	${comObjectionList.inter_date} ${comObjectionList.inter_result}  평점 ${comObjectionList.inter_avg}
                         		
                         </td>
                         <td align="center">${comObjectionList.obj_cl_content}</td>
@@ -59,7 +59,7 @@ body {
 									<c:when test="${comObjectionList.obj_state eq 0}">
 										<button type="button" onclick="pop(${comObjectionList.obj_no});">미처리</button>
 									</c:when>					
-									<c:when test="${comObjectionList.obj_state eq 1}">${comObjectionList.obj_date}처리완료</c:when>					
+									<c:when test="${comObjectionList.obj_state eq 1}">${comObjectionList.obj_date}<br>처리완료</c:when>					
 							</c:choose>
                         </td>
                     	
