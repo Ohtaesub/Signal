@@ -143,7 +143,7 @@ public class ResumeService {
 			
 			try {
 				byte[] arr = re_portfolio.getBytes();
-				Path path = Paths.get("C:/STUDY/SPRING_ADVANCE/Signal/src/main/webapp/resources/images/portfolio/" + newFileName);
+				Path path = Paths.get("C:/upload/" + newFileName);
 				Files.write(path, arr);
 				logger.info(newFileName + " 포트폴리오 save ok");
 				dto.setRe_portfolio(newFileName);

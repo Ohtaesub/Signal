@@ -7,6 +7,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/common.css" type="text/css"/>
 <style>
+	body{
+		width:800px;
+	}
+
 	.hidden {
 		display : none;
 	}

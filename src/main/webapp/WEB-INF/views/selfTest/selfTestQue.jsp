@@ -77,7 +77,7 @@ $('select[name="st_hidden"]').change(function(){
 
 
 function selfQueReg(){
-	window.open("selfTestReg.go","new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+	window.open("selfTestReg.go","new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
 }
 
 </script>

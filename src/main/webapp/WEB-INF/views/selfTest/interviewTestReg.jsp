@@ -10,6 +10,10 @@
 	input[type="submit"] {
 		margin : 5px;
 	}
+	
+	body{
+		width:800px;
+	}
 </style>
 </head>
 <body>

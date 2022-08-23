@@ -23,8 +23,8 @@ public class RecommendController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value = "recommendMePop.go", method = RequestMethod.GET)
-	public String recommendGo(Model model, @RequestParam String cl_id) {		
-		
+	public String recommendGo(HttpSession session ,Model model) {		
+		String cl_id=(String) session.getAttribute("loginId");
 		logger.info(cl_id + "의 추천요청");
 		model.addAttribute("cl_id", cl_id);
 		return "./resume/recommendMePop";

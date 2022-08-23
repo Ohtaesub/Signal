@@ -31,7 +31,7 @@
 	<table class="section" id="recommendMe">
 		<thead>
 			<tr>
-				<th colspan="4" id="regbutton"><button onclick="recommendReg()">추천요청</button></th>
+				<th colspan="4" id="regbutton"><button style="float:right;" onclick="recommendReg()">추천요청</button></th>
 			</tr>
 			<tr>
 				<th class="hidden">ID</th>
@@ -141,7 +141,7 @@ function recommendU(reco_no){
 
 function recommendReg(){
 	var cl_id = $("#cl_id").html();
-	 window.open("recommendMePop.go?cl_id="+cl_id,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+	 window.open("recommendMePop.go","new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 
 

@@ -86,6 +86,7 @@
 				 success:function(data){
 					 if(data.success){
 							alert("추천요청이 완료되었습니다!");
+							window.opener.location.reload();
 							window.close();
 						} else {
 							alert("추천요청에 실패했습니다.");							

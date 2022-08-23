@@ -119,32 +119,32 @@
 <script>
 function careerAdd(){
 	var re_no = $("#re_no").html();
-	 window.open("careerReg.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+	 window.open("careerReg.go?re_no="+re_no,"new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 
 function careerUp(){
 	var re_no = $("#re_no").html();
-	 window.open("careerUp.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+	 window.open("careerUp.go?re_no="+re_no,"new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 	 
 function socialAdd(){
 	var re_no = $("#re_no").html();
-	 window.open("socialReg.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+	 window.open("socialReg.go?re_no="+re_no,"new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 
 function socialUp(){
 	var re_no = $("#re_no").html();
-	 window.open("socialUp.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+	 window.open("socialUp.go?re_no="+re_no,"new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 	 
 function licenseAdd(){
 	var re_no = $("#re_no").html();
-	 window.open("licenseReg.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+	 window.open("licenseReg.go?re_no="+re_no,"new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 
 function licenseUp(){
 	var re_no = $("#re_no").html();
-	 window.open("licenseUp.go?re_no="+re_no,"new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+	 window.open("licenseUp.go?re_no="+re_no,"new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 	 }
 	 
 function recommendUp(){

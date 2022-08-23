@@ -125,7 +125,7 @@
 		  <tr>
 		    <th colspan="4">포트폴리오</th>
 		    <td colspan="24">
-		    <p>${dto.re_portfolio_ori}</p>
+		    <p id="portfolioName">${dto.re_portfolio_ori}</p>
 		    <input type="file" id="re_portfolio" multiple="multiple"/></td>
 		  </tr>
 		  <tr>
@@ -183,7 +183,7 @@ function schPeriod(){
 }
 
 function jobClassPopGo(){
-	 window.open("jobClassPop.go","new","width=800, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
+	 window.open("jobClassPop.go","new","width=850, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;");	 
 }
 
 function resumeUp(){
