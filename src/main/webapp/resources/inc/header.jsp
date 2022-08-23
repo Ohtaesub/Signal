@@ -57,7 +57,7 @@
 		        		<a href="/companyInfoManagement.do">마이페이지</a> 
 		        	</c:if>
 		        	<c:if test="${sessionScope.isAdmin.equals('true')}">
-		        		<a href="/adminManagementList.do">마이페이지</a> 
+		        		<a href="/clientManagementList.do">마이페이지</a> 
 		        	</c:if>
 		        	<span>|</span> <a href="logout.do">로그아웃</a>
 		        </aside>
@@ -94,8 +94,8 @@
 		            </ul>
 		        </c:if>
 		        <c:if test="${sessionScope.isAdmin.equals('true')}">
-		            <ul class="sidemenu">
-		                <li><a href="/adminManagementList.do">관리자계정관리</a></li>
+		            <ul class="sidemenu">		            
+		                <li><a href="/adminManagementList.go" onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">관리자계정관리</a></li>
 		                <li><a href="/jobClassReg.go">직무분류관리</a></li>
 		                <li><a href="/selfTestQue.go">셀프평가관리</a></li>
 		                <li><a href="/interviewTestQue.go">면접평가관리</a></li>

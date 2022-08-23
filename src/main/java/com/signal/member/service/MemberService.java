@@ -1,24 +1,18 @@
 package com.signal.member.service;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.signal.all.dto.MemberDTO;
 import com.signal.enter.controller.Criteria;
@@ -30,7 +24,8 @@ public class MemberService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired MemberDAO dao;
-	
+	@Value("#{config['superUser.super.id']}") String adminId;
+	@Value("#{config['superUser.super.pw']}") String adminPw;
 	
 	// 개인회원 아이디 중복확인
 	public HashMap<String, Object> overlayClientId(String cl_id) {
@@ -766,6 +761,16 @@ public class MemberService {
 	// 기업회원 상태 및 사유 변경 서비스 요청
 	public void companyStateChange(HashMap<String, String> params) {
 		dao.companyStateChange(params);
+	}
+
+
+	public boolean superLogin(String superPw) {
+		boolean success = false;		
+		if(superPw.equals(adminPw)) {
+			success = true;
+		}
+		
+		return success;
 	}
 
 

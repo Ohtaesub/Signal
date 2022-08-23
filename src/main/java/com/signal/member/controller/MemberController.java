@@ -1027,21 +1027,40 @@ public class MemberController {
   	
   	
    	// 관리자 관리 페이지 이동 및 리스트 보여주기 요청
+   	
+   	@RequestMapping(value="/adminManagementList.go")
+   	public String adminManageGo() {   		
+   		return "superPw";
+   	}
+   	
+   	
    	@RequestMapping(value="/adminManagementList.do")
-   	public String adminInfoManagement(Model model,HttpSession session){
+   	public String adminInfoManagement(Model model,HttpSession session,@RequestParam String superPw){
+   		
+   		boolean success=false;
+   		if(service.superLogin(superPw)) {
+   			session.setAttribute("superPw", superPw);
+   			success=true;
+   		}   		
+   		model.addAttribute("success", success);
+   		return "superPw";   		
+   	}
+   	
+   	@RequestMapping(value="/adminManagementListReal.Go")
+   	public String adminManagementListReal(Model model,HttpSession session){   		
+   		
   		logger.info("관리자 계정관리 페이지 이동");
   		String page = "adminManagementList";
-  		String isAdmin = (String) session.getAttribute("isAdmin");
+  		String superPw = (String) session.getAttribute("superPw");
   		
-  		if(isAdmin==null) {
+  		if(superPw==null) {
   			model.addAttribute("msg","관리자 전용 페이지 입니다.");
   			page = "main";
   		}
   		
   		ArrayList<MemberDTO> adminList = service.adminInfoManagement();
   		logger.info("list 갯수 : "+adminList.size());
-  		model.addAttribute("adminList",adminList);
-  		
+  		model.addAttribute("adminList",adminList);  		
   		
   		return page;
   	}

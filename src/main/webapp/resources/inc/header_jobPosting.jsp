@@ -59,7 +59,7 @@
 		        		<a href="/companyInfoManagement.do">마이페이지</a> 
 		        	</c:if>
 		        	<c:if test="${sessionScope.isAdmin.equals('true')}">
-		        		<a href="/adminManagementList.do">마이페이지</a> 
+		        		<a href="/clientManagementList.do">마이페이지</a> 
 		        	</c:if>
 		        	<span>|</span> <a href="logout.do">로그아웃</a>
 		        </aside>
