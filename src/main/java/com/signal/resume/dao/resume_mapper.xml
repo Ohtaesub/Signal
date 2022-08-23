@@ -19,7 +19,7 @@
 	
 	<!-- 필요한 컬럼 추가했습니다. by태섭 -->
 	<select id="personList" resultType="resume">
-		SELECT cl_age, cl_gender, format((SUM(inter_score)/COUNT(inter_result))*5,2) AS avr_inter_grade,  r.re_title , c.cl_id,
+		SELECT cl_age, cl_gender, format((SUM(inter_score)/COUNT(inter_result)),2) AS avr_inter_grade,  r.re_title , c.cl_id,
 		COUNT(DISTINCT inter_comment) as cnt_inter, format((SUM(st_score)/COUNT(st_comment)),1) AS avr_st_score FROM client c 
 		LEFT OUTER JOIN self_test_result str ON c.cl_id = str.cl_id 
 		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id

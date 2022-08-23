@@ -365,7 +365,7 @@ public class InterviewController {
 	
 		//이력서 상세보기
 		@RequestMapping(value = "resumeDetail2.do", method = RequestMethod.GET)
-		public String resumeDetail(HttpSession session ,Model model, @RequestParam String re_no) {
+		public String resumeDetailA(HttpSession session ,Model model, @RequestParam String re_no) {
 				String cl_id=(String) session.getAttribute("loginId");
 				String id=(String) session.getAttribute("loginId");
 				ResumeDTO dto = Reserive.resumeDetail(re_no);

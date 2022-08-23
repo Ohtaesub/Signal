@@ -93,35 +93,35 @@
 	</insert>
 	
 	<select id="selfTestDetail1" parameterType="String" resultType="String" >
-		select st_score from self_test_result str
+		select format(sum(st_score)/count(st_score),1) as scoreCnt from self_test_result str
 		left outer join self_test st ON str.st_no =st.st_no 
 		left outer join client c on str.cl_id = c.cl_id 
 		where str.cl_id=#{cl_id} and st_keyword="책임감";
 	</select>
 	
 	<select id="selfTestDetail2" parameterType="String" resultType="String" >
-		select st_score from self_test_result str
+		select format(sum(st_score)/count(st_score),1) as scoreCnt from self_test_result str
 		left outer join self_test st ON str.st_no =st.st_no 
 		left outer join client c on str.cl_id = c.cl_id 
 		where str.cl_id=#{cl_id} and st_keyword="침착함";
 	</select>
 	
 	<select id="selfTestDetail3" parameterType="String" resultType="String" >
-		select st_score from self_test_result str
+		select format(sum(st_score)/count(st_score),1) as scoreCnt from self_test_result str
 		left outer join self_test st ON str.st_no =st.st_no 
 		left outer join client c on str.cl_id = c.cl_id 
 		where str.cl_id=#{cl_id} and st_keyword="적극성";
 	</select>
 	
 	<select id="selfTestDetail4" parameterType="String" resultType="String" >
-		select st_score from self_test_result str
+		select format(sum(st_score)/count(st_score),1) as scoreCnt from self_test_result str
 		left outer join self_test st ON str.st_no =st.st_no 
 		left outer join client c on str.cl_id = c.cl_id 
 		where str.cl_id=#{cl_id} and st_keyword="자신감";
 	</select>
 	
 	<select id="selfTestDetail5" parameterType="String" resultType="String" >
-		select st_score from self_test_result str
+		select format(sum(st_score)/count(st_score),1) as scoreCnt from self_test_result str
 		left outer join self_test st ON str.st_no =st.st_no 
 		left outer join client c on str.cl_id = c.cl_id 
 		where str.cl_id=#{cl_id} and st_keyword="성실함";
