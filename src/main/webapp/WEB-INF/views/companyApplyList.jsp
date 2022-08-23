@@ -54,7 +54,7 @@ body {
 				<c:when test="${companyApplyList.size()>0}">
 					<c:forEach items="${companyApplyList}" var="item">
 						<tr>
-						    <td rowspan="2"><img src="/photo/${filename}" width="100"/>${item.cl_photo}</td>
+						    <td rowspan="2"><img src="/photo/${item.cl_photo}" width="100"/></td>
 						    <td>${item.cl_name}</td>
 						    <td>${item.cl_age}세</td>
 						    <td>${item.cl_gender}</td>
