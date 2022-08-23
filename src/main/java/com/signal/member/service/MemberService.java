@@ -114,7 +114,7 @@ public class MemberService {
 		
 			try {
 				byte[] arr = file.getBytes();
-				Path path = Paths.get("C:/STUDY/SPRING_ADVANCE/Signal/src/main/webapp/resources/images/member/"+newFileName);
+				Path path = Paths.get("C:/upload/"+newFileName);
 				Files.write(path, arr);
 				logger.info(newFileName+" save ok");
 				//4. 업로드 후 photo 테이블에 데이터 입력	
@@ -457,7 +457,7 @@ public class MemberService {
 		
 			try {
 				byte[] arr = file.getBytes();
-				Path path = Paths.get("C:/STUDY/SPRING_ADVANCE/Signal/src/main/webapp/resources/images/member/"+newFileName);
+				Path path = Paths.get("C:/upload/"+newFileName);
 				Files.write(path, arr);
 				logger.info(newFileName+" save ok");
 				//4. 업로드 후 photo 테이블에 데이터 입력	

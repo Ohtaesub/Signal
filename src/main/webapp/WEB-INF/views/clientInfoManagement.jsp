@@ -54,7 +54,7 @@
 	            <th>사진</th>
 	            <td>
 	            	<c:if test="${!empty clientInfo.cl_photo}">
-	            	<img src="/photo/member/${clientInfo.cl_photo}" width="100" height="100"/>	            	
+	            	<img src="/photo/${clientInfo.cl_photo}" width="100" height="100"/>	            	
 	            	</c:if>
 	            </td>
 	        </tr>
