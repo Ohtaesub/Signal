@@ -107,6 +107,12 @@ public class ResumeService {
 		int re_no=dto.getRe_no();
 		logger.info("이력서 등록 결과 : " + re_no);		
 		
+		if(jp.equals("0")) {
+			jp="";
+		}
+		if(jc.equals("0")) {
+			jc="";
+		}
 		
 		if(!jp.isEmpty()) {
 			if(!jc.isEmpty()) {
