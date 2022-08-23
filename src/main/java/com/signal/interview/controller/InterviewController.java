@@ -19,11 +19,17 @@ import com.signal.all.dto.EnterDTO;
 import com.signal.all.dto.InterviewDTO;
 import com.signal.all.dto.JobPostingDTO;
 import com.signal.all.dto.PageMakerDTO;
+import com.signal.all.dto.ResumeDTO;
+import com.signal.all.dto.TestDTO;
 import com.signal.enter.controller.Criteria;
 import com.signal.interview.service.InterviewService;
+import com.signal.resume.service.ResumeService;
+import com.signal.test.service.TestService;
 @Controller
 public class InterviewController {
 	@Autowired InterviewService service;
+	@Autowired ResumeService Reserive;
+	@Autowired TestService testService;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//면접현황리스트 (개인)
@@ -373,7 +379,59 @@ public class InterviewController {
 		}
 	
 	
-	
+		//이력서 상세보기
+		@RequestMapping(value = "resumeDetail2.do", method = RequestMethod.GET)
+		public String resumeDetail(HttpSession session ,Model model, @RequestParam String re_no) {
+			String cl_id=(String) session.getAttribute("loginId");
+			String id=(String) session.getAttribute("loginId");
+			ResumeDTO dto = Reserive.resumeDetail(re_no);
+			ArrayList<ResumeDTO> careerDto = Reserive.careerDetail(re_no);
+			ArrayList<ResumeDTO> socialDto = Reserive.socialDetail(re_no);
+			ArrayList<ResumeDTO> licenseDto = Reserive.licenseDetail(re_no);
+			ArrayList<ResumeDTO> recommendDto = Reserive.recommendDetail(re_no);
+			String selfTest1=testService.selfTestDetail1(cl_id);
+			String selfTest2=testService.selfTestDetail2(cl_id);
+			String selfTest3=testService.selfTestDetail3(cl_id);
+			String selfTest4=testService.selfTestDetail4(cl_id);
+			String selfTest5=testService.selfTestDetail5(cl_id);
+			String selfTest6=testService.selfTestDetail6(cl_id);
+			String selfComment=testService.selfComment(id);
+			ArrayList<TestDTO> interviewTestDto1 = testService.interviewTestDetail1(cl_id);
+			ArrayList<TestDTO> interviewTestDto2 = testService.interviewTestDetail2(cl_id);
+			ArrayList<TestDTO> interviewTestDto3 = testService.interviewTestDetail3(cl_id);
+			ArrayList<TestDTO> interviewTestDto4 = testService.interviewTestDetail4(cl_id);
+			ArrayList<TestDTO> interviewTestDto5 = testService.interviewTestDetail5(cl_id);
+			String interviewTestDto6 = testService.interviewTestDetail6(cl_id);
+			String interviewTestDto7 = testService.interviewTestDetail7(cl_id);
+			ArrayList<TestDTO> interviewComment = testService.interviewTestComment(cl_id);
+			
+			String page = "./resume/resumeDetail2";
+			
+			model.addAttribute("re_no", re_no);
+			model.addAttribute("dto", dto);
+			model.addAttribute("careerDto", careerDto);
+			model.addAttribute("socialDto", socialDto);
+			model.addAttribute("licenseDto", licenseDto);
+			model.addAttribute("recommendDto", recommendDto);
+			model.addAttribute("selfTest1", selfTest1);
+			model.addAttribute("selfTest2", selfTest2);
+			model.addAttribute("selfTest3", selfTest3);
+			model.addAttribute("selfTest4", selfTest4);
+			model.addAttribute("selfTest5", selfTest5);
+			model.addAttribute("selfTest6", selfTest6);
+			model.addAttribute("selfComment", selfComment);
+			model.addAttribute("interviewTestDto1", interviewTestDto1);
+			model.addAttribute("interviewTestDto2", interviewTestDto2);
+			model.addAttribute("interviewTestDto3", interviewTestDto3);
+			model.addAttribute("interviewTestDto4", interviewTestDto4);
+			model.addAttribute("interviewTestDto5", interviewTestDto5);
+			model.addAttribute("interviewTestDto6", interviewTestDto6);
+			model.addAttribute("interviewTestDto7", interviewTestDto7);
+			model.addAttribute("interviewComment", interviewComment);
+			/* model.addAttribute("interviewTestDto", interviewTestDto); */
+			
+			return page;
+		}
 	
 	
 	
