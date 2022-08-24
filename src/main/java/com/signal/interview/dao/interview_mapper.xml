@@ -7,7 +7,7 @@
 		<select id="interviewList" resultType="com.signal.all.dto.InterviewDTO">
 			SELECT 
 				jpo_title,com_name,inter_date,inter_grade,inter_result,i.inter_no,obj_cl_content,obj_state,i.com_id,i.jpo_no,
-				(select avg(inter_score)
+				(select format(avg(inter_score),1)
 				from interview_test_result itr 
 				where inter_no =i.inter_no)as inter_avg
 				FROM interview i  
@@ -20,7 +20,7 @@
 		<!-- 마무리작업시 추가  WHERE cl_id =#{cl_id} -->
 		
 		<select id="avgGrade" resultType="int">
-		select ifnull(avg(inter_score),0)
+		select ifnull(format(avg(inter_score),1),0)
 		from interview_test_result itr 
 		left outer join interview i  on i.inter_no =itr.inter_no 
 		where i.cl_id =#{param1};
@@ -268,9 +268,12 @@
 		,c.cl_photo 
 		,o.reading_state
 		,i.com_id 
-		,(select avg(inter_grade)/count(inter_comment) from interview i where c.cl_id = i.cl_id group by c.cl_id) as inter_grade_avg
+		,(select  ifnull(format( avg(inter_score),1),0)
+		from interview_test_result itr 
+		left outer join interview i  on i.inter_no =itr.inter_no 
+		where i.cl_id =c.cl_id ) as inter_grade_avg
 		,(select count(inter_comment) from interview i where c.cl_id = i.cl_id ) as gradeCnt
-		,(select avg(st_score) from self_test_result str where c.cl_id = str.cl_id group by c.cl_id) as st_score_avg
+		,(select format(avg(st_score),1) from self_test_result str where c.cl_id = str.cl_id group by c.cl_id) as st_score_avg
 	FROM interview i
 	LEFT OUTER JOIN job_posting jp ON i.jpo_no = jp.jpo_no
 	LEFT OUTER JOIN resume r ON r.re_no = i.re_no
@@ -333,9 +336,12 @@
 		,c.cl_photo 
 		,o.reading_state
 		,i.com_id 
-		,(select avg(inter_grade)/count(inter_comment) from interview i where c.cl_id = i.cl_id group by c.cl_id) as inter_grade_avg
+		,(select  ifnull(format( avg(inter_score),1),0)
+		from interview_test_result itr 
+		left outer join interview i  on i.inter_no =itr.inter_no 
+		where i.cl_id =c.cl_id ) as inter_grade_avg
 		,(select count(inter_comment) from interview i where c.cl_id = i.cl_id ) as gradeCnt
-		,(select avg(st_score) from self_test_result str where c.cl_id = str.cl_id group by c.cl_id) as st_score_avg
+		,(select format(avg(st_score),1) from self_test_result str where c.cl_id = str.cl_id group by c.cl_id) as st_score_avg
 	FROM interview i
 	LEFT OUTER JOIN job_posting jp ON i.jpo_no = jp.jpo_no
 	LEFT OUTER JOIN resume r ON r.re_no = i.re_no
