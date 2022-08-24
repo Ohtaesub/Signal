@@ -48,7 +48,7 @@ body{
 </body>
 <script>
 	function jobPostGo(jpo_no,com_id){
-		window.opener.location.href="PostingDetailMain.go?jpo_no="+jpo_no+"&&com_id="+com_id;
+		window.opener.location.href="PostingDetailMain.go?jpo_no="+jpo_no+"&&com_id="+com_id+"&&curState=2";
 		window.close(); 
 	}
 
