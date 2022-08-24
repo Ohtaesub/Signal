@@ -7,7 +7,7 @@
 		<select id="clientObjectionList" resultType="com.signal.all.dto.ObjectionDTO">
 		SELECT 
 			jpo_title,com_name,inter_date,inter_result,inter_grade,obj_state,obj_content,obj_date,o.inter_no,o.obj_no,i.cl_id,
-				(select avg(inter_score)
+				(select format(avg(inter_score),1)
 				from interview_test_result itr 
 				where inter_no =i.inter_no)as inter_avg
 		FROM objection o 
@@ -35,7 +35,7 @@
 	<select id="comObjectionList" resultType="com.signal.all.dto.ObjectionDTO">
 			SELECT 
 				cl.cl_photo ,cl.cl_name,cl.cl_age,cl.cl_gender,re.re_title,com.com_name,i.inter_date,i.inter_result,i.inter_grade ,ob.obj_cl_content,ob.obj_state,ob.obj_date,ob.obj_no,i.inter_no,
-				(select avg(inter_score)
+				(select format(avg(inter_score),1)
 				from interview_test_result itr 
 				where inter_no =i.inter_no)as inter_avg 
 			FROM objection ob

@@ -82,7 +82,9 @@
 
 		<select id="clientObjectionReg" resultType="com.signal.all.dto.InterviewDTO" parameterType="String">
 			SELECT 
-				jpo_title,com_name,inter_date,inter_grade,inter_result,inter_no
+				jpo_title,com_name,inter_date,(select format(avg(inter_score),1)
+				from interview_test_result itr 
+				where inter_no =#{inter_no})as inter_avg,inter_result,inter_no
 			FROM interview i 
 				left outer join job_posting jp on i.jpo_no = jp.jpo_no 
 				left outer join company c on jp.com_id = c.com_id
