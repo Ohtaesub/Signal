@@ -35,11 +35,12 @@
 	</select>
 	
 	<select id="personListSearch" resultType="resume">
-		SELECT cl_age, cl_gender,  format((SUM(inter_score)/COUNT(inter_result))*5,2) AS avr_inter_grade,  r.re_title , c.cl_id,
-		COUNT(DISTINCT inter_comment) as cnt_inter, (SUM(st_score)/COUNT(st_comment)) AS avr_st_score FROM client c 
+		SELECT cl_age, cl_gender,  format((SUM(inter_score)/COUNT(inter_result)),2) AS avr_inter_grade,  r.re_title , c.cl_id,
+		COUNT(DISTINCT inter_comment) as cnt_inter, format((SUM(st_score)/COUNT(st_comment)),1) AS avr_st_score FROM client c 
 		LEFT OUTER JOIN self_test_result str ON c.cl_id = str.cl_id 
 		LEFT OUTER JOIN interview i ON c.cl_id = i.cl_id
-		left outer join resume r on r.cl_id = c.cl_id 		
+		left outer join resume r on r.cl_id = c.cl_id 	
+		LEFT OUTER JOIN interview_test_result itr ON itr.inter_no = i.inter_no 	
 		WHERE
 		<if test="param1=0">
 			cl_age between #{param2} and #{param3}
