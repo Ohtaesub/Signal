@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <th>평점</th>
-                <td align="left">${dto.inter_grade}</td>
+                <td align="left">${dto.inter_avg}</td>
             </tr>
             <tr>
                 <th>이의제기</th>
